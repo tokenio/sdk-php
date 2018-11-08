@@ -1,0 +1,39 @@
+{
+  "name": "tokenio/sdk-php",
+  "description": "PHP SDK for interacting with the Token System",
+  "keywords": [
+    "token",
+    "payment processing",
+    "api"
+  ],
+  "homepage": "https://token.io",
+  "authors": [
+    {
+      "name": "Token.io",
+      "homepage": "https://token.io"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.0",
+    "ext-bcmath" : "*",
+    "ext-json": "*",
+    "ext-grpc": "*",
+    "paragonie/sodium_compat": "1.7.0",
+    "paragonie/random_compat": ">=2",
+    "stephenhill/base58": "~1.0",
+    "grpc/grpc": "^1.6.0",
+    "google/protobuf": "^3.6.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Tokenio\\": "lib/",
+      "Google\\": "lib/Rpc/Google",
+      "GPBMetadata\\": "lib/Rpc/GPBMetadata",
+      "Io\\":  "lib/Rpc/Io/"
+    }
+  },
+  "suggest": {
+    "ext-libsodium": "PHP < 7.0: Better performance, password hashing (Argon2i), secure memory management (memzero), and better security.",
+    "ext-sodium": "PHP >= 7.0: Better performance, password hashing (Argon2i), secure memory management (memzero), and better security."
+  }
+}
