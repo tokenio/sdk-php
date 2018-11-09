@@ -8,7 +8,7 @@ More information at [https://developer.token.io/sdk/](https://developer.token.io
 
 ## Requirements
 
-PHP 5.4.0 and later.
+PHP 5.5.0 and later.
 
 ## Composer
 
