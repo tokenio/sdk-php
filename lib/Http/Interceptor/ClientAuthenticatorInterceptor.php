@@ -42,7 +42,7 @@ class ClientAuthenticatorInterceptor extends Interceptor
                                         $continuation)
     {
         /** @var Message $argument */
-        $now = time() * 1000;
+        $now = round(microtime(true) * 1000);
         $payload = new GrpcAuthPayload();
         $payload->setRequest($argument->serializeToString())->setCreatedAtMs($now);
 

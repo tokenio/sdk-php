@@ -2,6 +2,6 @@
 
 namespace Tokenio;
 
-class RuntimeException extends \LogicException
+class RuntimeException extends \RuntimeException
 {
 }
