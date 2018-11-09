@@ -11,7 +11,9 @@ use Io\Token\Proto\Common\Member\MemberOperationMetadata;
 use Io\Token\Proto\Common\Member\MemberUpdate;
 use Io\Token\Proto\Common\Security\Key\Level;
 use Io\Token\Proto\Common\Security\Signature;
+use Io\Token\Proto\Common\Token\TokenOperationResult;
 use Io\Token\Proto\Common\Token\TokenPayload;
+use Io\Token\Proto\Common\Token\TokenRequestStatePayload;
 use Io\Token\Proto\Common\Transaction\Balance;
 use Io\Token\Proto\Common\Transaction\RequestStatus;
 use Io\Token\Proto\Common\Transaction\Transaction;
@@ -19,6 +21,8 @@ use Io\Token\Proto\Common\Transfer\Transfer;
 use Io\Token\Proto\Common\Transfer\TransferPayload;
 use Io\Token\Proto\Gateway\CreateBlobRequest;
 use Io\Token\Proto\Gateway\CreateBlobResponse;
+use Io\Token\Proto\Gateway\CancelTokenRequest;
+use Io\Token\Proto\Gateway\CancelTokenResponse;
 use Io\Token\Proto\Gateway\CreateTransferRequest;
 use Io\Token\Proto\Gateway\CreateTransferResponse;
 use Io\Token\Proto\Gateway\GetAccountRequest;
@@ -40,8 +44,14 @@ use Io\Token\Proto\Gateway\GetTransactionRequest;
 use Io\Token\Proto\Gateway\GetTransactionResponse;
 use Io\Token\Proto\Gateway\GetTransactionsRequest;
 use Io\Token\Proto\Gateway\GetTransactionsResponse;
+use Io\Token\Proto\Gateway\GetTransferRequest;
+use Io\Token\Proto\Gateway\GetTransferResponse;
+use Io\Token\Proto\Gateway\GetTransfersRequest;
+use Io\Token\Proto\Gateway\GetTransfersResponse;
 use Io\Token\Proto\Gateway\Page;
 use Io\Token\Proto\Common\Token\Token;
+use Io\Token\Proto\Gateway\SignTokenRequestStateRequest;
+use Io\Token\Proto\Gateway\SignTokenRequestStateResponse;
 use Io\Token\Proto\Gateway\StoreTokenRequestRequest;
 use Io\Token\Proto\Gateway\StoreTokenRequestResponse;
 use Io\Token\Proto\Gateway\UpdateMemberRequest;
@@ -53,6 +63,7 @@ use Google\Protobuf\Internal\RepeatedField;
 use Io\Token\Proto\Gateway\GatewayServiceClient;
 use Io\Token\Proto\Gateway\GetAliasesResponse;
 use Tokenio\Security\CryptoEngineInterface;
+use Tokenio\Util\Util;
 
 class Client
 {
@@ -412,7 +423,45 @@ class Client
     }
 
     /**
-     * Creates a transfer redeeming a transfer token.
+     * Looks up an existing transfer.
+     *
+     * @param string $transferId transfer id
+     * @return Transfer record
+     */
+    public function getTransfer($transferId)
+    {
+        $request = new GetTransferRequest();
+        $request->setTransferId($transferId);
+
+        /** @var GetTransferResponse $response */
+        list($response) = $this->gateway->GetTransfer($request)->wait();
+        return $response->getTransfer();
+    }
+
+    /**
+     * Looks up a list of existing transfers.
+     *
+     * @param string $offset optional offset to start at
+     * @param int $limit max number of records to return
+     * @param string $tokenId optional token id to restrict the search
+     * @return PagedList containing transfer records
+     */
+    public function getTransfers($limit, $offset = null, $tokenId = null)
+    {
+        $request = new GetTransfersRequest();
+        $request->setPage($this->pageBuilder($limit, $offset));
+        if($tokenId !== null){
+            $filter = new GetTransfersRequest\TransferFilter();
+            $filter->setTokenId($tokenId);
+            $request->setFilter($filter);
+        }
+        /** @var GetTransfersResponse $response */
+        list($response) = $this->gateway->GetTransfers($request)->wait();
+        return new PagedList($response->getTransfers(), $response->getOffset());
+    }
+
+    /**
+     * Redeems a transfer token.
      *
      * @param TransferPayload $payload the transfer payload
      * @return Transfer
@@ -433,5 +482,70 @@ class Client
         /** @var CreateTransferResponse $response */
         list($response) = $this->gateway->CreateTransfer($request)->wait();
         return $response->getTransfer();
+    }
+
+    /**
+     * Cancels a token.
+     *
+     * @param Token $token to cancel
+     * @return TokenOperationResult result of the cancel operation, returned by the server
+     */
+    public function cancelToken($token)
+    {
+        $signer = $this->cryptoEngine->createSigner(Level::LOW);
+        $signature = new Signature();
+        $signature->setMemberId($this->memberId)
+                  ->setKeyId($signer->getKeyId())
+                  ->setSignature($signer->signString($this->tokenActionFromToken($token, 'CANCELLED')));
+
+        $request = new CancelTokenRequest();
+        $request->setTokenId($token->getId())
+                ->setSignature($signature);
+
+        /** @var CancelTokenResponse $response */
+        list($response) = $this->gateway->CancelToken($request)->wait();
+        return $response->getResult();
+    }
+    /**
+     * @param Token $token
+     * @param string $action
+     * @return string
+     */
+    private function tokenActionFromToken($token, $action)
+    {
+        return $this->tokenAction($token->getPayload(), $action);
+    }
+
+    /**
+     * @param TokenPayload $payload
+     * @param string $action
+     * @return string
+     */
+    private function tokenAction($payload, $action)
+    {
+        return sprintf('%s.%s', Util::toJson($payload), strtolower($action));
+    }
+
+    /**
+     * Sign with a Token signature a token request state payload.
+     *
+     * @param string $tokenRequestId token request id
+     * @param string $tokenId token id
+     * @param string $state state
+     * @return Signature
+     */
+    public function signTokenRequestState($tokenRequestId, $tokenId, $state)
+    {
+        $request = new SignTokenRequestStateRequest();
+        $requestState = new TokenRequestStatePayload();
+        $requestState->setTokenId($tokenId)
+                     ->setState($state);
+
+        $request->setPayload($requestState)
+                ->setTokenRequestId($tokenRequestId);
+
+        /** @var SignTokenRequestStateResponse $response */
+        list($response) = $this->gateway->SignTokenRequestState($request)->wait();
+        return $response->getSignature();
     }
 }

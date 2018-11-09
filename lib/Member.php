@@ -9,7 +9,9 @@ use Io\Token\Proto\Common\Blob\Blob\AccessMode;
 use Io\Token\Proto\Common\Blob\Blob\Payload;
 use Io\Token\Proto\Common\Member\MemberAliasOperation;
 use Io\Token\Proto\Common\Money\Money;
+use Io\Token\Proto\Common\Security\Signature;
 use Io\Token\Proto\Common\Token\Token;
+use Io\Token\Proto\Common\Token\TokenOperationResult;
 use Io\Token\Proto\Common\Transaction\Balance;
 use Io\Token\Proto\Common\Transaction\Transaction;
 use Io\Token\Proto\Common\Transfer\Transfer;
@@ -314,6 +316,55 @@ class Member implements RepresentableInterface
     public function storeTokenRequest($tokenRequest)
     {
         return $this->client->storeTokenRequest($tokenRequest->getTokenPayload(), $tokenRequest->getOptions(), $tokenRequest->getUserRefId());
+    }
+
+    /**
+     * Looks up an existing token transfer.
+     *
+     * @param string $transferId ID of the transfer record
+     * @return Transfer record
+     */
+    public function getTransfer($transferId)
+    {
+        return $this->client->getTransfer($transferId);
+    }
+
+    /**
+     * Looks up a list of existing transfers.
+     *
+     * @param string $offset optional offset to start at
+     * @param int $limit max number of records to return
+     * @param string $tokenId optional token id to restrict the search
+     * @return PagedList containing transfer records
+     */
+    public function getTransfers($limit, $offset = null, $tokenId = null)
+    {
+        return $this->client->getTransfers($limit, $offset, $tokenId);
+    }
+
+    /**
+     * Cancels the token by signing it. The signature is persisted along
+     * with the token.
+     *
+     * @param Token $token to cancel
+     * @return TokenOperationResult result of cancel token
+     */
+    public function cancelToken($token)
+    {
+        return $this->client->cancelToken($token);
+    }
+
+    /**
+     * Sign with a Token signature a token request state payload.
+     *
+     * @param string $tokenRequestId token request id
+     * @param string $tokenId token id
+     * @param string $state state
+     * @return Signature
+     */
+    public function signTokenRequestState($tokenRequestId, $tokenId, $state)
+    {
+        return $this->client->signTokenRequestState($tokenRequestId, $tokenId, $state);
     }
 
     /**
