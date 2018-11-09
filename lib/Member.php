@@ -96,20 +96,6 @@ class Member implements RepresentableInterface
     }
 
     /**
-     * @param string $accessTokenId
-     * @param bool $customerInitiated
-     */
-    public function useAccessToken($accessTokenId, $customerInitiated)
-    {
-        $this->client->useAccessToken($accessTokenId, $customerInitiated);
-    }
-
-    public function clearAccessToken()
-    {
-        $this->client->clearAccessToken();
-    }
-
-    /**
      * Links a funding bank account to Token and returns it to the caller.
      *
      * @return Account[]
