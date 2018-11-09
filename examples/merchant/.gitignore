@@ -1,0 +1,4 @@
+*.log
+vendor
+keys/*
+!keys/.gitkeep

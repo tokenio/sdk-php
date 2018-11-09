@@ -4,6 +4,7 @@ namespace Tokenio\Http;
 
 use Google\Protobuf\Internal\MapField;
 use Io\Token\Proto\Common\Account\Account;
+use Io\Token\Proto\Common\Blob\Blob\Payload;
 use Io\Token\Proto\Common\Member\Member;
 use Io\Token\Proto\Common\Member\MemberOperation;
 use Io\Token\Proto\Common\Member\MemberOperationMetadata;
@@ -14,6 +15,12 @@ use Io\Token\Proto\Common\Token\TokenPayload;
 use Io\Token\Proto\Common\Transaction\Balance;
 use Io\Token\Proto\Common\Transaction\RequestStatus;
 use Io\Token\Proto\Common\Transaction\Transaction;
+use Io\Token\Proto\Common\Transfer\Transfer;
+use Io\Token\Proto\Common\Transfer\TransferPayload;
+use Io\Token\Proto\Gateway\CreateBlobRequest;
+use Io\Token\Proto\Gateway\CreateBlobResponse;
+use Io\Token\Proto\Gateway\CreateTransferRequest;
+use Io\Token\Proto\Gateway\CreateTransferResponse;
 use Io\Token\Proto\Gateway\GetAccountRequest;
 use Io\Token\Proto\Gateway\GetAccountResponse;
 use Io\Token\Proto\Gateway\GetAccountsRequest;
@@ -386,5 +393,45 @@ class Client
         /** @var StoreTokenRequestResponse $response */
         list($response) = $this->gateway->StoreTokenRequest($request)->wait();
         return $response->getTokenRequest()->getId();
+    }
+
+    /**
+     * Creates and uploads a blob.
+     *
+     * @param Payload $payload the blob payload
+     * @return string
+     */
+    public function createBlob($payload)
+    {
+        $request = new CreateBlobRequest();
+        $request->setPayload($payload);
+
+        /** @var CreateBlobResponse $response */
+        list($response) = $this->gateway->CreateBlob($request)->wait();
+        return $response->getBlobId();
+    }
+
+    /**
+     * Creates a transfer redeeming a transfer token.
+     *
+     * @param TransferPayload $payload the transfer payload
+     * @return Transfer
+     */
+    public function createTransfer($payload)
+    {
+        $signer = $this->cryptoEngine->createSigner(Level::LOW);
+
+        $payloadSignature = new Signature();
+        $payloadSignature->setMemberId($this->getMemberId());
+        $payloadSignature->setKeyId($signer->getKeyId());
+        $payloadSignature->setSignature($signer->sign($payload));
+
+        $request = new CreateTransferRequest();
+        $request->setPayload($payload);
+        $request->setPayloadSignature($payloadSignature);
+
+        /** @var CreateTransferResponse $response */
+        list($response) = $this->gateway->CreateTransfer($request)->wait();
+        return $response->getTransfer();
     }
 }

@@ -1,11 +1,14 @@
 <?php
 
+use Io\Token\Proto\Common\Account\BankAccount;
 use Io\Token\Proto\Common\Alias\Alias;
+use Io\Token\Proto\Common\Transferinstructions\TransferEndpoint;
 use Tokenio\Config\TokenCluster;
 use Tokenio\Config\TokenEnvironment;
 use Tokenio\Config\TokenIoBuilder;
 use Tokenio\Http\Request\TokenRequest;
 use Tokenio\Http\Request\TokenRequestOptions;
+use Tokenio\Http\Request\TransferTokenBuilder;
 use Tokenio\Security\UnsecuredFileSystemKeyStore;
 
 class TokenSample
@@ -72,13 +75,33 @@ class TokenSample
         return $this->member;
     }
 
-    public function generateTokenRequestUrl()
+    public function generateTokenRequestUrl($data)
     {
+        $destinationData = json_decode($data['destination'], true);
+        $sepa = new BankAccount\Sepa();
+        $sepa->setIban($destinationData['sepa']['iban']);
+
+        $destination = new BankAccount();
+        $destination->setSepa($sepa);
+
+        $amount = $data['amount'];
+        $currency = $data['currency'];
+        $description = $data['description'];
+
         $alias = $this->member->getFirstAlias();
-        $tokenBuilder = \Tokenio\Http\Request\AccessTokenBuilder::createWithAlias($alias)->forAll();
+
+        $tokenBuilder = new TransferTokenBuilder($this->member, $amount, $currency);
+        $tokenBuilder->setDescription($description);
+
+        $transferEndpoint = new TransferEndpoint();
+        $transferEndpoint->setAccount($destination);
+        $tokenBuilder->addDestination($transferEndpoint);
+
+        $tokenBuilder->setToAlias($alias);
+        $tokenBuilder->setToMemberId($this->member->getMemberId());
 
         $request = TokenRequest::builder($tokenBuilder->build())
-            ->addOption(TokenRequestOptions::REDIRECT_URL, 'http://localhost:9090/fetch-balances')
+            ->addOption(TokenRequestOptions::REDIRECT_URL, 'http://localhost:9090/redeem')
             ->build();
 
         $requestId = $this->member->storeTokenRequest($request);
@@ -92,15 +115,15 @@ $app->get('/', function ($request, $response, array $args) {
     return $this->renderer->render($response, 'index.phtml', $args);
 });
 
-$app->post('/request-balances', function ($request, $response, array $args) {
-    $this->logger->info("Request balances.");
+$app->post('/transfer', function ($request, $response, array $args) {
+    $this->logger->info("Request transfer.");
 
     $tokenIo = new TokenSample();
-    return $response->withRedirect($tokenIo->generateTokenRequestUrl(), 302);
+    return $response->withRedirect($tokenIo->generateTokenRequestUrl($request->getParsedBody()), 302);
 });
 
-$app->get('/fetch-balances', function ($request, $response, array $args) {
-    $this->logger->info("Fetch balances.");
+$app->get('/redeem', function ($request, $response, array $args) {
+    $this->logger->info("Request redeem.");
 
     $tokenId = $request->getQueryParam('tokenId');
     if (empty($tokenId)) {
@@ -109,33 +132,9 @@ $app->get('/fetch-balances', function ($request, $response, array $args) {
 
     $tokenIo = new TokenSample();
     $member = $tokenIo->getMember();
-
-    $member->useAccessToken($tokenId, false);
     $token = $member->getToken($tokenId);
 
-    $resources = $token->getPayload()->getAccess()->getResources();
+    $transfer = $member->redeemToken($token);
 
-    $accounts = array();
-    /** @var \Io\Token\Proto\Common\Token\AccessBody\Resource $resource */
-    foreach ($resources as $resource) {
-        if ($resource->getAccount() == null) {
-            continue;
-        }
-
-        if (!empty($resource->getAccount()->getAccountId())) {
-            $accounts[] = $resource->getAccount()->getAccountId();
-        }
-    }
-
-    $balances = array();
-    foreach ($accounts as $accountId) {
-        $account = $member->getAccount($accountId);
-        $current = $account->getCurrentBalance(\Io\Token\Proto\Common\Security\Key\Level::STANDARD);
-        $balances[] = sprintf('%s %s', $current->getValue(), $current->getCurrency());
-    }
-
-    $member->clearAccessToken();
-
-    $data = array('balances' => $balances);
-    return $response->withJson($data);
+    return 'Success! Redeemed transfer ' . $transfer->getId();
 });

@@ -4,11 +4,17 @@ namespace Tokenio;
 
 use Google\Protobuf\Internal\RepeatedField;
 use Io\Token\Proto\Common\Alias\Alias;
+use Io\Token\Proto\Common\Blob\Attachment;
+use Io\Token\Proto\Common\Blob\Blob\AccessMode;
+use Io\Token\Proto\Common\Blob\Blob\Payload;
 use Io\Token\Proto\Common\Member\MemberAliasOperation;
 use Io\Token\Proto\Common\Money\Money;
 use Io\Token\Proto\Common\Token\Token;
 use Io\Token\Proto\Common\Transaction\Balance;
 use Io\Token\Proto\Common\Transaction\Transaction;
+use Io\Token\Proto\Common\Transfer\Transfer;
+use Io\Token\Proto\Common\Transfer\TransferPayload;
+use Io\Token\Proto\Common\Transferinstructions\TransferEndpoint;
 use Tokenio\Exception\InvalidRealmException;
 use Tokenio\Http\Client;
 use Tokenio\Http\Request\TokenRequest;
@@ -344,5 +350,84 @@ class Member implements RepresentableInterface
     public function storeTokenRequest($tokenRequest)
     {
         return $this->client->storeTokenRequest($tokenRequest->getTokenPayload(), $tokenRequest->getOptions(), $tokenRequest->getUserRefId());
+    }
+
+    /**
+     * Creates and uploads a blob.
+     *
+     * @param string $ownerId the id of the owner of the blob
+     * @param string $type the MIME type of the file
+     * @param string $name the name of the file
+     * @param string $data the file data
+     * @param int $accessMode the access mode, normal or public
+     * @return Attachment
+     */
+    public function createBlob($ownerId, $type, $name, $data, $accessMode = AccessMode::PBDEFAULT)
+    {
+        $payload = new Payload();
+        $payload->setOwnerId($ownerId);
+        $payload->setType($type);
+        $payload->setName($name);
+        $payload->setData($data);
+        $payload->setAccessMode($accessMode);
+
+        $blobId = $this->client->createBlob($payload);
+
+        $attachment = new Attachment();
+        $attachment->setBlobId($blobId);
+        $attachment->setName($name);
+        $attachment->setType($type);
+
+        return $attachment;
+    }
+
+    /**
+     * Redeems a transfer token.
+     *
+     * @param Token $token the transfer token
+     * @param double $amount the amount to transfer
+     * @param string $currency the currency
+     * @param string $description the description of the transfer
+     * @param TransferEndpoint $destination the transfer instruction destination
+     * @param string $refId the reference id of the transfer
+     * @return Transfer
+     */
+    public function redeemToken($token, $amount = null, $currency = null, $description = null, $destination = null, $refId = null)
+    {
+        $payload = new TransferPayload();
+        $payload->setTokenId($token->getId());
+        $payload->setDescription($token->getPayload()->getDescription());
+
+        if ($destination != null) {
+            $payload->setDestinations(array($destination));
+        }
+
+        if ($amount != null) {
+            $money = new Money();
+            $money->setValue($amount);
+            $payload->setAmount($money);
+        }
+
+        if ($currency != null) {
+            if ($payload->getAmount() != null) {
+                $payload->getAmount()->setCurrency($currency);
+            } else {
+                $money = new Money();
+                $money->setCurrency($currency);
+                $payload->setAmount($money);
+            }
+        }
+
+        if ($description != null) {
+            $payload->setDescription($description);
+        }
+
+        if ($refId != null) {
+            $payload->setRefId($refId);
+        } else {
+            $payload->setRefId(Strings::generateNonce());
+        }
+
+        return $this->client->createTransfer($payload);
     }
 }
