@@ -295,32 +295,10 @@ class Member implements RepresentableInterface
      * that was granted by that member.
      *
      * @param string $tokenId the token id
-     * @return RepresentableInterface
-     */
-    public function forAccessToken($tokenId)
-    {
-        return $this->forAccessTokenWithCustomerFlag($tokenId, false);
-    }
-
-    /**
-     * Creates a Representable that acts as another member using the access token
-     * that was granted by that member.
-     *
-     * @param string $tokenId the token id
      * @param boolean $customerInitiated whether the call is initiated by the customer
-     * @return RepresentableInterface
-     */
-    public function forAccessTokenWithCustomerFlag($tokenId, $customerInitiated)
-    {
-        return $this->forAccessTokenInternal($tokenId, $customerInitiated);
-    }
-
-    /**
-     * @param string $tokenId
-     * @param bool $customerInitiated
      * @return Member
      */
-    private function forAccessTokenInternal($tokenId, $customerInitiated)
+    public function forAccessToken($tokenId, $customerInitiated = false)
     {
         $cloned = clone $this->client;
         $cloned->useAccessToken($tokenId, $customerInitiated);
