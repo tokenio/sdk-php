@@ -1,5 +1,5 @@
 {
-  "name": "tokenio/sdk-php",
+  "name": "tokenio/sdk",
   "description": "PHP SDK for interacting with the Token System",
   "keywords": [
     "token",
