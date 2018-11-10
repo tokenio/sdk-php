@@ -1,13 +1,14 @@
 {
   "name": "tokenio/sdk",
   "description": "PHP SDK for interacting with the Token System",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "keywords": [
     "token",
     "payment processing",
     "api"
   ],
   "homepage": "https://token.io",
+  "license": "MIT",
   "authors": [
     {
       "name": "Token.io",
