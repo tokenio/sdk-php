@@ -2,13 +2,15 @@ Overview
 ========
 Token open source SDKs simplify the interactions with the Token global open banking REST/gRPC API.
 The Token SDKs handle digital signatures and, where applicable, chain Token API calls. This makes
-it easier to develop Token- integrated applications, while providing most of the flexibility of
+it easier to develop Token-integrated applications, while providing most of the flexibility of
 the full Token API.
 More information at [https://developer.token.io/sdk/](https://developer.token.io/sdk/)
 
 ## Requirements
 
-PHP 5.5.0 and later.
+* PHP 5.5.0 and later.
+
+* [gRPC PHP extension](https://grpc.io/docs/quickstart/php.html#install-the-grpc-php-extension).
 
 ## Composer
 

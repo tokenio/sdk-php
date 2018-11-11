@@ -144,17 +144,4 @@ class UnsecuredFileSystemKeyStore implements KeyStoreInterface
     {
         return $this->keys[$memberId];
     }
-
-    /**
-     * @return null|string
-     */
-    public function getFirstMemberId()
-    {
-        if (empty($this->keys)) {
-            return null;
-        }
-
-        reset($this->keys);
-        return key($this->keys);
-    }
 }
