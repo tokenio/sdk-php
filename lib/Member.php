@@ -454,23 +454,6 @@ class Member implements RepresentableInterface
     }
 
     /**
-     * Approves a key owned by this member. The key is added to the list
-     * of valid keys for the member.
-     *
-     * @param key key to add to the approved list
-     * @param level key privilege level
-     * @return completable that indicates whether the operation finished or had an error
-     */
-   /* public Completable approveKey(SecretKeyPair key, Key.Level level) {
-        return approveKey(Key.newBuilder()
-                .setId(key.id())
-                .setAlgorithm(key.cryptoType().getKeyAlgorithm())
-                .setLevel(level)
-                .setPublicKey(key.publicKeyString())
-                .build());
-    }*/
-
-    /**
      * Approves a public key owned by this member. The key is added to the list
      * of valid keys for the member.
      *
