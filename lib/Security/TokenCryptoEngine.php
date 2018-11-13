@@ -61,4 +61,20 @@ class TokenCryptoEngine implements CryptoEngineInterface
         $keyPair = $this->keyStore->getById($this->memberId, $keyId);
         return new Ed25519Verifier($keyPair->getPublicKey());
     }
+
+    /**
+     * Returns public keys that the CryptoEngine can use to sign.
+     *
+     * @return Key[] of public keys
+     */
+    public function getPublicKeys()
+    {
+        $secretKeys = $this->keyStore->keyList($this->memberId);
+        $publicKeys = array();
+        /** @var KeyPair $secretKey */
+        foreach ($secretKeys as $secretKey){
+            $publicKeys[] = $secretKey->toKey();
+        }
+        return $publicKeys;
+    }
 }

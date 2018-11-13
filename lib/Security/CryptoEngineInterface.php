@@ -31,4 +31,11 @@ interface CryptoEngineInterface
      * @return VerifierInterface the verifier
      */
     public function createVerifier($keyId);
+
+    /**
+     * Returns public keys that the CryptoEngine can use to sign.
+     *
+     * @return Key[] of public keys
+     */
+    public function getPublicKeys();
 }
