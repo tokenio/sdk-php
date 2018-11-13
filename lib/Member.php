@@ -5,11 +5,18 @@ namespace Tokenio;
 use Google\Protobuf\Internal\RepeatedField;
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Blob\Attachment;
+use Io\Token\Proto\Common\Blob\Blob;
 use Io\Token\Proto\Common\Blob\Blob\AccessMode;
 use Io\Token\Proto\Common\Blob\Blob\Payload;
 use Io\Token\Proto\Common\Member\MemberAliasOperation;
+use Io\Token\Proto\Common\Member\MemberOperation;
+use Io\Token\Proto\Common\Member\MemberRecoveryOperation\Authorization;
+use Io\Token\Proto\Common\Member\MemberRecoveryRulesOperation;
+use Io\Token\Proto\Common\Member\MemberRemoveKeyOperation;
+use Io\Token\Proto\Common\Member\Profile;
+use Io\Token\Proto\Common\Member\RecoveryRule;
 use Io\Token\Proto\Common\Money\Money;
-use Io\Token\Proto\Common\Security\Signature;
+use Io\Token\Proto\Common\Security\Key;use Io\Token\Proto\Common\Security\Signature;
 use Io\Token\Proto\Common\Token\Token;
 use Io\Token\Proto\Common\Token\TokenOperationResult;
 use Io\Token\Proto\Common\Transaction\Balance;
@@ -444,5 +451,224 @@ class Member implements RepresentableInterface
         }
 
         return $this->client->createTransfer($payload);
+    }
+
+    /**
+     * Approves a public key owned by this member. The key is added to the list
+     * of valid keys for the member.
+     *
+     * @param Key $key to add to the approved list
+     * @return bool that indicates whether the operation finished or had an error
+     */
+    public function approveKey($key)
+    {
+        return $this->approveKeys([$key]);
+    }
+
+    /**
+     * Approves public keys owned by this member. The keys are added to the list
+     * of valid keys for the member.
+     *
+     * @param Key[] keys to add to the approved list
+     * @return bool that indicates whether the operation finished or had an error
+     */
+    public function approveKeys($keys)
+    {
+        $operations = array();
+        foreach ($keys as $key){
+            $operations[] = Util::createAddKeyMemberOperation($key);
+        }
+
+        return $this->updateKeys($operations);
+    }
+
+    private function updateKeys($operations)
+    {
+        $latestMember = $this->client->getMember($this->getMemberId());
+        $updatedMember = $this->client->updateMember($latestMember, $operations);
+        return $updatedMember !== null;
+    }
+
+    /**
+     * Removes a public key owned by this member.
+     *
+     * @param string $keyId key ID of the key to remove
+     * @return bool that indicates whether the operation finished or had an error
+     */
+    public function removeKey($keyId)
+    {
+        $this->removeKeys([$keyId]);
+    }
+
+    /**
+     * Removes public keys owned by this member.
+     *
+     * @param string[] $keyIds key IDs of the keys to remove
+     * @return bool that indicates whether the operation finished or had an error
+     */
+    public function removeKeys($keyIds)
+    {
+        $operations = array();
+        foreach($keyIds as $keyId){
+            $operation = new MemberRemoveKeyOperation();
+            $operation->setKeyId($keyId);
+            $operations[] = $operation;
+        }
+        return $this->updateKeys($operations);
+    }
+
+    /**
+     * Delete the member.
+     *
+     * @return bool
+     */
+    public function deleteMember()
+    {
+        $this->client->deleteMember();
+    }
+
+    /**
+     * Replaces a member's public profile.
+     *
+     * @param Profile $profile to set
+     * @return Profile which is set
+     */
+    public function setProfile($profile)
+    {
+        return $this->client->setProfile($profile);
+    }
+
+    /**
+     * Gets a member's public profile.
+     *
+     * @param string $memberId member Id whose profile we want
+     * @return Profile
+     */
+    public function getProfile($memberId)
+    {
+        return $this->client->getProfile($memberId);
+    }
+
+    /**
+     * Replaces auth'd member's public profile picture.
+     *
+     * @param string $type MIME type of picture
+     * @param string $data byte array representation image data
+     * @return bool that indicates whether the operation finished or had an error
+     */
+    public function setProfilePicture($type, $data)
+    {
+        $payload = new Payload();
+        $payload->setOwnerId($this->getMemberId())
+                ->setType($type)
+                ->setName('profile')
+                ->setData($data)
+                ->setAccessMode(AccessMode::PBPUBLIC);
+
+        return $this->client->setProfilePicture($payload);
+    }
+
+    /**
+     * Gets a member's public profile picture. Unlike set, you can get another member's picture.
+     *
+     * @param string $memberId member ID of member whose profile we want
+     * @param int $size desired size category (small, medium, large, original)
+     * @return Blob with picture; empty blob (no fields set) if has no picture
+     */
+    public function getProfilePicture($memberId, $size)
+    {
+        return $this->client->getProfilePicture($memberId, $size);
+    }
+
+    /**
+     * Verifies a given alias.
+     *
+     * @param string $verificationId the verification id
+     * @param string $code the code
+     * @return bool if operation succeed
+     */
+    public function verifyAlias($verificationId, $code)
+    {
+        return $this->client->verifyAlias($verificationId, $code);
+    }
+
+    /**
+     * Retry alias verification.
+     *
+     * @param Alias $alias the alias to be verified
+     * @return string $verificationId
+     */
+    public function retryVerification($alias)
+    {
+        return $this->client->retryVerification($alias);
+    }
+
+    /**
+     * Adds the recovery rule.
+     *
+     * @param RecoveryRule $recoveryRule the recovery rule
+     * @return bool if operation succeed
+     */
+    public function addRecoveryRule($recoveryRule)
+    {
+        $member = $this->client->getMember($this->getMemberId());
+        $memberOperation = new MemberOperation();
+        $recoveryOperation = new MemberRecoveryRulesOperation();
+        $recoveryOperation->setRecoveryRule($recoveryRule);
+        $memberOperation->setRecoveryRules($recoveryOperation);
+        $upadtedMember = $this->client->updateMember($member, [$memberOperation]);
+
+        return $upadtedMember !== null;
+    }
+
+    /**
+     * Set Token as the recovery agent.
+     */
+    public function useDefaultRecoveryRule()
+    {
+        $this->client->useDefaultRecoveryRule();
+    }
+
+    /**
+     * Gets the member id of the default recovery agent.
+     *
+     * @return string the member id
+     */
+    public function getDefaultAgent()
+    {
+        return $this->client->getDefaultAgent();
+    }
+
+    /**
+     * Authorizes recovery as a trusted agent.
+     *
+     * @param Authorization $authorization the authorization
+     * @return Signature
+     */
+    public function authorizeRecovery($authorization)
+    {
+        return $this->client->authorizeRecovery($authorization);
+    }
+
+    /**
+     * Removes all public keys that do not have a corresponding private key stored on
+     * the current device from tke member.
+     *
+     * @return bool that indicates whether the operation finished or had an error
+     */
+    public function removeNonStoredKeys()
+    {
+        $storedKeys = $this->client->getCryptoEngine()->getPublicKeys();
+        $member = $this->client->getMember($this->getMemberId());
+        $keyIdsToRemove = array();
+        foreach($member->getKeys() as $key) {
+            if(!in_array($key, $storedKeys, true)){
+                $keyIdsToRemove[] = $key->getId();
+            }
+        }
+        if(!empty($keyIdsToRemove)){
+            return $this->removeKeys($keyIdsToRemove);
+        }
+        return false;
     }
 }

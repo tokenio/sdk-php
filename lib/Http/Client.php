@@ -4,11 +4,18 @@ namespace Tokenio\Http;
 
 use Google\Protobuf\Internal\MapField;
 use Io\Token\Proto\Common\Account\Account;
+use Io\Token\Proto\Common\Alias\Alias;
+use Io\Token\Proto\Common\Blob\Blob;
 use Io\Token\Proto\Common\Blob\Blob\Payload;
 use Io\Token\Proto\Common\Member\Member;
 use Io\Token\Proto\Common\Member\MemberOperation;
 use Io\Token\Proto\Common\Member\MemberOperationMetadata;
+use Io\Token\Proto\Common\Member\MemberRecoveryOperation\Authorization;
+use Io\Token\Proto\Common\Member\MemberRecoveryRulesOperation;
 use Io\Token\Proto\Common\Member\MemberUpdate;
+use Io\Token\Proto\Common\Member\Profile;
+use Io\Token\Proto\Common\Member\ProfilePictureSize;
+use Io\Token\Proto\Common\Member\RecoveryRule;
 use Io\Token\Proto\Common\Security\Key\Level;
 use Io\Token\Proto\Common\Security\Signature;
 use Io\Token\Proto\Common\Token\TokenOperationResult;
@@ -25,6 +32,7 @@ use Io\Token\Proto\Gateway\CancelTokenRequest;
 use Io\Token\Proto\Gateway\CancelTokenResponse;
 use Io\Token\Proto\Gateway\CreateTransferRequest;
 use Io\Token\Proto\Gateway\CreateTransferResponse;
+use Io\Token\Proto\Gateway\DeleteMemberRequest;
 use Io\Token\Proto\Gateway\GetAccountRequest;
 use Io\Token\Proto\Gateway\GetAccountResponse;
 use Io\Token\Proto\Gateway\GetAccountsRequest;
@@ -36,8 +44,14 @@ use Io\Token\Proto\Gateway\GetBalanceRequest;
 use Io\Token\Proto\Gateway\GetBalanceResponse;
 use Io\Token\Proto\Gateway\GetBalancesRequest;
 use Io\Token\Proto\Gateway\GetBalancesResponse;
+use Io\Token\Proto\Gateway\GetDefaultAgentRequest;
+use Io\Token\Proto\Gateway\GetDefaultAgentResponse;
 use Io\Token\Proto\Gateway\GetMemberRequest;
 use Io\Token\Proto\Gateway\GetMemberResponse;
+use Io\Token\Proto\Gateway\GetProfilePictureRequest;
+use Io\Token\Proto\Gateway\GetProfilePictureResponse;
+use Io\Token\Proto\Gateway\GetProfileRequest;
+use Io\Token\Proto\Gateway\GetProfileResponse;
 use Io\Token\Proto\Gateway\GetTokenRequest;
 use Io\Token\Proto\Gateway\GetTokenResponse;
 use Io\Token\Proto\Gateway\GetTransactionRequest;
@@ -50,12 +64,20 @@ use Io\Token\Proto\Gateway\GetTransfersRequest;
 use Io\Token\Proto\Gateway\GetTransfersResponse;
 use Io\Token\Proto\Gateway\Page;
 use Io\Token\Proto\Common\Token\Token;
+use Io\Token\Proto\Gateway\RetryVerificationRequest;
+use Io\Token\Proto\Gateway\RetryVerificationResponse;
+use Io\Token\Proto\Gateway\SetProfilePictureRequest;
+use Io\Token\Proto\Gateway\SetProfilePictureResponse;
+use Io\Token\Proto\Gateway\SetProfileRequest;
+use Io\Token\Proto\Gateway\SetProfileResponse;
 use Io\Token\Proto\Gateway\SignTokenRequestStateRequest;
 use Io\Token\Proto\Gateway\SignTokenRequestStateResponse;
 use Io\Token\Proto\Gateway\StoreTokenRequestRequest;
 use Io\Token\Proto\Gateway\StoreTokenRequestResponse;
 use Io\Token\Proto\Gateway\UpdateMemberRequest;
 use Io\Token\Proto\Gateway\UpdateMemberResponse;
+use Io\Token\Proto\Gateway\VerifyAliasRequest;
+use Io\Token\Proto\Gateway\VerifyAliasResponse;
 use Tokenio\Exception;
 use Tokenio\Util\PagedList;
 use Tokenio\Util\Strings;
@@ -105,6 +127,14 @@ class Client
     public function getMemberId()
     {
         return $this->memberId;
+    }
+
+    /**
+     * @return CryptoEngineInterface
+     */
+    public function getCryptoEngine()
+    {
+        return $this->cryptoEngine;
     }
 
     /**
@@ -548,4 +578,185 @@ class Client
         list($response) = $this->gateway->SignTokenRequestState($request)->wait();
         return $response->getSignature();
     }
+
+    /**
+    * Delete the member.
+    *
+    * @return bool
+    */
+    public function deleteMember()
+    {
+        $this->setOnBehalfOf();
+        $this->setRequestSignerKeyLevel(Level::PRIVILEGED);
+        /** @var DeleteMemberRequest $response */
+        list($response) = $this->gateway->DeleteMember(new DeleteMemberRequest())->wait();
+        return $response !== null;
+    }
+
+    /**
+     * Replaces a member's public profile.
+     *
+     * @param Profile $profile to set
+     * @return Profile which is set
+     */
+    public function setProfile($profile)
+    {
+        $request = new SetProfileRequest();
+        $request->setProfile($profile);
+        /** @var SetProfileResponse $response */
+        list($response) = $this->gateway->SetProfile($request)->wait();
+        return $response->getProfile();
+    }
+
+    /**
+     * Gets a member's public profile.
+     *
+     * @param string $memberId member Id whose profile we want
+     * @return Profile
+     */
+    public function getProfile($memberId)
+    {
+        $request = new GetProfileRequest();
+        $request->setMemberId($memberId);
+
+        /** @var GetProfileResponse $response */
+        list($response) = $this->gateway->GetProfile($request)->wait();
+        return $response->getProfile();
+    }
+
+    /**
+     * Replaces a member's public profile picture.
+     *
+     * @param Payload $payload Picture data
+     * @return bool that completes when request handled
+     */
+    public function setProfilePicture($payload)
+    {
+        $request = new SetProfilePictureRequest();
+        $request->setPayload($payload);
+
+        /** @var SetProfilePictureResponse $response */
+        list($response) = $this->gateway->SetProfilePicture($request)->wait();
+        return $response !== null;
+    }
+
+    /**
+     * Gets a member's public profile picture.
+     *
+     * @param string $memberId member Id whose profile we want
+     * @param int $size ProfilePictureSize size category we want (small, medium, large, original)
+     * @return Blob with picture; empty blob (no fields set) if has no picture
+     */
+    public function getProfilePicture($memberId, $size)
+    {
+        $request = new GetProfilePictureRequest();
+        $request->setMemberId($memberId)
+                ->setSize($size);
+
+        /** @var GetProfilePictureResponse $response */
+        list($response) = $this->gateway->GetProfilePicture($request)->wait();
+        return $response->getBlob();
+
+    }
+
+    /**
+     * Verifies a given alias.
+     *
+     * @param string $verificationId the verification id
+     * @param string $code the code
+     * @return bool if operation succeed
+     */
+    public function verifyAlias($verificationId, $code)
+    {
+        $request = new VerifyAliasRequest();
+        $request->setCode($code)
+                ->setVerificationId($verificationId);
+
+        /** @var VerifyAliasResponse $response */
+        list($response) = $this->gateway->VerifyAlias($request)->wait();
+        return $response !== null;
+    }
+
+    /**
+     * Retry alias verification.
+     *
+     * @param Alias $alias the alias to be verified
+     * @return string $verificationId
+     */
+    public function retryVerification($alias)
+    {
+        $request = new RetryVerificationRequest();
+        $request->setAlias($alias)
+                ->setMemberId($this->getMemberId());
+
+        /** @var RetryVerificationResponse $response */
+        list($response) = $this->gateway->RetryVerification($request)->wait();
+        return $response->getVerificationId();
+    }
+
+    /**
+     * Set Token as the recovery agent.
+     */
+    public function useDefaultRecoveryRule()
+    {
+        $signer = $this->cryptoEngine->createSigner(Level::PRIVILEGED);
+        $member = $this->getMember($this->getMemberId());
+        /** @var GetDefaultAgentResponse $defAgentResponse */
+        $defAgentResponse = $this->gateway->GetDefaultAgent(new GetDefaultAgentRequest());
+
+        $rule = new RecoveryRule();
+        $rule->setPrimaryAgent($defAgentResponse->getMemberId());
+
+        $recoveryRuleOperation = new MemberRecoveryRulesOperation();
+        $recoveryRuleOperation->setRecoveryRule($rule);
+
+        $operation = new MemberOperation();
+        $operation->setRecoveryRules($recoveryRuleOperation);
+
+        $memberUpdate = new MemberUpdate();
+        $memberUpdate->setPrevHash($member->getLastHash())
+                     ->setMemberId($member->getId())
+                     ->setOperations([$operation]);
+
+        $signature = new Signature();
+        $signature->setKeyId($signer->getKeyId())
+                  ->setMemberId($member->getId())
+                  ->setSignature($signer->sign($memberUpdate));
+
+        $request = new UpdateMemberRequest();
+        $request->setUpdate($memberUpdate)
+                ->setUpdateSignature($signature);
+
+        $this->gateway->UpdateMember($request)->wait();
+    }
+
+    /**
+     * Gets the member id of the default recovery agent.
+     *
+     * @return string the member id
+     */
+    public function getDefaultAgent()
+    {
+        /** @var GetDefaultAgentResponse $response */
+        list($response) = $this->gateway->GetDefaultAgent(new GetDefaultAgentRequest())->wait();
+        return $response->getMemberId();
+    }
+
+    /**
+     * Authorizes recovery as a trusted agent.
+     *
+     * @param Authorization $authorization the authorization
+     * @return Signature
+     */
+    public function authorizeRecovery($authorization)
+    {
+        $signer = $this->cryptoEngine->createSigner(Level::PRIVILEGED);
+        $signature = new Signature();
+        $signature->setMemberId($this->getMemberId())
+                  ->setKeyId($signer->getKeyId())
+                  ->setSignature($signer->sign($authorization));
+
+        return $signature;
+    }
+
 }
