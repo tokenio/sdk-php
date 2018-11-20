@@ -51,29 +51,22 @@ class AddressTest extends TokenBaseTest
     public function testGetAddress_NotFound()
     {
         $fakeAddressId = Strings::generateNonce();
-
+        $this->expectException('AggregateException');
+        $this->member->getAddress($fakeAddressId);
     }
-    /*
 
-        [Test]
-        public void GetAddress_NotFound()
-        {
-            var fakeAddressId = Util.Nonce();
-            Assert.Throws<AggregateException>(() => member.GetAddress(fakeAddressId));
-        }
+    public function testDeleteAddress()
+    {
+        $member = $this->tokenIO->createMember();
 
-        [Test]
-        public void DeleteAddress()
-        {
-            var name = Util.Nonce();
-            var payload = Address();
-            var address = member.AddAddress(name, payload);
+        $name = Strings::generateNonce();
+        $payload = self::generateAddress();
+        $address = $member->addAddress($name, $payload);
 
-            member.GetAddress(address.Id);
-            Assert.IsNotEmpty(member.GetAddresses());
+        $member->getAddress($address->getId());
+        $this->assertNotEmpty($member->getAddresses());
 
-            member.DeleteAddress(address.Id);
-            Assert.IsEmpty(member.GetAddresses());
-        }
-    } */
+        $member->deleteAddress($address->getId());
+        $this->assertEmpty($member->getAddresses());
+    }
 }
