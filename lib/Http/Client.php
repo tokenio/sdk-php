@@ -6,6 +6,7 @@ use Google\Protobuf\Internal\MapField;
 use Io\Token\Proto\Common\Account\Account;
 use Io\Token\Proto\Common\Address\Address;
 use Io\Token\Proto\Common\Alias\Alias;
+use Io\Token\Proto\Common\Bank\BankInfo;
 use Io\Token\Proto\Common\Blob\Blob;
 use Io\Token\Proto\Common\Blob\Blob\Payload;
 use Io\Token\Proto\Common\Member\AddressRecord;
@@ -52,6 +53,8 @@ use Io\Token\Proto\Gateway\GetBalanceRequest;
 use Io\Token\Proto\Gateway\GetBalanceResponse;
 use Io\Token\Proto\Gateway\GetBalancesRequest;
 use Io\Token\Proto\Gateway\GetBalancesResponse;
+use Io\Token\Proto\Gateway\GetBankInfoRequest;
+use Io\Token\Proto\Gateway\GetBankInfoResponse;
 use Io\Token\Proto\Gateway\GetBlobRequest;
 use Io\Token\Proto\Gateway\GetBlobResponse;
 use Io\Token\Proto\Gateway\GetDefaultAgentRequest;
@@ -870,6 +873,22 @@ class Client
         /** @var DeleteAddressRequest $response */
         list($response) = $this->gateway->DeleteAddress($request)->wait();
         return $response !== null;
+    }
+
+
+    /**
+     * Returns linking information for the specified bank id.
+     *
+     * @param string $bankId the bank id
+     * @return BankInfo linking information
+     */
+    public function getBankInfo($bankId)
+    {
+        $request = new GetBankInfoRequest();
+        $request->setBankId($bankId);
+        /** @var GetBankInfoResponse $response */
+        list($response) = $this->gateway->GetBankInfo($request)->wait();
+        return $response->getInfo();
     }
 
 }

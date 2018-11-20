@@ -5,6 +5,7 @@ namespace Tokenio;
 use Google\Protobuf\Internal\RepeatedField;
 use Io\Token\Proto\Common\Address\Address;
 use Io\Token\Proto\Common\Alias\Alias;
+use Io\Token\Proto\Common\Bank\BankInfo;
 use Io\Token\Proto\Common\Blob\Attachment;
 use Io\Token\Proto\Common\Blob\Blob;
 use Io\Token\Proto\Common\Blob\Blob\AccessMode;
@@ -21,6 +22,7 @@ use Io\Token\Proto\Common\Money\Money;
 use Io\Token\Proto\Common\Security\Key;use Io\Token\Proto\Common\Security\Signature;
 use Io\Token\Proto\Common\Token\Token;
 use Io\Token\Proto\Common\Token\TokenOperationResult;
+use Io\Token\Proto\Common\Token\TokenRequest;
 use Io\Token\Proto\Common\Transaction\Balance;
 use Io\Token\Proto\Common\Transaction\Transaction;
 use Io\Token\Proto\Common\Transfer\Transfer;
@@ -28,7 +30,7 @@ use Io\Token\Proto\Common\Transfer\TransferPayload;
 use Io\Token\Proto\Common\Transferinstructions\TransferEndpoint;
 use Tokenio\Exception\InvalidRealmException;
 use Tokenio\Http\Client;
-use Tokenio\Http\Request\TokenRequest;
+use Tokenio\Http\Request\TransferTokenBuilder;
 use Tokenio\Util\PagedList;
 use Tokenio\Util\Strings;
 use Tokenio\Util\Util;
@@ -161,6 +163,17 @@ class Member implements RepresentableInterface
     public function getCurrentBalance($accountId, $keyLevel)
     {
         return $this->getBalance($accountId, $keyLevel)->getCurrent();
+    }
+
+    /**
+     * Returns linking information for the specified bank id.
+     *
+     * @param string $bankId the bank id
+     * @return BankInfo linking information
+     */
+    public function getBankInfo($bankId)
+    {
+        return $this->client->getBankInfo($bankId);
     }
 
     /**
@@ -739,5 +752,17 @@ class Member implements RepresentableInterface
     public function deleteAddress($addressId)
     {
         return $this->client->deleteAddress($addressId);
+    }
+
+    /**
+     * Creates a new transfer token builder.
+     *
+     * @param double $amount transfer amount
+     * @param string $currency currency code, e.g. "USD"
+     * @return TransferTokenBuilder token returned by the server
+     */
+    public function createTransferToken($amount, $currency)
+    {
+        return new TransferTokenBuilder($this, $amount, $currency);
     }
 }
