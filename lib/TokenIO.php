@@ -176,11 +176,11 @@ class TokenIO
      *     (case insensitive).
      * @return GetBanksResponse
      */
-    public function getBanks($ids,
-                             $search,
-                             $country,
-                             $page,
-                             $perPage,
+    public function getBanks($ids = null,
+                             $search = null,
+                             $country = null,
+                             $page = null,
+                             $perPage = null,
                              $sort = null,
                              $provider = null)
     {
