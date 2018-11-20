@@ -87,6 +87,25 @@ abstract class Util
     }
 
     /**
+     * Creates MemberOperation from Keys
+     * @param Key[] $keys
+     * @return MemberOperation[]
+     */
+    public static function createMemberOperationsFromKeys($keys)
+    {
+        $operations = array();
+        foreach ($keys as $key){
+            $addKeyOperation = new MemberAddKeyOperation();
+            $addKeyOperation->setKey($key);
+
+            $operation = new MemberOperation();
+            $operation->setAddKey($addKeyOperation);
+            $operations[] = $operation;
+        }
+        return $operations;
+    }
+
+    /**
      * Creates MemberOperationMetadata with Alias.
      *
      * @param Alias $alias
