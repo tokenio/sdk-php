@@ -682,18 +682,16 @@ class Member implements RepresentableInterface
     {
         return $this->client->getBlob($blobId);
     }
-/*public Observable<Blob> getBlob(String blobId) {
-return client.getBlob(blobId);
-}*/
 
-/**
- * Retrieves a blob that is attached to a transfer token.
- *
- * @param tokenId id of the token
- * @param blobId id of the blob
- * @return Blob
- */
-/*public Observable<Blob> getTokenBlob(String tokenId, String blobId) {
-    return client.getTokenBlob(tokenId, blobId);
-}*/
+    /**
+     * Retrieves a blob that is attached to a transfer token.
+     *
+     * @param string $tokenId id of the token
+     * @param string $blobId id of the blob
+     * @return Blob
+     */
+    public function getTokenBlob($tokenId, $blobId)
+    {
+        return $this->client->getTokenBlob($tokenId, $blobId);
+    }
 }
