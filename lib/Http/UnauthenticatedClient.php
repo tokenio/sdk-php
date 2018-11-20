@@ -4,10 +4,19 @@ namespace Tokenio\Http;
 
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Member\Member;
+use Io\Token\Proto\Common\Member\MemberAddKeyOperation;
 use Io\Token\Proto\Common\Member\MemberOperation;
+use Io\Token\Proto\Common\Member\MemberRecoveryOperation;
 use Io\Token\Proto\Common\Member\MemberUpdate;
+use Io\Token\Proto\Common\Security\Key;
+use Io\Token\Proto\Common\Security\Key\Level;
 use Io\Token\Proto\Common\Security\Signature;
 use Io\Token\Proto\Common\Token\TokenRequest;
+use Io\Token\Proto\Common\Transaction\RequestStatus;
+use Io\Token\Proto\Gateway\BeginRecoveryRequest;
+use Io\Token\Proto\Gateway\BeginRecoveryResponse;
+use Io\Token\Proto\Gateway\CompleteRecoveryRequest;
+use Io\Token\Proto\Gateway\CompleteRecoveryResponse;
 use Io\Token\Proto\Gateway\CreateMemberRequest;
 use Io\Token\Proto\Gateway\CreateMemberResponse;
 use Io\Token\Proto\Gateway\GatewayServiceClient;
@@ -23,9 +32,12 @@ use Io\Token\Proto\Gateway\RetrieveTokenRequestRequest;
 use Io\Token\Proto\Gateway\RetrieveTokenRequestResponse;
 use Io\Token\Proto\Gateway\UpdateMemberRequest;
 use Io\Token\Proto\Gateway\UpdateMemberResponse;
+use Tokenio\Exception\VerificationException;
 use Tokenio\Http\Request\TokenRequestResult;
+use Tokenio\Security\CryptoEngineInterface;
 use Tokenio\Security\SignerInterface;
 use Tokenio\Util\Strings;
+use Tokenio\Util\Util;
 
 class UnauthenticatedClient
 {
@@ -275,5 +287,139 @@ class UnauthenticatedClient
         /** @var ResolveAliasResponse $response */
         list($response) = $this->gateway->ResolveAlias($request)->wait();
         return $response->getMember()->getId();
+    }
+
+    /**
+     * Begins account recovery.
+     *
+     * @param Alias $alias the alias used to recover
+     * @return string verification id
+     */
+    public function beginRecovery($alias)
+    {
+        $request = new BeginRecoveryRequest();
+        $request->setAlias(Util::normalizeAlias($alias));
+        /** @var BeginRecoveryResponse $response */
+        list($response) = $this->gateway->BeginRecovery($request)->wait();
+        return $response->getVerificationId();
+    }
+
+    /**
+     * Completes account recovery if the default recovery rule was set.
+     *
+     * @param string $memberId the member id
+     * @param string $verificationId the verification id
+     * @param string $code the code
+     * @param CryptoEngineInterface $cryptoEngine
+     * @return Member the new member
+     */
+    public function completeRecoveryWithDefaultRule($memberId, $verificationId, $code, $cryptoEngine)
+    {
+        $privelegedKey = $cryptoEngine->generateKey(Level::PRIVILEGED);
+        $standardKey = $cryptoEngine->generateKey(Level::STANDARD);
+        $lowKey = $cryptoEngine->generateKey(Level::LOW);
+
+        $signer = $cryptoEngine->createSigner(Level::PRIVILEGED);
+
+        $request = new CompleteRecoveryRequest();
+        $request->setVerificationId($verificationId)
+                ->setCode($code)
+                ->setKey($privelegedKey);
+
+        /** @var CompleteRecoveryResponse $response */
+        list($completeResponse) = $this->gateway->CompleteRecovery($request);
+        $memberRequest = new GetMemberRequest();
+        /** @var GetMemberResponse $memberResponse */
+        list($memberResponse) = $this->gateway->GetMember($memberRequest)->wait();
+
+        $memberRecoveryOperation = new MemberOperation();
+        $memberRecoveryOperation->setRecover($response->getRecoveryEntry());
+
+        $operations = Util::createMemberOperationsFromKeys([$privelegedKey, $standardKey, $lowKey]);
+        $operations[] = $memberRecoveryOperation;
+        $memberUpdate = new MemberUpdate();
+        $memberUpdate->setMemberId($memberId)
+                     ->setPrevHash($memberResponse->getMember()->getLastHash())
+                     ->setOperations($operations);
+
+        $signature = new Signature();
+        $signature->setKeyId($signer->getKeyId())
+                  ->setMemberId($memberId)
+                  ->setSignature($signer->sign($memberUpdate));
+        $updateMemberRequest = new UpdateMemberRequest();
+        $updateMemberRequest->setUpdate($memberUpdate)
+                            ->setUpdateSignature($signature);
+        /** @var UpdateMemberResponse $memberUpdateResponse */
+        list($memberUpdateResponse) = $this->gateway->UpdateMember($updateMemberRequest)->wait();
+        return $memberUpdateResponse->getMember();
+    }
+
+    /**
+     * Gets recovery authorization from Token.
+     *
+     * @param string $verificationId the verification id
+     * @param string $code the code
+     * @param Key $privilegedKey the privileged key
+     * @return MemberRecoveryOperation the recovery entry
+     * @throws VerificationException if the code verification fails
+     */
+    public function getRecoveryAuthorization($verificationId, $code, $privilegedKey)
+    {
+        $request = new CompleteRecoveryRequest();
+        $request->setVerificationId($verificationId)
+                ->setCode($code)
+                ->setKey($privilegedKey);
+
+        /** @var CompleteRecoveryResponse $response */
+        list($response) = $this->gateway->CompleteRecovery($request)->wait();
+        if($response->getStatus() !== RequestStatus::SUCCESSFUL_REQUEST){
+            throw new VerificationException($response->getStatus());
+        }
+        return $response->getRecoveryEntry();
+    }
+
+    /**
+     * Completes account recovery.
+     *
+     * @param string $memberId the member id
+     * @param MemberRecoveryOperation[] $recoveryOperations the member recovery operations
+     * @param Key $privilegedKey the privileged public key in the member recovery operations
+     * @param CryptoEngineInterface $cryptoEngine the new crypto engine
+     * @return Member updatedMember
+     */
+    public function completeRecovery($memberId, $recoveryOperations, $privilegedKey, $cryptoEngine)
+    {
+        $standardKey = $cryptoEngine->generateKey(Level::STANDARD);
+        $lowKey = $cryptoEngine->generateKey(Level::LOW);
+        $signer = $cryptoEngine->createSigner(Level::PRIVILEGED);
+        $operations = array();
+        foreach ($recoveryOperations as $op){
+            $memberOperation = new MemberOperation();
+            $memberOperation->setRecover($op);
+
+            $operations[] = $memberOperation;
+        }
+        $operations[] = Util::createMemberOperationsFromKeys([$privilegedKey, $standardKey, $lowKey]);
+        $getMemberRequest = new GetMemberRequest();
+        $getMemberRequest->setMemberId($memberId);
+        /** @var GetMemberResponse $getMemberResponse */
+        list($getMemberResponse) = $this->gateway->GetMember($getMemberRequest)->wait();
+        $memberUpdate = new MemberUpdate();
+        $memberUpdate->setMemberId($memberId)
+                     ->setPrevHash($getMemberResponse->getMember()->getLastHash())
+                     ->setOperations($operations);
+
+        $updateSignature = new Signature();
+        $updateSignature->setKeyId($signer->getKeyId())
+                        ->setMemberId($memberId)
+                        ->setSignature($signer->sign($memberUpdate));
+
+        $memberUpdateRequest = new UpdateMemberRequest();
+        $memberUpdateRequest->setUpdate($memberUpdate)
+                            ->setUpdateSignature($updateSignature);
+        /** @var UpdateMemberResponse $updateMemberResponse */
+        list($updateMemberResponse) = $this->gateway->UpdateMember($memberUpdateRequest)->wait();
+        return $updateMemberResponse->getMember();
+
     }
 }

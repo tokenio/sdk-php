@@ -671,4 +671,27 @@ class Member implements RepresentableInterface
         }
         return false;
     }
+
+    /**
+     * Retrieves a blob from the server.
+     *
+     * @param string $blobId id of the blob
+     * @return Blob
+     */
+    public function getBlob($blobId)
+    {
+        return $this->client->getBlob($blobId);
+    }
+
+    /**
+     * Retrieves a blob that is attached to a transfer token.
+     *
+     * @param string $tokenId id of the token
+     * @param string $blobId id of the blob
+     * @return Blob
+     */
+    public function getTokenBlob($tokenId, $blobId)
+    {
+        return $this->client->getTokenBlob($tokenId, $blobId);
+    }
 }
