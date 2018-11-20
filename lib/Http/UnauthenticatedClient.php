@@ -418,7 +418,7 @@ class UnauthenticatedClient
         $memberUpdateRequest->setUpdate($memberUpdate)
                             ->setUpdateSignature($updateSignature);
         /** @var UpdateMemberResponse $updateMemberResponse */
-        list($updateMemberResponse) = $this->gateway->UpdateMember($memberUpdateRequest);
+        list($updateMemberResponse) = $this->gateway->UpdateMember($memberUpdateRequest)->wait();
         return $updateMemberResponse->getMember();
 
     }

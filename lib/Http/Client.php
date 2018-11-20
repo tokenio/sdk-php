@@ -44,6 +44,8 @@ use Io\Token\Proto\Gateway\GetBalanceRequest;
 use Io\Token\Proto\Gateway\GetBalanceResponse;
 use Io\Token\Proto\Gateway\GetBalancesRequest;
 use Io\Token\Proto\Gateway\GetBalancesResponse;
+use Io\Token\Proto\Gateway\GetBlobRequest;
+use Io\Token\Proto\Gateway\GetBlobResponse;
 use Io\Token\Proto\Gateway\GetDefaultAgentRequest;
 use Io\Token\Proto\Gateway\GetDefaultAgentResponse;
 use Io\Token\Proto\Gateway\GetMemberRequest;
@@ -52,6 +54,8 @@ use Io\Token\Proto\Gateway\GetProfilePictureRequest;
 use Io\Token\Proto\Gateway\GetProfilePictureResponse;
 use Io\Token\Proto\Gateway\GetProfileRequest;
 use Io\Token\Proto\Gateway\GetProfileResponse;
+use Io\Token\Proto\Gateway\GetTokenBlobRequest;
+use Io\Token\Proto\Gateway\GetTokenBlobResponse;
 use Io\Token\Proto\Gateway\GetTokenRequest;
 use Io\Token\Proto\Gateway\GetTokenResponse;
 use Io\Token\Proto\Gateway\GetTransactionRequest;
@@ -759,4 +763,36 @@ class Client
         return $signature;
     }
 
+    /**
+     * Retrieves a blob from the server.
+     *
+     * @param string $blobId id of the blob
+     * @return Blob
+     */
+    public function getBlob($blobId)
+    {
+        $request = new GetBlobRequest();
+        $request->setBlobId($blobId);
+        /** @var GetBlobResponse $response */
+        list($response) = $this->gateway->GetBlob($request)->wait();
+        return $response->getBlob();
+    }
+
+    /**
+     * Retrieves a blob that is attached to a token.
+     *
+     * @param string $tokenId id of the token
+     * @param string $blobId id of the blob
+     * @return Blob
+     */
+    public function getTokenBlob($tokenId, $blobId)
+    {
+        $request = new GetTokenBlobRequest();
+        $request->setTokenId($tokenId)
+                ->setBlobId($blobId);
+        /** @var GetTokenBlobResponse $response */
+        list($response) = $this->gateway->GetTokenBlob($request)->wait();
+        return $response->getBlob();
+
+    }
 }

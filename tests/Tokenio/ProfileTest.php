@@ -90,14 +90,7 @@ class ProfileTest extends TokenBaseTest
         $this->assertEquals($outProfile->getDisplayNameFirst(), $inProfile->getDisplayNameFirst());
         $this->assertEquals($outProfile->getDisplayNameLast(), $inProfile->getDisplayNameLast());
 
-//        $blob = $otherMember->getB
-        //TODO get blob
-        /*
-            var tinyGifString = ByteString.CopyFrom(tinyGif);
-            var blob = otherMember.GetBlob(outProfile.OriginalPictureId);
-            Assert.AreEqual(tinyGifString, blob.Payload.Data);
-    }*/
+        $blob = $otherMember->getBlob($outProfile->getOriginalPictureId());
+        $this->assertEquals($tinyGif, $blob->getPayload()->getData());
     }
-
-
 }
