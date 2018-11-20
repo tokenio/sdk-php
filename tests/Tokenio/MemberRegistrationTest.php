@@ -2,14 +2,11 @@
 
 namespace Test\Tokenio;
 
-
-use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Member\MemberRecoveryOperation;
 use Io\Token\Proto\Common\Member\MemberRecoveryOperation\Authorization;
 use Io\Token\Proto\Common\Member\RecoveryRule;
 use Io\Token\Proto\Common\Security\Key\Level;
 use Tokenio\Security\TokenCryptoEngine;
-use Tokenio\Security\UnsecuredFileSystemKeyStore;
 
 class MemberRegistrationTest extends TokenBaseTest
 {
@@ -104,7 +101,7 @@ class MemberRegistrationTest extends TokenBaseTest
         $unusedSecondaryAgent = $this->tokenIO->createMember(self::generateAlias());
 
         $recoveryRule = new RecoveryRule();
-        $recoveryRule->setPrimaryAgent($memberId)
+        $recoveryRule->setPrimaryAgent($primaryAgentId)
                      ->setSecondaryAgents([$secondaryAgent->getMemberId(), $unusedSecondaryAgent->getMemberId()]);
 
         $member->addRecoveryRule($recoveryRule);
