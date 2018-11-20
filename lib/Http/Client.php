@@ -4,9 +4,11 @@ namespace Tokenio\Http;
 
 use Google\Protobuf\Internal\MapField;
 use Io\Token\Proto\Common\Account\Account;
+use Io\Token\Proto\Common\Address\Address;
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Blob\Blob;
 use Io\Token\Proto\Common\Blob\Blob\Payload;
+use Io\Token\Proto\Common\Member\AddressRecord;
 use Io\Token\Proto\Common\Member\Member;
 use Io\Token\Proto\Common\Member\MemberOperation;
 use Io\Token\Proto\Common\Member\MemberOperationMetadata;
@@ -14,7 +16,6 @@ use Io\Token\Proto\Common\Member\MemberRecoveryOperation\Authorization;
 use Io\Token\Proto\Common\Member\MemberRecoveryRulesOperation;
 use Io\Token\Proto\Common\Member\MemberUpdate;
 use Io\Token\Proto\Common\Member\Profile;
-use Io\Token\Proto\Common\Member\ProfilePictureSize;
 use Io\Token\Proto\Common\Member\RecoveryRule;
 use Io\Token\Proto\Common\Security\Key\Level;
 use Io\Token\Proto\Common\Security\Signature;
@@ -26,12 +27,15 @@ use Io\Token\Proto\Common\Transaction\RequestStatus;
 use Io\Token\Proto\Common\Transaction\Transaction;
 use Io\Token\Proto\Common\Transfer\Transfer;
 use Io\Token\Proto\Common\Transfer\TransferPayload;
+use Io\Token\Proto\Gateway\AddAddressRequest;
+use Io\Token\Proto\Gateway\AddAddressResponse;
 use Io\Token\Proto\Gateway\CreateBlobRequest;
 use Io\Token\Proto\Gateway\CreateBlobResponse;
 use Io\Token\Proto\Gateway\CancelTokenRequest;
 use Io\Token\Proto\Gateway\CancelTokenResponse;
 use Io\Token\Proto\Gateway\CreateTransferRequest;
 use Io\Token\Proto\Gateway\CreateTransferResponse;
+use Io\Token\Proto\Gateway\DeleteAddressRequest;
 use Io\Token\Proto\Gateway\DeleteMemberRequest;
 use Io\Token\Proto\Gateway\GetAccountRequest;
 use Io\Token\Proto\Gateway\GetAccountResponse;
@@ -39,6 +43,10 @@ use Io\Token\Proto\Gateway\GetAccountsRequest;
 use Io\Token\Proto\Gateway\GetAccountsResponse;
 use Io\Token\Proto\Gateway\GetActiveAccessTokenRequest;
 use Io\Token\Proto\Gateway\GetActiveAccessTokenResponse;
+use Io\Token\Proto\Gateway\GetAddressesRequest;
+use Io\Token\Proto\Gateway\GetAddressesResponse;
+use Io\Token\Proto\Gateway\GetAddressRequest;
+use Io\Token\Proto\Gateway\GetAddressResponse;
 use Io\Token\Proto\Gateway\GetAliasesRequest;
 use Io\Token\Proto\Gateway\GetBalanceRequest;
 use Io\Token\Proto\Gateway\GetBalanceResponse;
@@ -795,4 +803,73 @@ class Client
         return $response->getBlob();
 
     }
+
+    /**
+     * Creates a new member address.
+     *
+     * @param string $name the name of the address
+     * @param Address $address the address
+     * @return AddressRecord record created
+     */
+    public function addAddress($name, $address)
+    {
+        $signer = $this->cryptoEngine->createSigner(Level::LOW);
+        $signature = new Signature();
+        $signature->setMemberId($this->memberId)
+                  ->setKeyId($signer->getKeyId())
+                  ->setSignature($signer->sign($address));
+
+        $request = new AddAddressRequest();
+        $request->setName($name)
+                ->setAddress($address)
+                ->setAddressSignature($signature);
+
+        /** @var AddAddressResponse $response */
+        list($response) = $this->gateway->AddAddress($request)->wait();
+        return $response->getAddress();
+    }
+
+    /**
+     * Looks up an address by id.
+     *
+     * @param string $addressId the address id
+     * @return AddressRecord
+     */
+    public function getAddress($addressId)
+    {
+        $request = new GetAddressRequest();
+        $request->setAddressId($addressId);
+        /** @var GetAddressResponse $response */
+        list($response) = $this->gateway->GetAddress($request)->wait();
+        return $response->getAddress();
+    }
+
+    /**
+     * Looks up member addresses.
+     *
+     * @return RepeatedField a list of addresses
+     */
+    public function getAddresses()
+    {
+        $request = new GetAddressesRequest();
+        /** @var GetAddressesResponse $response */
+        list($response) = $this->gateway->GetAddresses($request)->wait();
+        return $response->getAddresses();
+    }
+
+    /**
+     * Deletes a member address by its id.
+     *
+     * @param string $addressId the id of the address
+     * @return bool that indicates whether the operation finished or had an error
+     */
+    public function deleteAddress($addressId)
+    {
+        $request = new DeleteAddressRequest();
+        $request->setAddressId($addressId);
+        /** @var DeleteAddressRequest $response */
+        list($response) = $this->gateway->DeleteAddress($request)->wait();
+        return $response !== null;
+    }
+
 }

@@ -2,6 +2,7 @@
 
 namespace Test\Tokenio;
 
+use Io\Token\Proto\Common\Address\Address;
 use PHPUnit\Framework\TestCase;
 use Tokenio\Config\TokenCluster;
 use Tokenio\Config\TokenEnvironment;
@@ -80,4 +81,15 @@ abstract class TokenBaseTest extends TestCase
         return $alias;
     }
 
+    public static function generateAddress()
+    {
+        $address = new Address();
+        $address->setHouseNumber('425')
+                ->setStreet('Broadway')
+                ->setCity('Redwood City')
+                ->setPostCode('94063')
+                ->setCountry('US');
+
+        return $address;
+    }
 }

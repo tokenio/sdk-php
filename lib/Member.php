@@ -3,11 +3,13 @@
 namespace Tokenio;
 
 use Google\Protobuf\Internal\RepeatedField;
+use Io\Token\Proto\Common\Address\Address;
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Blob\Attachment;
 use Io\Token\Proto\Common\Blob\Blob;
 use Io\Token\Proto\Common\Blob\Blob\AccessMode;
 use Io\Token\Proto\Common\Blob\Blob\Payload;
+use Io\Token\Proto\Common\Member\AddressRecord;
 use Io\Token\Proto\Common\Member\MemberAliasOperation;
 use Io\Token\Proto\Common\Member\MemberOperation;
 use Io\Token\Proto\Common\Member\MemberRecoveryOperation\Authorization;
@@ -693,5 +695,49 @@ class Member implements RepresentableInterface
     public function getTokenBlob($tokenId, $blobId)
     {
         return $this->client->getTokenBlob($tokenId, $blobId);
+    }
+
+    /**
+     * Creates a new member address.
+     *
+     * @param string $name the name of the address
+     * @param Address $address the address
+     * @return AddressRecord record created
+     */
+    public function addAddress($name, $address)
+    {
+        return $this->client->addAddress($name, $address);
+    }
+
+    /**
+     * Looks up an address by id.
+     *
+     * @param string $addressId the address id
+     * @return AddressRecord
+     */
+    public function getAddress($addressId)
+    {
+        return $this->client->getAddress($addressId);
+    }
+
+    /**
+     * Looks up member addresses.
+     *
+     * @return RepeatedField a list of addresses
+     */
+    public function getAddresses()
+    {
+        return $this->client->getAddresses();
+    }
+
+    /**
+     * Deletes a member address by its id.
+     *
+     * @param string $addressId the id of the address
+     * @return bool that indicates whether the operation finished or had an error
+     */
+    public function deleteAddress($addressId)
+    {
+        return $this->client->deleteAddress($addressId);
     }
 }
