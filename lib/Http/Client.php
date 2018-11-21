@@ -30,6 +30,8 @@ use Io\Token\Proto\Common\Transfer\Transfer;
 use Io\Token\Proto\Common\Transfer\TransferPayload;
 use Io\Token\Proto\Gateway\AddAddressRequest;
 use Io\Token\Proto\Gateway\AddAddressResponse;
+use Io\Token\Proto\Gateway\CreateAccessTokenRequest;
+use Io\Token\Proto\Gateway\CreateAccessTokenResponse;
 use Io\Token\Proto\Gateway\CreateBlobRequest;
 use Io\Token\Proto\Gateway\CreateBlobResponse;
 use Io\Token\Proto\Gateway\CancelTokenRequest;
@@ -38,6 +40,8 @@ use Io\Token\Proto\Gateway\CreateTransferRequest;
 use Io\Token\Proto\Gateway\CreateTransferResponse;
 use Io\Token\Proto\Gateway\DeleteAddressRequest;
 use Io\Token\Proto\Gateway\DeleteMemberRequest;
+use Io\Token\Proto\Gateway\EndorseTokenRequest;
+use Io\Token\Proto\Gateway\EndorseTokenResponse;
 use Io\Token\Proto\Gateway\GetAccountRequest;
 use Io\Token\Proto\Gateway\GetAccountResponse;
 use Io\Token\Proto\Gateway\GetAccountsRequest;
@@ -69,6 +73,8 @@ use Io\Token\Proto\Gateway\GetTokenBlobRequest;
 use Io\Token\Proto\Gateway\GetTokenBlobResponse;
 use Io\Token\Proto\Gateway\GetTokenRequest;
 use Io\Token\Proto\Gateway\GetTokenResponse;
+use Io\Token\Proto\Gateway\GetTokensRequest;
+use Io\Token\Proto\Gateway\GetTokensResponse;
 use Io\Token\Proto\Gateway\GetTransactionRequest;
 use Io\Token\Proto\Gateway\GetTransactionResponse;
 use Io\Token\Proto\Gateway\GetTransactionsRequest;
@@ -891,4 +897,82 @@ class Client
         return $response->getInfo();
     }
 
+    /**
+     * Creates a new access token.
+     *
+     * @param TokenPayload $payload transfer token payload
+     * @return Token returned by the server
+     */
+    public function createAccessToken($payload)
+    {
+        $request = new CreateAccessTokenRequest();
+        $request->setPayload($payload);
+        /** @var CreateAccessTokenResponse $response */
+        list($response) = $this->gateway->CreateAccessToken($request)->wait();
+        return $response->getToken();
+
+    }
+    /**
+     * Creates a new access token.
+     *
+     * @param TokenPayload $tokenPayload token payload
+     * @param string $tokenRequestId token request id
+     * @return Token returned by server
+     */
+    public function createAccessTokenForTokenRequestId($tokenPayload, $tokenRequestId)
+    {
+        $request = new CreateAccessTokenRequest();
+        $request->setPayload($tokenPayload)
+                ->setTokenRequestId($tokenRequestId);
+
+        /** @var CreateAccessTokenResponse $response */
+        list($response) = $this->gateway->CreateAccessToken($request)->wait();
+        return $response->getToken();
+    }
+
+    /**
+     * Endorses the token by signing it. The signature is persisted along
+     * with the token.
+     *
+     * <p>If the key's level is too low, the result's status is MORE_SIGNATURES_NEEDED
+     * and the system pushes a notification to the member prompting them to use a
+     * higher-privilege key.
+     *
+     * @param Token $token to endorse
+     * @param int $keyLevel key level to be used to endorse the token
+     * @return TokenOperationResult result of endorse token
+     */
+    public function endorseToken($token, $keyLevel)
+    {
+        $signer = $this->cryptoEngine->createSigner($keyLevel);
+        $signature = new Signature();
+        $signature->setMemberId($this->memberId)
+                  ->setKeyId($signer->getKeyId())
+                  ->setSignature($signer->sign($this->tokenActionFromToken($token, 'ENDORSED')));
+        $request = new EndorseTokenRequest();
+        $request->setTokenId($token->getId())
+                ->setSignature($signature);
+        /** @var EndorseTokenResponse $response */
+        list($response) = $this->gateway->EndorseToken($request)->wait();
+        return $response->getResult();
+    }
+
+    /**
+     * Looks up a list of existing token.
+     *
+     * @param int $type token type
+     * @param string $offset optional offset to start at
+     * @param int $limit max number of records to return
+     * @return PagedList returned by the server
+     */
+    public function getTokens($type, $offset, $limit)
+    {
+        $request = new GetTokensRequest();
+        $request->setType($type)
+                ->setPage($this->pageBuilder($limit, $offset));
+
+        /** @var GetTokensResponse $response */
+        list($response) = $this->gateway->GetTokens($request)->wait();
+        return new PagedList($response->getTokens(), $offset);
+    }
 }

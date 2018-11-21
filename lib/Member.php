@@ -22,14 +22,18 @@ use Io\Token\Proto\Common\Money\Money;
 use Io\Token\Proto\Common\Security\Key;use Io\Token\Proto\Common\Security\Signature;
 use Io\Token\Proto\Common\Token\Token;
 use Io\Token\Proto\Common\Token\TokenOperationResult;
+use Io\Token\Proto\Common\Token\TokenPayload;
 use Io\Token\Proto\Common\Token\TokenRequest;
 use Io\Token\Proto\Common\Transaction\Balance;
 use Io\Token\Proto\Common\Transaction\Transaction;
 use Io\Token\Proto\Common\Transfer\Transfer;
 use Io\Token\Proto\Common\Transfer\TransferPayload;
 use Io\Token\Proto\Common\Transferinstructions\TransferEndpoint;
+use Io\Token\Proto\Gateway\GetTokensRequest\Type;
+use Io\Token\Proto\Gateway\GetTokensRequest_Type;
 use Tokenio\Exception\InvalidRealmException;
 use Tokenio\Http\Client;
+use Tokenio\Http\Request\AccessTokenBuilder;
 use Tokenio\Http\Request\TransferTokenBuilder;
 use Tokenio\Util\PagedList;
 use Tokenio\Util\Strings;
@@ -765,4 +769,57 @@ class Member implements RepresentableInterface
     {
         return new TransferTokenBuilder($this, $amount, $currency);
     }
+
+    /**
+     * Creates an access token built from a given {@link AccessTokenBuilder}.
+     *
+     * @param TokenPayload $tokenPayload to create access token from
+     * @return Token
+     */
+    public function createAccessToken($tokenPayload)
+    {
+        return $this->client->createAccessToken($tokenPayload);
+    }
+
+    /**
+     * Creates an access token built from a given {@link AccessTokenBuilder}.
+     *
+     * @param TokenPayload $tokenPayload to create access token from
+     * @param string $tokenRequestId token request id
+     * @return Token
+     */
+    public function createAccessTokenForTokenRequestId($tokenPayload, $tokenRequestId)
+    {
+        return $this->client->createAccessTokenForTokenRequestId($tokenPayload, $tokenRequestId);
+    }
+
+    /**
+     * Endorses the token by signing it. The signature is persisted along
+     * with the token.
+     *
+     * <p>If the key's level is too low, the result's status is MORE_SIGNATURES_NEEDED
+     * and the system pushes a notification to the member prompting them to use a
+     * higher-privilege key.
+     *
+     * @param Token $token to endorse
+     * @param int $keyLevel key level to be used to endorse the token
+     * @return TokenOperationResult result of endorse token
+     */
+    public function endorseToken($token, $keyLevel)
+    {
+        return $this->client->endorseToken($token, $keyLevel);
+    }
+
+    /**
+     * Looks up access tokens owned by the member.
+     *
+     * @param string $offset optional offset to start at
+     * @param int $limit max number of records to return
+     * @return PagedList tokens owned by the member
+     */
+    public function getAccessTokens($offset, $limit)
+    {
+        return $this->client->getTokens(Type::ACCESS, $offset, $limit);
+    }
+
 }
