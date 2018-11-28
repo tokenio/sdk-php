@@ -2,6 +2,7 @@
 
 namespace Test\Tokenio;
 
+use Google\Protobuf\Internal\RepeatedField;
 use Io\Token\Proto\Common\Address\Address;
 use PHPUnit\Framework\TestCase;
 use Tokenio\Config\TokenCluster;
@@ -91,5 +92,20 @@ abstract class TokenBaseTest extends TestCase
                 ->setCountry('US');
 
         return $address;
+    }
+
+    /**
+     * Looks up a list of existing transfers.
+     *
+     * @param RepeatedField $repeated
+     * @return array
+     */
+    public static function repeatedFieldsToArray($repeated)
+    {
+        $result = array();
+        foreach ($repeated as $item) {
+            $result[] = $item;
+        }
+        return $result;
     }
 }

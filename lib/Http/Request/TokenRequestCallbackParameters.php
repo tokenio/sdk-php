@@ -35,19 +35,24 @@ class TokenRequestCallbackParameters
     {
         $parts = parse_url($callbackUrl);
         parse_str($parts['query'], $query);
-
         if (!isset($query[self::TOKEN_ID_FIELD], $query[self::STATE_FIELD], $query[self::SIGNATURE_FIELD])) {
             throw new Exception("Invalid or missing parameters in token request query.");
         }
 
-        return new TokenRequestCallbackParameters($query[self::TOKEN_ID_FIELD], $query[self::STATE_FIELD], $query[self::SIGNATURE_FIELD]);
+        $signatureJson = json_decode($query[self::SIGNATURE_FIELD]);
+        $signature = new Signature();
+        $signature->setMemberId($signatureJson->memberId)
+                  ->setKeyId($signatureJson->keyId)
+                  ->getSignature($signatureJson->signature);
+
+        return new TokenRequestCallbackParameters($query[self::TOKEN_ID_FIELD], $query[self::STATE_FIELD], $signature);
     }
 
     private function __construct($tokenId, $state, $signature)
     {
         $this->tokenId = $tokenId;
         $this->state = $state;
-        $this->signature = json_decode($signature);
+        $this->signature = $signature;
     }
 
     /**

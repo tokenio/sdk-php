@@ -2,11 +2,20 @@
 
 namespace Test\Tokenio;
 
+require_once 'TokenBaseTest.php';
+
+use Google\Protobuf\Internal\CodedOutputStream;
 use Io\Token\Proto\Common\Member\Profile;
 use Io\Token\Proto\Common\Member\ProfilePictureSize;
 
 class ProfileTest extends TokenBaseTest
 {
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->member = $this->tokenIO->createMember(self::generateAlias());
+    }
+
     public function testSetProfile()
     {
         $inProfile = new Profile();
@@ -51,9 +60,11 @@ class ProfileTest extends TokenBaseTest
 
     public function testGetProfilePicture()
     {
+        $this->setUp();
         // "The tiniest gif ever" , a 1x1 gif
         // http://probablyprogramming.com/2009/03/15/the-tiniest-gif-ever
-        $tinyGif = 'R0lGODlhAQABAIABAP///wAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+        $tinyGif = base64_decode('R0lGODlhAQABAIABAP///wAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==');
+        echo $tinyGif;
         $this->member->setProfilePicture('image/gif', $tinyGif);
 
         $otherMember = $this->tokenIO->createMember();
@@ -76,7 +87,7 @@ class ProfileTest extends TokenBaseTest
     {
         // "The tiniest gif ever" , a 1x1 gif
         // http://probablyprogramming.com/2009/03/15/the-tiniest-gif-ever
-        $tinyGif = 'R0lGODlhAQABAIABAP///wAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+        $tinyGif = base64_decode('R0lGODlhAQABAIABAP///wAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==');
         $inProfile = new Profile();
         $inProfile->setDisplayNameFirst('Tomás')
                   ->setDisplayNameLast('de Aquino');

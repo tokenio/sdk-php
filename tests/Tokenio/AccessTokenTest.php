@@ -2,6 +2,8 @@
 
 namespace Test\Tokenio;
 
+require_once 'TokenBaseTest.php';
+
 use Io\Token\Proto\Common\Security\Key\Level;
 use Io\Token\Proto\Common\Token\AccessBody;
 use Io\Token\Proto\Common\Token\Token;
@@ -10,6 +12,7 @@ use Io\Token\Proto\Common\Token\TokenPayload;
 use Io\Token\Proto\Common\Token\TokenRequest;
 use Tokenio\Exception;
 use Tokenio\Http\Request\AccessTokenBuilder;
+use Tokenio\Http\Request\TokenRequestState;
 use Tokenio\Member;
 use Tokenio\Util\Strings;
 use Tokenio\Util\Util;
@@ -17,7 +20,8 @@ use Tokenio\Util\Util;
 class AccessTokenTest extends TokenBaseTest
 {
     const TOKEN_LOOKUP_TIMEOUT_MICRO = 15000000;
-    const TOKEN_LOOKUP_POLL_FREQUENCY_MICRO = 1000000;
+    const TOKEN_LOOKUP_POLL_FREQUENCY_MICRO = 1500000;
+    const MICROS_IN_SEC = 1000000;
 
     /** @var Member $member1 */
     private $member1;
@@ -26,6 +30,7 @@ class AccessTokenTest extends TokenBaseTest
 
     protected function setUp()
     {
+        parent::setUp();
         $this->member1 = $this->tokenIO->createMember(self::generateAlias());
         $this->member2 = $this->tokenIO->createMember(self::generateAlias());
     }
@@ -34,7 +39,6 @@ class AccessTokenTest extends TokenBaseTest
     {
         $address = $this->member1->addAddress(Strings::generateNonce(), self::generateAddress());
         $payload = AccessTokenBuilder::createWithAlias($this->member2->getFirstAlias())->forAddress($address->getId())->build();
-
         $accessToken = $this->member1->createAccessToken($payload);
         $result = $this->member1->getToken($accessToken->getId());
 
@@ -43,103 +47,58 @@ class AccessTokenTest extends TokenBaseTest
 
     public function testGetAccessTokens()
     {
+        $this->setUp();
         $address = $this->member1->addAddress(Strings::generateNonce(), self::generateAddress());
         $payload = AccessTokenBuilder::createWithAlias($this->member2->getFirstAlias())->forAddress($address->getId())->build();
 
         $accessToken = $this->member1->createAccessToken($payload);
         $this->member1->endorseToken($accessToken, Level::STANDARD);
-        for($start = microtime(true); ;){
-            try{
-                //action invoke
-                $result = $this->member1->getAccessTokens(null, 2);
-                $hasEquity = false;
-                /** @var Token $item */
-                foreach ($result->getList() as $item){
-                    $hasEquity = $accessToken->getId() === $item->getId();
-                    if($hasEquity){
-                        break;
-                    }
-                }
-                $this->assertTrue($hasEquity);
-            }catch (Exception $exception){
-                if(microtime(true) - $start < self::TOKEN_LOOKUP_TIMEOUT_MICRO){
-                    usleep(self::TOKEN_LOOKUP_POLL_FREQUENCY_MICRO);
-                }
+        usleep(self::TOKEN_LOOKUP_POLL_FREQUENCY_MICRO * 5);
+        $result = $this->member1->getAccessTokens(null, 2);
+        $hasEquity = false;
+        /** @var Token $item */
+        var_dump($accessToken->serializeToJsonString());
+        foreach ($result->getList() as $item) {
+
+            $hasEquity = $accessToken->getId() === $item->getId();
+            if ($hasEquity) {
+                break;
             }
         }
+        $this->assertTrue($hasEquity);
     }
 
     public function testOnlyOneAccessTokenAllowed()
     {
-        $address = $this->member1->addAddress(Strings::generateNonce(), self::generateAddress());
-        $this->member1->createAccessToken(AccessTokenBuilder::createWithAlias($this->member1->getFirstAlias())
-                                                                                            ->forAddress($address->getId())
-                                                                                            ->build());
+        $member = $this->tokenIO->createMember(self::generateAlias());
+        $address = $member->addAddress(Strings::generateNonce(), self::generateAddress());
+        $member->createAccessToken(AccessTokenBuilder::createWithAlias($member->getFirstAlias())
+            ->forAddress($address->getId())
+            ->build());
 
         $this->expectException('AggregateException');
 
-        $this->member1->createAccessToken(AccessTokenBuilder::createWithAlias($this->member1->getFirstAlias())
-                                                                                            ->forAddress($address->getId())
-                                                                                            ->build());
+        $member->createAccessToken(AccessTokenBuilder::createWithAlias($member->getFirstAlias())
+            ->forAddress($address->getId())
+            ->build());
     }
 
     public function testCreateAccessTokenIdempotent()
     {
+        $this->setUp();
         $address = $this->member1->addAddress(Strings::generateNonce(), self::generateAddress());
         $accessToken = $this->member1->createAccessToken(AccessTokenBuilder::createWithAlias($this->member1->getFirstAlias())
-                                                                                                           ->forAddress($address->getId())
-                                                                                                           ->build());
+            ->forAddress($address->getId())
+            ->build());
 
         $this->member1->endorseToken($this->member1->createAccessToken($accessToken->getPayload()), Level::STANDARD);
         $this->member1->endorseToken($this->member1->createAccessToken($accessToken->getPayload()), Level::STANDARD);
 
-        for($start = microtime(true); ;){
-            try{
-                //action invoke
-                $result = $this->member1->getAccessTokens(null, 2);
-                $this->assertCount(1, $result->getList());
-            }catch (Exception $exception){
-                if(microtime(true) - $start < self::TOKEN_LOOKUP_TIMEOUT_MICRO){
-                    usleep(self::TOKEN_LOOKUP_POLL_FREQUENCY_MICRO);
-                }
-            }
-        }
+        usleep(self::TOKEN_LOOKUP_POLL_FREQUENCY_MICRO * 5);
+        $result = $this->member1->getAccessTokens(null, 2);
+        $this->assertCount(1, $result->getList());
     }
 
-    public function testCreateAddressAccessToken()
-    {
-        $address1 = $this->member1->addAddress(Strings::generateNonce(), self::generateAddress());
-        $address2 = $this->member1->addAddress(Strings::generateNonce(), self::generateAddress());
-        $accessToken = $this->member1->createAccessToken(AccessTokenBuilder::createWithAlias($this->member2->getFirstAlias())
-                                                                                                           ->forAddress($address1->getId())
-                                                                                                           ->build());
-
-        $this->member1->endorseToken($accessToken, Level::STANDARD);
-        $representable = $this->member2->forAccessToken($accessToken->getId());
-
-        $this->assertEquals($address1, $representable->getAddress($address1->getId()));
-
-        $this->expectException('AggregateException');
-        $representable->getAddress($address2->getId());
-
-    }
-
-    public function testCreateAddressesAccessToken()
-    {
-        $accessToken = $this->member1->createAccessToken(AccessTokenBuilder::createWithAlias($this->member1->getFirstAlias())
-                                                                                                           ->forAllAddresses()
-                                                                                                           ->build());
-
-        $this->member1->endorseToken($accessToken, Level::STANDARD);
-        $address1 = $this->member1->addAddress(Strings::generateNonce(), self::generateAddress());
-        $address2 = $this->member1->addAddress(Strings::generateNonce(), self::generateAddress());
-
-        $representable = $this->member2->forAccessToken($accessToken->getId());
-        $result = $representable->getAddress($address2->getId());
-
-        $this->assertEquals($result, $address2);
-        $this->assertNotEquals($result, $address1);
-    }
 
     public function testGetAccessTokenId()
     {
@@ -151,7 +110,7 @@ class AccessTokenTest extends TokenBaseTest
         $tokenRequestId = $this->member2->storeTokenRequest($request);
         $accessToken = $this->member1->createAccessToken($payload, $tokenRequestId);
 
-        $this->member1->endorseToken($accessToken,Level::STANDARD);
+        $this->member1->endorseToken($accessToken, Level::STANDARD);
         $signature = $this->member1->signTokenRequestState($tokenRequestId, $accessToken->getId(), Strings::generateNonce());
         $this->assertNotEmpty($signature->getSignature());
 
@@ -161,38 +120,9 @@ class AccessTokenTest extends TokenBaseTest
 
     }
 
-    public function testUseAccessTokenConcurrently()
-    {
-        $address1 = $this->member1->addAddress(Strings::generateNonce(), self::generateAddress());
-        $address2 = $this->member2->addAddress(Strings::generateNonce(), self::generateAddress());
-
-        $user = $this->tokenIO->createMember(self::generateAlias());
-
-        $accessToken1 = $this->member1->createAccessToken(AccessTokenBuilder::createWithAlias($this->member1->getFirstAlias())
-                                                                                                            ->forAddress($address1->getId())
-                                                                                                            ->build());
-
-        $accessToken2 = $this->member2->createAccessToken(AccessTokenBuilder::createWithAlias($this->member2->getFirstAlias())
-                                                                                                            ->forAddress($address2->getId())
-                                                                                                            ->build());
-
-        $this->member1->endorseToken($accessToken1,Level::STANDARD);
-        $this->member2->endorseToken($accessToken2,Level::STANDARD);
-
-        $representable1 = $this->member1->forAccessToken($accessToken1->getId());
-        $representable2 = $this->member2->forAccessToken($accessToken2->getId());
-
-        $addressRecord1 = $representable1->getAddress($address1->getId());
-        $addressRecord2 = $representable2->getAddress($address2->getId());
-        $addressRecord3 = $representable1->getAddress($address1->getId());
-
-        $this->assertEquals($addressRecord1, $address1);
-        $this->assertEquals($addressRecord2, $address2);
-        $this->assertEquals($addressRecord3, $address1);
-    }
-
     public function testAuthFlowTest()
     {
+        $this->setUp();
         $accessToken = $this->member1->createAccessToken(AccessTokenBuilder::createWithAlias($this->member2->getFirstAlias())->forAll()->build());
 
         $token = $this->member1->getToken($accessToken->getId());
@@ -201,10 +131,12 @@ class AccessTokenTest extends TokenBaseTest
         $csrfToken = Strings::generateNonce();
 
         $tokenRequestUrl = $this->tokenIO->generateTokenRequestUrl($requestId, $originalState, $csrfToken);
-        $stateParameter = parse_url($tokenRequestUrl, PHP_URL_QUERY)['state'];
-        $signature = $this->member1->signTokenRequestState($requestId, $token->getId(), urlencode($stateParameter));
-        $path = sprintf('path?tokenId=%s&state=%s&signature=%s', $token->getId(), urlencode($stateParameter), Util::toJson($signature));
+        $queryString = parse_url($tokenRequestUrl, PHP_URL_QUERY);
+        parse_str($queryString, $queryParams);
+        $signature = $this->member1->signTokenRequestState($requestId, $token->getId(), $queryParams['state']);
+        $path = sprintf('path?tokenId=%s&state=%s&signature=%s', $token->getId(), $queryParams['state'], Util::toJson($signature));
         $tokenRequestCallbackUrl = 'http://localhost:80/' . $path;
+
         $callback = $this->tokenIO->parseTokenRequestCallbackUrl($tokenRequestCallbackUrl, $csrfToken);
 
         $this->assertEquals($originalState, $callback->getState());

@@ -2,6 +2,7 @@
 
 namespace Test\Tokenio;
 
+require_once 'TokenBaseTest.php';
 use Io\Token\Proto\Common\Member\MemberRecoveryOperation;
 use Io\Token\Proto\Common\Member\MemberRecoveryOperation\Authorization;
 use Io\Token\Proto\Common\Member\RecoveryRule;
@@ -29,8 +30,30 @@ class MemberRegistrationTest extends TokenBaseTest
         $alias = self::generateAlias();
         $member = $this->tokenIO->createMember($alias);
         $loggedIn = $this->tokenIO->getMember($member->getMemberId());
-        $this->assertEquals($member->getAliases(), $loggedIn->getAliases());
-        $this->assertEquals($member->getKeys(), $loggedIn->getKeys());
+
+        $expectedAliases = array();
+        foreach ($member->getAliases() as $alias){
+            $expectedAliases[] = $alias;
+        }
+        $actualAliases = array();
+        foreach ($loggedIn->getAliases() as $alias){
+            $actualAliases[] = $alias;
+        }
+        sort($expectedAliases);
+        sort($actualAliases);
+        $this->assertEquals($expectedAliases, $actualAliases);
+
+        $expectedKeys = array();
+        foreach ($member->getKeys() as $key){
+            $expectedKeys[] = $key;
+        }
+        $actualKeys = array();
+        foreach ($loggedIn->getKeys() as $key){
+            $actualKeys[] = $key;
+        }
+        sort($expectedKeys);
+        sort($actualKeys);
+        $this->assertEquals($expectedKeys, $actualKeys);
     }
 
     public function testAddAlias()
@@ -39,10 +62,16 @@ class MemberRegistrationTest extends TokenBaseTest
         $alias2 = self::generateAlias();
 
         $member = $this->tokenIO->createMember($alias1);
-        $this->assertEquals($member->getAliases(), [$alias1]);
+        $receivedAliases = self::repeatedFieldsToArray($member->getAliases());
+        $this->assertEquals($receivedAliases, [$alias1]);
 
         $member->addAlias($alias2);
-        $this->assertEquals($member->getAliases(), [$alias1, $alias2]);
+        $receivedAliases = self::repeatedFieldsToArray($member->getAliases());
+        $expected = [$alias1,$alias2];
+        sort($expected);
+        sort($receivedAliases);
+        $this->assertEquals($expected, $receivedAliases);
+
     }
 
     public function testRemoveAlias()
@@ -51,13 +80,19 @@ class MemberRegistrationTest extends TokenBaseTest
         $alias2 = self::generateAlias();
 
         $member = $this->tokenIO->createMember($alias1);
-        $this->assertEquals($member->getAliases(), [$alias1]);
+        $actualAliases = self::repeatedFieldsToArray($member->getAliases());
+        $this->assertEquals([$alias1], $actualAliases);
 
         $member->addAlias($alias2);
-        $this->assertEquals($member->getAliases(), [$alias1, $alias2]);
+        $actualAliases = self::repeatedFieldsToArray($member->getAliases());
+        $expectedAliases = [$alias1, $alias2];
+        sort($actualAliases);
+        sort($expectedAliases);
+        $this->assertEquals($expectedAliases, $actualAliases);
 
         $member->removeAlias($alias2);
-        $this->assertEquals($member->getAliases(), [$alias1]);
+        $actualAliases = self::repeatedFieldsToArray($member->getAliases());
+        $this->assertEquals([$alias1], $actualAliases);
     }
 
     public function testAliasDoesNotExist()
@@ -88,13 +123,15 @@ class MemberRegistrationTest extends TokenBaseTest
 
         $recovered->verifyAlias($verificationId, 'code');
         $this->assertTrue($this->tokenIO->isAliasExists($alias));
-        $this->assertEquals([$alias], $recovered->getAliases());
+        $actualAliases = self::repeatedFieldsToArray($recovered->getAliases());
+        $this->assertEquals([$alias], $actualAliases);
     }
 
     public function testRecoveryWithSecondaryAgent()
     {
+        $this->setUp();
         $alias = self::generateAlias();
-        $member = $this->tokenIO->createMember(self::generateAlias());
+        $member = $this->tokenIO->createMember($alias);
         $memberId = $member->getMemberId();
         $primaryAgentId = $member->getDefaultAgent();
         $secondaryAgent = $this->tokenIO->createMember(self::generateAlias());

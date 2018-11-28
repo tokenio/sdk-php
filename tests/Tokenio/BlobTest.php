@@ -2,6 +2,9 @@
 
 namespace Test\Tokenio;
 
+require_once 'TokenBaseTest.php';
+
+use Io\Token\Proto\Common\Blob\Blob\AccessMode;
 use Io\Token\Proto\Common\Blob\Blob\Payload;
 use Tokenio\Util\Strings;
 use Tokenio\Util\Util;
@@ -10,6 +13,12 @@ class BlobTest extends TokenBaseTest
 {
     const FILENAME = 'file.json';
     const FILETYPE = 'application/json';
+
+    public function setUp()
+    {
+        parent::setUp();
+        $this->member = $this->tokenIO->createMember(self::generateAlias());
+    }
 
     public function testCheckHash()
     {
@@ -21,7 +30,7 @@ class BlobTest extends TokenBaseTest
                     ->setType(self::FILETYPE)
                     ->setOwnerId($this->member->getMemberId());
 
-        $hash = Util::hashString($blobPayload->serializeToJsonString());
+        $hash = Util::hasProto($blobPayload);
         $this->assertContains($hash, $attachment->getBlobId());
     }
 
@@ -78,7 +87,7 @@ class BlobTest extends TokenBaseTest
     public function testPublicAccess()
     {
         $randomData = Strings::generateRandomString(50);
-        $attachment = $this->member->createBlob($this->member->getMemberId(), self::FILETYPE, self::FILENAME, $randomData);
+        $attachment = $this->member->createBlob($this->member->getMemberId(), self::FILETYPE, self::FILENAME, $randomData, AccessMode::PBPUBLIC);
 
         $otherMember = $this->tokenIO->createMember();
         $blob1 = $this->member->getBlob($attachment->getBlobId());
