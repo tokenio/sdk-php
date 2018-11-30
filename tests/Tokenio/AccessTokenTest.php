@@ -79,23 +79,6 @@ class AccessTokenTest extends TestCase
             ->build());
     }
 
-    public function testCreateAccessTokenIdempotent()
-    {
-        $this->setUp();
-        $address = $this->member1->addAddress(Strings::generateNonce(), TestUtil::generateAddress());
-        $accessToken = $this->member1->createAccessToken(AccessTokenBuilder::createWithAlias($this->member1->getFirstAlias())
-            ->forAddress($address->getId())
-            ->build());
-
-        $this->member1->endorseToken($this->member1->createAccessToken($accessToken->getPayload()), Level::STANDARD);
-        $this->member1->endorseToken($this->member1->createAccessToken($accessToken->getPayload()), Level::STANDARD);
-
-        usleep(self::TOKEN_LOOKUP_POLL_FREQUENCY_MICRO * 5);
-        $result = $this->member1->getAccessTokens(null, 2);
-        $this->assertCount(1, $result->getList());
-    }
-
-
     public function testGetAccessTokenId()
     {
         $address = $this->member1->addAddress(Strings::generateNonce(), TestUtil::generateAddress());
@@ -114,28 +97,6 @@ class AccessTokenTest extends TestCase
         $this->assertEquals($accessToken->getId(), $result->getTokenId());
         $this->assertEquals($signature->getSignature(), $result->getSignature()->getSignature());
 
-    }
-
-    public function testAuthFlowTest()
-    {
-        $this->setUp();
-        $accessToken = $this->member1->createAccessToken(AccessTokenBuilder::createWithAlias($this->member2->getFirstAlias())->forAll()->build());
-
-        $token = $this->member1->getToken($accessToken->getId());
-        $requestId = Strings::generateNonce();
-        $originalState = Strings::generateNonce();
-        $csrfToken = Strings::generateNonce();
-
-        $tokenRequestUrl = $this->tokenIO->generateTokenRequestUrl($requestId, $originalState, $csrfToken);
-        $queryString = parse_url($tokenRequestUrl, PHP_URL_QUERY);
-        parse_str($queryString, $queryParams);
-        $signature = $this->member1->signTokenRequestState($requestId, $token->getId(), $queryParams['state']);
-        $path = sprintf('path?tokenId=%s&state=%s&signature=%s', $token->getId(), $queryParams['state'], Util::toJson($signature));
-        $tokenRequestCallbackUrl = 'http://localhost:80/' . $path;
-
-        $callback = $this->tokenIO->parseTokenRequestCallbackUrl($tokenRequestCallbackUrl, $csrfToken);
-
-        $this->assertEquals($originalState, $callback->getState());
     }
 
     public function testRequestSignature()
