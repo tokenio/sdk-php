@@ -2,6 +2,7 @@
 
 namespace Test\Tokenio;
 
+require_once 'TokenBaseTest.php';
 use Io\Token\Proto\Common\Token\AccessBody;
 use Io\Token\Proto\Common\Token\TokenMember;
 use Io\Token\Proto\Common\Token\TokenPayload;
@@ -10,6 +11,12 @@ use Io\Token\Proto\Common\Token\TokenRequest;
 class TokenRequestTest extends TokenBaseTest
 {
     const TOKEN_URL = 'https://token.io';
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->member = $this->tokenIO->createMember(self::generateAlias());
+    }
 
     public function testAddAndGetTransferTokenRequest()
     {
@@ -57,9 +64,12 @@ class TokenRequestTest extends TokenBaseTest
 
     public function testAddAndGetTokenRequest_NotFound()
     {
-        $this->expectException('AggregateException');
-        $this->tokenIO->retrieveTokenRequest('bogus');
-        $this->tokenIO->retrieveTokenRequest($this->member->getMemberId());
+        $this->expectException('Tokenio\Exception\StatusRuntimeException');
+        $token1 = $this->tokenIO->retrieveTokenRequest('bogus');
+        $token2 = $this->tokenIO->retrieveTokenRequest($this->member->getMemberId());
+
+        $this->assertEmpty($token1);
+        $this->assertEmpty($token2);
     }
 
     public function testAddAndGetTokenRequest_WrongMember()
@@ -71,7 +81,7 @@ class TokenRequestTest extends TokenBaseTest
         $storedRequest = new TokenRequest();
         $storedRequest->setPayload($payload);
 
-        $this->expectException('AggregateException');
+        $this->expectException('Tokenio\Exception\StatusRuntimeException');
         $this->member->storeTokenRequest($storedRequest);
 
     }

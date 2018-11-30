@@ -18,6 +18,7 @@ use Io\Token\Proto\Common\Member\MemberRecoveryRulesOperation;
 use Io\Token\Proto\Common\Member\MemberRemoveKeyOperation;
 use Io\Token\Proto\Common\Member\Profile;
 use Io\Token\Proto\Common\Member\RecoveryRule;
+use Io\Token\Proto\Common\Member\TrustedBeneficiary;
 use Io\Token\Proto\Common\Money\Money;
 use Io\Token\Proto\Common\Security\Key;use Io\Token\Proto\Common\Security\Signature;
 use Io\Token\Proto\Common\Token\Token;
@@ -268,11 +269,16 @@ class Member implements RepresentableInterface
     {
         $operations = [];
         foreach ($aliasList as $alias) {
-            $operation = new MemberAliasOperation();
-            $operation->setAliasHash(Util::hashAlias($alias));
+            $aliasOperation = new MemberAliasOperation();
+            $aliasOperation->setAliasHash(Util::hashAlias($alias));
+
+            $operation = new MemberOperation();
+            $operation->setRemoveAlias($aliasOperation);
+
+            $operations[] = $operation;
         }
         $latest = $this->client->getMember($this->getMemberId());
-        $updatedMember = $this->client->updateMember($latest, $operations);
+        $updatedMember = $this->client->updateMember($latest, $operations, []);
         return $updatedMember !== null;
     }
 
@@ -319,21 +325,6 @@ class Member implements RepresentableInterface
     }
 
     /**
-     * Creates a Representable that acts as another member using the access token
-     * that was granted by that member.
-     *
-     * @param string $tokenId the token id
-     * @param boolean $customerInitiated whether the call is initiated by the customer
-     * @return Member
-     */
-    public function forAccessToken($tokenId, $customerInitiated = false)
-    {
-        $cloned = clone $this->client;
-        $cloned->useAccessToken($tokenId, $customerInitiated);
-        return new Member($cloned);
-    }
-
-    /**
      * Stores a token request. This can be retrieved later by the token request id.
      *
      * @param TokenRequest $tokenRequest token request
@@ -341,7 +332,7 @@ class Member implements RepresentableInterface
      */
     public function storeTokenRequest($tokenRequest)
     {
-        return $this->client->storeTokenRequest($tokenRequest->getTokenPayload(), $tokenRequest->getOptions(), $tokenRequest->getUserRefId());
+        return $this->client->storeTokenRequest($tokenRequest->getPayload(), $tokenRequest->getOptions(), $tokenRequest->getUserRefId());
     }
 
     /**
@@ -768,6 +759,46 @@ class Member implements RepresentableInterface
     public function createTransferToken($amount, $currency)
     {
         return new TransferTokenBuilder($this, $amount, $currency);
+    }
+
+    /**
+     * Adds a trusted beneficiary for whom the SCA will be skipped.
+     *
+     * @param string $memberId the member id of the beneficiary
+     * @return bool if success or not
+     */
+    public function addTrustedBeneficiary($memberId)
+    {
+        $payload = new TrustedBeneficiary\Payload();
+        $payload->setMemberId($memberId)
+            ->setNonce(Strings::generateNonce());
+
+        return $this->client->addTrustedBeneficiary($payload);
+    }
+
+    /**
+     * Removes a trusted beneficiary.
+     *
+     * @param string $memberId the member id of the beneficiary
+     * @return bool if success or not
+     */
+    public function removeTrustedBeneficiary($memberId)
+    {
+        $payload = new TrustedBeneficiary\Payload();
+        $payload->setMemberId($memberId)
+                ->setNonce(Strings::generateNonce());
+
+        return $this->client->removeTrustedBeneficiary($payload);
+    }
+
+    /**
+     * Gets a list of all trusted beneficiaries.
+     *
+     * @return RepeatedField
+     */
+    public function getTrustedBeneficiaries()
+    {
+        return $this->client->getTrustedBeneficiaries();
     }
 
     /**

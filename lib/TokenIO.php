@@ -278,7 +278,6 @@ class TokenIO
     {
         $client = ClientFactory::unauthenticated($this->channel);
         $member = $client->getTokenMember();
-
         $parameters = TokenRequestCallbackParameters::create($callbackUrl);
         $state = TokenRequestState::parse($parameters->getSerializedState());
 
@@ -289,7 +288,6 @@ class TokenIO
         $payload = new TokenRequestStatePayload();
         $payload->setTokenId($parameters->getTokenId());
         $payload->setState(urlencode($parameters->getSerializedState()));
-
         Util::verifySignature($member, $payload, $parameters->getSignature());
 
         return new TokenRequestCallback($parameters->getTokenId(), $state->getInnerState());

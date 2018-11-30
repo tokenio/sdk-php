@@ -3,6 +3,7 @@
 namespace Tokenio\Http;
 
 use Io\Token\Proto\Common\Alias\Alias;
+use Io\Token\Proto\Common\Alias\VerificationStatus;
 use Io\Token\Proto\Common\Member\Member;
 use Io\Token\Proto\Common\Member\MemberAddKeyOperation;
 use Io\Token\Proto\Common\Member\MemberOperation;
@@ -73,7 +74,7 @@ class UnauthenticatedClient
         $request->setAlias($alias);
 
         /** @var ResolveAliasResponse $response */
-        list($response) = $this->gateway->ResolveAlias($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->ResolveAlias($request));
         return $response->getMember();
     }
 
@@ -107,7 +108,7 @@ class UnauthenticatedClient
         $request->setMemberId($memberId);
 
         /** @var GetMemberResponse $response */
-        list($response) = $this->gateway->GetMember($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->GetMember($request));
         return $response->getMember();
     }
 
@@ -129,7 +130,7 @@ class UnauthenticatedClient
         }
 
         /** @var CreateMemberResponse $response */
-        list($response) = $this->gateway->CreateMember($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->CreateMember($request));
         return $response->getMemberId();
     }
 
@@ -159,7 +160,7 @@ class UnauthenticatedClient
                 ->setMetadata($metadata);
 
         /** @var UpdateMemberResponse $response */
-        list($response) = $this->gateway->UpdateMember($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->UpdateMember($request));
         return $response->getMember();
     }
 
@@ -234,7 +235,7 @@ class UnauthenticatedClient
         }
 
         /** @var GetBanksResponse $response */
-        list($response) = $this->gateway->GetBanks($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->GetBanks($request));
         return $response;
     }
 
@@ -251,7 +252,7 @@ class UnauthenticatedClient
         $request->setRequestId($tokenRequestId);
 
         /** @var RetrieveTokenRequestResponse $response */
-        list($response) = $this->gateway->RetrieveTokenRequest($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->RetrieveTokenRequest($request));
         return $response->getTokenRequest();
     }
 
@@ -267,7 +268,7 @@ class UnauthenticatedClient
         $request->setTokenRequestId($tokenRequestId);
 
         /** @var GetTokenRequestResultResponse $response */
-        list($response) = $this->gateway->GetTokenRequestResult($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->GetTokenRequestResult($request));
         return new TokenRequestResult($response->getTokenId(), $response->getSignature());
     }
 
@@ -285,7 +286,7 @@ class UnauthenticatedClient
 
         $request->setAlias($alias);
         /** @var ResolveAliasResponse $response */
-        list($response) = $this->gateway->ResolveAlias($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->ResolveAlias($request));
         return $response->getMember()->getId();
     }
 
@@ -300,7 +301,7 @@ class UnauthenticatedClient
         $request = new BeginRecoveryRequest();
         $request->setAlias(Util::normalizeAlias($alias));
         /** @var BeginRecoveryResponse $response */
-        list($response) = $this->gateway->BeginRecovery($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->BeginRecovery($request));
         return $response->getVerificationId();
     }
 
@@ -327,13 +328,14 @@ class UnauthenticatedClient
                 ->setKey($privelegedKey);
 
         /** @var CompleteRecoveryResponse $response */
-        list($completeResponse) = $this->gateway->CompleteRecovery($request);
+        $completeResponse = Util::executeAndHandleCall($this->gateway->CompleteRecovery($request));
         $memberRequest = new GetMemberRequest();
+        $memberRequest->setMemberId($memberId);
         /** @var GetMemberResponse $memberResponse */
-        list($memberResponse) = $this->gateway->GetMember($memberRequest)->wait();
+        $memberResponse = Util::executeAndHandleCall($this->gateway->GetMember($memberRequest));
 
         $memberRecoveryOperation = new MemberOperation();
-        $memberRecoveryOperation->setRecover($response->getRecoveryEntry());
+        $memberRecoveryOperation->setRecover($completeResponse->getRecoveryEntry());
 
         $operations = Util::createMemberOperationsFromKeys([$privelegedKey, $standardKey, $lowKey]);
         $operations[] = $memberRecoveryOperation;
@@ -350,7 +352,7 @@ class UnauthenticatedClient
         $updateMemberRequest->setUpdate($memberUpdate)
                             ->setUpdateSignature($signature);
         /** @var UpdateMemberResponse $memberUpdateResponse */
-        list($memberUpdateResponse) = $this->gateway->UpdateMember($updateMemberRequest)->wait();
+        $memberUpdateResponse = Util::executeAndHandleCall($this->gateway->UpdateMember($updateMemberRequest));
         return $memberUpdateResponse->getMember();
     }
 
@@ -371,8 +373,8 @@ class UnauthenticatedClient
                 ->setKey($privilegedKey);
 
         /** @var CompleteRecoveryResponse $response */
-        list($response) = $this->gateway->CompleteRecovery($request)->wait();
-        if($response->getStatus() !== RequestStatus::SUCCESSFUL_REQUEST){
+        $response = Util::executeAndHandleCall($this->gateway->CompleteRecovery($request));
+        if($response->getStatus() !== VerificationStatus::SUCCESS){
             throw new VerificationException($response->getStatus());
         }
         return $response->getRecoveryEntry();
@@ -399,7 +401,7 @@ class UnauthenticatedClient
 
             $operations[] = $memberOperation;
         }
-        $operations[] = Util::createMemberOperationsFromKeys([$privilegedKey, $standardKey, $lowKey]);
+        $operations = Util::createMemberOperationsFromKeys([$privilegedKey, $standardKey, $lowKey]);
         $getMemberRequest = new GetMemberRequest();
         $getMemberRequest->setMemberId($memberId);
         /** @var GetMemberResponse $getMemberResponse */
@@ -408,7 +410,6 @@ class UnauthenticatedClient
         $memberUpdate->setMemberId($memberId)
                      ->setPrevHash($getMemberResponse->getMember()->getLastHash())
                      ->setOperations($operations);
-
         $updateSignature = new Signature();
         $updateSignature->setKeyId($signer->getKeyId())
                         ->setMemberId($memberId)
@@ -418,8 +419,7 @@ class UnauthenticatedClient
         $memberUpdateRequest->setUpdate($memberUpdate)
                             ->setUpdateSignature($updateSignature);
         /** @var UpdateMemberResponse $updateMemberResponse */
-        list($updateMemberResponse) = $this->gateway->UpdateMember($memberUpdateRequest)->wait();
+        $updateMemberResponse = Util::executeAndHandleCall($this->gateway->UpdateMember($memberUpdateRequest));
         return $updateMemberResponse->getMember();
-
     }
 }

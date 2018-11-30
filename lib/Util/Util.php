@@ -3,6 +3,7 @@
 namespace Tokenio\Util;
 
 use Google\Protobuf\Internal\Message;
+use Grpc\UnaryCall;
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Member\Member;
 use Io\Token\Proto\Common\Member\MemberAddKeyOperation;
@@ -19,6 +20,8 @@ use Tokenio\Exception\CryptoKeyNotFoundException;
 use Tokenio\Security\Base58;
 use Tokenio\Security\Base64Url;
 use Tokenio\Security\Ed25519Verifier;
+use Webmozart\Json\JsonDecoder;
+use Webmozart\Json\JsonEncoder;
 
 abstract class Util
 {
@@ -50,6 +53,17 @@ abstract class Util
         return Base58::encode(self::sha256hash(self::toJson($alias)));
     }
 
+    /**
+     * Hash Alias as Base58 hashed json from Alias message
+     *
+     * @param Message $message the alias to hash
+     * @return string
+     * @throws \Tokenio\Exception\CryptographicException
+     */
+    public static function hasProto($message)
+    {
+        return Base58::encode(self::sha256hash($message->serializeToString()));
+    }
     /**
      * Creates AddKey operation with Key.
      *
@@ -211,10 +225,12 @@ abstract class Util
         if (empty($keys)) {
             return null;
         }
+        $signatureKeyId = $signature->getKeyId();
 
         /** @var Key $keyItem */
         foreach ($keys->getIterator() as $keyItem) {
-            if ($keyItem->getId() == $signature->getKeyId()) {
+
+            if ($keyItem->getId() == $signatureKeyId) {
                 return $keyItem;
             }
         }
@@ -241,13 +257,38 @@ abstract class Util
      */
     private static function normalizeJson($data)
     {
+        $jsonOriginal = json_decode($data, false);
         $json = json_decode($data, true);
         if ($json == null) {
             return $data;
         }
-
         self::jsonSort($json);
+        self::fixEmptyObjectReplacements($jsonOriginal, $json, '');
         return json_encode($json);
+    }
+
+    private static function fixEmptyObjectReplacements($originalJson, &$object, $path)
+    {
+        foreach ($object as $key => &$value) {
+
+            if(is_array($value) && empty($value) && !Strings::isEmptyString($path)){
+                $pathParts = array_diff(explode(';', $path), ['', null]);
+                $srcObj = $originalJson;
+                foreach ($pathParts as $part){
+                    $srcObj = is_object($srcObj) ? $srcObj->$part : $srcObj[$part];
+                }
+                if(is_object($srcObj->$key)){
+                    if(!($object[$key] instanceof \stdClass)) {
+                        $object[$key] = new \stdClass();
+                    }
+                    return;
+
+                }
+            }else if(is_object($value) || is_array($value)){
+                $path = $path . ';' . $key;
+                self::fixEmptyObjectReplacements($originalJson, $value, $path);
+            }
+        }
     }
 
     /**
@@ -262,6 +303,22 @@ abstract class Util
             if (is_array($array[$key])) {
                 self::jsonSort($array[$key]);
             }
+        }
+    }
+
+    /**
+     * Executes UnaryCall and handles status and response
+     *
+     * @param UnaryCall $call
+     * @return Message returned by the server
+     * @throws Exception\StatusRuntimeException exception returned by server
+     */
+    public static function executeAndHandleCall($call){
+        list($response, $status) = $call->wait();
+        if($status->code == \Grpc\STATUS_OK){
+            return $response;
+        }else{
+            throw new Exception\StatusRuntimeException($status->code, $status->details);
         }
     }
 }

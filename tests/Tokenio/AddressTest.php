@@ -2,11 +2,18 @@
 
 namespace Test\Tokenio;
 
+require_once 'TokenBaseTest.php';
 use Io\Token\Proto\Common\Member\AddressRecord;
 use Tokenio\Util\Strings;
 
 class AddressTest extends TokenBaseTest
 {
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->member = $this->tokenIO->createMember(self::generateAlias());
+    }
+
     public function testAddAddress()
     {
         $name = Strings::generateNonce();
@@ -51,8 +58,9 @@ class AddressTest extends TokenBaseTest
     public function testGetAddress_NotFound()
     {
         $fakeAddressId = Strings::generateNonce();
-        $this->expectException('AggregateException');
-        $this->member->getAddress($fakeAddressId);
+        $this->expectException('Tokenio\Exception\StatusRuntimeException');
+        $nonExistingAddress = $this->member->getAddress($fakeAddressId . 'adadasss');
+        $this->assertEmpty($nonExistingAddress);
     }
 
     public function testDeleteAddress()
