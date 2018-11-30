@@ -2,18 +2,23 @@
 
 namespace Test\Tokenio;
 
-require_once 'TokenBaseTest.php';
-
-use Google\Protobuf\Internal\CodedOutputStream;
 use Io\Token\Proto\Common\Member\Profile;
 use Io\Token\Proto\Common\Member\ProfilePictureSize;
+use PHPUnit\Framework\TestCase;
+use Tokenio\Member;
+use Tokenio\Util\TestUtil;
 
-class ProfileTest extends TokenBaseTest
+class ProfileTest extends TestCase
 {
+    /** @var \Tokenio\TokenIO */
+    protected $tokenIO;
+    /** @var Member $member */
+    private $member;
+
     protected function setUp()
     {
-        parent::setUp();
-        $this->member = $this->tokenIO->createMember(self::generateAlias());
+        $this->tokenIO = TestUtil::initializeSDK();
+        $this->member = $this->tokenIO->createMember(TestUtil::generateAlias());
     }
 
     public function testSetProfile()

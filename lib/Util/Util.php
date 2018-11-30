@@ -20,8 +20,6 @@ use Tokenio\Exception\CryptoKeyNotFoundException;
 use Tokenio\Security\Base58;
 use Tokenio\Security\Base64Url;
 use Tokenio\Security\Ed25519Verifier;
-use Webmozart\Json\JsonDecoder;
-use Webmozart\Json\JsonEncoder;
 
 abstract class Util
 {
@@ -60,7 +58,7 @@ abstract class Util
      * @return string
      * @throws \Tokenio\Exception\CryptographicException
      */
-    public static function hasProto($message)
+    public static function hashProto($message)
     {
         return Base58::encode(self::sha256hash($message->serializeToString()));
     }
@@ -105,7 +103,7 @@ abstract class Util
      * @param Key[] $keys
      * @return MemberOperation[]
      */
-    public static function createMemberOperationsFromKeys($keys)
+    public static function toAddKeyOperations($keys)
     {
         $operations = array();
         foreach ($keys as $key){

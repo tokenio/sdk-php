@@ -2,20 +2,27 @@
 
 namespace Test\Tokenio;
 
-require_once 'TokenBaseTest.php';
 use Io\Token\Proto\Common\Token\AccessBody;
 use Io\Token\Proto\Common\Token\TokenMember;
 use Io\Token\Proto\Common\Token\TokenPayload;
 use Io\Token\Proto\Common\Token\TokenRequest;
+use PHPUnit\Framework\TestCase;
+use Tokenio\Member;
+use Tokenio\Util\TestUtil;
 
-class TokenRequestTest extends TokenBaseTest
+class TokenRequestTest extends TestCase
 {
     const TOKEN_URL = 'https://token.io';
 
+    /** @var \Tokenio\TokenIO */
+    protected $tokenIO;
+    /** @var Member $member */
+    private $member;
+
     protected function setUp()
     {
-        parent::setUp();
-        $this->member = $this->tokenIO->createMember(self::generateAlias());
+        $this->tokenIO = TestUtil::initializeSDK();
+        $this->member = $this->tokenIO->createMember(TestUtil::generateAlias());
     }
 
     public function testAddAndGetTransferTokenRequest()

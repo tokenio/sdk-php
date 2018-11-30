@@ -5,7 +5,6 @@ namespace Tokenio\Http;
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Alias\VerificationStatus;
 use Io\Token\Proto\Common\Member\Member;
-use Io\Token\Proto\Common\Member\MemberAddKeyOperation;
 use Io\Token\Proto\Common\Member\MemberOperation;
 use Io\Token\Proto\Common\Member\MemberRecoveryOperation;
 use Io\Token\Proto\Common\Member\MemberUpdate;
@@ -13,7 +12,6 @@ use Io\Token\Proto\Common\Security\Key;
 use Io\Token\Proto\Common\Security\Key\Level;
 use Io\Token\Proto\Common\Security\Signature;
 use Io\Token\Proto\Common\Token\TokenRequest;
-use Io\Token\Proto\Common\Transaction\RequestStatus;
 use Io\Token\Proto\Gateway\BeginRecoveryRequest;
 use Io\Token\Proto\Gateway\BeginRecoveryResponse;
 use Io\Token\Proto\Gateway\CompleteRecoveryRequest;
@@ -337,7 +335,7 @@ class UnauthenticatedClient
         $memberRecoveryOperation = new MemberOperation();
         $memberRecoveryOperation->setRecover($completeResponse->getRecoveryEntry());
 
-        $operations = Util::createMemberOperationsFromKeys([$privelegedKey, $standardKey, $lowKey]);
+        $operations = Util::toAddKeyOperations([$privelegedKey, $standardKey, $lowKey]);
         $operations[] = $memberRecoveryOperation;
         $memberUpdate = new MemberUpdate();
         $memberUpdate->setMemberId($memberId)
@@ -401,7 +399,7 @@ class UnauthenticatedClient
 
             $operations[] = $memberOperation;
         }
-        $operations = Util::createMemberOperationsFromKeys([$privilegedKey, $standardKey, $lowKey]);
+        $operations = Util::toAddKeyOperations([$privilegedKey, $standardKey, $lowKey]);
         $getMemberRequest = new GetMemberRequest();
         $getMemberRequest->setMemberId($memberId);
         /** @var GetMemberResponse $getMemberResponse */

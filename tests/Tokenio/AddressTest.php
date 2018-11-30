@@ -2,22 +2,29 @@
 
 namespace Test\Tokenio;
 
-require_once 'TokenBaseTest.php';
 use Io\Token\Proto\Common\Member\AddressRecord;
+use PHPUnit\Framework\TestCase;
+use Tokenio\Member;
 use Tokenio\Util\Strings;
+use Tokenio\Util\TestUtil;
 
-class AddressTest extends TokenBaseTest
+class AddressTest extends TestCase
 {
+    /** @var \Tokenio\TokenIO */
+    protected $tokenIO;
+    /** @var Member $member */
+    private $member;
+
     protected function setUp()
     {
-        parent::setUp();
-        $this->member = $this->tokenIO->createMember(self::generateAlias());
+        $this->tokenIO = TestUtil::initializeSDK();
+        $this->member = $this->tokenIO->createMember(TestUtil::generateAlias());
     }
 
     public function testAddAddress()
     {
         $name = Strings::generateNonce();
-        $payload = self::generateAddress();
+        $payload = TestUtil::generateAddress();
         $address = $this->member->addAddress($name, $payload);
         $this->assertEquals($name, $address->getName());
         $this->assertEquals($payload, $address->getAddress());
@@ -26,7 +33,7 @@ class AddressTest extends TokenBaseTest
     public function testAddAndGetAddress()
     {
         $name = Strings::generateNonce();
-        $payload = self::generateAddress();
+        $payload = TestUtil::generateAddress();
         $address = $this->member->addAddress($name, $payload);
         $result = $this->member->getAddress($address->getId());
         $this->assertEquals($address, $result);
@@ -34,9 +41,9 @@ class AddressTest extends TokenBaseTest
 
     public function testCreateAndGetAddresses()
     {
-        $addressMap = [Strings::generateNonce() => self::generateAddress(),
-                       Strings::generateNonce() => self::generateAddress(),
-                       Strings::generateNonce() => self::generateAddress()];
+        $addressMap = [Strings::generateNonce() => TestUtil::generateAddress(),
+                       Strings::generateNonce() => TestUtil::generateAddress(),
+                       Strings::generateNonce() => TestUtil::generateAddress()];
 
         foreach ($addressMap as $k => $v){
             $this->member->addAddress($k, $v);
@@ -68,7 +75,7 @@ class AddressTest extends TokenBaseTest
         $member = $this->tokenIO->createMember();
 
         $name = Strings::generateNonce();
-        $payload = self::generateAddress();
+        $payload = TestUtil::generateAddress();
         $address = $member->addAddress($name, $payload);
 
         $member->getAddress($address->getId());
