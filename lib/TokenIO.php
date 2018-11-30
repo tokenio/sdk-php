@@ -330,4 +330,22 @@ class TokenIO
         $updatedMember = $unauthenticated->completeRecovery($memberId, $recoveryOperations, $privilegedKey, $cryptoEngine);
         return new Member(ClientFactory::authenticated($this->channel, $updatedMember->getId(), $cryptoEngine));
     }
+
+    /**
+     * Completes account recovery if the default recovery rule was set.
+     *
+     * @param string $memberId the member id
+     * @param string $verificationId the verification id
+     * @param string $code the code
+     * @return Member the new member
+     */
+    public function completeRecoveryWithDefaultRule($memberId, $verificationId, $code)
+    {
+        $unauthenticated = ClientFactory::unauthenticated($this->channel);
+        $cryptoEngine = new TokenCryptoEngine($memberId, new UnsecuredFileSystemKeyStore(__DIR__ . '/test-keys/'));
+        $recoveredMember = $unauthenticated->completeRecoveryWithDefaultRule($memberId, $verificationId, $code, $cryptoEngine);
+        $client = ClientFactory::authenticated($this->channel, $recoveredMember->getId(), $cryptoEngine);
+
+        return new Member($client);
+    }
 }
