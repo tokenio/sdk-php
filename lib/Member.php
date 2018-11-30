@@ -560,25 +560,6 @@ class Member implements RepresentableInterface
     }
 
     /**
-     * Replaces auth'd member's public profile picture.
-     *
-     * @param string $type MIME type of picture
-     * @param string $data byte array representation image data
-     * @return bool that indicates whether the operation finished or had an error
-     */
-    public function setProfilePicture($type, $data)
-    {
-        $payload = new Payload();
-        $payload->setOwnerId($this->getMemberId())
-                ->setType($type)
-                ->setName('profile')
-                ->setData($data)
-                ->setAccessMode(AccessMode::PBPUBLIC);
-
-        return $this->client->setProfilePicture($payload);
-    }
-
-    /**
      * Gets a member's public profile picture. Unlike set, you can get another member's picture.
      *
      * @param string $memberId member ID of member whose profile we want
@@ -825,6 +806,18 @@ class Member implements RepresentableInterface
     }
 
     /**
+     * Looks up access tokens owned by the member.
+     *
+     * @param string $offset optional offset to start at
+     * @param int $limit max number of records to return
+     * @return PagedList tokens owned by the member
+     */
+    public function getAccessTokens($offset, $limit)
+    {
+        return $this->client->getTokens(Type::ACCESS, $offset, $limit);
+    }
+
+    /**
      * Endorses the token by signing it. The signature is persisted along
      * with the token.
      *
@@ -840,17 +833,4 @@ class Member implements RepresentableInterface
     {
         return $this->client->endorseToken($token, $keyLevel);
     }
-
-    /**
-     * Looks up access tokens owned by the member.
-     *
-     * @param string $offset optional offset to start at
-     * @param int $limit max number of records to return
-     * @return PagedList tokens owned by the member
-     */
-    public function getAccessTokens($offset, $limit)
-    {
-        return $this->client->getTokens(Type::ACCESS, $offset, $limit);
-    }
-
 }
