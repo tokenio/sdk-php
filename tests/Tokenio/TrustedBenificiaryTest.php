@@ -2,13 +2,16 @@
 
 namespace Test\Tokenio;
 
-require_once 'TokenBaseTest.php';
 use Io\Token\Proto\Common\Member\TrustedBeneficiary;
+use PHPUnit\Framework\TestCase;
 use Tokenio\Member;
+use Tokenio\Util\TestUtil;
 
-class TrustedBenificiaryTest extends TokenBaseTest
+class TrustedBenificiaryTest extends TestCase
 {
 
+    /** @var \Tokenio\TokenIO */
+    protected $tokenIO;
     /** @var Member $member1 */
     private $member1;
     /** @var Member $member2 */
@@ -18,10 +21,10 @@ class TrustedBenificiaryTest extends TokenBaseTest
 
     protected function setUp()
     {
-        parent::setUp();
-        $this->member1 = $this->tokenIO->createMember(self::generateAlias());
-        $this->member2 = $this->tokenIO->createMember(self::generateAlias());
-        $this->member3 = $this->tokenIO->createMember(self::generateAlias());
+        $this->tokenIO = TestUtil::initializeSDK();
+        $this->member1 = $this->tokenIO->createMember(TestUtil::generateAlias());
+        $this->member2 = $this->tokenIO->createMember(TestUtil::generateAlias());
+        $this->member3 = $this->tokenIO->createMember(TestUtil::generateAlias());
     }
 
     public function testAddAndGetTrustedBeneficiary()

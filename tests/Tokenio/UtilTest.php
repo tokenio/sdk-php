@@ -2,7 +2,6 @@
 
 namespace Test\Tokenio;
 
-require_once 'TokenBaseTest.php';
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Token\AccessBody;
 use Io\Token\Proto\Common\Token\TokenMember;

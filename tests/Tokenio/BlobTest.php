@@ -2,22 +2,28 @@
 
 namespace Test\Tokenio;
 
-require_once 'TokenBaseTest.php';
-
 use Io\Token\Proto\Common\Blob\Blob\AccessMode;
 use Io\Token\Proto\Common\Blob\Blob\Payload;
+use PHPUnit\Framework\TestCase;
+use Tokenio\Member;
 use Tokenio\Util\Strings;
+use Tokenio\Util\TestUtil;
 use Tokenio\Util\Util;
 
-class BlobTest extends TokenBaseTest
+class BlobTest extends TestCase
 {
     const FILENAME = 'file.json';
     const FILETYPE = 'application/json';
 
-    public function setUp()
+    /** @var \Tokenio\TokenIO */
+    protected $tokenIO;
+    /** @var Member $member */
+    private $member;
+
+    protected function setUp()
     {
-        parent::setUp();
-        $this->member = $this->tokenIO->createMember(self::generateAlias());
+        $this->tokenIO = TestUtil::initializeSDK();
+        $this->member = $this->tokenIO->createMember(TestUtil::generateAlias());
     }
 
     public function testCheckHash()
@@ -30,7 +36,7 @@ class BlobTest extends TokenBaseTest
                     ->setType(self::FILETYPE)
                     ->setOwnerId($this->member->getMemberId());
 
-        $hash = Util::hasProto($blobPayload);
+        $hash = Util::hashProto($blobPayload);
         $this->assertContains($hash, $attachment->getBlobId());
     }
 

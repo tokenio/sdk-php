@@ -1,15 +1,22 @@
 <?php
 
 namespace Test\Tokenio;
-require_once 'TokenBaseTest.php';
+use PHPUnit\Framework\TestCase;
+use Tokenio\Member;
+use Tokenio\Util\TestUtil;
 
-class BankInfoTest extends TokenBaseTest
+class BankInfoTest extends TestCase
 {
+
+    /** @var \Tokenio\TokenIO */
+    protected $tokenIO;
+    /** @var Member $member */
+    private $member;
 
     protected function setUp()
     {
-        parent::setUp();
-        $this->member = $this->tokenIO->createMember(self::generateAlias());
+        $this->tokenIO = TestUtil::initializeSDK();
+        $this->member = $this->tokenIO->createMember(TestUtil::generateAlias());
     }
 
     public function testGetBanks()
