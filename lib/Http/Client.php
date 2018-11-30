@@ -176,7 +176,7 @@ class Client
     public function getAliases()
     {
         /** @var GetAliasesResponse $response */
-        list($response) = $this->gateway->GetAliases(new GetAliasesRequest())->wait();
+        $response = Util::executeAndHandleCall($this->gateway->GetAliases(new GetAliasesRequest()));
         return $response->getAliases();
     }
 
@@ -193,7 +193,7 @@ class Client
         $request->setMemberId($memberId);
 
         /** @var GetMemberResponse $response */
-        list($response) = $this->gateway->GetMember($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->GetMember($request));
         return $response->getMember();
     }
 
@@ -211,7 +211,7 @@ class Client
         $request->setAccountId($accountId);
 
         /** @var GetAccountResponse $response */
-        list($response) = $this->gateway->GetAccount($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->GetAccount($request));
         return $response->getAccount();
     }
 
@@ -225,7 +225,7 @@ class Client
         $this->setOnBehalfOf();
 
         /** @var GetAccountsResponse $response */
-        list($response) = $this->gateway->GetAccounts(new GetAccountsRequest())->wait();
+        $response = Util::executeAndHandleCall($this->gateway->GetAccounts(new GetAccountsRequest()));
         return $response->getAccounts();
     }
 
@@ -256,7 +256,7 @@ class Client
             ->setMetadata($metadata);
 
         /** @var UpdateMemberResponse $response */
-        list($response, $status) = $this->gateway->UpdateMember($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->UpdateMember($request));
         return $response->getMember();
     }
 
@@ -277,7 +277,7 @@ class Client
         $request->setAccountId($accountId);
 
         /** @var GetBalanceResponse $response */
-        list($response) = $this->gateway->GetBalance($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->GetBalance($request));
         if ($response->getStatus() == RequestStatus::SUCCESSFUL_REQUEST) {
             return $response->getBalance();
         } else {
@@ -301,7 +301,7 @@ class Client
         $request->setAccountId($accountIds);
 
         /** @var GetBalancesResponse $response */
-        list($response) = $this->gateway->GetBalances($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->GetBalances($request));
 
         $result = [];
         foreach ($response->getResponse() as $balance) {
@@ -332,7 +332,7 @@ class Client
             ->setTransactionId($transactionId);
 
         /** @var GetTransactionResponse $response */
-        list($response) = $this->gateway->GetTransaction($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->GetTransaction($request));
         if ($response->getStatus() == RequestStatus::SUCCESSFUL_REQUEST) {
             return $response->getTransaction();
         } else {
@@ -360,7 +360,7 @@ class Client
         $request->setPage($this->pageBuilder($limit, $offset));
 
         /** @var GetTransactionsResponse $response */
-        list($response) = $this->gateway->GetTransactions($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->GetTransactions($request));
         if ($response->getStatus() == RequestStatus::SUCCESSFUL_REQUEST) {
             return new PagedList($response->getTransactions(), $response->getOffset());
         } else {
@@ -380,7 +380,7 @@ class Client
         $request->setTokenId($tokenId);
 
         /** @var GetTokenResponse $response */
-        list($response) = $this->gateway->GetToken($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->GetToken($request));
         return $response->getToken();
     }
 
@@ -397,7 +397,7 @@ class Client
         $request->setToMemberId($toMemberId);
 
         /** @var GetActiveAccessTokenResponse $response */
-        list($response) = $this->gateway->GetActiveAccessToken($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->GetActiveAccessToken($request));
         return $response->getToken();
     }
 
@@ -463,7 +463,7 @@ class Client
             ->setUserRefId($userRefId);
 
         /** @var StoreTokenRequestResponse $response */
-        list($response) = $this->gateway->StoreTokenRequest($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->StoreTokenRequest($request));
         return $response->getTokenRequest()->getId();
     }
 
@@ -479,7 +479,7 @@ class Client
         $request->setPayload($payload);
 
         /** @var CreateBlobResponse $response */
-        list($response) = $this->gateway->CreateBlob($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->CreateBlob($request));
         return $response->getBlobId();
     }
 
@@ -495,7 +495,7 @@ class Client
         $request->setTransferId($transferId);
 
         /** @var GetTransferResponse $response */
-        list($response) = $this->gateway->GetTransfer($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->GetTransfer($request));
         return $response->getTransfer();
     }
 
@@ -517,7 +517,7 @@ class Client
             $request->setFilter($filter);
         }
         /** @var GetTransfersResponse $response */
-        list($response) = $this->gateway->GetTransfers($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->GetTransfers($request));
         return new PagedList($response->getTransfers(), $response->getOffset());
     }
 
@@ -541,7 +541,7 @@ class Client
         $request->setPayloadSignature($payloadSignature);
 
         /** @var CreateTransferResponse $response */
-        list($response) = $this->gateway->CreateTransfer($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->CreateTransfer($request));
         return $response->getTransfer();
     }
 
@@ -564,7 +564,7 @@ class Client
                 ->setSignature($signature);
 
         /** @var CancelTokenResponse $response */
-        list($response) = $this->gateway->CancelToken($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->CancelToken($request));
         return $response->getResult();
     }
     /**
@@ -606,7 +606,7 @@ class Client
                 ->setTokenRequestId($tokenRequestId);
 
         /** @var SignTokenRequestStateResponse $response */
-        list($response) = $this->gateway->SignTokenRequestState($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->SignTokenRequestState($request));
         return $response->getSignature();
     }
 
@@ -620,7 +620,7 @@ class Client
         $this->setOnBehalfOf();
         $this->setRequestSignerKeyLevel(Level::PRIVILEGED);
         /** @var DeleteMemberRequest $response */
-        list($response) = $this->gateway->DeleteMember(new DeleteMemberRequest())->wait();
+        $response = Util::executeAndHandleCall($this->gateway->DeleteMember(new DeleteMemberRequest()));
         return $response !== null;
     }
 
@@ -635,7 +635,7 @@ class Client
         $request = new SetProfileRequest();
         $request->setProfile($profile);
         /** @var SetProfileResponse $response */
-        list($response) = $this->gateway->SetProfile($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->SetProfile($request));
         return $response->getProfile();
     }
 
@@ -667,8 +667,7 @@ class Client
         $request->setPayload($payload);
 
         /** @var SetProfilePictureResponse $response */
-        list($response, $status) = $this->gateway->SetProfilePicture($request)->wait();
-        var_dump($status);
+        $response = Util::executeAndHandleCall($this->gateway->SetProfilePicture($request));
         return $response !== null;
     }
 
@@ -686,10 +685,8 @@ class Client
                 ->setSize($size);
 
         /** @var GetProfilePictureResponse $response */
-        list($response, $status) = $this->gateway->GetProfilePicture($request)->wait();
-        var_dump($response->serializeToJsonString());
+        $response = Util::executeAndHandleCall($this->gateway->GetProfilePicture($request));
         return $response->getBlob();
-
     }
 
     /**
@@ -706,7 +703,7 @@ class Client
                 ->setVerificationId($verificationId);
 
         /** @var VerifyAliasResponse $response */
-        list($response) = $this->gateway->VerifyAlias($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->VerifyAlias($request));
         return $response !== null;
     }
 
@@ -723,7 +720,7 @@ class Client
                 ->setMemberId($this->getMemberId());
 
         /** @var RetryVerificationResponse $response */
-        list($response) = $this->gateway->RetryVerification($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->RetryVerification($request));
         return $response->getVerificationId();
     }
 
@@ -735,7 +732,7 @@ class Client
         $signer = $this->cryptoEngine->createSigner(Level::PRIVILEGED);
         $member = $this->getMember($this->getMemberId());
         /** @var GetDefaultAgentResponse $defAgentResponse */
-        list($defAgentResponse) = $this->gateway->GetDefaultAgent(new GetDefaultAgentRequest())->wait();
+        $defAgentResponse = Util::executeAndHandleCall($this->gateway->GetDefaultAgent(new GetDefaultAgentRequest()));
         $rule = new RecoveryRule();
         $rule->setPrimaryAgent($defAgentResponse->getMemberId());
 
@@ -759,7 +756,7 @@ class Client
         $request->setUpdate($memberUpdate)
                 ->setUpdateSignature($signature);
 
-        $this->gateway->UpdateMember($request)->wait();
+        Util::executeAndHandleCall($this->gateway->UpdateMember($request));
     }
 
     /**
@@ -770,7 +767,7 @@ class Client
     public function getDefaultAgent()
     {
         /** @var GetDefaultAgentResponse $response */
-        list($response) = $this->gateway->GetDefaultAgent(new GetDefaultAgentRequest())->wait();
+        $response = Util::executeAndHandleCall($this->gateway->GetDefaultAgent(new GetDefaultAgentRequest()));
         return $response->getMemberId();
     }
 
@@ -802,7 +799,7 @@ class Client
         $request = new GetBlobRequest();
         $request->setBlobId($blobId);
         /** @var GetBlobResponse $response */
-        list($response) = $this->gateway->GetBlob($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->GetBlob($request));
         return $response != null ? $response->getBlob() : null;
     }
 
@@ -819,7 +816,7 @@ class Client
         $request->setTokenId($tokenId)
                 ->setBlobId($blobId);
         /** @var GetTokenBlobResponse $response */
-        list($response) = $this->gateway->GetTokenBlob($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->GetTokenBlob($request));
         return $response->getBlob();
 
     }
@@ -845,7 +842,7 @@ class Client
                 ->setAddressSignature($signature);
 
         /** @var AddAddressResponse $response */
-        list($response) = $this->gateway->AddAddress($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->AddAddress($request));
         return $response->getAddress();
     }
 
@@ -860,7 +857,7 @@ class Client
         $request = new GetAddressRequest();
         $request->setAddressId($addressId);
         /** @var GetAddressResponse $response */
-        list($response) = $this->gateway->GetAddress($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->GetAddress($request));
         return $response !== null ? $response->getAddress() : null;
     }
 
@@ -873,7 +870,7 @@ class Client
     {
         $request = new GetAddressesRequest();
         /** @var GetAddressesResponse $response */
-        list($response) = $this->gateway->GetAddresses($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->GetAddresses($request));
         return $response->getAddresses();
     }
 
@@ -888,7 +885,7 @@ class Client
         $request = new DeleteAddressRequest();
         $request->setAddressId($addressId);
         /** @var DeleteAddressRequest $response */
-        list($response) = $this->gateway->DeleteAddress($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->DeleteAddress($request));
         return $response !== null;
     }
 
@@ -904,7 +901,7 @@ class Client
         $request = new GetBankInfoRequest();
         $request->setBankId($bankId);
         /** @var GetBankInfoResponse $response */
-        list($response) = $this->gateway->GetBankInfo($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->GetBankInfo($request));
         return $response->getInfo();
     }
 
@@ -927,7 +924,7 @@ class Client
                            ->setSignature($signature);
         $request->setTrustedBeneficiary($trustedBenificiary);
         /** @var AddTrustedBeneficiaryResponse $response */
-        list($response) = $this->gateway->AddTrustedBeneficiary($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->AddTrustedBeneficiary($request));
         return $response !== null;
     }
 
@@ -950,7 +947,7 @@ class Client
         $request = new RemoveTrustedBeneficiaryRequest();
         $request->setTrustedBeneficiary($trustedBenificiary);
         /** @var RemoveTrustedBeneficiaryResponse $response */
-        list($response) = $this->gateway->RemoveTrustedBeneficiary($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->RemoveTrustedBeneficiary($request));
         return $response !== null;
     }
 
@@ -963,7 +960,7 @@ class Client
     {
         $request = new GetTrustedBeneficiariesRequest();
         /** @var GetTrustedBeneficiariesResponse $response */
-        list($response) = $this->gateway->GetTrustedBeneficiaries($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->GetTrustedBeneficiaries($request));
         return $response->getTrustedBeneficiaries();
     }
 
@@ -981,8 +978,7 @@ class Client
         $request = new CreateAccessTokenRequest();
         $request->setPayload($payload);
         /** @var CreateAccessTokenResponse $response */
-        list($response, $status) = $this->gateway->CreateAccessToken($request)->wait();
-        var_dump($status);
+        $response = Util::executeAndHandleCall($this->gateway->CreateAccessToken($request));
         return $response->getToken();
 
     }
@@ -1001,7 +997,7 @@ class Client
                 ->setTokenRequestId($tokenRequestId);
 
         /** @var CreateAccessTokenResponse $response */
-        list($response) = $this->gateway->CreateAccessToken($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->CreateAccessToken($request));
         return $response->getToken();
     }
 
@@ -1028,7 +1024,7 @@ class Client
         $request->setTokenId($token->getId())
                 ->setSignature($signature);
         /** @var EndorseTokenResponse $response */
-        list($response,$status) = $this->gateway->EndorseToken($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->EndorseToken($request));
         return $response->getResult();
     }
 
@@ -1047,22 +1043,7 @@ class Client
                 ->setPage($this->pageBuilder($limit, $offset));
 
         /** @var GetTokensResponse $response */
-        list($response, $status) = $this->gateway->GetTokens($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->GetTokens($request));
         return new PagedList($response->getTokens(), $offset);
-    }
-
-    /**
-     * Executes UnaryCall and handles status and response
-     *
-     * @param UnaryCall $call
-     * @return Message returned by the server
-     */
-    private function handleResponseStatus($call){
-        list($response, $status) = $call->wait();
-        if($status->code != \Grpc\STATUS_OK){
-            return $response;
-        }else{
-            throw new Exception\StatusRuntimeException($status->code, $status->description);
-        }
     }
 }

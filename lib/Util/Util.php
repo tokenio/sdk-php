@@ -3,6 +3,7 @@
 namespace Tokenio\Util;
 
 use Google\Protobuf\Internal\Message;
+use Grpc\UnaryCall;
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Member\Member;
 use Io\Token\Proto\Common\Member\MemberAddKeyOperation;
@@ -302,6 +303,22 @@ abstract class Util
             if (is_array($array[$key])) {
                 self::jsonSort($array[$key]);
             }
+        }
+    }
+
+    /**
+     * Executes UnaryCall and handles status and response
+     *
+     * @param UnaryCall $call
+     * @return Message returned by the server
+     * @throws Exception\StatusRuntimeException exception returned by server
+     */
+    public static function executeAndHandleCall($call){
+        list($response, $status) = $call->wait();
+        if($status->code == \Grpc\STATUS_OK){
+            return $response;
+        }else{
+            throw new Exception\StatusRuntimeException($status->code, $status->details);
         }
     }
 }

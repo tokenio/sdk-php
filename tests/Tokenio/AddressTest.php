@@ -58,6 +58,7 @@ class AddressTest extends TokenBaseTest
     public function testGetAddress_NotFound()
     {
         $fakeAddressId = Strings::generateNonce();
+        $this->expectException('Tokenio\Exception\StatusRuntimeException');
         $nonExistingAddress = $this->member->getAddress($fakeAddressId . 'adadasss');
         $this->assertEmpty($nonExistingAddress);
     }

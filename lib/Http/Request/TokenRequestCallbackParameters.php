@@ -43,7 +43,7 @@ class TokenRequestCallbackParameters
         $signature = new Signature();
         $signature->setMemberId($signatureJson->memberId)
                   ->setKeyId($signatureJson->keyId)
-                  ->getSignature($signatureJson->signature);
+                  ->setSignature($signatureJson->signature);
 
         return new TokenRequestCallbackParameters($query[self::TOKEN_ID_FIELD], $query[self::STATE_FIELD], $signature);
     }

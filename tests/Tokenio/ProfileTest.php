@@ -64,7 +64,7 @@ class ProfileTest extends TokenBaseTest
         // "The tiniest gif ever" , a 1x1 gif
         // http://probablyprogramming.com/2009/03/15/the-tiniest-gif-ever
         $tinyGif = base64_decode('R0lGODlhAQABAIABAP///wAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==');
-        echo $tinyGif;
+
         $this->member->setProfilePicture('image/gif', $tinyGif);
 
         $otherMember = $this->tokenIO->createMember();

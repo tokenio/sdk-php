@@ -64,7 +64,7 @@ class TokenRequestTest extends TokenBaseTest
 
     public function testAddAndGetTokenRequest_NotFound()
     {
-//        $this->expectException('AggregateException');
+        $this->expectException('Tokenio\Exception\StatusRuntimeException');
         $token1 = $this->tokenIO->retrieveTokenRequest('bogus');
         $token2 = $this->tokenIO->retrieveTokenRequest($this->member->getMemberId());
 
@@ -81,7 +81,7 @@ class TokenRequestTest extends TokenBaseTest
         $storedRequest = new TokenRequest();
         $storedRequest->setPayload($payload);
 
-        $this->expectException('AggregateException');
+        $this->expectException('Tokenio\Exception\StatusRuntimeException');
         $this->member->storeTokenRequest($storedRequest);
 
     }

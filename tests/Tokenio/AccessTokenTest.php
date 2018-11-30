@@ -57,7 +57,6 @@ class AccessTokenTest extends TokenBaseTest
         $result = $this->member1->getAccessTokens(null, 2);
         $hasEquity = false;
         /** @var Token $item */
-        var_dump($accessToken->serializeToJsonString());
         foreach ($result->getList() as $item) {
 
             $hasEquity = $accessToken->getId() === $item->getId();
@@ -76,7 +75,7 @@ class AccessTokenTest extends TokenBaseTest
             ->forAddress($address->getId())
             ->build());
 
-        $this->expectException('AggregateException');
+        $this->expectException('Tokenio\Exception\StatusRuntimeException');
 
         $member->createAccessToken(AccessTokenBuilder::createWithAlias($member->getFirstAlias())
             ->forAddress($address->getId())
