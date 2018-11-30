@@ -560,25 +560,6 @@ class Member implements RepresentableInterface
     }
 
     /**
-     * Replaces auth'd member's public profile picture.
-     *
-     * @param string $type MIME type of picture
-     * @param string $data byte array representation image data
-     * @return bool that indicates whether the operation finished or had an error
-     */
-    public function setProfilePicture($type, $data)
-    {
-        $payload = new Payload();
-        $payload->setOwnerId($this->getMemberId())
-                ->setType($type)
-                ->setName('profile')
-                ->setData($data)
-                ->setAccessMode(AccessMode::PBPUBLIC);
-
-        return $this->client->setProfilePicture($payload);
-    }
-
-    /**
      * Gets a member's public profile picture. Unlike set, you can get another member's picture.
      *
      * @param string $memberId member ID of member whose profile we want
@@ -822,23 +803,6 @@ class Member implements RepresentableInterface
     public function createAccessTokenForTokenRequestId($tokenPayload, $tokenRequestId)
     {
         return $this->client->createAccessTokenForTokenRequestId($tokenPayload, $tokenRequestId);
-    }
-
-    /**
-     * Endorses the token by signing it. The signature is persisted along
-     * with the token.
-     *
-     * <p>If the key's level is too low, the result's status is MORE_SIGNATURES_NEEDED
-     * and the system pushes a notification to the member prompting them to use a
-     * higher-privilege key.
-     *
-     * @param Token $token to endorse
-     * @param int $keyLevel key level to be used to endorse the token
-     * @return TokenOperationResult result of endorse token
-     */
-    public function endorseToken($token, $keyLevel)
-    {
-        return $this->client->endorseToken($token, $keyLevel);
     }
 
     /**
