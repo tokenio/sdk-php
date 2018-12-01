@@ -17,7 +17,7 @@ More information at [https://developer.token.io/sdk/](https://developer.token.io
 You can install the bindings via [Composer](http://getcomposer.org/). Run the following command:
 
 ```bash
-composer require tokenio/sdk-php
+composer require tokenio/sdk
 ```
 
 To use the bindings, use Composer's [autoload](https://getcomposer.org/doc/01-basic-usage.md#autoloading):
