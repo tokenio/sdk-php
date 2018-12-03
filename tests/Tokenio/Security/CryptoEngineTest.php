@@ -80,4 +80,14 @@ class CryptoEngineTest extends TestCase
         $verifier = $this->cryptoEngine->createVerifier($oldKey->getId());
         $verifier->verifyString($payload, $signature);
     }
+
+    protected function tearDown()
+    {
+        $keyDir = __DIR__ . '/test-keys/';
+        $files = glob($keyDir . '*');
+        foreach ($files as $file) {
+            unlink($file);
+        }
+        rmdir($keyDir);
+    }
 }
