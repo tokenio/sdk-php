@@ -5,6 +5,7 @@ namespace Tokenio;
 use Grpc\Channel;
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Member\CreateMemberType;
+use Io\Token\Proto\Common\Member\MemberRecoveryOperation;
 use Io\Token\Proto\Common\Security\Key;
 use Io\Token\Proto\Common\Token\TokenRequest;
 use Io\Token\Proto\Common\Token\TokenRequestStatePayload;
@@ -12,12 +13,17 @@ use Io\Token\Proto\Gateway\GetBanksResponse;
 use Tokenio\Config\TokenCluster;
 use Tokenio\Config\TokenIoBuilder;
 use Tokenio\Exception\InvalidStateException;
+use Tokenio\Exception\VerificationException;
+use Tokenio\Http\Client;
 use Tokenio\Http\ClientFactory;
 use Tokenio\Http\Request\TokenRequestCallback;
 use Tokenio\Http\Request\TokenRequestCallbackParameters;
 use Tokenio\Http\Request\TokenRequestResult;
 use Tokenio\Http\Request\TokenRequestState;
 use Tokenio\Security\CryptoEngineFactoryInterface;
+use Tokenio\Security\CryptoEngineInterface;
+use Tokenio\Security\TokenCryptoEngine;
+use Tokenio\Security\UnsecuredFileSystemKeyStore;
 use Tokenio\Util\Util;
 
 class TokenIO
@@ -170,11 +176,11 @@ class TokenIO
      *     (case insensitive).
      * @return GetBanksResponse
      */
-    public function getBanks($ids,
-                             $search,
-                             $country,
-                             $page,
-                             $perPage,
+    public function getBanks($ids = null,
+                             $search = null,
+                             $country = null,
+                             $page = null,
+                             $perPage = null,
                              $sort = null,
                              $provider = null)
     {
@@ -259,37 +265,6 @@ class TokenIO
     }
 
     /**
-     * Parse the token request callback URL to extract the state and the token ID. Verify that the
-     * state contains the CSRF token hash and that the signature on the state and CSRF token is
-     * valid.
-     *
-     * @param string $callbackUrl the token request callback url
-     * @param string $csrfToken the csrf token
-     * @return TokenRequestCallback object containing the token id and the original state
-     * @throws Exception
-     */
-    public function parseTokenRequestCallbackUrl($callbackUrl, $csrfToken = null)
-    {
-        $client = ClientFactory::unauthenticated($this->channel);
-        $member = $client->getTokenMember();
-
-        $parameters = TokenRequestCallbackParameters::create($callbackUrl);
-        $state = TokenRequestState::parse($parameters->getSerializedState());
-
-        if ($state->getCsrfTokenHash() != Util::hashString($csrfToken)) {
-            throw new InvalidStateException($csrfToken);
-        }
-
-        $payload = new TokenRequestStatePayload();
-        $payload->setTokenId($parameters->getTokenId());
-        $payload->setState(urlencode($parameters->getSerializedState()));
-
-        Util::verifySignature($member, $payload, $parameters->getSignature());
-
-        return new TokenRequestCallback($parameters->getTokenId(), $state->getInnerState());
-    }
-
-    /**
      * Get the token request result based on a token's tokenRequestId.
      *
      * @param string tokenRequestId the token request id
@@ -312,4 +287,95 @@ class TokenIO
         $client = ClientFactory::unauthenticated($this->channel);
         return $client->retrieveTokenRequest($requestId);
     }
+
+    /**
+     * Begins account recovery.
+     *
+     * @param Alias $alias the alias used to recover
+     * @return string verification id
+     */
+    public function beginRecovery($alias)
+    {
+        $client = ClientFactory::unauthenticated($this->channel);
+        return $client->beginRecovery($alias);
+    }
+
+    /**
+     * Gets recovery authorization from Token.
+     *
+     * @param string $verificationId the verification id
+     * @param string $code the code
+     * @param Key $privilegedKey the privileged key
+     * @return MemberRecoveryOperation the recovery entry
+     * @throws VerificationException if the code verification fails
+     */
+    public function getRecoveryAuthorization($verificationId, $code, $privilegedKey)
+    {
+        $unauthenticated = ClientFactory::unauthenticated($this->channel);
+        return $unauthenticated->getRecoveryAuthorization($verificationId, $code, $privilegedKey);
+    }
+
+    /**
+     * Completes account recovery.
+     *
+     * @param string $memberId the member id
+     * @param MemberRecoveryOperation[] $recoveryOperations the member recovery operations
+     * @param Key $privilegedKey the privileged public key in the member recovery operations
+     * @param CryptoEngineInterface $cryptoEngine the new crypto engine
+     * @return Member updatedMember
+     */
+    public function completeRecovery($memberId, $recoveryOperations, $privilegedKey, $cryptoEngine)
+    {
+        $unauthenticated = ClientFactory::unauthenticated($this->channel);
+        $updatedMember = $unauthenticated->completeRecovery($memberId, $recoveryOperations, $privilegedKey, $cryptoEngine);
+        return new Member(ClientFactory::authenticated($this->channel, $updatedMember->getId(), $cryptoEngine));
+    }
+
+    /**
+     * Completes account recovery if the default recovery rule was set.
+     *
+     * @param string $memberId the member id
+     * @param string $verificationId the verification id
+     * @param string $code the code
+     * @return Member the new member
+     */
+    public function completeRecoveryWithDefaultRule($memberId, $verificationId, $code)
+    {
+        $unauthenticated = ClientFactory::unauthenticated($this->channel);
+        $cryptoEngine = new TokenCryptoEngine($memberId, new UnsecuredFileSystemKeyStore(__DIR__ . '/test-keys/'));
+        $recoveredMember = $unauthenticated->completeRecoveryWithDefaultRule($memberId, $verificationId, $code, $cryptoEngine);
+        $client = ClientFactory::authenticated($this->channel, $recoveredMember->getId(), $cryptoEngine);
+
+        return new Member($client);
+    }
+
+    /**
+     * Parse the token request callback URL to extract the state and the token ID. Verify that the
+     * state contains the CSRF token hash and that the signature on the state and CSRF token is
+     * valid.
+     *
+     * @param string $callbackUrl the token request callback url
+     * @param string $csrfToken the csrf token
+     * @return TokenRequestCallback object containing the token id and the original state
+     * @throws Exception
+     */
+    public function parseTokenRequestCallbackUrl($callbackUrl, $csrfToken = null)
+    {
+        $client = ClientFactory::unauthenticated($this->channel);
+        $member = $client->getTokenMember();
+        $parameters = TokenRequestCallbackParameters::create($callbackUrl);
+        $state = TokenRequestState::parse($parameters->getSerializedState());
+
+        if ($state->getCsrfTokenHash() != Util::hashString($csrfToken)) {
+            throw new InvalidStateException($csrfToken);
+        }
+
+        $payload = new TokenRequestStatePayload();
+        $payload->setTokenId($parameters->getTokenId());
+        $payload->setState(urlencode($parameters->getSerializedState()));
+        Util::verifySignature($member, $payload, $parameters->getSignature());
+
+        return new TokenRequestCallback($parameters->getTokenId(), $state->getInnerState());
+    }
+
 }

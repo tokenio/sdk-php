@@ -3,11 +3,19 @@
 namespace Tokenio\Http;
 
 use Io\Token\Proto\Common\Alias\Alias;
+use Io\Token\Proto\Common\Alias\VerificationStatus;
 use Io\Token\Proto\Common\Member\Member;
 use Io\Token\Proto\Common\Member\MemberOperation;
+use Io\Token\Proto\Common\Member\MemberRecoveryOperation;
 use Io\Token\Proto\Common\Member\MemberUpdate;
+use Io\Token\Proto\Common\Security\Key;
+use Io\Token\Proto\Common\Security\Key\Level;
 use Io\Token\Proto\Common\Security\Signature;
 use Io\Token\Proto\Common\Token\TokenRequest;
+use Io\Token\Proto\Gateway\BeginRecoveryRequest;
+use Io\Token\Proto\Gateway\BeginRecoveryResponse;
+use Io\Token\Proto\Gateway\CompleteRecoveryRequest;
+use Io\Token\Proto\Gateway\CompleteRecoveryResponse;
 use Io\Token\Proto\Gateway\CreateMemberRequest;
 use Io\Token\Proto\Gateway\CreateMemberResponse;
 use Io\Token\Proto\Gateway\GatewayServiceClient;
@@ -23,9 +31,12 @@ use Io\Token\Proto\Gateway\RetrieveTokenRequestRequest;
 use Io\Token\Proto\Gateway\RetrieveTokenRequestResponse;
 use Io\Token\Proto\Gateway\UpdateMemberRequest;
 use Io\Token\Proto\Gateway\UpdateMemberResponse;
+use Tokenio\Exception\VerificationException;
 use Tokenio\Http\Request\TokenRequestResult;
+use Tokenio\Security\CryptoEngineInterface;
 use Tokenio\Security\SignerInterface;
 use Tokenio\Util\Strings;
+use Tokenio\Util\Util;
 
 class UnauthenticatedClient
 {
@@ -61,7 +72,7 @@ class UnauthenticatedClient
         $request->setAlias($alias);
 
         /** @var ResolveAliasResponse $response */
-        list($response) = $this->gateway->ResolveAlias($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->ResolveAlias($request));
         return $response->getMember();
     }
 
@@ -95,7 +106,7 @@ class UnauthenticatedClient
         $request->setMemberId($memberId);
 
         /** @var GetMemberResponse $response */
-        list($response) = $this->gateway->GetMember($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->GetMember($request));
         return $response->getMember();
     }
 
@@ -117,7 +128,7 @@ class UnauthenticatedClient
         }
 
         /** @var CreateMemberResponse $response */
-        list($response) = $this->gateway->CreateMember($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->CreateMember($request));
         return $response->getMemberId();
     }
 
@@ -147,7 +158,7 @@ class UnauthenticatedClient
                 ->setMetadata($metadata);
 
         /** @var UpdateMemberResponse $response */
-        list($response) = $this->gateway->UpdateMember($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->UpdateMember($request));
         return $response->getMember();
     }
 
@@ -222,7 +233,7 @@ class UnauthenticatedClient
         }
 
         /** @var GetBanksResponse $response */
-        list($response) = $this->gateway->GetBanks($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->GetBanks($request));
         return $response;
     }
 
@@ -239,7 +250,7 @@ class UnauthenticatedClient
         $request->setRequestId($tokenRequestId);
 
         /** @var RetrieveTokenRequestResponse $response */
-        list($response) = $this->gateway->RetrieveTokenRequest($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->RetrieveTokenRequest($request));
         return $response->getTokenRequest();
     }
 
@@ -255,7 +266,7 @@ class UnauthenticatedClient
         $request->setTokenRequestId($tokenRequestId);
 
         /** @var GetTokenRequestResultResponse $response */
-        list($response) = $this->gateway->GetTokenRequestResult($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->GetTokenRequestResult($request));
         return new TokenRequestResult($response->getTokenId(), $response->getSignature());
     }
 
@@ -273,7 +284,140 @@ class UnauthenticatedClient
 
         $request->setAlias($alias);
         /** @var ResolveAliasResponse $response */
-        list($response) = $this->gateway->ResolveAlias($request)->wait();
+        $response = Util::executeAndHandleCall($this->gateway->ResolveAlias($request));
         return $response->getMember()->getId();
+    }
+
+    /**
+     * Begins account recovery.
+     *
+     * @param Alias $alias the alias used to recover
+     * @return string verification id
+     */
+    public function beginRecovery($alias)
+    {
+        $request = new BeginRecoveryRequest();
+        $request->setAlias(Util::normalizeAlias($alias));
+        /** @var BeginRecoveryResponse $response */
+        $response = Util::executeAndHandleCall($this->gateway->BeginRecovery($request));
+        return $response->getVerificationId();
+    }
+
+    /**
+     * Completes account recovery if the default recovery rule was set.
+     *
+     * @param string $memberId the member id
+     * @param string $verificationId the verification id
+     * @param string $code the code
+     * @param CryptoEngineInterface $cryptoEngine
+     * @return Member the new member
+     */
+    public function completeRecoveryWithDefaultRule($memberId, $verificationId, $code, $cryptoEngine)
+    {
+        $privelegedKey = $cryptoEngine->generateKey(Level::PRIVILEGED);
+        $standardKey = $cryptoEngine->generateKey(Level::STANDARD);
+        $lowKey = $cryptoEngine->generateKey(Level::LOW);
+
+        $signer = $cryptoEngine->createSigner(Level::PRIVILEGED);
+
+        $request = new CompleteRecoveryRequest();
+        $request->setVerificationId($verificationId)
+                ->setCode($code)
+                ->setKey($privelegedKey);
+
+        /** @var CompleteRecoveryResponse $response */
+        $completeResponse = Util::executeAndHandleCall($this->gateway->CompleteRecovery($request));
+        $memberRequest = new GetMemberRequest();
+        $memberRequest->setMemberId($memberId);
+        /** @var GetMemberResponse $memberResponse */
+        $memberResponse = Util::executeAndHandleCall($this->gateway->GetMember($memberRequest));
+
+        $memberRecoveryOperation = new MemberOperation();
+        $memberRecoveryOperation->setRecover($completeResponse->getRecoveryEntry());
+
+        $operations = Util::toAddKeyOperations([$privelegedKey, $standardKey, $lowKey]);
+        $operations[] = $memberRecoveryOperation;
+        $memberUpdate = new MemberUpdate();
+        $memberUpdate->setMemberId($memberId)
+                     ->setPrevHash($memberResponse->getMember()->getLastHash())
+                     ->setOperations($operations);
+
+        $signature = new Signature();
+        $signature->setKeyId($signer->getKeyId())
+                  ->setMemberId($memberId)
+                  ->setSignature($signer->sign($memberUpdate));
+        $updateMemberRequest = new UpdateMemberRequest();
+        $updateMemberRequest->setUpdate($memberUpdate)
+                            ->setUpdateSignature($signature);
+        /** @var UpdateMemberResponse $memberUpdateResponse */
+        $memberUpdateResponse = Util::executeAndHandleCall($this->gateway->UpdateMember($updateMemberRequest));
+        return $memberUpdateResponse->getMember();
+    }
+
+    /**
+     * Gets recovery authorization from Token.
+     *
+     * @param string $verificationId the verification id
+     * @param string $code the code
+     * @param Key $privilegedKey the privileged key
+     * @return MemberRecoveryOperation the recovery entry
+     * @throws VerificationException if the code verification fails
+     */
+    public function getRecoveryAuthorization($verificationId, $code, $privilegedKey)
+    {
+        $request = new CompleteRecoveryRequest();
+        $request->setVerificationId($verificationId)
+                ->setCode($code)
+                ->setKey($privilegedKey);
+
+        /** @var CompleteRecoveryResponse $response */
+        $response = Util::executeAndHandleCall($this->gateway->CompleteRecovery($request));
+        if($response->getStatus() !== VerificationStatus::SUCCESS){
+            throw new VerificationException($response->getStatus());
+        }
+        return $response->getRecoveryEntry();
+    }
+
+    /**
+     * Completes account recovery.
+     *
+     * @param string $memberId the member id
+     * @param MemberRecoveryOperation[] $recoveryOperations the member recovery operations
+     * @param Key $privilegedKey the privileged public key in the member recovery operations
+     * @param CryptoEngineInterface $cryptoEngine the new crypto engine
+     * @return Member updatedMember
+     */
+    public function completeRecovery($memberId, $recoveryOperations, $privilegedKey, $cryptoEngine)
+    {
+        $standardKey = $cryptoEngine->generateKey(Level::STANDARD);
+        $lowKey = $cryptoEngine->generateKey(Level::LOW);
+        $signer = $cryptoEngine->createSigner(Level::PRIVILEGED);
+        $operations = array();
+        foreach ($recoveryOperations as $op){
+            $memberOperation = new MemberOperation();
+            $memberOperation->setRecover($op);
+
+            $operations[] = $memberOperation;
+        }
+        $operations = Util::toAddKeyOperations([$privilegedKey, $standardKey, $lowKey]);
+        $getMemberRequest = new GetMemberRequest();
+        $getMemberRequest->setMemberId($memberId);
+        /** @var GetMemberResponse $getMemberResponse */
+        list($getMemberResponse) = $this->gateway->GetMember($getMemberRequest)->wait();
+        $memberUpdate = new MemberUpdate();
+        $memberUpdate->setMemberId($memberId)
+                     ->setPrevHash($getMemberResponse->getMember()->getLastHash())
+                     ->setOperations($operations);
+        $updateSignature = new Signature();
+        $updateSignature->setKeyId($signer->getKeyId())
+                        ->setMemberId($memberId)
+                        ->setSignature($signer->sign($memberUpdate));
+
+        $memberUpdateRequest = new UpdateMemberRequest();
+        $memberUpdateRequest->setUpdate($memberUpdate)
+                            ->setUpdateSignature($updateSignature);
+        /** @var UpdateMemberResponse $updateMemberResponse */
+        $updateMemberResponse = Util::executeAndHandleCall($this->gateway->UpdateMember($memberUpdateRequest));
+        return $updateMemberResponse->getMember();
     }
 }
