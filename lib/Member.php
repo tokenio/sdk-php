@@ -833,4 +833,20 @@ class Member implements RepresentableInterface
     {
         return $this->client->endorseToken($token, $keyLevel);
     }
+
+    /**
+     * Creates a Representable that acts as another member using the access token
+     * that was granted by that member.
+     *
+     * @param string $tokenId the token id
+     * @param boolean $customerInitiated whether the call is initiated by the customer
+     * @return Member
+     */
+    public function forAccessToken($tokenId, $customerInitiated = false)
+    {
+        $cloned = clone $this->client;
+        $cloned->useAccessToken($tokenId, $customerInitiated);
+        return new Member($cloned);
+    }
+
 }
