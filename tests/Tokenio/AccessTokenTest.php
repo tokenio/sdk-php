@@ -99,6 +99,27 @@ class AccessTokenTest extends TestCase
 
     }
 
+    public function testAuthFlowTest()
+    {
+        $accessToken = $this->member1->createAccessToken(AccessTokenBuilder::createWithAlias($this->member2->getFirstAlias())->forAll()->build());
+
+        $token = $this->member1->getToken($accessToken->getId());
+        $requestId = Strings::generateNonce();
+        $originalState = Strings::generateNonce();
+        $csrfToken = Strings::generateNonce();
+
+        $tokenRequestUrl = $this->tokenIO->generateTokenRequestUrl($requestId, $originalState, $csrfToken);
+        $queryString = parse_url($tokenRequestUrl, PHP_URL_QUERY);
+        parse_str($queryString, $queryParams);
+        $signature = $this->member1->signTokenRequestState($requestId, $token->getId(), urlencode($queryParams['state']));
+        $path = sprintf('path?tokenId=%s&state=%s&signature=%s', $token->getId(), $queryParams['state'], Util::toJson($signature));
+        $tokenRequestCallbackUrl = 'http://localhost:80/' . $path;
+
+        $callback = $this->tokenIO->parseTokenRequestCallbackUrl($tokenRequestCallbackUrl, $csrfToken);
+
+        $this->assertEquals($originalState, $callback->getState());
+    }
+
     public function testRequestSignature()
     {
         $token = $this->member1->createAccessToken(AccessTokenBuilder::createWithAlias($this->member2->getFirstAlias())->forAll()->build());

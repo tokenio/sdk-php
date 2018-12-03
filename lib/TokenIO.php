@@ -348,4 +348,34 @@ class TokenIO
 
         return new Member($client);
     }
+
+    /**
+     * Parse the token request callback URL to extract the state and the token ID. Verify that the
+     * state contains the CSRF token hash and that the signature on the state and CSRF token is
+     * valid.
+     *
+     * @param string $callbackUrl the token request callback url
+     * @param string $csrfToken the csrf token
+     * @return TokenRequestCallback object containing the token id and the original state
+     * @throws Exception
+     */
+    public function parseTokenRequestCallbackUrl($callbackUrl, $csrfToken = null)
+    {
+        $client = ClientFactory::unauthenticated($this->channel);
+        $member = $client->getTokenMember();
+        $parameters = TokenRequestCallbackParameters::create($callbackUrl);
+        $state = TokenRequestState::parse($parameters->getSerializedState());
+
+        if ($state->getCsrfTokenHash() != Util::hashString($csrfToken)) {
+            throw new InvalidStateException($csrfToken);
+        }
+
+        $payload = new TokenRequestStatePayload();
+        $payload->setTokenId($parameters->getTokenId());
+        $payload->setState(urlencode($parameters->getSerializedState()));
+        Util::verifySignature($member, $payload, $parameters->getSignature());
+
+        return new TokenRequestCallback($parameters->getTokenId(), $state->getInnerState());
+    }
+
 }
