@@ -84,8 +84,7 @@ class CryptoEngineTest extends TestCase
     protected function tearDown()
     {
         $keyDir = __DIR__ . '/test-keys/';
-        $files = glob($keyDir . '*');
-        foreach ($files as $file) {
+        foreach (glob($keyDir . '*') as $file) {
             unlink($file);
         }
         rmdir($keyDir);
