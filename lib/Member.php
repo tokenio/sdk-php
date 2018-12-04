@@ -20,7 +20,8 @@ use Io\Token\Proto\Common\Member\Profile;
 use Io\Token\Proto\Common\Member\RecoveryRule;
 use Io\Token\Proto\Common\Member\TrustedBeneficiary;
 use Io\Token\Proto\Common\Money\Money;
-use Io\Token\Proto\Common\Security\Key;use Io\Token\Proto\Common\Security\Signature;
+use Io\Token\Proto\Common\Security\Key;
+use Io\Token\Proto\Common\Security\Signature;
 use Io\Token\Proto\Common\Token\Token;
 use Io\Token\Proto\Common\Token\TokenOperationResult;
 use Io\Token\Proto\Common\Token\TokenPayload;
@@ -325,6 +326,21 @@ class Member implements RepresentableInterface
     }
 
     /**
+     * Creates a Representable that acts as another member using the access token
+     * that was granted by that member.
+     *
+     * @param string $tokenId the token id
+     * @param boolean $customerInitiated whether the call is initiated by the customer
+     * @return Member
+     */
+    public function forAccessToken($tokenId, $customerInitiated = false)
+    {
+        $cloned = clone $this->client;
+        $cloned->useAccessToken($tokenId, $customerInitiated);
+        return new Member($cloned);
+    }
+
+    /**
      * Stores a token request. This can be retrieved later by the token request id.
      *
      * @param TokenRequest $tokenRequest token request
@@ -557,6 +573,25 @@ class Member implements RepresentableInterface
     public function getProfile($memberId)
     {
         return $this->client->getProfile($memberId);
+    }
+
+    /**
+     * Replaces auth'd member's public profile picture.
+     *
+     * @param string $type MIME type of picture
+     * @param string $data byte array representation image data
+     * @return bool that indicates whether the operation finished or had an error
+     */
+    public function setProfilePicture($type, $data)
+    {
+        $payload = new Payload();
+        $payload->setOwnerId($this->getMemberId())
+            ->setType($type)
+            ->setName('profile')
+            ->setData($data)
+            ->setAccessMode(AccessMode::PBPUBLIC);
+
+        return $this->client->setProfilePicture($payload);
     }
 
     /**
@@ -833,20 +868,4 @@ class Member implements RepresentableInterface
     {
         return $this->client->endorseToken($token, $keyLevel);
     }
-
-    /**
-     * Creates a Representable that acts as another member using the access token
-     * that was granted by that member.
-     *
-     * @param string $tokenId the token id
-     * @param boolean $customerInitiated whether the call is initiated by the customer
-     * @return Member
-     */
-    public function forAccessToken($tokenId, $customerInitiated = false)
-    {
-        $cloned = clone $this->client;
-        $cloned->useAccessToken($tokenId, $customerInitiated);
-        return new Member($cloned);
-    }
-
 }
