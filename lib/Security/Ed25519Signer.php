@@ -56,6 +56,7 @@ class Ed25519Signer implements SignerInterface
     public function signString($message)
     {
         try {
+            $message = stripcslashes($message);
             $signature = \ParagonIE_Sodium_Compat::crypto_sign_detached($message, $this->privateKey);
             return Base64Url::encode($signature);
         } catch (\Exception $e) {
