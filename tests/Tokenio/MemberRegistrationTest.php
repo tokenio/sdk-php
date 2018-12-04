@@ -16,9 +16,13 @@ class MemberRegistrationTest extends TestCase
     /** @var \Tokenio\TokenIO */
     protected $tokenIO;
 
+    /** @var UnsecuredFileSystemKeyStore */
+    protected $keyStore;
+
     protected function setUp()
     {
         $this->tokenIO = TestUtil::initializeSDK();
+        $this->keyStore = new UnsecuredFileSystemKeyStore(__DIR__ . '/test-keys/');
     }
 
     public function testCreateMember()
@@ -144,8 +148,8 @@ class MemberRegistrationTest extends TestCase
         $member = $this->tokenIO->createMember($alias);
         $memberId = $member->getMemberId();
         $primaryAgentId = $member->getDefaultAgent();
-        $secondaryAgent = $this->tokenIO->createMember(self::generateAlias());
-        $unusedSecondaryAgent = $this->tokenIO->createMember(self::generateAlias());
+        $secondaryAgent = $this->tokenIO->createMember(TestUtil::generateAlias());
+        $unusedSecondaryAgent = $this->tokenIO->createMember(TestUtil::generateAlias());
 
         $recoveryRule = new RecoveryRule();
         $recoveryRule->setPrimaryAgent($primaryAgentId)
