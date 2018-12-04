@@ -16,9 +16,13 @@ class MemberRegistrationTest extends TestCase
     /** @var \Tokenio\TokenIO */
     protected $tokenIO;
 
+    /** @var UnsecuredFileSystemKeyStore */
+    protected $keyStore;
+
     protected function setUp()
     {
         $this->tokenIO = TestUtil::initializeSDK();
+        $this->keyStore = new UnsecuredFileSystemKeyStore(__DIR__ . '/test-keys/');
     }
 
     public function testCreateMember()
@@ -137,4 +141,44 @@ class MemberRegistrationTest extends TestCase
         $this->assertEquals([$alias], $actualAliases);
     }
 
+    public function testRecoveryWithSecondaryAgent()
+    {
+        $this->setUp();
+        $alias = TestUtil::generateAlias();
+        $member = $this->tokenIO->createMember($alias);
+        $memberId = $member->getMemberId();
+        $primaryAgentId = $member->getDefaultAgent();
+        $secondaryAgent = $this->tokenIO->createMember(TestUtil::generateAlias());
+        $unusedSecondaryAgent = $this->tokenIO->createMember(TestUtil::generateAlias());
+
+        $recoveryRule = new RecoveryRule();
+        $recoveryRule->setPrimaryAgent($primaryAgentId)
+            ->setSecondaryAgents([$secondaryAgent->getMemberId(), $unusedSecondaryAgent->getMemberId()]);
+
+        $member->addRecoveryRule($recoveryRule);
+        $cryptoEngine = new TokenCryptoEngine($memberId, $this->keyStore);
+        $key = $cryptoEngine->generateKey(Level::PRIVILEGED);
+        $verificationId = $this->tokenIO->beginRecovery($alias);
+        $authorization = new Authorization();
+        $authorization->setMemberId($memberId)
+            ->setMemberKey($key)
+            ->setPrevHash($member->getLastHash());
+
+        $signature = $secondaryAgent->authorizeRecovery($authorization);
+        $op1 = $this->tokenIO->getRecoveryAuthorization($verificationId,'code', $key);
+        $op2 = new MemberRecoveryOperation();
+        $op2->setAuthorization($authorization)
+            ->setAgentSignature($signature);
+
+        $recovered = $this->tokenIO->completeRecovery($memberId, [$op1, $op2], $key, $cryptoEngine);
+
+        $this->assertEquals($member->getMemberId(), $recovered->getMemberId());
+        $this->assertCount(3, $recovered->getKeys());
+        $this->assertEmpty($recovered->getAliases());
+        $this->assertFalse($this->tokenIO->isAliasExists($alias));
+
+        $recovered->verifyAlias($verificationId, 'code');
+        $this->assertTrue($this->tokenIO->isAliasExists($alias));
+        $this->assertEquals([$alias], $recovered->getAliases());
+    }
 }

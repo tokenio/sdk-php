@@ -3,10 +3,15 @@
 namespace Test\Tokenio;
 
 use Io\Token\Proto\Common\Security\Key\Level;
+use Io\Token\Proto\Common\Token\AccessBody;
 use Io\Token\Proto\Common\Token\Token;
+use Io\Token\Proto\Common\Token\TokenMember;
+use Io\Token\Proto\Common\Token\TokenPayload;
 use Io\Token\Proto\Common\Token\TokenRequest;
 use PHPUnit\Framework\TestCase;
+use Tokenio\Exception;
 use Tokenio\Http\Request\AccessTokenBuilder;
+use Tokenio\Http\Request\TokenRequestState;
 use Tokenio\Member;
 use Tokenio\Util\Strings;
 use Tokenio\Util\TestUtil;
@@ -97,6 +102,22 @@ class AccessTokenTest extends TestCase
         $this->assertEquals($accessToken->getId(), $result->getTokenId());
         $this->assertEquals($signature->getSignature(), $result->getSignature()->getSignature());
 
+    }
+
+    public function testCreateAccessTokenIdempotent()
+    {
+        $this->setUp();
+        $address = $this->member1->addAddress(Strings::generateNonce(), TestUtil::generateAddress());
+        $accessToken = $this->member1->createAccessToken(AccessTokenBuilder::createWithAlias($this->member1->getFirstAlias())
+            ->forAddress($address->getId())
+            ->build());
+
+        $this->member1->endorseToken($this->member1->createAccessToken($accessToken->getPayload()), Level::STANDARD);
+        $this->member1->endorseToken($this->member1->createAccessToken($accessToken->getPayload()), Level::STANDARD);
+
+        usleep(self::TOKEN_LOOKUP_POLL_FREQUENCY_MICRO * 5);
+        $result = $this->member1->getAccessTokens(null, 2);
+        $this->assertCount(1, $result->getList());
     }
 
     public function testAuthFlowTest()
