@@ -104,22 +104,6 @@ class AccessTokenTest extends TestCase
 
     }
 
-    public function testCreateAccessTokenIdempotent()
-    {
-        $this->setUp();
-        $address = $this->member1->addAddress(Strings::generateNonce(), TestUtil::generateAddress());
-        $accessToken = $this->member1->createAccessToken(AccessTokenBuilder::createWithAlias($this->member1->getFirstAlias())
-            ->forAddress($address->getId())
-            ->build());
-
-        $this->member1->endorseToken($this->member1->createAccessToken($accessToken->getPayload()), Level::STANDARD);
-        $this->member1->endorseToken($this->member1->createAccessToken($accessToken->getPayload()), Level::STANDARD);
-
-        usleep(self::TOKEN_LOOKUP_POLL_FREQUENCY_MICRO * 5);
-        $result = $this->member1->getAccessTokens(null, 2);
-        $this->assertCount(1, $result->getList());
-    }
-
     public function testAuthFlowTest()
     {
         $accessToken = $this->member1->createAccessToken(AccessTokenBuilder::createWithAlias($this->member2->getFirstAlias())->forAll()->build());
