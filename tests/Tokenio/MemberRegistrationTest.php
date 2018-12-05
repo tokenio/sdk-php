@@ -179,6 +179,6 @@ class MemberRegistrationTest extends TestCase
 
         $recovered->verifyAlias($verificationId, 'code');
         $this->assertTrue($this->tokenIO->isAliasExists($alias));
-        $this->assertEquals([$alias], $recovered->getAliases());
+        $this->assertEquals([$alias], TestUtil::repeatedFieldsToArray($recovered->getAliases()));
     }
 }
