@@ -4,7 +4,7 @@ namespace Test\Tokenio;
 
 use Io\Token\Proto\Common\Security\Key\Level;
 use Io\Token\Proto\Common\Token\Token;
-use Io\Token\Proto\Common\Token\TokenRequest;
+use Tokenio\Http\Request\TokenRequest;
 use PHPUnit\Framework\TestCase;
 use Tokenio\Http\Request\AccessTokenBuilder;
 use Tokenio\Member;
@@ -44,7 +44,6 @@ class AccessTokenTest extends TestCase
 
     public function testGetAccessTokens()
     {
-        $this->setUp();
         $address = $this->member1->addAddress(Strings::generateNonce(), TestUtil::generateAddress());
         $payload = AccessTokenBuilder::createWithAlias($this->member2->getFirstAlias())->forAddress($address->getId())->build();
 
@@ -84,8 +83,7 @@ class AccessTokenTest extends TestCase
         $address = $this->member1->addAddress(Strings::generateNonce(), TestUtil::generateAddress());
         $payload = AccessTokenBuilder::createWithAlias($this->member2->getFirstAlias())->forAddress($address->getId())->build();
 
-        $request = new TokenRequest();
-        $request->setPayload($payload);
+        $request = TokenRequest::builder($payload)->build();
         $tokenRequestId = $this->member2->storeTokenRequest($request);
         $accessToken = $this->member1->createAccessToken($payload, $tokenRequestId);
 
@@ -97,6 +95,21 @@ class AccessTokenTest extends TestCase
         $this->assertEquals($accessToken->getId(), $result->getTokenId());
         $this->assertEquals($signature->getSignature(), $result->getSignature()->getSignature());
 
+    }
+
+    public function testCreateAccessTokenIdempotent()
+    {
+        $address = $this->member1->addAddress(Strings::generateNonce(), TestUtil::generateAddress());
+        $accessToken = AccessTokenBuilder::createWithAlias($this->member1->getFirstAlias())
+            ->forAddress($address->getId())
+            ->build();
+
+        $this->member1->endorseToken($this->member1->createAccessToken($accessToken), Level::STANDARD);
+        $this->member1->endorseToken($this->member1->createAccessToken($accessToken), Level::STANDARD);
+
+        usleep(self::TOKEN_LOOKUP_POLL_FREQUENCY_MICRO * 5);
+        $result = $this->member1->getAccessTokens(null, 2);
+        $this->assertCount(1, $result->getList());
     }
 
     public function testAuthFlowTest()

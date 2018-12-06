@@ -399,7 +399,7 @@ class UnauthenticatedClient
 
             $operations[] = $memberOperation;
         }
-        $operations = Util::toAddKeyOperations([$privilegedKey, $standardKey, $lowKey]);
+        $operations = array_merge($operations, Util::toAddKeyOperations([$privilegedKey, $standardKey, $lowKey]));
         $getMemberRequest = new GetMemberRequest();
         $getMemberRequest->setMemberId($memberId);
         /** @var GetMemberResponse $getMemberResponse */

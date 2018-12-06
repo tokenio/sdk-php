@@ -5,7 +5,7 @@ namespace Test\Tokenio;
 use Io\Token\Proto\Common\Token\AccessBody;
 use Io\Token\Proto\Common\Token\TokenMember;
 use Io\Token\Proto\Common\Token\TokenPayload;
-use Io\Token\Proto\Common\Token\TokenRequest;
+use Tokenio\Http\Request\TokenRequest;
 use PHPUnit\Framework\TestCase;
 use Tokenio\Member;
 use Tokenio\Util\TestUtil;
@@ -27,20 +27,21 @@ class TokenRequestTest extends TestCase
 
     public function testAddAndGetTransferTokenRequest()
     {
-        $storedRequest = new TokenRequest();
         $payload = $this->member->createTransferToken(10, 'EUR')
                                 ->setToMemberId($this->member->getMemberId())
                                 ->build();
 
-        $storedRequest->setPayload($payload)
-                      ->setOptions(['redirectUrl' => self::TOKEN_URL]);
+        $storedRequest = TokenRequest::builder($payload)->addAllOptions(['redirectUrl' => self::TOKEN_URL])->build();
 
         $requestId = $this->member->storeTokenRequest($storedRequest);
         $this->assertNotEmpty($requestId);
-        $storedRequest->setId($requestId);
 
         $retrievedRequest = $this->tokenIO->retrieveTokenRequest($requestId);
-        $this->assertEquals($storedRequest, $retrievedRequest);
+        $this->assertEquals($storedRequest->getTokenPayload(), $retrievedRequest->getPayload());
+        $this->assertEquals($requestId, $retrievedRequest->getId());
+        foreach ($storedRequest->getOptions() as $k => $v){
+            $this->assertEquals($v, $retrievedRequest->getOptions()->offsetGet($k));
+        }
     }
 
     public function testAddAndGetAccessTokenRequest()
@@ -58,15 +59,17 @@ class TokenRequestTest extends TestCase
         $payload->setTo($toMember)
                 ->setAccess($access);
 
-        $storedRequest = new TokenRequest();
-        $storedRequest->setPayload($payload)
-                      ->setOptions(['redirectUrl' => self::TOKEN_URL]);
+        $storedRequest = TokenRequest::builder($payload)->addAllOptions(['redirectUrl' => self::TOKEN_URL])->build();
 
         $requestId = $this->member->storeTokenRequest($storedRequest);
         $this->assertNotEmpty($requestId);
-        $storedRequest->setId($requestId);
-        $retreivedRequest = $this->tokenIO->retrieveTokenRequest($requestId);
-        $this->assertEquals($storedRequest, $retreivedRequest);
+        $retrievedRequest = $this->tokenIO->retrieveTokenRequest($requestId);
+        $this->assertEquals($storedRequest->getTokenPayload(), $retrievedRequest->getPayload());
+        $this->assertEquals($requestId, $retrievedRequest->getId());
+        foreach ($storedRequest->getOptions() as $k => $v){
+            $this->assertEquals($v, $retrievedRequest->getOptions()->offsetGet($k));
+        }
+
     }
 
     public function testAddAndGetTokenRequest_NotFound()
@@ -85,8 +88,7 @@ class TokenRequestTest extends TestCase
                                 ->setToMemberId($this->tokenIO->createMember()->getMemberId())
                                 ->build();
 
-        $storedRequest = new TokenRequest();
-        $storedRequest->setPayload($payload);
+        $storedRequest = TokenRequest::builder($payload)->build();
 
         $this->expectException('Tokenio\Exception\StatusRuntimeException');
         $this->member->storeTokenRequest($storedRequest);
