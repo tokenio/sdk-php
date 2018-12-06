@@ -49,7 +49,6 @@ class AccessTokenTest extends TestCase
 
     public function testGetAccessTokens()
     {
-        $this->setUp();
         $address = $this->member1->addAddress(Strings::generateNonce(), TestUtil::generateAddress());
         $payload = AccessTokenBuilder::createWithAlias($this->member2->getFirstAlias())->forAddress($address->getId())->build();
 
