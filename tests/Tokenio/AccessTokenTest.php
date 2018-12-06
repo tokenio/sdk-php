@@ -3,15 +3,10 @@
 namespace Test\Tokenio;
 
 use Io\Token\Proto\Common\Security\Key\Level;
-use Io\Token\Proto\Common\Token\AccessBody;
 use Io\Token\Proto\Common\Token\Token;
-use Io\Token\Proto\Common\Token\TokenMember;
-use Io\Token\Proto\Common\Token\TokenPayload;
-use Io\Token\Proto\Common\Token\TokenRequest;
+use Tokenio\Http\Request\TokenRequest;
 use PHPUnit\Framework\TestCase;
-use Tokenio\Exception;
 use Tokenio\Http\Request\AccessTokenBuilder;
-use Tokenio\Http\Request\TokenRequestState;
 use Tokenio\Member;
 use Tokenio\Util\Strings;
 use Tokenio\Util\TestUtil;
@@ -88,8 +83,7 @@ class AccessTokenTest extends TestCase
         $address = $this->member1->addAddress(Strings::generateNonce(), TestUtil::generateAddress());
         $payload = AccessTokenBuilder::createWithAlias($this->member2->getFirstAlias())->forAddress($address->getId())->build();
 
-        $request = new TokenRequest();
-        $request->setPayload($payload);
+        $request = TokenRequest::builder($payload)->build();
         $tokenRequestId = $this->member2->storeTokenRequest($request);
         $accessToken = $this->member1->createAccessToken($payload, $tokenRequestId);
 
