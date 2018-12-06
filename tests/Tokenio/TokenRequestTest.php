@@ -27,7 +27,6 @@ class TokenRequestTest extends TestCase
 
     public function testAddAndGetTransferTokenRequest()
     {
-
         $payload = $this->member->createTransferToken(10, 'EUR')
                                 ->setToMemberId($this->member->getMemberId())
                                 ->build();
