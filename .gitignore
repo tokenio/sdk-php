@@ -5,4 +5,5 @@ composer.lock
 console.php
 keys
 doc
+lib/Rpc
 **/test-keys/

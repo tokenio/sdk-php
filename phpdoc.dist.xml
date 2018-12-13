@@ -7,6 +7,9 @@
     <transformer>
         <target>temp/output</target>
     </transformer>
+    <logging>
+        <level>crit</level>
+    </logging>
     <files>
         <ignore>Rpc/*</ignore>
     </files>
