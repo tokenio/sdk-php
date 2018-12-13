@@ -23,7 +23,8 @@
     "paragonie/random_compat": ">=2",
     "stephenhill/base58": "~1.0",
     "grpc/grpc": "^1.6.0",
-    "google/protobuf": "^3.6.1"
+    "google/protobuf": "^3.6.1",
+    "phpdocumentor/phpdocumentor": "^2"
   },
   "require-dev": {
     "phpunit/phpunit": "^7"

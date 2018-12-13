@@ -8,6 +8,10 @@ rm -rf ./vendor
 composer install
 composer dump-autoload
 
-./vendor/phpunit/phpunit/phpunit -v ./tests/
+./vendor/bin/phpunit -v ./tests/
+
+rm -rf ./doc
+mkdir doc
+./vendor/bin/phpdoc run -d ./lib -t ./doc
 
 
