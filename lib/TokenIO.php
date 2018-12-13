@@ -14,7 +14,6 @@ use Tokenio\Config\TokenCluster;
 use Tokenio\Config\TokenIoBuilder;
 use Tokenio\Exception\InvalidStateException;
 use Tokenio\Exception\VerificationException;
-use Tokenio\Http\Client;
 use Tokenio\Http\ClientFactory;
 use Tokenio\Http\Request\TokenRequestCallback;
 use Tokenio\Http\Request\TokenRequestCallbackParameters;

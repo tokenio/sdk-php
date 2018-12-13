@@ -5,8 +5,8 @@ namespace Test\Tokenio;
 use Io\Token\Proto\Common\Token\AccessBody;
 use Io\Token\Proto\Common\Token\TokenMember;
 use Io\Token\Proto\Common\Token\TokenPayload;
-use Tokenio\Http\Request\TokenRequest;
 use PHPUnit\Framework\TestCase;
+use Tokenio\Http\Request\TokenRequest;
 use Tokenio\Member;
 use Tokenio\Util\TestUtil;
 

@@ -4,9 +4,9 @@ namespace Test\Tokenio;
 
 use Io\Token\Proto\Common\Security\Key\Level;
 use Io\Token\Proto\Common\Token\Token;
-use Tokenio\Http\Request\TokenRequest;
 use PHPUnit\Framework\TestCase;
 use Tokenio\Http\Request\AccessTokenBuilder;
+use Tokenio\Http\Request\TokenRequest;
 use Tokenio\Member;
 use Tokenio\Util\Strings;
 use Tokenio\Util\TestUtil;
