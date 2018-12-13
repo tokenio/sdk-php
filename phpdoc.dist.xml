@@ -2,6 +2,7 @@
 <phpdoc>
     <parser>
         <target>temp/output</target>
+        <visibility>public</visibility>
     </parser>
     <transformer>
         <target>temp/output</target>
