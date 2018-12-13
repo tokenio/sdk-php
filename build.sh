@@ -12,6 +12,6 @@ composer dump-autoload
 
 rm -rf ./doc
 mkdir doc
-./vendor/bin/phpdoc run -d ./lib -t ./doc
+./vendor/bin/phpdoc run -d ./lib -t ./doc -c phpdoc.dist.xml
 
 
