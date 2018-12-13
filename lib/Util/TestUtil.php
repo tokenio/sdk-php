@@ -5,6 +5,7 @@ namespace Tokenio\Util;
 use Google\Protobuf\Internal\RepeatedField;
 use Io\Token\Proto\Common\Address\Address;
 use Io\Token\Proto\Common\Alias\Alias;
+use Tokenio\Config\TokenClientBuilder;
 use Tokenio\Config\TokenCluster;
 use Tokenio\Config\TokenEnvironment;
 use Tokenio\Config\TokenIoBuilder;
@@ -18,7 +19,7 @@ abstract class TestUtil
     {
         $keyStore = new UnsecuredFileSystemKeyStore(__DIR__ . 'tests/Tokenio/test-keys/');
 
-        $builder = new TokenIoBuilder();
+        $builder = new TokenClientBuilder();
         $builder->connectTo(TokenCluster::get(TokenEnvironment::SANDBOX));
         $builder->developerKey(self::DEVELOPER_KEY);
         $builder->withKeyStore($keyStore);

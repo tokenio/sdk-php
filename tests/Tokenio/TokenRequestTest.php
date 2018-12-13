@@ -14,7 +14,7 @@ class TokenRequestTest extends TestCase
 {
     const TOKEN_URL = 'https://token.io';
 
-    /** @var \Tokenio\TokenIO */
+    /** @var \Tokenio\TokenClient */
     protected $tokenIO;
     /** @var Member $member */
     private $member;
