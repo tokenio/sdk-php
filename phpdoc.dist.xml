@@ -4,12 +4,12 @@
         <target>temp/output</target>
         <visibility>public</visibility>
     </parser>
+    <logging>
+        <level>quiet</level>
+    </logging>
     <transformer>
         <target>temp/output</target>
     </transformer>
-    <logging>
-        <level>crit</level>
-    </logging>
     <files>
         <ignore>Rpc/*</ignore>
     </files>

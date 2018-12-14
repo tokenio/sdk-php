@@ -18,7 +18,7 @@ class AccessTokenTest extends TestCase
     const TOKEN_LOOKUP_POLL_FREQUENCY_MICRO = 1500000;
     const MICROS_IN_SEC = 1000000;
 
-    /** @var \Tokenio\TokenIO */
+    /** @var \Tokenio\TokenClient */
     protected $tokenIO;
     /** @var Member $member1 */
     private $member1;

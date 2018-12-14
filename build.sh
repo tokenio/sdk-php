@@ -8,10 +8,11 @@ rm -rf ./vendor
 composer install
 composer dump-autoload
 
-./vendor/bin/phpunit -v ./tests/
-
-rm -rf ./doc
-mkdir doc
-./vendor/bin/phpdoc run -d ./lib -t ./doc -c phpdoc.dist.xml
-
-
+if ./vendor/bin/phpunit -v ./tests/; then
+        rm -rf ./doc
+        mkdir doc
+        echo 'Generate Documentation'
+        ./vendor/bin/phpdoc run -d ./lib -t ./doc -c ./phpdoc.dist.xml| grep 'Parsing'
+else
+        exit 1
+fi
