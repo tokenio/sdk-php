@@ -1,17 +1,21 @@
 <?php
 
-namespace Tokenio\Config;
+namespace Tokenio;
 
 use Tokenio\Http\RpcChannelFactory;
 use Tokenio\RuntimeException;
 use Tokenio\Security\CryptoEngineFactoryInterface;
 use Tokenio\Security\KeyStoreInterface;
 use Tokenio\Security\TokenCryptoEngineFactory;
-use Tokenio\TokenClient;
 use Tokenio\TokenIO;
 use Tokenio\Util\Strings;
 
-class TokenClientBuilder
+/**
+ * Class TokenIoBuilder
+ * @package Tokenio
+ * @deprecated
+ */
+class TokenIoBuilder
 {
     const DEFAULT_TIMEOUT_MS = 10000;
     const DEFAULT_SSL_PORT = 443;
@@ -148,7 +152,7 @@ class TokenClientBuilder
     /**
      * Builds and returns a new TokenIO instance.
      *
-     * @return TokenClient
+     * @return TokenIO
      */
     public function build()
     {
@@ -164,6 +168,6 @@ class TokenClientBuilder
 
         $channel = RpcChannelFactory::createChannel($this->hostName, $this->port, $this->useSsl, $this->timeoutMs, $metadata);
 
-        return new TokenClient($channel, $this->tokenCluster, $this->cryptoEngine);
+        return new TokenIO($channel, $this->tokenCluster, $this->cryptoEngine);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tokenio\Config;
+namespace Tokenio;
 
 use Tokenio\RuntimeException;
 
