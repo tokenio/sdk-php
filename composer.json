@@ -32,9 +32,9 @@
   "autoload": {
     "psr-4": {
       "Tokenio\\": "lib/",
-      "Google\\": "lib/Rpc/Google",
-      "GPBMetadata\\": "lib/Rpc/GPBMetadata",
-      "Io\\":  "lib/Rpc/Io/"
+      "Google\\": "lib/Proto/Google",
+      "GPBMetadata\\": "lib/Proto/GPBMetadata",
+      "Io\\": "lib/Proto/Io/"
     }
   },
   "suggest": {
