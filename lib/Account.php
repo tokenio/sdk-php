@@ -5,7 +5,7 @@ namespace Tokenio;
 use Io\Token\Proto\Common\Money\Money;
 use Io\Token\Proto\Common\Transaction\Balance;
 use Io\Token\Proto\Common\Transaction\Transaction;
-use Tokenio\Http\Client;
+use Tokenio\Rpc\Client;
 
 class Account
 {

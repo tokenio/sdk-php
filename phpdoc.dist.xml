@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdoc>
+    <parser>
+        <target>temp/output</target>
+        <visibility>public</visibility>
+    </parser>
+    <logging>
+        <level>quiet</level>
+    </logging>
+    <transformer>
+        <target>temp/output</target>
+    </transformer>
+    <files>
+        <ignore>Proto/*</ignore>
+    </files>
+</phpdoc>

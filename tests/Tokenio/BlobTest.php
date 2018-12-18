@@ -15,7 +15,7 @@ class BlobTest extends TestCase
     const FILENAME = 'file.json';
     const FILETYPE = 'application/json';
 
-    /** @var \Tokenio\TokenIO */
+    /** @var \Tokenio\TokenClient */
     protected $tokenIO;
     /** @var Member $member */
     private $member;

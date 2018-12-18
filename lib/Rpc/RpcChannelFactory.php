@@ -1,12 +1,12 @@
 <?php
 
-namespace Tokenio\Http;
+namespace Tokenio\Rpc;
 
 use Grpc\Channel;
 use Grpc\ChannelCredentials;
 use Grpc\Interceptor;
-use Tokenio\Http\Interceptor\MetadataInterceptor;
-use Tokenio\Http\Interceptor\TimeoutInterceptor;
+use Tokenio\Rpc\Interceptor\MetadataInterceptor;
+use Tokenio\Rpc\Interceptor\TimeoutInterceptor;
 
 abstract class RpcChannelFactory
 {

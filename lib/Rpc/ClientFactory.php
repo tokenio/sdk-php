@@ -1,11 +1,11 @@
 <?php
 
-namespace Tokenio\Http;
+namespace Tokenio\Rpc;
 
 use Grpc\Channel;
 use Grpc\Interceptor;
 use Io\Token\Proto\Gateway\GatewayServiceClient;
-use Tokenio\Http\Interceptor\ClientAuthenticatorInterceptor;
+use Tokenio\Rpc\Interceptor\ClientAuthenticatorInterceptor;
 use Tokenio\Security\CryptoEngineInterface;
 
 abstract class ClientFactory

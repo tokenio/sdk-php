@@ -10,6 +10,7 @@ use Io\Token\Proto\Common\Security\Key;
 use Io\Token\Proto\Common\Token\TokenRequest;
 use Io\Token\Proto\Common\Token\TokenRequestStatePayload;
 use Io\Token\Proto\Gateway\GetBanksResponse;
+use Tokenio\TokenClientBuilder;
 use Tokenio\TokenCluster;
 use Tokenio\TokenIoBuilder;
 use Tokenio\Exception\InvalidStateException;
@@ -25,20 +26,16 @@ use Tokenio\Security\TokenCryptoEngine;
 use Tokenio\Security\UnsecuredFileSystemKeyStore;
 use Tokenio\Util\Util;
 
-/**
- * This class is deprecated. Use TokenClient instead.
- * @deprecated
- */
-class TokenIO
+class TokenClient
 {
     const TOKEN_REQUEST_TEMPLATE = 'https://%s/request-token/%s?state=%s';
 
     /**
-     * @return TokenIoBuilder
+     * @return TokenClientBuilder
      */
     public static function builder()
     {
-        return new TokenIoBuilder();
+        return new TokenClientBuilder();
     }
 
     /**

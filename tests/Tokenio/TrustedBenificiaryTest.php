@@ -10,7 +10,7 @@ use Tokenio\Util\TestUtil;
 class TrustedBenificiaryTest extends TestCase
 {
 
-    /** @var \Tokenio\TokenIO */
+    /** @var \Tokenio\TokenClient */
     protected $tokenIO;
     /** @var Member $member1 */
     private $member1;

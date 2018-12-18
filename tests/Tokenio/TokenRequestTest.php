@@ -5,8 +5,8 @@ namespace Test\Tokenio;
 use Io\Token\Proto\Common\Token\AccessBody;
 use Io\Token\Proto\Common\Token\TokenMember;
 use Io\Token\Proto\Common\Token\TokenPayload;
-use Tokenio\Http\Request\TokenRequest;
 use PHPUnit\Framework\TestCase;
+use Tokenio\Rpc\Request\TokenRequest;
 use Tokenio\Member;
 use Tokenio\Util\TestUtil;
 
@@ -14,7 +14,7 @@ class TokenRequestTest extends TestCase
 {
     const TOKEN_URL = 'https://token.io';
 
-    /** @var \Tokenio\TokenIO */
+    /** @var \Tokenio\TokenClient */
     protected $tokenIO;
     /** @var Member $member */
     private $member;

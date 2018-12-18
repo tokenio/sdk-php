@@ -1,6 +1,6 @@
 <?php
 
-namespace Tokenio\Http\Request;
+namespace Tokenio\Rpc\Request;
 
 use Io\Token\Proto\Common\Token\TokenPayload;
 

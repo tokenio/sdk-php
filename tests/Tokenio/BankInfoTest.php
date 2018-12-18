@@ -8,7 +8,7 @@ use Tokenio\Util\TestUtil;
 class BankInfoTest extends TestCase
 {
 
-    /** @var \Tokenio\TokenIO */
+    /** @var \Tokenio\TokenClient */
     protected $tokenIO;
     /** @var Member $member */
     private $member;

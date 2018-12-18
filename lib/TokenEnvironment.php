@@ -1,6 +1,6 @@
 <?php
 
-namespace Tokenio\Config;
+namespace Tokenio;
 
 class TokenEnvironment
 {

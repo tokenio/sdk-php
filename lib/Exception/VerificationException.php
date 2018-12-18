@@ -2,7 +2,6 @@
 
 namespace Tokenio\Exception;
 
-use Throwable;
 use Tokenio\Exception;
 
 class VerificationException extends Exception

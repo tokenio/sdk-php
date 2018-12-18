@@ -13,7 +13,7 @@ use Tokenio\Util\TestUtil;
 
 class MemberRegistrationTest extends TestCase
 {
-    /** @var \Tokenio\TokenIO */
+    /** @var \Tokenio\TokenClient */
     protected $tokenIO;
 
     protected function setUp()

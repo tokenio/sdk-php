@@ -1,6 +1,6 @@
 <?php
 
-namespace Tokenio\Http;
+namespace Tokenio\Rpc;
 
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Alias\VerificationStatus;
@@ -32,7 +32,7 @@ use Io\Token\Proto\Gateway\RetrieveTokenRequestResponse;
 use Io\Token\Proto\Gateway\UpdateMemberRequest;
 use Io\Token\Proto\Gateway\UpdateMemberResponse;
 use Tokenio\Exception\VerificationException;
-use Tokenio\Http\Request\TokenRequestResult;
+use Tokenio\Rpc\Request\TokenRequestResult;
 use Tokenio\Security\CryptoEngineInterface;
 use Tokenio\Security\SignerInterface;
 use Tokenio\Util\Strings;
