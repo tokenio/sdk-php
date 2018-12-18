@@ -51,6 +51,7 @@ def generate_protos_cmd(path_to_protos, out_dir)
     # Base directory where the .proto files are.
     src = "./protos"
 
+    #Provide path to gRPC extension
     protoc_dir = "/Users/maxkucherenko/Downloads/grpcProtoc/grpc/bins/opt"
     protoc = "#{protoc_dir}/protobuf/protoc"
     plugin = "#{protoc_dir}/grpc_php_plugin"
