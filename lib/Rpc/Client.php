@@ -1,6 +1,6 @@
 <?php
 
-namespace Tokenio\Http;
+namespace Tokenio\Rpc;
 
 use Google\Protobuf\Internal\MapField;
 use Google\Protobuf\Internal\RepeatedField;

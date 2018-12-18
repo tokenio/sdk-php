@@ -2,7 +2,7 @@
 
 namespace Tokenio;
 
-use Tokenio\Http\RpcChannelFactory;
+use Tokenio\Rpc\RpcChannelFactory;
 use Tokenio\RuntimeException;
 use Tokenio\Security\CryptoEngineFactoryInterface;
 use Tokenio\Security\KeyStoreInterface;

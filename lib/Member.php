@@ -32,8 +32,8 @@ use Io\Token\Proto\Common\Transfer\TransferPayload;
 use Io\Token\Proto\Common\Transferinstructions\TransferEndpoint;
 use Io\Token\Proto\Gateway\GetTokensRequest\Type;
 use Tokenio\Exception\InvalidRealmException;
-use Tokenio\Http\Client;
-use Tokenio\Http\Request\TransferTokenBuilder;
+use Tokenio\Rpc\Client;
+use Tokenio\Rpc\Request\TransferTokenBuilder;
 use Tokenio\Util\PagedList;
 use Tokenio\Util\Strings;
 use Tokenio\Util\Util;
@@ -340,7 +340,7 @@ class Member implements RepresentableInterface
     /**
      * Stores a token request. This can be retrieved later by the token request id.
      *
-     * @param \Tokenio\Http\Request\TokenRequest $tokenRequest token request
+     * @param \Tokenio\Rpc\Request\TokenRequest $tokenRequest token request
      * @return string token request id
      */
     public function storeTokenRequest($tokenRequest)

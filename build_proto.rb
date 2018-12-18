@@ -75,7 +75,7 @@ end
 fetch_protos();
 
 # Build the command that generates the protos.
-dir = "./lib/Rpc"
+dir = "./lib/Proto"
 system("rm -rf #{dir}");
 system("mkdir #{dir}");
 

@@ -1,12 +1,12 @@
 <?php
 /** @noinspection PhpOptionalBeforeRequiredParametersInspection */
 
-namespace Tokenio\Http\Interceptor;
+namespace Tokenio\Rpc\Interceptor;
 
 use Google\Protobuf\Internal\Message;
 use Grpc\Interceptor;
 use Io\Token\Proto\Gateway\GrpcAuthPayload;
-use Tokenio\Http\AuthenticationContext;
+use Tokenio\Rpc\AuthenticationContext;
 use Tokenio\Security\CryptoEngineInterface;
 use Tokenio\Util\Strings;
 

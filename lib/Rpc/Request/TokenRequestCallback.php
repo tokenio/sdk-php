@@ -1,6 +1,6 @@
 <?php
 
-namespace Tokenio\Http\Request;
+namespace Tokenio\Rpc\Request;
 
 /**
  * Represents callback in Token Request Flow. Contains tokenID and state.
