@@ -3,16 +3,8 @@
 #
 TOKEN_PROTOS_VER = "1.1.23"
 RPC_PROTOS_VER = "1.1.0"
-RPC_PLUGIN_VER = "1.17.1"
 
 require 'open-uri'
-
-def fetch_and_build_plugin(dir, version)
-    system("rm -rf #{dir}");
-    system("mkdir #{dir}");
-    system("cd #{dir} && git clone -b v#{version} https://github.com/grpc/grpc");
-    system("cd #{dir}/grpc && git submodule update --init && make grpc_php_plugin");
-end
 
 def fetch_protos()
     def download(path, name, type, version)
@@ -60,8 +52,8 @@ def generate_protos_cmd(path_to_protos, out_dir)
     src = "./protos"
 
     #Provide path to gRPC extension
-    protoc_dir = "./tools/grpc/bins/opt"
-    protoc = "protoc"
+    protoc_dir = "./tools"
+    protoc = "#{protoc_dir}/protobuf/protoc"
     plugin = "#{protoc_dir}/grpc_php_plugin"
     
     result = <<-CMD
@@ -79,10 +71,6 @@ def generate_protos_cmd(path_to_protos, out_dir)
     result
 end
 
-# Fetch and build php plugin
-tools_dir = "./tools";
-fetch_and_build_plugin(tools_dir, RPC_PLUGIN_VER);
-
 # Fetch the protos.
 fetch_protos();
 
@@ -97,4 +85,4 @@ gencommand = generate_protos_cmd("common", dir) +
              generate_protos_cmd("external/gateway", dir);
 
 system(gencommand);
-system("rm -rf #{tools_dir}");
+#system("rm -rf #{tools_dir}");
