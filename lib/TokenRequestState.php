@@ -1,6 +1,6 @@
 <?php
 
-namespace Tokenio\Rpc\Request;
+namespace Tokenio;
 
 use stdClass;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tokenio\Rpc\Request;
+namespace Tokenio;
 
 use Google\Protobuf\Internal\MapField;
 use Io\Token\Proto\Common\Token\TokenPayload;

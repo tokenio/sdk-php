@@ -32,7 +32,7 @@ use Io\Token\Proto\Gateway\RetrieveTokenRequestResponse;
 use Io\Token\Proto\Gateway\UpdateMemberRequest;
 use Io\Token\Proto\Gateway\UpdateMemberResponse;
 use Tokenio\Exception\VerificationException;
-use Tokenio\Rpc\Request\TokenRequestResult;
+use Tokenio\TokenRequestResult;
 use Tokenio\Security\CryptoEngineInterface;
 use Tokenio\Security\SignerInterface;
 use Tokenio\Util\Strings;
