@@ -12,7 +12,7 @@ More information at [https://developer.token.io/sdk/](https://developer.token.io
 
 * [gRPC PHP extension](https://grpc.io/docs/quickstart/php.html#install-the-grpc-php-extension).
 
-## Composer
+## Usage
 
 You can install the bindings via [Composer](http://getcomposer.org/). Run the following command:
 
@@ -26,11 +26,10 @@ To use the bindings, use Composer's [autoload](https://getcomposer.org/doc/01-ba
 require_once('vendor/autoload.php');
 ```
 ## Build
-To build the SDK:
+To build the SDK, run tests and generate documentation:
 
 ```sh build.sh```
 
-This command will download latest protos, run tests and generate documentation.
 ## Dependencies
 
 The bindings require the following extensions in order to work properly:
