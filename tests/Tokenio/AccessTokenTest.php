@@ -32,6 +32,12 @@ class AccessTokenTest extends TestCase
         $this->member2 = $this->tokenIO->createMember(TestUtil::generateAlias());
     }
 
+    protected function tearDown()
+    {
+        parent::tearDown();
+        TestUtil::removeDirectory(__DIR__ . '/test-keys/');
+    }
+
     public function testGetAccessToken()
     {
         $address = $this->member1->addAddress(Strings::generateNonce(), TestUtil::generateAddress());

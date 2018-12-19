@@ -18,6 +18,12 @@ class BankInfoTest extends TestCase
         $this->member = $this->tokenIO->createMember(TestUtil::generateAlias());
     }
 
+    protected function tearDown()
+    {
+        parent::tearDown();
+        TestUtil::removeDirectory(__DIR__ . '/test-keys/');
+    }
+
     public function testGetBanks()
     {
         $this->assertNotEmpty($this->tokenIO->getBanks()->getBanks());

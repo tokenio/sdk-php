@@ -17,8 +17,7 @@ abstract class TestUtil
 
     public static function initializeSDK()
     {
-        $keyStore = new UnsecuredFileSystemKeyStore(__DIR__ . 'tests/Tokenio/test-keys/');
-
+        $keyStore = new UnsecuredFileSystemKeyStore(__DIR__ . '/test-keys/');
         $builder = new TokenClientBuilder();
         $builder->connectTo(TokenCluster::get(TokenEnvironment::SANDBOX));
         $builder->developerKey(self::DEVELOPER_KEY);
@@ -62,5 +61,20 @@ abstract class TestUtil
             $result[] = $item;
         }
         return $result;
+    }
+
+    public static function removeDirectory($dir) {
+        if (is_dir($dir)) {
+            $objects = scandir($dir);
+            foreach ($objects as $object) {
+                if ($object != "." && $object != "..") {
+                    if (is_dir($dir."/".$object))
+                        self::removeDirectory($dir."/".$object);
+                    else
+                        unlink($dir."/".$object);
+                }
+            }
+            rmdir($dir);
+        }
     }
 }

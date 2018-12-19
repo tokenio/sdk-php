@@ -26,6 +26,12 @@ class TrustedBenificiaryTest extends TestCase
         $this->member3 = $this->tokenIO->createMember(TestUtil::generateAlias());
     }
 
+    protected function tearDown()
+    {
+        parent::tearDown();
+        TestUtil::removeDirectory(__DIR__ . '/test-keys/');
+    }
+
     public function testAddAndGetTrustedBeneficiary()
     {
         $this->member1->addTrustedBeneficiary($this->member2->getMemberId());

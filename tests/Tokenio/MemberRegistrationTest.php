@@ -20,6 +20,12 @@ class MemberRegistrationTest extends TestCase
         $this->tokenIO = TestUtil::initializeSDK();
     }
 
+    protected function tearDown()
+    {
+        parent::tearDown();
+        TestUtil::removeDirectory(__DIR__ . '/test-keys/');
+    }
+
     public function testCreateMember()
     {
         $alias = TestUtil::generateAlias();
