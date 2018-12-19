@@ -10,16 +10,9 @@ use Io\Token\Proto\Common\Security\Key;
 use Io\Token\Proto\Common\Token\TokenRequest;
 use Io\Token\Proto\Common\Token\TokenRequestStatePayload;
 use Io\Token\Proto\Gateway\GetBanksResponse;
-use Tokenio\TokenClientBuilder;
-use Tokenio\TokenCluster;
-use Tokenio\TokenIoBuilder;
 use Tokenio\Exception\InvalidStateException;
 use Tokenio\Exception\VerificationException;
 use Tokenio\Rpc\ClientFactory;
-use Tokenio\TokenRequestCallback;
-use Tokenio\TokenRequestCallbackParameters;
-use Tokenio\TokenRequestResult;
-use Tokenio\TokenRequestState;
 use Tokenio\Security\CryptoEngineFactoryInterface;
 use Tokenio\Security\CryptoEngineInterface;
 use Tokenio\Security\TokenCryptoEngine;
@@ -342,7 +335,7 @@ class TokenClient
     public function completeRecoveryWithDefaultRule($memberId, $verificationId, $code)
     {
         $unauthenticated = ClientFactory::unauthenticated($this->channel);
-        $cryptoEngine = new TokenCryptoEngine($memberId, new UnsecuredFileSystemKeyStore(__DIR__ . '/test-keys/'));
+        $cryptoEngine = $this->cryptoEngineFactory->create($memberId);
         $recoveredMember = $unauthenticated->completeRecoveryWithDefaultRule($memberId, $verificationId, $code, $cryptoEngine);
         $client = ClientFactory::authenticated($this->channel, $recoveredMember->getId(), $cryptoEngine);
 
