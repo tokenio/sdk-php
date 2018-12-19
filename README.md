@@ -25,9 +25,8 @@ To use the bindings, use Composer's [autoload](https://getcomposer.org/doc/01-ba
 ```php
 require_once('vendor/autoload.php');
 ```
-##Building SDK
-To build SDK with latest `.proto`'s edit `build_proto.rb`: in line 55 provide path to yours gRPC installation 
-with PHP plugin installed and run:
+## Build
+To build the SDK:
 
 ```sh build.sh```
 
