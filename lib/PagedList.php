@@ -1,6 +1,6 @@
 <?php
 
-namespace Tokenio\Util;
+namespace Tokenio;
 
 use Google\Protobuf\Internal\RepeatedField;
 

@@ -34,7 +34,7 @@ use Io\Token\Proto\Gateway\GetTokensRequest\Type;
 use Tokenio\Exception\InvalidRealmException;
 use Tokenio\Rpc\Client;
 use Tokenio\Rpc\Request\TransferTokenBuilder;
-use Tokenio\Util\PagedList;
+use Tokenio\PagedList;
 use Tokenio\Util\Strings;
 use Tokenio\Util\Util;
 

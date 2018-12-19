@@ -112,7 +112,7 @@ use Io\Token\Proto\Gateway\VerifyAliasRequest;
 use Io\Token\Proto\Gateway\VerifyAliasResponse;
 use Tokenio\Exception;
 use Tokenio\Security\CryptoEngineInterface;
-use Tokenio\Util\PagedList;
+use Tokenio\PagedList;
 use Tokenio\Util\Strings;
 use Tokenio\Util\Util;
 

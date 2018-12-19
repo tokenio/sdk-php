@@ -143,7 +143,7 @@ class Account
      * @param string $offset nullable offset
      * @param int $limit
      * @param int $level key level
-     * @return Util\PagedList
+     * @return PagedList
      * @throws Exception
      */
     public function getTransactions($offset, $limit, $level)
