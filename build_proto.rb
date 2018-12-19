@@ -85,4 +85,3 @@ gencommand = generate_protos_cmd("common", dir) +
              generate_protos_cmd("external/gateway", dir);
 
 system(gencommand);
-#system("rm -rf #{tools_dir}");
