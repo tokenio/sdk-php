@@ -1,6 +1,6 @@
 <?php
 
-namespace Tokenio\Rpc\Request;
+namespace Tokenio;
 
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Token\AccessBody;

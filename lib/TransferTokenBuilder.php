@@ -1,6 +1,6 @@
 <?php
 
-namespace Tokenio\Rpc\Request;
+namespace Tokenio;
 
 use Io\Token\Proto\Common\Account\BankAccount;
 use Io\Token\Proto\Common\Alias\Alias;
@@ -13,7 +13,6 @@ use Io\Token\Proto\Common\Token\TransferBody;
 use Io\Token\Proto\Common\Transferinstructions\TransferEndpoint;
 use Io\Token\Proto\Common\Transferinstructions\TransferInstructions;
 use Tokenio\Exception\IllegalArgumentException;
-use Tokenio\Member;
 use Tokenio\Util\Strings;
 
 class TransferTokenBuilder

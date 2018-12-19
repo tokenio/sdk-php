@@ -5,6 +5,7 @@ namespace Test\Tokenio\Security;
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Security\Key\Level;
 use PHPUnit\Framework\TestCase;
+use Test\Tokenio\TestUtil;
 use Tokenio\Exception\CryptographicException;
 use Tokenio\Security\Base64Url;
 use Tokenio\Security\CryptoEngineInterface;
@@ -83,10 +84,6 @@ class CryptoEngineTest extends TestCase
 
     protected function tearDown()
     {
-        $keyDir = __DIR__ . '/test-keys/';
-        foreach (glob($keyDir . '*') as $file) {
-            unlink($file);
-        }
-        rmdir($keyDir);
+        TestUtil::removeDirectory(__DIR__ . '/test-keys/');
     }
 }

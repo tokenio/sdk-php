@@ -9,7 +9,6 @@ use Io\Token\Proto\Common\Security\Key\Level;
 use PHPUnit\Framework\TestCase;
 use Tokenio\Security\TokenCryptoEngine;
 use Tokenio\Security\UnsecuredFileSystemKeyStore;
-use Tokenio\Util\TestUtil;
 
 class MemberRegistrationTest extends TestCase
 {
@@ -19,6 +18,12 @@ class MemberRegistrationTest extends TestCase
     protected function setUp()
     {
         $this->tokenIO = TestUtil::initializeSDK();
+    }
+
+    protected function tearDown()
+    {
+        parent::tearDown();
+        TestUtil::removeDirectory(__DIR__ . '/test-keys/');
     }
 
     public function testCreateMember()

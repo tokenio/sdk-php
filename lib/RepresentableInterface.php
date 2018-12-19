@@ -4,7 +4,7 @@ namespace Tokenio;
 
 use Io\Token\Proto\Common\Transaction\Balance;
 use Io\Token\Proto\Common\Transaction\Transaction;
-use Tokenio\Util\PagedList;
+use Tokenio\PagedList;
 
 /**
  * Represents the part of a token member that can be accessed through an access token.

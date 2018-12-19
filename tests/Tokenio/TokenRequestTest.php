@@ -6,9 +6,8 @@ use Io\Token\Proto\Common\Token\AccessBody;
 use Io\Token\Proto\Common\Token\TokenMember;
 use Io\Token\Proto\Common\Token\TokenPayload;
 use PHPUnit\Framework\TestCase;
-use Tokenio\Rpc\Request\TokenRequest;
+use Tokenio\TokenRequest;
 use Tokenio\Member;
-use Tokenio\Util\TestUtil;
 
 class TokenRequestTest extends TestCase
 {
@@ -23,6 +22,12 @@ class TokenRequestTest extends TestCase
     {
         $this->tokenIO = TestUtil::initializeSDK();
         $this->member = $this->tokenIO->createMember(TestUtil::generateAlias());
+    }
+
+    protected function tearDown()
+    {
+        parent::tearDown();
+        TestUtil::removeDirectory(__DIR__ . '/test-keys/');
     }
 
     public function testAddAndGetTransferTokenRequest()

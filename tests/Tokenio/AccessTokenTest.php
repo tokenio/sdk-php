@@ -5,12 +5,12 @@ namespace Test\Tokenio;
 use Io\Token\Proto\Common\Security\Key\Level;
 use Io\Token\Proto\Common\Token\Token;
 use PHPUnit\Framework\TestCase;
-use Tokenio\Rpc\Request\AccessTokenBuilder;
-use Tokenio\Rpc\Request\TokenRequest;
+use Tokenio\AccessTokenBuilder;
+use Tokenio\TokenRequest;
 use Tokenio\Member;
 use Tokenio\Util\Strings;
-use Tokenio\Util\TestUtil;
 use Tokenio\Util\Util;
+use Test\Tokenio\TestUtil;
 
 class AccessTokenTest extends TestCase
 {
@@ -30,6 +30,12 @@ class AccessTokenTest extends TestCase
         $this->tokenIO = TestUtil::initializeSDK();
         $this->member1 = $this->tokenIO->createMember(TestUtil::generateAlias());
         $this->member2 = $this->tokenIO->createMember(TestUtil::generateAlias());
+    }
+
+    protected function tearDown()
+    {
+        parent::tearDown();
+        TestUtil::removeDirectory(__DIR__ . '/test-keys/');
     }
 
     public function testGetAccessToken()
