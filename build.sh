@@ -8,7 +8,7 @@ rm -rf ./vendor
 composer install
 composer dump-autoload
 
-if ./vendor/bin/phpunit -v ./tests/; then
+if ./vendor/bin/phpunit --testdox ./tests/; then
         rm -rf ./doc
         mkdir doc
         echo 'Generate Documentation'
