@@ -9,7 +9,6 @@ use Io\Token\Proto\Common\Security\Key\Level;
 use PHPUnit\Framework\TestCase;
 use Tokenio\Security\TokenCryptoEngine;
 use Tokenio\Security\UnsecuredFileSystemKeyStore;
-use Tokenio\Util\TestUtil;
 
 class MemberRegistrationTest extends TestCase
 {

@@ -8,7 +8,6 @@ use Io\Token\Proto\Common\Token\TokenPayload;
 use PHPUnit\Framework\TestCase;
 use Tokenio\TokenRequest;
 use Tokenio\Member;
-use Tokenio\Util\TestUtil;
 
 class TokenRequestTest extends TestCase
 {

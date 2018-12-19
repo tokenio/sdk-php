@@ -3,7 +3,6 @@
 namespace Test\Tokenio;
 use PHPUnit\Framework\TestCase;
 use Tokenio\Member;
-use Tokenio\Util\TestUtil;
 
 class BankInfoTest extends TestCase
 {

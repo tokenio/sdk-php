@@ -6,7 +6,6 @@ use Io\Token\Proto\Common\Member\AddressRecord;
 use PHPUnit\Framework\TestCase;
 use Tokenio\Member;
 use Tokenio\Util\Strings;
-use Tokenio\Util\TestUtil;
 
 class AddressTest extends TestCase
 {

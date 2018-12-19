@@ -6,7 +6,6 @@ use Io\Token\Proto\Common\Member\Profile;
 use Io\Token\Proto\Common\Member\ProfilePictureSize;
 use PHPUnit\Framework\TestCase;
 use Tokenio\Member;
-use Tokenio\Util\TestUtil;
 
 class ProfileTest extends TestCase
 {

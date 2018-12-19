@@ -31,6 +31,7 @@
   },
   "autoload": {
     "psr-4": {
+      "Test\\": "tests/",
       "Tokenio\\": "lib/",
       "Google\\": "lib/Proto/Google",
       "GPBMetadata\\": "lib/Proto/GPBMetadata",

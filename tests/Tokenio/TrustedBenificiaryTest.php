@@ -5,7 +5,6 @@ namespace Test\Tokenio;
 use Io\Token\Proto\Common\Member\TrustedBeneficiary;
 use PHPUnit\Framework\TestCase;
 use Tokenio\Member;
-use Tokenio\Util\TestUtil;
 
 class TrustedBenificiaryTest extends TestCase
 {

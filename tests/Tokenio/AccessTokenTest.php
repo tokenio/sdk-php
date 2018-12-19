@@ -9,8 +9,8 @@ use Tokenio\AccessTokenBuilder;
 use Tokenio\TokenRequest;
 use Tokenio\Member;
 use Tokenio\Util\Strings;
-use Tokenio\Util\TestUtil;
 use Tokenio\Util\Util;
+use Test\Tokenio\TestUtil;
 
 class AccessTokenTest extends TestCase
 {

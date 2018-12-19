@@ -7,7 +7,6 @@ use Io\Token\Proto\Common\Blob\Blob\Payload;
 use PHPUnit\Framework\TestCase;
 use Tokenio\Member;
 use Tokenio\Util\Strings;
-use Tokenio\Util\TestUtil;
 use Tokenio\Util\Util;
 
 class BlobTest extends TestCase

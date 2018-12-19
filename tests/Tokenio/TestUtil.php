@@ -1,6 +1,6 @@
 <?php
 
-namespace Tokenio\Util;
+namespace Test\Tokenio;
 
 use Google\Protobuf\Internal\RepeatedField;
 use Io\Token\Proto\Common\Address\Address;
@@ -9,6 +9,7 @@ use Tokenio\TokenClientBuilder;
 use Tokenio\TokenCluster;
 use Tokenio\TokenEnvironment;
 use Tokenio\Security\UnsecuredFileSystemKeyStore;
+use Tokenio\Util\Strings;
 
 abstract class TestUtil
 {
