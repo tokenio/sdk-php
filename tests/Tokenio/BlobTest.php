@@ -7,7 +7,6 @@ use Io\Token\Proto\Common\Blob\Blob\Payload;
 use PHPUnit\Framework\TestCase;
 use Tokenio\Member;
 use Tokenio\Util\Strings;
-use Tokenio\Util\TestUtil;
 use Tokenio\Util\Util;
 
 class BlobTest extends TestCase
@@ -15,7 +14,7 @@ class BlobTest extends TestCase
     const FILENAME = 'file.json';
     const FILETYPE = 'application/json';
 
-    /** @var \Tokenio\TokenIO */
+    /** @var \Tokenio\TokenClient */
     protected $tokenIO;
     /** @var Member $member */
     private $member;
@@ -24,6 +23,12 @@ class BlobTest extends TestCase
     {
         $this->tokenIO = TestUtil::initializeSDK();
         $this->member = $this->tokenIO->createMember(TestUtil::generateAlias());
+    }
+
+    protected function tearDown()
+    {
+        parent::tearDown();
+        TestUtil::removeDirectory(__DIR__ . '/test-keys/');
     }
 
     public function testCheckHash()

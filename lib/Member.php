@@ -25,19 +25,16 @@ use Io\Token\Proto\Common\Security\Signature;
 use Io\Token\Proto\Common\Token\Token;
 use Io\Token\Proto\Common\Token\TokenOperationResult;
 use Io\Token\Proto\Common\Token\TokenPayload;
-use Io\Token\Proto\Common\Token\TokenRequest;
 use Io\Token\Proto\Common\Transaction\Balance;
 use Io\Token\Proto\Common\Transaction\Transaction;
 use Io\Token\Proto\Common\Transfer\Transfer;
 use Io\Token\Proto\Common\Transfer\TransferPayload;
 use Io\Token\Proto\Common\Transferinstructions\TransferEndpoint;
 use Io\Token\Proto\Gateway\GetTokensRequest\Type;
-use Io\Token\Proto\Gateway\GetTokensRequest_Type;
 use Tokenio\Exception\InvalidRealmException;
-use Tokenio\Http\Client;
-use Tokenio\Http\Request\AccessTokenBuilder;
-use Tokenio\Http\Request\TransferTokenBuilder;
-use Tokenio\Util\PagedList;
+use Tokenio\Rpc\Client;
+use Tokenio\TransferTokenBuilder;
+use Tokenio\PagedList;
 use Tokenio\Util\Strings;
 use Tokenio\Util\Util;
 
@@ -343,7 +340,7 @@ class Member implements RepresentableInterface
     /**
      * Stores a token request. This can be retrieved later by the token request id.
      *
-     * @param \Tokenio\Http\Request\TokenRequest $tokenRequest token request
+     * @param \Tokenio\TokenRequest $tokenRequest token request
      * @return string token request id
      */
     public function storeTokenRequest($tokenRequest)
