@@ -52,8 +52,8 @@ def generate_protos_cmd(path_to_protos, out_dir)
     src = "./protos"
 
     #Provide path to gRPC extension
-    protoc_dir = "./tools"
-    protoc = "#{protoc_dir}/protobuf/protoc"
+    protoc_dir = "./tools/" + ((RUBY_PLATFORM.include?"linux") ? "linux_x64" : "macosx_x64");
+    protoc = "#{protoc_dir}/protoc"
     plugin = "#{protoc_dir}/grpc_php_plugin"
     
     result = <<-CMD
