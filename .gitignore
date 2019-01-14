@@ -1,8 +1,9 @@
 .idea
 .DS_Store
 vendor
-composer.lock
 console.php
 keys
 doc
 **/test-keys/
+**/*.proto
+!protos/common/google/protobuf/descriptor.proto
