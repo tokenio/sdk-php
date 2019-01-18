@@ -2,9 +2,7 @@
 
 namespace Tokenio\Exception;
 
-use Tokenio\Exception;
-
-class VerificationException extends Exception
+class VerificationException extends \Exception
 {
     private $status;
 

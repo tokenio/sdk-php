@@ -2,8 +2,6 @@
 
 namespace Tokenio\Exception;
 
-use Tokenio\Exception;
-
-class IllegalArgumentException extends Exception
+class IllegalArgumentException extends \Exception
 {
 }

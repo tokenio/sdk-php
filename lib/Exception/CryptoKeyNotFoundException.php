@@ -2,9 +2,7 @@
 
 namespace Tokenio\Exception;
 
-use Tokenio\Exception;
-
-class CryptoKeyNotFoundException extends Exception
+class CryptoKeyNotFoundException extends \Exception
 {
     /**
      * CryptoKeyNotFoundException constructor.
