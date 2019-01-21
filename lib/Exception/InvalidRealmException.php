@@ -2,9 +2,7 @@
 
 namespace Tokenio\Exception;
 
-use Tokenio\Exception;
-
-class InvalidRealmException extends Exception
+class InvalidRealmException extends \Exception
 {
     public function __construct($actualRealm, $expectedRealm)
     {

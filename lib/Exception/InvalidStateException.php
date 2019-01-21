@@ -2,9 +2,7 @@
 
 namespace Tokenio\Exception;
 
-use Tokenio\Exception;
-
-class InvalidStateException extends Exception
+class InvalidStateException extends \Exception
 {
     /**
      * InvalidStateException constructor.
