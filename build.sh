@@ -12,7 +12,7 @@ if ./vendor/bin/phpunit --testdox ./tests/; then
         rm -rf ./doc
         mkdir doc
         echo 'Generate Documentation'
-        ./vendor/phpdocumentor/phpdocumentor/bin/phpdoc run -d ./lib -t ./doc -c ./phpdoc.dist.xml| grep 'Parsing'
+        ./vendor/phpdocumentor/phpdocumentor/bin/phpdoc run -d ./lib -t ./doc -c ./phpdoc.dist.xml --template="responsive-twig"| grep 'Parsing'
 else
         exit 1
 fi
