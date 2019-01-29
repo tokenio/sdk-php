@@ -18,5 +18,11 @@
           </filesMatch>
       </ifModule>
   ]]></description>
-
+  <transformations>
+    <transformation query="copy" writer="FileIo" source="templates/responsive/img" artifact="img"/>
+    <transformation query="copy" writer="FileIo" source="templates/responsive/css" artifact="css"/>
+    <transformation query="copy" writer="FileIo" source="templates/responsive/js" artifact="js"/>
+    <transformation query="copy" writer="FileIo" source="templates/doc-template/index.html" artifact="index.html"/>
+    <transformation query="indexes.namespaces" writer="twig" source="templates/doc-template/namespace.html.twig" />
+  </transformations>
 </template>

@@ -9,11 +9,13 @@ composer install
 composer dump-autoload
 
 if ./vendor/bin/phpunit --testdox ./tests/; then
-        rm -rf ./doc
-        mkdir doc
+        rm -rf ./doc/generated
+        mkdir ./doc/generated
         echo 'Generate Documentation'
+        rm -rf ./vendor/phpdocumentor/phpdocumentor/data/templates/doc-template
         pwd
-        ./vendor/phpdocumentor/phpdocumentor/bin/phpdoc run -d ./lib -t ./doc -c ./phpdoc.dist.xml --template="./token-doc-template"| grep 'Parsing'
+        ./vendor/phpdocumentor/phpdocumentor/bin/phpdoc run -d ./lib -t ./doc/generated -c ./phpdoc.dist.xml --template="./doc/doc-template" | grep 'Parsing'
+        rm -rf ./doc/generated/phpdoc-cache-*
 else
         exit 1
 fi

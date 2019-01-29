@@ -3,7 +3,7 @@
 vendor
 console.php
 keys
-doc
+doc/generated
 **/test-keys/
 **/*.proto
 !protos/common/google/protobuf/descriptor.proto
