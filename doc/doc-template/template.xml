@@ -24,5 +24,6 @@
     <transformation query="copy" writer="FileIo" source="templates/responsive/js" artifact="js"/>
     <transformation query="copy" writer="FileIo" source="templates/doc-template/index.html" artifact="index.html"/>
     <transformation query="indexes.namespaces" writer="twig" source="templates/doc-template/namespace.html.twig" />
+    <transformation query="indexes.classes" writer="twig" source="templates/doc-template/class.html.twig" />
   </transformations>
 </template>
