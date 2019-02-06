@@ -133,10 +133,7 @@
                         </aside>
                     {% endif %}
                     <dl>
-                        <dt>File</dt>
-                            <dd>
-                                <a href="{{ node.file|route('url') }}"><div class="path-wrapper">{{ node.path }}</div></a>
-                            </dd>
+
                         {% if node.package is not empty and node.package != '\\' %}
                         <dt>Package</dt>
                             <dd><div class="namespace-wrapper">{{ node.subpackage ? (node.package ~ '\\' ~ node.subpackage) : node.package }}</div></dd>

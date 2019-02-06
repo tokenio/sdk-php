@@ -173,8 +173,6 @@
                     {% endif %}
 
                     <dl>
-                        <dt>File</dt>
-                            <dd><a href="{{ node.file|route('url') }}"><div class="path-wrapper">{{ node.path }}</div></a></dd>
                         {% if node.package.name is not empty and node.package.name != '\\' %}
                         <dt>Package</dt>
                             <dd><div class="namespace-wrapper">{{ node.package.parent.name != '\\' ? (node.package.parent.name ~ '\\' ~ node.package.name) : node.package.name }}</div></dd>
