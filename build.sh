@@ -14,7 +14,7 @@ if ./vendor/bin/phpunit --testdox ./tests/; then
         echo 'Generate Documentation'
         rm -rf ./vendor/phpdocumentor/phpdocumentor/data/templates/doc-template
         pwd
-        ./vendor/phpdocumentor/phpdocumentor/bin/phpdoc run -d ./lib -t ./doc/generated -c ./phpdoc.dist.xml --template="./doc/doc-template" | grep 'Parsing'
+        ./vendor/phpdocumentor/phpdocumentor/bin/phpdoc run -c ./phpdoc.dist.xml  #| grep 'Parsing'
         rm -rf ./doc/generated/phpdoc-cache-*
 else
         exit 1

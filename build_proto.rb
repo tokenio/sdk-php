@@ -76,7 +76,9 @@ fetch_protos();
 
 # Build the command that generates the protos.
 dir = "./lib/Proto"
-system("rm -rf #{dir}");
+system("rm -rf #{dir}/Google");
+system("rm -rf #{dir}/GPBMetadata");
+system("rm -rf #{dir}/Io");
 system("mkdir #{dir}");
 
 gencommand = generate_protos_cmd("common", dir) +
