@@ -8,8 +8,6 @@ rm -rf ./vendor
 composer install
 composer dump-autoload
 
-#Download doc generator tool
-curl -o ./tools/sami.phar http://get.sensiolabs.org/sami.phar
 
 if ./vendor/bin/phpunit --testdox ./tests/; then
         rm -rf ./doc/generated
