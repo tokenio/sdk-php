@@ -8,14 +8,15 @@ rm -rf ./vendor
 composer install
 composer dump-autoload
 
+#Download doc generator tool
+curl -o ./tools/sami.phar http://get.sensiolabs.org/sami.phar
+
 if ./vendor/bin/phpunit --testdox ./tests/; then
         rm -rf ./doc/generated
         mkdir ./doc/generated
         echo 'Generate Documentation'
-        rm -rf ./vendor/phpdocumentor/phpdocumentor/data/templates/doc-template
-        pwd
-        ./vendor/phpdocumentor/phpdocumentor/bin/phpdoc run -c ./phpdoc.dist.xml | grep 'Parsing'
-        rm -rf ./doc/generated/phpdoc-cache-*
+        php ./tools/sami.phar update ./doc/config.php
+        rm -rf ./cache
 else
         exit 1
 fi
