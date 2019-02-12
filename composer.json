@@ -1,7 +1,7 @@
 {
   "name": "tokenio/sdk",
   "description": "PHP SDK for interacting with the Token System",
-  "version": "0.0.4",
+  "version": "1.0.0-beta",
   "keywords": [
     "token",
     "payment processing",
