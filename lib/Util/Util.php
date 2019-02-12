@@ -17,8 +17,6 @@ use Io\Token\Proto\Common\Security\Signature;
 use Io\Token\Proto\Common\Token\TokenRequestStatePayload;
 use Tokenio\Exception;
 use Tokenio\Exception\CryptoKeyNotFoundException;
-use Tokenio\Security\Base58;
-use Tokenio\Security\Base64Url;
 use Tokenio\Security\Ed25519Verifier;
 
 abstract class Util

@@ -1,8 +1,6 @@
 <?php
 
-namespace Tokenio\Security;
-
-use Tokenio\Exception;
+namespace Tokenio\Util;
 
 class Base58
 {
@@ -11,7 +9,7 @@ class Base58
      *
      * @param string $string the string you wish to encode
      * @return string The Base58 encoded string
-     * @throws Exception\CryptographicException
+     * @throws \RuntimeException
      */
     public static function encode($string)
     {
@@ -19,7 +17,7 @@ class Base58
             $base58 = new \StephenHill\Base58();
             return $base58->encode($string);
         } catch (\Exception $e) {
-            throw new Exception\CryptographicException("Cannot encode value as Base58.");
+            throw new \RuntimeException("Cannot encode value as Base58.");
         }
     }
 }

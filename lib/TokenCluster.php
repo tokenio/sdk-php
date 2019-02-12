@@ -2,8 +2,6 @@
 
 namespace Tokenio;
 
-use Tokenio\RuntimeException;
-
 class TokenCluster
 {
     /**
@@ -34,7 +32,7 @@ class TokenCluster
                 return self::getProduction();
         }
 
-        throw new RuntimeException("Invalid environment was provided.");
+        throw new \InvalidArgumentException("Invalid environment was provided.");
     }
 
     /**

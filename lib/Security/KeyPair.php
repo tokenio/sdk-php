@@ -5,6 +5,7 @@ namespace Tokenio\Security;
 use Io\Token\Proto\Common\Security\Key;
 use Io\Token\Proto\Common\Security\Key\Algorithm;
 use Tokenio\Exception\CryptographicException;
+use Tokenio\Util\Base64Url;
 
 class KeyPair implements \JsonSerializable
 {

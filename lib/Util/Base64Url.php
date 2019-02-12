@@ -1,8 +1,6 @@
 <?php
 
-namespace Tokenio\Security;
-
-use Tokenio\Exception\CryptographicException;
+namespace Tokenio\Util;
 
 /**
  * Encode and decode data into Base64 Url Safe.
@@ -26,13 +24,13 @@ final class Base64Url
      * @param string $data the data to decode
      *
      * @return string the data decoded
-     * @throws CryptographicException
+     * @throws \InvalidArgumentException
      */
     public static function decode($data)
     {
         $decoded = base64_decode(strtr($data, '-_', '+/'), true);
         if ($decoded === false) {
-            throw new CryptographicException('Cannot decode Base64, invalid data provided.');
+            throw new \InvalidArgumentException('Cannot decode Base64, invalid data provided.');
         }
 
         return $decoded;

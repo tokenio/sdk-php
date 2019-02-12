@@ -7,11 +7,11 @@ use Io\Token\Proto\Common\Security\Key\Level;
 use PHPUnit\Framework\TestCase;
 use Test\Tokenio\TestUtil;
 use Tokenio\Exception\CryptographicException;
-use Tokenio\Security\Base64Url;
 use Tokenio\Security\CryptoEngineInterface;
 use Tokenio\Security\Ed25519Verifier;
 use Tokenio\Security\TokenCryptoEngine;
 use Tokenio\Security\UnsecuredFileSystemKeyStore;
+use Tokenio\Util\Base64Url;
 use Tokenio\Util\Strings;
 
 class CryptoEngineTest extends TestCase
