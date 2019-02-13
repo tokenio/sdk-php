@@ -4,7 +4,6 @@ namespace Tokenio;
 
 use Io\Token\Proto\Common\Transaction\Balance;
 use Io\Token\Proto\Common\Transaction\Transaction;
-use Tokenio\PagedList;
 
 /**
  * Represents the part of a token member that can be accessed through an access token.
@@ -32,7 +31,6 @@ interface RepresentableInterface
      * @param string $accountId account id
      * @param int $keyLevel key level
      * @return Balance
-     * @throws Exception
      */
     public function getBalance($accountId, $keyLevel);
 
@@ -44,7 +42,6 @@ interface RepresentableInterface
      * @param int $limit max number of records to return
      * @param int $keyLevel key level
      * @return PagedList paged list of transaction records
-     * @throws Exception
      */
     public function getTransactions($accountId, $offset, $limit, $keyLevel);
 
@@ -55,7 +52,6 @@ interface RepresentableInterface
      * @param string $transactionId ID of the transaction
      * @param int $keyLevel key level
      * @return Transaction
-     * @throws Exception
      */
     public function getTransaction($accountId, $transactionId, $keyLevel);
 }

@@ -15,8 +15,6 @@ use Tokenio\Exception\VerificationException;
 use Tokenio\Rpc\ClientFactory;
 use Tokenio\Security\CryptoEngineFactoryInterface;
 use Tokenio\Security\CryptoEngineInterface;
-use Tokenio\Security\TokenCryptoEngine;
-use Tokenio\Security\UnsecuredFileSystemKeyStore;
 use Tokenio\Util\Util;
 
 class TokenClient
@@ -93,7 +91,6 @@ class TokenClient
      * @param string tokenRequestId (optional) token request id. If used, then the member will be claimed
      *     by the creator of the corresponding token request. Only works if memberType == TRANSIENT.
      * @return \Tokenio\Member newly created member
-     * @throws Exception\CryptographicException
      */
     public function createMember($alias = null, $memberType = CreateMemberType::PERSONAL)
     {
@@ -129,7 +126,6 @@ class TokenClient
      *
      * @param Alias $alias the alias to associated with member
      * @return \Tokenio\Member the created member
-     * @throws Exception\CryptographicException
      */
     public function createBusinessMember($alias)
     {
@@ -350,7 +346,9 @@ class TokenClient
      * @param string $callbackUrl the token request callback url
      * @param string $csrfToken the csrf token
      * @return TokenRequestCallback object containing the token id and the original state
-     * @throws Exception
+     * @throws Exception\CryptoKeyNotFoundException
+     * @throws Exception\CryptographicException
+     * @throws InvalidStateException
      */
     public function parseTokenRequestCallbackUrl($callbackUrl, $csrfToken = null)
     {

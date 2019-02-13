@@ -38,7 +38,6 @@ abstract class Util
      *
      * @param Alias $alias the alias to hash
      * @return string
-     * @throws \Tokenio\Exception\CryptographicException
      */
     public static function hashAlias($alias)
     {
@@ -54,7 +53,6 @@ abstract class Util
      *
      * @param Message $message the alias to hash
      * @return string
-     * @throws \Tokenio\Exception\CryptographicException
      */
     public static function hashProto($message)
     {
@@ -82,7 +80,6 @@ abstract class Util
      *
      * @param Alias $alias
      * @return MemberOperation
-     * @throws \Tokenio\Exception\CryptographicException
      */
     public static function createAddAliasOperation($alias)
     {
@@ -120,7 +117,6 @@ abstract class Util
      *
      * @param Alias $alias
      * @return MemberOperationMetadata
-     * @throws Exception\CryptographicException
      */
     public static function createAddAliasOperationMetadata($alias)
     {

@@ -6,7 +6,6 @@ use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Token\AccessBody;
 use Io\Token\Proto\Common\Token\TokenMember;
 use Io\Token\Proto\Common\Token\TokenPayload;
-use Tokenio\Exception;
 use Tokenio\Exception\IllegalArgumentException;
 use Tokenio\Util\Strings;
 
