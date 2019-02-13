@@ -9,7 +9,7 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * Provides access to the resolved transfer destinations of all accounts
+ * **DEPRECATED** Provides access to the resolved transfer destinations of all accounts
  *
  * Generated from protobuf message <code>io.token.proto.common.token.AccessBody.Resource.AllTransferDestinations</code>
  */

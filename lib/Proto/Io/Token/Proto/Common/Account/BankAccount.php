@@ -73,7 +73,7 @@ class BankAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.TokenAuthorization token_authorization = 2;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.TokenAuthorization token_authorization = 2 [deprecated = true];</code>
      * @return \Io\Token\Proto\Common\Account\BankAccount\TokenAuthorization
      */
     public function getTokenAuthorization()
@@ -82,7 +82,7 @@ class BankAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.TokenAuthorization token_authorization = 2;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.TokenAuthorization token_authorization = 2 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Account\BankAccount\TokenAuthorization $var
      * @return $this
      */

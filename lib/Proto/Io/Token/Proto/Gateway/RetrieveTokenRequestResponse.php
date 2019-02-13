@@ -17,6 +17,10 @@ class RetrieveTokenRequestResponse extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.io.token.proto.common.token.TokenRequest token_request = 1;</code>
      */
     private $token_request = null;
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.member.Customization customization = 2;</code>
+     */
+    private $customization = null;
 
     /**
      * Constructor.
@@ -25,6 +29,7 @@ class RetrieveTokenRequestResponse extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type \Io\Token\Proto\Common\Token\TokenRequest $token_request
+     *     @type \Io\Token\Proto\Common\Member\Customization $customization
      * }
      */
     public function __construct($data = NULL) {
@@ -50,6 +55,28 @@ class RetrieveTokenRequestResponse extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\TokenRequest::class);
         $this->token_request = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.member.Customization customization = 2;</code>
+     * @return \Io\Token\Proto\Common\Member\Customization
+     */
+    public function getCustomization()
+    {
+        return $this->customization;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.member.Customization customization = 2;</code>
+     * @param \Io\Token\Proto\Common\Member\Customization $var
+     * @return $this
+     */
+    public function setCustomization($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Member\Customization::class);
+        $this->customization = $var;
 
         return $this;
     }

@@ -9,7 +9,7 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * Provides access to all member addresses
+ * **DEPRECATED** Provides access to all member addresses
  *
  * Generated from protobuf message <code>io.token.proto.common.token.AccessBody.Resource.AllAddresses</code>
  */

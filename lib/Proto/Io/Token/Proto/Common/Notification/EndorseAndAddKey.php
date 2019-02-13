@@ -9,8 +9,6 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * A notification that a token needs to be created/endorsed, and that keys want to be added
- *
  * Generated from protobuf message <code>io.token.proto.common.notification.EndorseAndAddKey</code>
  */
 class EndorseAndAddKey extends \Google\Protobuf\Internal\Message

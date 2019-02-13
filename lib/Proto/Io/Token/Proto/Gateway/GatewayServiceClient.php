@@ -458,6 +458,21 @@ class GatewayServiceClient extends \Grpc\BaseStub {
     }
 
     /**
+     * Set Customization
+     * https://developer.token.io/sdk/#customization
+     * @param \Io\Token\Proto\Gateway\CreateCustomizationRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function CreateCustomization(\Io\Token\Proto\Gateway\CreateCustomizationRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/CreateCustomization',
+        $argument,
+        ['\Io\Token\Proto\Gateway\CreateCustomizationResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * //////////////////////////////////////////////////////////////////////////////////////////////////
      * Devices for notification service
      *
@@ -606,6 +621,20 @@ class GatewayServiceClient extends \Grpc\BaseStub {
         return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/TriggerEndorseAndAddKeyNotification',
         $argument,
         ['\Io\Token\Proto\Gateway\TriggerEndorseAndAddKeyNotificationResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * send create and endorse token notification
+     * @param \Io\Token\Proto\Gateway\TriggerCreateAndEndorseTokenNotificationRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function TriggerCreateAndEndorseTokenNotification(\Io\Token\Proto\Gateway\TriggerCreateAndEndorseTokenNotificationRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/TriggerCreateAndEndorseTokenNotification',
+        $argument,
+        ['\Io\Token\Proto\Gateway\TriggerCreateAndEndorseTokenNotificationResponse', 'decode'],
         $metadata, $options);
     }
 
@@ -950,6 +979,19 @@ class GatewayServiceClient extends \Grpc\BaseStub {
     }
 
     /**
+     * @param \Io\Token\Proto\Gateway\UpdateTokenRequestRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function UpdateTokenRequest(\Io\Token\Proto\Gateway\UpdateTokenRequestRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/UpdateTokenRequest',
+        $argument,
+        ['\Io\Token\Proto\Gateway\UpdateTokenRequestResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * //////////////////////////////////////////////////////////////////////////////////////////////////
      * Tokens.
      *
@@ -1165,6 +1207,20 @@ class GatewayServiceClient extends \Grpc\BaseStub {
      * Bank Information Endpoints.
      *
      *
+     * Get a list of "link-able" bank countries.
+     * @param \Io\Token\Proto\Gateway\GetBanksCountriesRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetBanksCountries(\Io\Token\Proto\Gateway\GetBanksCountriesRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetBanksCountries',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetBanksCountriesResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * Get a list of "link-able" banks.
      * https://developer.token.io/sdk/#link-a-bank-account
      * @param \Io\Token\Proto\Gateway\GetBanksRequest $argument input argument
@@ -1191,6 +1247,51 @@ class GatewayServiceClient extends \Grpc\BaseStub {
         return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetBankInfo',
         $argument,
         ['\Io\Token\Proto\Gateway\GetBankInfoResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * //////////////////////////////////////////////////////////////////////////////////////////////////
+     * Keychain management.
+     *
+     * Create a keychain with a name.
+     * @param \Io\Token\Proto\Gateway\CreateKeychainRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function CreateKeychain(\Io\Token\Proto\Gateway\CreateKeychainRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/CreateKeychain',
+        $argument,
+        ['\Io\Token\Proto\Gateway\CreateKeychainResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * Update a keychain's info.
+     * @param \Io\Token\Proto\Gateway\UpdateKeychainInfoRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function UpdateKeychainInfo(\Io\Token\Proto\Gateway\UpdateKeychainInfoRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/UpdateKeychainInfo',
+        $argument,
+        ['\Io\Token\Proto\Gateway\UpdateKeychainInfoResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * Get all the keychains of a member.
+     * @param \Io\Token\Proto\Gateway\GetKeychainsRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetKeychains(\Io\Token\Proto\Gateway\GetKeychainsRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetKeychains',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetKeychainsResponse', 'decode'],
         $metadata, $options);
     }
 

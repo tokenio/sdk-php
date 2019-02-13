@@ -20,21 +20,35 @@ class TokenRequest extends \Google\Protobuf\Internal\Message
      */
     private $id = '';
     /**
-     * token payload
+     * immutable properties
      *
-     * Generated from protobuf field <code>.io.token.proto.common.token.TokenPayload payload = 2;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.token.TokenRequestPayload request_payload = 6;</code>
+     */
+    private $request_payload = null;
+    /**
+     * mutable properties
+     *
+     * Generated from protobuf field <code>.io.token.proto.common.token.TokenRequestOptions request_options = 7;</code>
+     */
+    private $request_options = null;
+    /**
+     * deprecated fields
+     *
+     * Generated from protobuf field <code>.io.token.proto.common.token.TokenPayload payload = 2 [deprecated = true];</code>
      */
     private $payload = null;
     /**
-     * generic string map of options
-     *
-     * Generated from protobuf field <code>map<string, string> options = 3 [(.io.token.proto.extensions.field.redact) = true];</code>
+     * Generated from protobuf field <code>map<string, string> options = 3 [deprecated = true, (.io.token.proto.extensions.field.redact) = true];</code>
      */
     private $options;
     /**
-     * Generated from protobuf field <code>string user_ref_id = 4;</code>
+     * Generated from protobuf field <code>string user_ref_id = 4 [deprecated = true];</code>
      */
     private $user_ref_id = '';
+    /**
+     * Generated from protobuf field <code>string customization_id = 5 [deprecated = true];</code>
+     */
+    private $customization_id = '';
 
     /**
      * Constructor.
@@ -44,11 +58,15 @@ class TokenRequest extends \Google\Protobuf\Internal\Message
      *
      *     @type string $id
      *           request id
+     *     @type \Io\Token\Proto\Common\Token\TokenRequestPayload $request_payload
+     *           immutable properties
+     *     @type \Io\Token\Proto\Common\Token\TokenRequestOptions $request_options
+     *           mutable properties
      *     @type \Io\Token\Proto\Common\Token\TokenPayload $payload
-     *           token payload
+     *           deprecated fields
      *     @type array|\Google\Protobuf\Internal\MapField $options
-     *           generic string map of options
      *     @type string $user_ref_id
+     *     @type string $customization_id
      * }
      */
     public function __construct($data = NULL) {
@@ -83,9 +101,61 @@ class TokenRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * token payload
+     * immutable properties
      *
-     * Generated from protobuf field <code>.io.token.proto.common.token.TokenPayload payload = 2;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.token.TokenRequestPayload request_payload = 6;</code>
+     * @return \Io\Token\Proto\Common\Token\TokenRequestPayload
+     */
+    public function getRequestPayload()
+    {
+        return $this->request_payload;
+    }
+
+    /**
+     * immutable properties
+     *
+     * Generated from protobuf field <code>.io.token.proto.common.token.TokenRequestPayload request_payload = 6;</code>
+     * @param \Io\Token\Proto\Common\Token\TokenRequestPayload $var
+     * @return $this
+     */
+    public function setRequestPayload($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\TokenRequestPayload::class);
+        $this->request_payload = $var;
+
+        return $this;
+    }
+
+    /**
+     * mutable properties
+     *
+     * Generated from protobuf field <code>.io.token.proto.common.token.TokenRequestOptions request_options = 7;</code>
+     * @return \Io\Token\Proto\Common\Token\TokenRequestOptions
+     */
+    public function getRequestOptions()
+    {
+        return $this->request_options;
+    }
+
+    /**
+     * mutable properties
+     *
+     * Generated from protobuf field <code>.io.token.proto.common.token.TokenRequestOptions request_options = 7;</code>
+     * @param \Io\Token\Proto\Common\Token\TokenRequestOptions $var
+     * @return $this
+     */
+    public function setRequestOptions($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\TokenRequestOptions::class);
+        $this->request_options = $var;
+
+        return $this;
+    }
+
+    /**
+     * deprecated fields
+     *
+     * Generated from protobuf field <code>.io.token.proto.common.token.TokenPayload payload = 2 [deprecated = true];</code>
      * @return \Io\Token\Proto\Common\Token\TokenPayload
      */
     public function getPayload()
@@ -94,9 +164,9 @@ class TokenRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * token payload
+     * deprecated fields
      *
-     * Generated from protobuf field <code>.io.token.proto.common.token.TokenPayload payload = 2;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.token.TokenPayload payload = 2 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Token\TokenPayload $var
      * @return $this
      */
@@ -109,9 +179,7 @@ class TokenRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * generic string map of options
-     *
-     * Generated from protobuf field <code>map<string, string> options = 3 [(.io.token.proto.extensions.field.redact) = true];</code>
+     * Generated from protobuf field <code>map<string, string> options = 3 [deprecated = true, (.io.token.proto.extensions.field.redact) = true];</code>
      * @return \Google\Protobuf\Internal\MapField
      */
     public function getOptions()
@@ -120,9 +188,7 @@ class TokenRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * generic string map of options
-     *
-     * Generated from protobuf field <code>map<string, string> options = 3 [(.io.token.proto.extensions.field.redact) = true];</code>
+     * Generated from protobuf field <code>map<string, string> options = 3 [deprecated = true, (.io.token.proto.extensions.field.redact) = true];</code>
      * @param array|\Google\Protobuf\Internal\MapField $var
      * @return $this
      */
@@ -135,7 +201,7 @@ class TokenRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string user_ref_id = 4;</code>
+     * Generated from protobuf field <code>string user_ref_id = 4 [deprecated = true];</code>
      * @return string
      */
     public function getUserRefId()
@@ -144,7 +210,7 @@ class TokenRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string user_ref_id = 4;</code>
+     * Generated from protobuf field <code>string user_ref_id = 4 [deprecated = true];</code>
      * @param string $var
      * @return $this
      */
@@ -152,6 +218,28 @@ class TokenRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->user_ref_id = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string customization_id = 5 [deprecated = true];</code>
+     * @return string
+     */
+    public function getCustomizationId()
+    {
+        return $this->customization_id;
+    }
+
+    /**
+     * Generated from protobuf field <code>string customization_id = 5 [deprecated = true];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setCustomizationId($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->customization_id = $var;
 
         return $this;
     }

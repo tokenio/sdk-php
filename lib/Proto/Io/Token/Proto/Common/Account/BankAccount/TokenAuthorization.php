@@ -9,7 +9,7 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * One-time encrypted authorization for an account
+ * Deprecated; unused
  *
  * Generated from protobuf message <code>io.token.proto.common.account.BankAccount.TokenAuthorization</code>
  */

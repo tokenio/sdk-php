@@ -17,18 +17,6 @@ use Google\Protobuf\Internal\GPBUtil;
 class AddKey extends \Google\Protobuf\Internal\Message
 {
     /**
-     * **DEPRECATED** Human-readable name, e.g., "Chrome Browser" or "My App"
-     *
-     * Generated from protobuf field <code>string name = 1;</code>
-     */
-    private $name = '';
-    /**
-     * **DEPRECATED** Key
-     *
-     * Generated from protobuf field <code>.io.token.proto.common.security.Key key = 2;</code>
-     */
-    private $key = null;
-    /**
      * Expiration time
      *
      * Generated from protobuf field <code>int64 expires_ms = 3;</code>
@@ -51,10 +39,6 @@ class AddKey extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type string $name
-     *           **DEPRECATED** Human-readable name, e.g., "Chrome Browser" or "My App"
-     *     @type \Io\Token\Proto\Common\Security\Key $key
-     *           **DEPRECATED** Key
      *     @type int|string $expires_ms
      *           Expiration time
      *     @type \Io\Token\Proto\Common\Security\Key[]|\Google\Protobuf\Internal\RepeatedField $keys
@@ -65,58 +49,6 @@ class AddKey extends \Google\Protobuf\Internal\Message
     public function __construct($data = NULL) {
         \GPBMetadata\Notification::initOnce();
         parent::__construct($data);
-    }
-
-    /**
-     * **DEPRECATED** Human-readable name, e.g., "Chrome Browser" or "My App"
-     *
-     * Generated from protobuf field <code>string name = 1;</code>
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * **DEPRECATED** Human-readable name, e.g., "Chrome Browser" or "My App"
-     *
-     * Generated from protobuf field <code>string name = 1;</code>
-     * @param string $var
-     * @return $this
-     */
-    public function setName($var)
-    {
-        GPBUtil::checkString($var, True);
-        $this->name = $var;
-
-        return $this;
-    }
-
-    /**
-     * **DEPRECATED** Key
-     *
-     * Generated from protobuf field <code>.io.token.proto.common.security.Key key = 2;</code>
-     * @return \Io\Token\Proto\Common\Security\Key
-     */
-    public function getKey()
-    {
-        return $this->key;
-    }
-
-    /**
-     * **DEPRECATED** Key
-     *
-     * Generated from protobuf field <code>.io.token.proto.common.security.Key key = 2;</code>
-     * @param \Io\Token\Proto\Common\Security\Key $var
-     * @return $this
-     */
-    public function setKey($var)
-    {
-        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Security\Key::class);
-        $this->key = $var;
-
-        return $this;
     }
 
     /**

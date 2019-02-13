@@ -25,6 +25,7 @@ class MemberOperationMetadata extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type \Io\Token\Proto\Common\Member\MemberOperationMetadata\AddAliasMetadata $add_alias_metadata
+     *     @type \Io\Token\Proto\Common\Member\MemberOperationMetadata\AddKeyMetadata $add_key_metadata
      * }
      */
     public function __construct($data = NULL) {
@@ -50,6 +51,28 @@ class MemberOperationMetadata extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Member\MemberOperationMetadata_AddAliasMetadata::class);
         $this->writeOneof(1, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.member.MemberOperationMetadata.AddKeyMetadata add_key_metadata = 2;</code>
+     * @return \Io\Token\Proto\Common\Member\MemberOperationMetadata\AddKeyMetadata
+     */
+    public function getAddKeyMetadata()
+    {
+        return $this->readOneof(2);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.member.MemberOperationMetadata.AddKeyMetadata add_key_metadata = 2;</code>
+     * @param \Io\Token\Proto\Common\Member\MemberOperationMetadata\AddKeyMetadata $var
+     * @return $this
+     */
+    public function setAddKeyMetadata($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Member\MemberOperationMetadata_AddKeyMetadata::class);
+        $this->writeOneof(2, $var);
 
         return $this;
     }

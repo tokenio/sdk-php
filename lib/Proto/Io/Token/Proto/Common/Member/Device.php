@@ -18,9 +18,13 @@ class Device extends \Google\Protobuf\Internal\Message
      */
     private $name = '';
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.security.Key key = 2;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.security.Key key = 2 [deprecated = true];</code>
      */
     private $key = null;
+    /**
+     * Generated from protobuf field <code>repeated .io.token.proto.common.security.Key keys = 3;</code>
+     */
+    private $keys;
 
     /**
      * Constructor.
@@ -30,6 +34,7 @@ class Device extends \Google\Protobuf\Internal\Message
      *
      *     @type string $name
      *     @type \Io\Token\Proto\Common\Security\Key $key
+     *     @type \Io\Token\Proto\Common\Security\Key[]|\Google\Protobuf\Internal\RepeatedField $keys
      * }
      */
     public function __construct($data = NULL) {
@@ -60,7 +65,7 @@ class Device extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.security.Key key = 2;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.security.Key key = 2 [deprecated = true];</code>
      * @return \Io\Token\Proto\Common\Security\Key
      */
     public function getKey()
@@ -69,7 +74,7 @@ class Device extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.security.Key key = 2;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.security.Key key = 2 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Security\Key $var
      * @return $this
      */
@@ -77,6 +82,28 @@ class Device extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Security\Key::class);
         $this->key = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated .io.token.proto.common.security.Key keys = 3;</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getKeys()
+    {
+        return $this->keys;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated .io.token.proto.common.security.Key keys = 3;</code>
+     * @param \Io\Token\Proto\Common\Security\Key[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setKeys($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Io\Token\Proto\Common\Security\Key::class);
+        $this->keys = $arr;
 
         return $this;
     }

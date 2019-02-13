@@ -39,6 +39,7 @@ class NotifyBody extends \Google\Protobuf\Internal\Message
      *     @type \Io\Token\Proto\Common\Notification\EndorseAndAddKey $endorse_and_add_key
      *     @type \Io\Token\Proto\Common\Notification\RecoveryCompleted $recovery_completed
      *     @type \Io\Token\Proto\Common\Notification\NotificationInvalidated $notification_invalidated
+     *     @type \Io\Token\Proto\Common\Notification\CreateAndEndorseToken $create_and_endorse_token
      * }
      */
     public function __construct($data = NULL) {
@@ -333,7 +334,7 @@ class NotifyBody extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.notification.EndorseAndAddKey endorse_and_add_key = 14;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.notification.EndorseAndAddKey endorse_and_add_key = 14 [deprecated = true];</code>
      * @return \Io\Token\Proto\Common\Notification\EndorseAndAddKey
      */
     public function getEndorseAndAddKey()
@@ -342,7 +343,7 @@ class NotifyBody extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.notification.EndorseAndAddKey endorse_and_add_key = 14;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.notification.EndorseAndAddKey endorse_and_add_key = 14 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Notification\EndorseAndAddKey $var
      * @return $this
      */
@@ -394,6 +395,28 @@ class NotifyBody extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Notification\NotificationInvalidated::class);
         $this->writeOneof(16, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.notification.CreateAndEndorseToken create_and_endorse_token = 17;</code>
+     * @return \Io\Token\Proto\Common\Notification\CreateAndEndorseToken
+     */
+    public function getCreateAndEndorseToken()
+    {
+        return $this->readOneof(17);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.notification.CreateAndEndorseToken create_and_endorse_token = 17;</code>
+     * @param \Io\Token\Proto\Common\Notification\CreateAndEndorseToken $var
+     * @return $this
+     */
+    public function setCreateAndEndorseToken($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Notification\CreateAndEndorseToken::class);
+        $this->writeOneof(17, $var);
 
         return $this;
     }

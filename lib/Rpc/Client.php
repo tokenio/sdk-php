@@ -42,6 +42,8 @@ use Io\Token\Proto\Gateway\CreateAccessTokenRequest;
 use Io\Token\Proto\Gateway\CreateAccessTokenResponse;
 use Io\Token\Proto\Gateway\CreateBlobRequest;
 use Io\Token\Proto\Gateway\CreateBlobResponse;
+use Io\Token\Proto\Gateway\CreateCustomizationRequest;
+use Io\Token\Proto\Gateway\CreateCustomizationResponse;
 use Io\Token\Proto\Gateway\CreateTransferRequest;
 use Io\Token\Proto\Gateway\CreateTransferResponse;
 use Io\Token\Proto\Gateway\DeleteAddressRequest;
@@ -1043,5 +1045,33 @@ class Client
         /** @var GetTokensResponse $response */
         $response = Util::executeAndHandleCall($this->gateway->GetTokens($request));
         return new PagedList($response->getTokens(), $offset);
+    }
+
+    /**
+     * Creates a new web-app customization.
+     *
+     * @param string $displayName display name
+     * @param Payload $logo blob payload of the logo
+     * @param string $consentText consent text
+     * @param array $colors a string dictionary that describes color schemes
+     * @return string customization id
+     */
+    public function createCustomization($displayName, $logo, $consentText, $colors)
+    {
+        $request = new CreateCustomizationRequest();
+        if ($displayName != null) {
+            $request->setName($displayName);
+        }
+        if ($logo != null) {
+            $request->setLogo($logo);
+        }
+        if ($consentText != null) {
+            $request->setConsentText($consentText);
+        }
+        $request->setColors($colors);
+
+        /** @var CreateCustomizationResponse $response */
+        $response = Util::executeAndHandleCall($this->gateway->CreateCustomization($request));
+        return $response->getCustomizationId();
     }
 }

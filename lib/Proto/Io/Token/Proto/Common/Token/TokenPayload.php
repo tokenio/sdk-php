@@ -44,6 +44,10 @@ class TokenPayload extends \Google\Protobuf\Internal\Message
      */
     private $to = null;
     /**
+     * Generated from protobuf field <code>.io.token.proto.common.token.ActingAs acting_as = 12;</code>
+     */
+    private $acting_as = null;
+    /**
      * Optional
      *
      * Generated from protobuf field <code>int64 effective_at_ms = 6;</code>
@@ -70,10 +74,6 @@ class TokenPayload extends \Google\Protobuf\Internal\Message
      */
     private $description = '';
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.TokenPayload.ActingAs acting_as = 12;</code>
-     */
-    private $acting_as = null;
-    /**
      * Generated from protobuf field <code>bool receipt_requested = 13;</code>
      */
     private $receipt_requested = false;
@@ -95,6 +95,7 @@ class TokenPayload extends \Google\Protobuf\Internal\Message
      *           Payer member.
      *     @type \Io\Token\Proto\Common\Token\TokenMember $to
      *           Payee member.
+     *     @type \Io\Token\Proto\Common\Token\ActingAs $acting_as
      *     @type int|string $effective_at_ms
      *           Optional
      *     @type int|string $expires_at_ms
@@ -107,7 +108,6 @@ class TokenPayload extends \Google\Protobuf\Internal\Message
      *           Optional
      *     @type \Io\Token\Proto\Common\Token\TransferBody $transfer
      *     @type \Io\Token\Proto\Common\Token\AccessBody $access
-     *     @type \Io\Token\Proto\Common\Token\TokenPayload\ActingAs $acting_as
      *     @type bool $receipt_requested
      * }
      */
@@ -242,6 +242,28 @@ class TokenPayload extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\TokenMember::class);
         $this->to = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.token.ActingAs acting_as = 12;</code>
+     * @return \Io\Token\Proto\Common\Token\ActingAs
+     */
+    public function getActingAs()
+    {
+        return $this->acting_as;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.token.ActingAs acting_as = 12;</code>
+     * @param \Io\Token\Proto\Common\Token\ActingAs $var
+     * @return $this
+     */
+    public function setActingAs($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\ActingAs::class);
+        $this->acting_as = $var;
 
         return $this;
     }
@@ -394,28 +416,6 @@ class TokenPayload extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\AccessBody::class);
         $this->writeOneof(10, $var);
-
-        return $this;
-    }
-
-    /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.TokenPayload.ActingAs acting_as = 12;</code>
-     * @return \Io\Token\Proto\Common\Token\TokenPayload\ActingAs
-     */
-    public function getActingAs()
-    {
-        return $this->acting_as;
-    }
-
-    /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.TokenPayload.ActingAs acting_as = 12;</code>
-     * @param \Io\Token\Proto\Common\Token\TokenPayload\ActingAs $var
-     * @return $this
-     */
-    public function setActingAs($var)
-    {
-        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\TokenPayload_ActingAs::class);
-        $this->acting_as = $var;
 
         return $this;
     }

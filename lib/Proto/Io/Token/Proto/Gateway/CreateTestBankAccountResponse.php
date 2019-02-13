@@ -14,12 +14,6 @@ use Google\Protobuf\Internal\GPBUtil;
 class CreateTestBankAccountResponse extends \Google\Protobuf\Internal\Message
 {
     /**
-     * deprecated, will be removed from response
-     *
-     * Generated from protobuf field <code>.io.token.proto.banklink.BankAuthorization bank_authorization = 1;</code>
-     */
-    private $bank_authorization = null;
-    /**
      * authorization usable with linkAccounts
      *
      * Generated from protobuf field <code>.io.token.proto.banklink.OauthBankAuthorization authorization = 2;</code>
@@ -32,8 +26,6 @@ class CreateTestBankAccountResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Io\Token\Proto\Banklink\BankAuthorization $bank_authorization
-     *           deprecated, will be removed from response
      *     @type \Io\Token\Proto\Banklink\OauthBankAuthorization $authorization
      *           authorization usable with linkAccounts
      * }
@@ -41,32 +33,6 @@ class CreateTestBankAccountResponse extends \Google\Protobuf\Internal\Message
     public function __construct($data = NULL) {
         \GPBMetadata\Gateway\Gateway::initOnce();
         parent::__construct($data);
-    }
-
-    /**
-     * deprecated, will be removed from response
-     *
-     * Generated from protobuf field <code>.io.token.proto.banklink.BankAuthorization bank_authorization = 1;</code>
-     * @return \Io\Token\Proto\Banklink\BankAuthorization
-     */
-    public function getBankAuthorization()
-    {
-        return $this->bank_authorization;
-    }
-
-    /**
-     * deprecated, will be removed from response
-     *
-     * Generated from protobuf field <code>.io.token.proto.banklink.BankAuthorization bank_authorization = 1;</code>
-     * @param \Io\Token\Proto\Banklink\BankAuthorization $var
-     * @return $this
-     */
-    public function setBankAuthorization($var)
-    {
-        GPBUtil::checkMessage($var, \Io\Token\Proto\Banklink\BankAuthorization::class);
-        $this->bank_authorization = $var;
-
-        return $this;
     }
 
     /**
