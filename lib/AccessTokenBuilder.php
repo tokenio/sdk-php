@@ -386,7 +386,7 @@ class AccessTokenBuilder
      * Builds the TokenPayload with all specified settings.
      *
      * @return TokenPayload
-     * @throws Exception
+     * @throws IllegalArgumentException
      */
     public function build()
     {

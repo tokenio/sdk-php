@@ -264,7 +264,7 @@ class Client
      * @param string $accountId the account id
      * @param int $keyLevel the key level
      * @return Balance
-     * @throws Exception
+     * @throws Exception\StepUpRequiredException
      */
     public function getBalance($accountId, $keyLevel)
     {
@@ -318,7 +318,7 @@ class Client
      * @param string $transactionId the transaction id
      * @param int $keyLevel the key level
      * @return Transaction
-     * @throws Exception
+     * @throws Exception\StepUpRequiredException
      */
     public function getTransaction($accountId, $transactionId, $keyLevel)
     {
@@ -346,7 +346,7 @@ class Client
      * @param int $limit the limit
      * @param int $keyLevel the key level
      * @return PagedList list of transactions
-     * @throws Exception
+     * @throws Exception\StepUpRequiredException
      */
     public function getTransactions($accountId, $offset, $limit, $keyLevel)
     {
