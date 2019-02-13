@@ -2,8 +2,6 @@
 
 namespace Tokenio\Security;
 
-use Tokenio\Exception\InvalidUnsecuredFileSystemKeyStoreConfiguration;
-
 class UnsecuredFileSystemKeyStore implements KeyStoreInterface
 {
     const DEFAULT_DIRECTORY_MODE = 0777;
@@ -19,7 +17,7 @@ class UnsecuredFileSystemKeyStore implements KeyStoreInterface
     public function __construct($directory)
     {
         if (!$this->createDirectory($directory)) {
-            throw new InvalidUnsecuredFileSystemKeyStoreConfiguration("Invalid directory: " . $directory);
+            throw new \InvalidArgumentException("Invalid directory: " . $directory);
         }
 
         $this->directory = $directory;

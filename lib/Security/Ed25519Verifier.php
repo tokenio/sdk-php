@@ -4,6 +4,7 @@ namespace Tokenio\Security;
 
 use Google\Protobuf\Internal\Message;
 use Tokenio\Exception\CryptographicException;
+use Tokenio\Util\Base64Url;
 use Tokenio\Util\Util;
 
 class Ed25519Verifier implements VerifierInterface

@@ -4,12 +4,11 @@ namespace Test\Tokenio;
 
 use Io\Token\Proto\Common\Security\Key\Level;
 use Io\Token\Proto\Common\Token\Token;
-use Tokenio\Http\Request\TokenRequest;
 use PHPUnit\Framework\TestCase;
-use Tokenio\Http\Request\AccessTokenBuilder;
+use Tokenio\AccessTokenBuilder;
+use Tokenio\TokenRequest;
 use Tokenio\Member;
 use Tokenio\Util\Strings;
-use Tokenio\Util\TestUtil;
 use Tokenio\Util\Util;
 
 class AccessTokenTest extends TestCase
@@ -18,7 +17,7 @@ class AccessTokenTest extends TestCase
     const TOKEN_LOOKUP_POLL_FREQUENCY_MICRO = 1500000;
     const MICROS_IN_SEC = 1000000;
 
-    /** @var \Tokenio\TokenIO */
+    /** @var \Tokenio\TokenClient */
     protected $tokenIO;
     /** @var Member $member1 */
     private $member1;
@@ -30,6 +29,12 @@ class AccessTokenTest extends TestCase
         $this->tokenIO = TestUtil::initializeSDK();
         $this->member1 = $this->tokenIO->createMember(TestUtil::generateAlias());
         $this->member2 = $this->tokenIO->createMember(TestUtil::generateAlias());
+    }
+
+    protected function tearDown()
+    {
+        parent::tearDown();
+        TestUtil::removeDirectory(__DIR__ . '/test-keys/');
     }
 
     public function testGetAccessToken()

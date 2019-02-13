@@ -17,8 +17,6 @@ use Io\Token\Proto\Common\Security\Signature;
 use Io\Token\Proto\Common\Token\TokenRequestStatePayload;
 use Tokenio\Exception;
 use Tokenio\Exception\CryptoKeyNotFoundException;
-use Tokenio\Security\Base58;
-use Tokenio\Security\Base64Url;
 use Tokenio\Security\Ed25519Verifier;
 
 abstract class Util
@@ -40,7 +38,6 @@ abstract class Util
      *
      * @param Alias $alias the alias to hash
      * @return string
-     * @throws \Tokenio\Exception\CryptographicException
      */
     public static function hashAlias($alias)
     {
@@ -56,7 +53,6 @@ abstract class Util
      *
      * @param Message $message the alias to hash
      * @return string
-     * @throws \Tokenio\Exception\CryptographicException
      */
     public static function hashProto($message)
     {
@@ -84,7 +80,6 @@ abstract class Util
      *
      * @param Alias $alias
      * @return MemberOperation
-     * @throws \Tokenio\Exception\CryptographicException
      */
     public static function createAddAliasOperation($alias)
     {
@@ -122,7 +117,6 @@ abstract class Util
      *
      * @param Alias $alias
      * @return MemberOperationMetadata
-     * @throws Exception\CryptographicException
      */
     public static function createAddAliasOperationMetadata($alias)
     {

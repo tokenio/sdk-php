@@ -5,12 +5,11 @@ namespace Test\Tokenio;
 use Io\Token\Proto\Common\Member\TrustedBeneficiary;
 use PHPUnit\Framework\TestCase;
 use Tokenio\Member;
-use Tokenio\Util\TestUtil;
 
 class TrustedBenificiaryTest extends TestCase
 {
 
-    /** @var \Tokenio\TokenIO */
+    /** @var \Tokenio\TokenClient */
     protected $tokenIO;
     /** @var Member $member1 */
     private $member1;
@@ -25,6 +24,12 @@ class TrustedBenificiaryTest extends TestCase
         $this->member1 = $this->tokenIO->createMember(TestUtil::generateAlias());
         $this->member2 = $this->tokenIO->createMember(TestUtil::generateAlias());
         $this->member3 = $this->tokenIO->createMember(TestUtil::generateAlias());
+    }
+
+    protected function tearDown()
+    {
+        parent::tearDown();
+        TestUtil::removeDirectory(__DIR__ . '/test-keys/');
     }
 
     public function testAddAndGetTrustedBeneficiary()

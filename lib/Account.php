@@ -5,7 +5,7 @@ namespace Tokenio;
 use Io\Token\Proto\Common\Money\Money;
 use Io\Token\Proto\Common\Transaction\Balance;
 use Io\Token\Proto\Common\Transaction\Transaction;
-use Tokenio\Http\Client;
+use Tokenio\Rpc\Client;
 
 class Account
 {
@@ -93,7 +93,6 @@ class Account
      *
      * @param int $level key level
      * @return Balance the account balance
-     * @throws Exception
      */
     public function getBalance($level)
     {
@@ -105,7 +104,6 @@ class Account
      *
      * @param int $level key level
      * @return Money the current balance
-     * @throws Exception
      */
     public function getCurrentBalance($level)
     {
@@ -117,7 +115,6 @@ class Account
      *
      * @param int $level key level
      * @return Money the available balance
-     * @throws Exception
      */
     public function getAvailableBalance($level)
     {
@@ -130,7 +127,6 @@ class Account
      * @param string $transactionId transaction id
      * @param int $level key level
      * @return Transaction
-     * @throws Exception
      */
     public function getTransaction($transactionId, $level)
     {
@@ -143,8 +139,7 @@ class Account
      * @param string $offset nullable offset
      * @param int $limit
      * @param int $level key level
-     * @return Util\PagedList
-     * @throws Exception
+     * @return PagedList
      */
     public function getTransactions($offset, $limit, $level)
     {

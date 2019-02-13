@@ -6,11 +6,10 @@ use Io\Token\Proto\Common\Member\Profile;
 use Io\Token\Proto\Common\Member\ProfilePictureSize;
 use PHPUnit\Framework\TestCase;
 use Tokenio\Member;
-use Tokenio\Util\TestUtil;
 
 class ProfileTest extends TestCase
 {
-    /** @var \Tokenio\TokenIO */
+    /** @var \Tokenio\TokenClient */
     protected $tokenIO;
     /** @var Member $member */
     private $member;
@@ -19,6 +18,12 @@ class ProfileTest extends TestCase
     {
         $this->tokenIO = TestUtil::initializeSDK();
         $this->member = $this->tokenIO->createMember(TestUtil::generateAlias());
+    }
+
+    protected function tearDown()
+    {
+        parent::tearDown();
+        TestUtil::removeDirectory(__DIR__ . '/test-keys/');
     }
 
     public function testSetProfile()

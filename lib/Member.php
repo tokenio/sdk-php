@@ -25,19 +25,14 @@ use Io\Token\Proto\Common\Security\Signature;
 use Io\Token\Proto\Common\Token\Token;
 use Io\Token\Proto\Common\Token\TokenOperationResult;
 use Io\Token\Proto\Common\Token\TokenPayload;
-use Io\Token\Proto\Common\Token\TokenRequest;
 use Io\Token\Proto\Common\Transaction\Balance;
 use Io\Token\Proto\Common\Transaction\Transaction;
 use Io\Token\Proto\Common\Transfer\Transfer;
 use Io\Token\Proto\Common\Transfer\TransferPayload;
 use Io\Token\Proto\Common\Transferinstructions\TransferEndpoint;
 use Io\Token\Proto\Gateway\GetTokensRequest\Type;
-use Io\Token\Proto\Gateway\GetTokensRequest_Type;
 use Tokenio\Exception\InvalidRealmException;
-use Tokenio\Http\Client;
-use Tokenio\Http\Request\AccessTokenBuilder;
-use Tokenio\Http\Request\TransferTokenBuilder;
-use Tokenio\Util\PagedList;
+use Tokenio\Rpc\Client;
 use Tokenio\Util\Strings;
 use Tokenio\Util\Util;
 
@@ -151,7 +146,6 @@ class Member implements RepresentableInterface
      * @param string $accountId account id
      * @param int $keyLevel key level
      * @return Balance
-     * @throws Exception
      */
     public function getBalance($accountId, $keyLevel)
     {
@@ -164,7 +158,6 @@ class Member implements RepresentableInterface
      * @param string $accountId the account id
      * @param int $keyLevel key level
      * @return Money
-     * @throws Exception
      */
     public function getCurrentBalance($accountId, $keyLevel)
     {
@@ -188,7 +181,6 @@ class Member implements RepresentableInterface
      * @param string $accountId the account id
      * @param int $keyLevel key level
      * @return Money
-     * @throws Exception
      */
     public function getAvailableBalance($accountId, $keyLevel)
     {
@@ -214,7 +206,6 @@ class Member implements RepresentableInterface
      * @param string $transactionId ID of the transaction
      * @param int $keyLevel key level
      * @return Transaction
-     * @throws Exception
      */
     public function getTransaction($accountId, $transactionId, $keyLevel)
     {
@@ -229,7 +220,6 @@ class Member implements RepresentableInterface
      * @param int $limit max number of records to return
      * @param int $keyLevel key level
      * @return PagedList paged list of transaction records
-     * @throws Exception
      */
     public function getTransactions($accountId, $offset, $limit, $keyLevel)
     {
@@ -251,7 +241,6 @@ class Member implements RepresentableInterface
      * Removes an alias for the member.
      *
      * @param Alias $alias , e.g. 'john'
-     * @throws Exception
      * @return bool that indicates whether the operation finished or had an error
      */
     public function removeAlias($alias)
@@ -264,7 +253,6 @@ class Member implements RepresentableInterface
      *
      * @param Alias[] $aliasList , e.g. 'john'
      * @return bool that indicates whether the operation finished or had an error
-     * @throws Exception
      */
     public function removeAliases($aliasList)
     {
@@ -287,8 +275,8 @@ class Member implements RepresentableInterface
      * Adds a new alias for the member.
      *
      * @param Alias $alias , e.g. 'john'
-     * @throws Exception
      * @return bool that indicates whether the operation finished or had an error
+     * @throws InvalidRealmException
      */
     public function addAlias($alias)
     {
@@ -300,7 +288,7 @@ class Member implements RepresentableInterface
      *
      * @param Alias[] $aliasList , e.g. 'john'
      * @return bool that indicates whether the operation finished or had an error
-     * @throws Exception
+     * @throws InvalidRealmException
      */
     public function addAliases($aliasList)
     {
@@ -343,7 +331,7 @@ class Member implements RepresentableInterface
     /**
      * Stores a token request. This can be retrieved later by the token request id.
      *
-     * @param \Tokenio\Http\Request\TokenRequest $tokenRequest token request
+     * @param \Tokenio\TokenRequest $tokenRequest token request
      * @return string token request id
      */
     public function storeTokenRequest($tokenRequest)
@@ -523,7 +511,7 @@ class Member implements RepresentableInterface
      */
     public function removeKey($keyId)
     {
-        $this->removeKeys([$keyId]);
+        return $this->removeKeys([$keyId]);
     }
 
     /**
@@ -550,7 +538,7 @@ class Member implements RepresentableInterface
      */
     public function deleteMember()
     {
-        $this->client->deleteMember();
+        return $this->client->deleteMember();
     }
 
     /**
