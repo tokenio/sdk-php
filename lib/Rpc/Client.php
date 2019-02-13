@@ -1053,16 +1053,22 @@ class Client
      * @param string $displayName display name
      * @param Payload $logo blob payload of the logo
      * @param string $consentText consent text
-     * @param string[] $colors colors
+     * @param array $colors a string dictionary that describes color schemes
      * @return string customization id
      */
     public function createCustomization($displayName, $logo, $consentText, $colors)
     {
         $request = new CreateCustomizationRequest();
-        $request->setName($displayName)
-            ->setLogo($logo)
-            ->setConsentText($consentText)
-            ->setColors($colors);
+        if ($displayName != null) {
+            $request->setName($displayName);
+        }
+        if ($logo != null) {
+            $request->setLogo($logo);
+        }
+        if ($consentText != null) {
+            $request->setConsentText($consentText);
+        }
+        $request->setColors($colors);
 
         /** @var CreateCustomizationResponse $response */
         $response = Util::executeAndHandleCall($this->gateway->CreateCustomization($request));

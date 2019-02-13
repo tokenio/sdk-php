@@ -863,10 +863,10 @@ class Member implements RepresentableInterface
      * @param string $displayName display name
      * @param Payload $logo blob payload of the logo
      * @param string $consentText consent text
-     * @param string[] $colors colors
+     * @param array $colors a string dictionary that describes color schemes
      * @return string customization id
      */
-    public function createCustomization($displayName, $logo, $consentText, $colors)
+    public function createCustomization($displayName=null, $logo=null, $consentText=null, $colors=[])
     {
         return $this->client->createCustomization($displayName, $logo, $consentText, $colors);
     }
