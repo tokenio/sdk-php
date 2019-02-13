@@ -9,14 +9,14 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * Refers to a Token member by ID or by alias.
+ * Refers to a Token member by ID and/or by alias.
  *
  * Generated from protobuf message <code>io.token.proto.common.token.TokenMember</code>
  */
 class TokenMember extends \Google\Protobuf\Internal\Message
 {
     /**
-     * member ID
+     * optional member ID
      *
      * Generated from protobuf field <code>string id = 1;</code>
      */
@@ -28,7 +28,7 @@ class TokenMember extends \Google\Protobuf\Internal\Message
      */
     private $username = '';
     /**
-     * alias, such as an email address
+     * optional alias, such as an email address
      *
      * Generated from protobuf field <code>.io.token.proto.common.alias.Alias alias = 3;</code>
      */
@@ -41,11 +41,11 @@ class TokenMember extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type string $id
-     *           member ID
+     *           optional member ID
      *     @type string $username
      *           TODO(PR-1161): Rename this when we no longer require backwards compatibility with usernames
      *     @type \Io\Token\Proto\Common\Alias\Alias $alias
-     *           alias, such as an email address
+     *           optional alias, such as an email address
      * }
      */
     public function __construct($data = NULL) {
@@ -54,7 +54,7 @@ class TokenMember extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * member ID
+     * optional member ID
      *
      * Generated from protobuf field <code>string id = 1;</code>
      * @return string
@@ -65,7 +65,7 @@ class TokenMember extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * member ID
+     * optional member ID
      *
      * Generated from protobuf field <code>string id = 1;</code>
      * @param string $var
@@ -106,7 +106,7 @@ class TokenMember extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * alias, such as an email address
+     * optional alias, such as an email address
      *
      * Generated from protobuf field <code>.io.token.proto.common.alias.Alias alias = 3;</code>
      * @return \Io\Token\Proto\Common\Alias\Alias
@@ -117,7 +117,7 @@ class TokenMember extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * alias, such as an email address
+     * optional alias, such as an email address
      *
      * Generated from protobuf field <code>.io.token.proto.common.alias.Alias alias = 3;</code>
      * @param \Io\Token\Proto\Common\Alias\Alias $var

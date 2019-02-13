@@ -45,6 +45,18 @@ class Cma9AccountDetails extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>repeated .io.token.proto.common.providerspecific.Cma9AccountDetails.Cma9Address address = 8;</code>
      */
     private $address;
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.Cma9AccountDetails.AccountType account_type = 9;</code>
+     */
+    private $account_type = 0;
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.Cma9AccountDetails.AccountSubtype account_subtype = 10;</code>
+     */
+    private $account_subtype = 0;
+    /**
+     * Generated from protobuf field <code>string description = 11;</code>
+     */
+    private $description = '';
 
     /**
      * Constructor.
@@ -60,6 +72,9 @@ class Cma9AccountDetails extends \Google\Protobuf\Internal\Message
      *     @type string $phone
      *     @type string $mobile
      *     @type \Io\Token\Proto\Common\Providerspecific\Cma9AccountDetails\Cma9Address[]|\Google\Protobuf\Internal\RepeatedField $address
+     *     @type int $account_type
+     *     @type int $account_subtype
+     *     @type string $description
      * }
      */
     public function __construct($data = NULL) {
@@ -239,6 +254,72 @@ class Cma9AccountDetails extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Io\Token\Proto\Common\Providerspecific\Cma9AccountDetails\Cma9Address::class);
         $this->address = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.Cma9AccountDetails.AccountType account_type = 9;</code>
+     * @return int
+     */
+    public function getAccountType()
+    {
+        return $this->account_type;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.Cma9AccountDetails.AccountType account_type = 9;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setAccountType($var)
+    {
+        GPBUtil::checkEnum($var, \Io\Token\Proto\Common\Providerspecific\Cma9AccountDetails_AccountType::class);
+        $this->account_type = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.Cma9AccountDetails.AccountSubtype account_subtype = 10;</code>
+     * @return int
+     */
+    public function getAccountSubtype()
+    {
+        return $this->account_subtype;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.Cma9AccountDetails.AccountSubtype account_subtype = 10;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setAccountSubtype($var)
+    {
+        GPBUtil::checkEnum($var, \Io\Token\Proto\Common\Providerspecific\Cma9AccountDetails_AccountSubtype::class);
+        $this->account_subtype = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string description = 11;</code>
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Generated from protobuf field <code>string description = 11;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setDescription($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->description = $var;
 
         return $this;
     }

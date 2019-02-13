@@ -50,9 +50,9 @@ class TransferBody extends \Google\Protobuf\Internal\Message
      */
     private $attachments;
     /**
-     * Optional: Transfer fees and fx charges.
+     * Deprecated; unused.
      *
-     * Generated from protobuf field <code>.io.token.proto.common.pricing.Pricing pricing = 9;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.pricing.Pricing pricing = 9 [deprecated = true];</code>
      */
     private $pricing = null;
 
@@ -75,7 +75,7 @@ class TransferBody extends \Google\Protobuf\Internal\Message
      *     @type \Io\Token\Proto\Common\Blob\Attachment[]|\Google\Protobuf\Internal\RepeatedField $attachments
      *           Optional: file / data attachments
      *     @type \Io\Token\Proto\Common\Pricing\Pricing $pricing
-     *           Optional: Transfer fees and fx charges.
+     *           Deprecated; unused.
      * }
      */
     public function __construct($data = NULL) {
@@ -240,9 +240,9 @@ class TransferBody extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Optional: Transfer fees and fx charges.
+     * Deprecated; unused.
      *
-     * Generated from protobuf field <code>.io.token.proto.common.pricing.Pricing pricing = 9;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.pricing.Pricing pricing = 9 [deprecated = true];</code>
      * @return \Io\Token\Proto\Common\Pricing\Pricing
      */
     public function getPricing()
@@ -251,9 +251,9 @@ class TransferBody extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Optional: Transfer fees and fx charges.
+     * Deprecated; unused.
      *
-     * Generated from protobuf field <code>.io.token.proto.common.pricing.Pricing pricing = 9;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.pricing.Pricing pricing = 9 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Pricing\Pricing $var
      * @return $this
      */

@@ -856,4 +856,18 @@ class Member implements RepresentableInterface
     {
         return $this->client->endorseToken($token, $keyLevel);
     }
+
+    /**
+     * Creates a new web-app customization.
+     *
+     * @param string $displayName display name
+     * @param Payload $logo blob payload of the logo
+     * @param string $consentText consent text
+     * @param string[] $colors colors
+     * @return string customization id
+     */
+    public function createCustomization($displayName, $logo, $consentText, $colors)
+    {
+        return $this->client->createCustomization($displayName, $logo, $consentText, $colors);
+    }
 }

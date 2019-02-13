@@ -9,7 +9,7 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * Provides access to member transactions in all accounts at a specific bank.
+ * **DEPRECATED** Provides access to member transactions in all accounts at a specific bank.
  * Normally used with AllAccountsAtBank (to get list of accounts)
  *
  * Generated from protobuf message <code>io.token.proto.common.token.AccessBody.Resource.AllTransactionsAtBank</code>

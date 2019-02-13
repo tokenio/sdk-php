@@ -100,7 +100,7 @@ class TransactionStatus
      */
     const SENT = 16;
     /**
-     * the transaction has been initiated but the status is unknown
+     * the transaction has been initiated but the result is unknown, this may be the final status and may not get updated later
      *
      * Generated from protobuf enum <code>INITIATED = 17;</code>
      */

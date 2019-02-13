@@ -43,7 +43,7 @@ class Resource extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllAddresses all_addresses = 1;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllAddresses all_addresses = 1 [deprecated = true];</code>
      * @return \Io\Token\Proto\Common\Token\AccessBody\Resource\AllAddresses
      */
     public function getAllAddresses()
@@ -52,7 +52,7 @@ class Resource extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllAddresses all_addresses = 1;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllAddresses all_addresses = 1 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Token\AccessBody\Resource\AllAddresses $var
      * @return $this
      */
@@ -65,7 +65,7 @@ class Resource extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllAccounts all_accounts = 2;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllAccounts all_accounts = 2 [deprecated = true];</code>
      * @return \Io\Token\Proto\Common\Token\AccessBody\Resource\AllAccounts
      */
     public function getAllAccounts()
@@ -74,7 +74,7 @@ class Resource extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllAccounts all_accounts = 2;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllAccounts all_accounts = 2 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Token\AccessBody\Resource\AllAccounts $var
      * @return $this
      */
@@ -87,7 +87,7 @@ class Resource extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllAccountTransactions all_transactions = 3;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllAccountTransactions all_transactions = 3 [deprecated = true];</code>
      * @return \Io\Token\Proto\Common\Token\AccessBody\Resource\AllAccountTransactions
      */
     public function getAllTransactions()
@@ -96,7 +96,7 @@ class Resource extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllAccountTransactions all_transactions = 3;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllAccountTransactions all_transactions = 3 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Token\AccessBody\Resource\AllAccountTransactions $var
      * @return $this
      */
@@ -109,7 +109,7 @@ class Resource extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllAccountBalances all_balances = 4;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllAccountBalances all_balances = 4 [deprecated = true];</code>
      * @return \Io\Token\Proto\Common\Token\AccessBody\Resource\AllAccountBalances
      */
     public function getAllBalances()
@@ -118,7 +118,7 @@ class Resource extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllAccountBalances all_balances = 4;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllAccountBalances all_balances = 4 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Token\AccessBody\Resource\AllAccountBalances $var
      * @return $this
      */
@@ -131,7 +131,7 @@ class Resource extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllTransferDestinations all_transfer_destinations = 13;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllTransferDestinations all_transfer_destinations = 13 [deprecated = true];</code>
      * @return \Io\Token\Proto\Common\Token\AccessBody\Resource\AllTransferDestinations
      */
     public function getAllTransferDestinations()
@@ -140,7 +140,7 @@ class Resource extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllTransferDestinations all_transfer_destinations = 13;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllTransferDestinations all_transfer_destinations = 13 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Token\AccessBody\Resource\AllTransferDestinations $var
      * @return $this
      */
@@ -263,7 +263,7 @@ class Resource extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllAccountsAtBank all_accounts_at_bank = 9;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllAccountsAtBank all_accounts_at_bank = 9 [deprecated = true];</code>
      * @return \Io\Token\Proto\Common\Token\AccessBody\Resource\AllAccountsAtBank
      */
     public function getAllAccountsAtBank()
@@ -272,7 +272,7 @@ class Resource extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllAccountsAtBank all_accounts_at_bank = 9;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllAccountsAtBank all_accounts_at_bank = 9 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Token\AccessBody\Resource\AllAccountsAtBank $var
      * @return $this
      */
@@ -285,7 +285,7 @@ class Resource extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllTransactionsAtBank all_transactions_at_bank = 10;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllTransactionsAtBank all_transactions_at_bank = 10 [deprecated = true];</code>
      * @return \Io\Token\Proto\Common\Token\AccessBody\Resource\AllTransactionsAtBank
      */
     public function getAllTransactionsAtBank()
@@ -294,7 +294,7 @@ class Resource extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllTransactionsAtBank all_transactions_at_bank = 10;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllTransactionsAtBank all_transactions_at_bank = 10 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Token\AccessBody\Resource\AllTransactionsAtBank $var
      * @return $this
      */
@@ -307,7 +307,7 @@ class Resource extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllBalancesAtBank all_balances_at_bank = 11;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllBalancesAtBank all_balances_at_bank = 11 [deprecated = true];</code>
      * @return \Io\Token\Proto\Common\Token\AccessBody\Resource\AllBalancesAtBank
      */
     public function getAllBalancesAtBank()
@@ -316,7 +316,7 @@ class Resource extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllBalancesAtBank all_balances_at_bank = 11;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllBalancesAtBank all_balances_at_bank = 11 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Token\AccessBody\Resource\AllBalancesAtBank $var
      * @return $this
      */
@@ -329,7 +329,7 @@ class Resource extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllTransferDestinationsAtBank all_transfer_destinations_at_bank = 14;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllTransferDestinationsAtBank all_transfer_destinations_at_bank = 14 [deprecated = true];</code>
      * @return \Io\Token\Proto\Common\Token\AccessBody\Resource\AllTransferDestinationsAtBank
      */
     public function getAllTransferDestinationsAtBank()
@@ -338,7 +338,7 @@ class Resource extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllTransferDestinationsAtBank all_transfer_destinations_at_bank = 14;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AllTransferDestinationsAtBank all_transfer_destinations_at_bank = 14 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Token\AccessBody\Resource\AllTransferDestinationsAtBank $var
      * @return $this
      */

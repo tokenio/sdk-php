@@ -9,7 +9,7 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * Provides access to all member accounts. Enables getAccounts()
+ * **DEPRECATED** Provides access to all member accounts. Enables getAccounts()
  * to get list of accounts (and also getAccount() on any account).
  *
  * Generated from protobuf message <code>io.token.proto.common.token.AccessBody.Resource.AllAccounts</code>

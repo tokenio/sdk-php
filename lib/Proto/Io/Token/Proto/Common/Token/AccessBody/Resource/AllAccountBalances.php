@@ -9,7 +9,7 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * Provides access to member balance on all accounts
+ * **DEPRECATED** Provides access to member balance on all accounts
  * Normally used with AllAccounts (to get list of accounts)
  *
  * Generated from protobuf message <code>io.token.proto.common.token.AccessBody.Resource.AllAccountBalances</code>
