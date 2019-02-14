@@ -336,7 +336,11 @@ class Member implements RepresentableInterface
      */
     public function storeTokenRequest($tokenRequest)
     {
-        return $this->client->storeTokenRequest($tokenRequest->getTokenPayload(), $tokenRequest->getOptions(), $tokenRequest->getUserRefId());
+        return $this->client->storeTokenRequest(
+            $tokenRequest->getTokenPayload(),
+            $tokenRequest->getOptions(),
+            $tokenRequest->getUserRefId(),
+            $tokenRequest->getCustomizationId());
     }
 
     /**
