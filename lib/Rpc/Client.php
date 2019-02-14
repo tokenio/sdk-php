@@ -453,14 +453,16 @@ class Client
      * @param TokenPayload $payload transfer token payload
      * @param MapField $options map of options
      * @param string $userRefId (optional) user ref id
+     * @param string $customizationId (optional) customization id
      * @return string id to reference token request
      */
-    public function storeTokenRequest($payload, $options, $userRefId = '')
+    public function storeTokenRequest($payload, $options, $userRefId = '', $customizationId = '')
     {
         $request = new StoreTokenRequestRequest();
         $request->setPayload($payload)
             ->setOptions($options)
-            ->setUserRefId($userRefId);
+            ->setUserRefId($userRefId)
+            ->setCustomizationId($customizationId);
 
         /** @var StoreTokenRequestResponse $response */
         $response = Util::executeAndHandleCall($this->gateway->StoreTokenRequest($request));
