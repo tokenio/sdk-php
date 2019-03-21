@@ -13,7 +13,7 @@ use Tokenio\Util\Strings;
 
 class TokenClientBuilder
 {
-    const DEFAULT_DEV_KEY = "f3982819-5d8d-4123-9601-886df2780f42";
+    const DEFAULT_DEV_KEY = "4qY7lqQw8NOl9gng0ZHgT4xdiDqxqoGVutuZwrUYQsI";
     const DEFAULT_TIMEOUT_MS = 10000;
     const DEFAULT_SSL_PORT = 443;
 
