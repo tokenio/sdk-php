@@ -13,6 +13,7 @@ use Tokenio\Util\Strings;
 
 class TokenClientBuilder
 {
+    const DEFAULT_DEV_KEY = "4qY7lqQw8NOl9gng0ZHgT4xdiDqxqoGVutuZwrUYQsI";
     const DEFAULT_TIMEOUT_MS = 10000;
     const DEFAULT_SSL_PORT = 443;
 
@@ -53,6 +54,7 @@ class TokenClientBuilder
 
     public function __construct()
     {
+        $this->devKey = self::DEFAULT_DEV_KEY;
         $this->port = self::DEFAULT_SSL_PORT;
         $this->timeoutMs = self::DEFAULT_TIMEOUT_MS;
         $this->useSsl = true;
@@ -152,10 +154,6 @@ class TokenClientBuilder
      */
     public function build()
     {
-        if (Strings::isEmptyString($this->devKey)) {
-            throw new RuntimeException("Please provide a developer key. Contact Token for more details");
-        }
-
         $metadata = array(
             TokenInfo::TOKEN_SDK => [TokenInfo::TOKEN_SDK_VALUE],
             TokenInfo::TOKEN_SDK_VERSION => [TokenInfo::TOKEN_SDK_VERSION_VALUE],
