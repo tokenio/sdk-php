@@ -78,7 +78,7 @@ class Member implements RepresentableInterface
      *
      * @return RepeatedField a list of aliases
      */
-    public function getAliases()
+    public function aliases()
     {
         return $this->client->getAliases();
     }
@@ -90,7 +90,7 @@ class Member implements RepresentableInterface
      */
     public function getFirstAlias()
     {
-        $aliases = $this->getAliases();
+        $aliases = $this->client->getAliases();
         if (empty($aliases)) {
             return null;
         }
@@ -158,11 +158,11 @@ class Member implements RepresentableInterface
      * @param string $accountId the account id
      * @param int $keyLevel key level
      * @return Money
-     */
+     *
     public function getCurrentBalance($accountId, $keyLevel)
     {
         return $this->getBalance($accountId, $keyLevel)->getCurrent();
-    }
+    }*/
 
     /**
      * Returns linking information for the specified bank id.
@@ -181,11 +181,12 @@ class Member implements RepresentableInterface
      * @param string $accountId the account id
      * @param int $keyLevel key level
      * @return Money
-     */
+     *
     public function getAvailableBalance($accountId, $keyLevel)
     {
         return $this->getBalance($accountId, $keyLevel)->getAvailable();
     }
+     */
 
     /**
      * Looks up balances for a list of accounts.
@@ -401,7 +402,7 @@ class Member implements RepresentableInterface
      * @param string $data the file data
      * @param int $accessMode the access mode, normal or public
      * @return Attachment
-     */
+     *
     public function createBlob($ownerId, $type, $name, $data, $accessMode = AccessMode::PBDEFAULT)
     {
         $payload = new Payload();
@@ -420,6 +421,7 @@ class Member implements RepresentableInterface
 
         return $attachment;
     }
+     */
 
     /**
      * Redeems a transfer token.
@@ -673,7 +675,7 @@ class Member implements RepresentableInterface
      * the current device from tke member.
      *
      * @return bool that indicates whether the operation finished or had an error
-     */
+     *
     public function removeNonStoredKeys()
     {
         $storedKeys = $this->client->getCryptoEngine()->getPublicKeys();
@@ -689,6 +691,7 @@ class Member implements RepresentableInterface
         }
         return false;
     }
+     */
 
     /**
      * Retrieves a blob from the server.
@@ -707,11 +710,12 @@ class Member implements RepresentableInterface
      * @param string $tokenId id of the token
      * @param string $blobId id of the blob
      * @return Blob
-     */
+     *
     public function getTokenBlob($tokenId, $blobId)
     {
         return $this->client->getTokenBlob($tokenId, $blobId);
     }
+     */
 
     /**
      * Creates a new member address.
@@ -719,7 +723,7 @@ class Member implements RepresentableInterface
      * @param string $name the name of the address
      * @param Address $address the address
      * @return AddressRecord record created
-     */
+
     public function addAddress($name, $address)
     {
         return $this->client->addAddress($name, $address);
@@ -730,7 +734,7 @@ class Member implements RepresentableInterface
      *
      * @param string $addressId the address id
      * @return AddressRecord
-     */
+
     public function getAddress($addressId)
     {
         return $this->client->getAddress($addressId);
@@ -740,7 +744,7 @@ class Member implements RepresentableInterface
      * Looks up member addresses.
      *
      * @return RepeatedField a list of addresses
-     */
+
     public function getAddresses()
     {
         return $this->client->getAddresses();
@@ -751,11 +755,12 @@ class Member implements RepresentableInterface
      *
      * @param string $addressId the id of the address
      * @return bool that indicates whether the operation finished or had an error
-     */
+     *
     public function deleteAddress($addressId)
     {
         return $this->client->deleteAddress($addressId);
     }
+    */
 
     /**
      * Creates a new transfer token builder.
@@ -763,11 +768,12 @@ class Member implements RepresentableInterface
      * @param double $amount transfer amount
      * @param string $currency currency code, e.g. "USD"
      * @return TransferTokenBuilder token returned by the server
-     */
+     *
     public function createTransferToken($amount, $currency)
     {
         return new TransferTokenBuilder($this, $amount, $currency);
     }
+     */
 
     /**
      * Adds a trusted beneficiary for whom the SCA will be skipped.
@@ -814,11 +820,12 @@ class Member implements RepresentableInterface
      *
      * @param TokenPayload $tokenPayload to create access token from
      * @return Token
-     */
+     *
     public function createAccessToken($tokenPayload)
     {
         return $this->client->createAccessToken($tokenPayload);
     }
+     */
 
     /**
      * Creates an access token built from a given {@link AccessTokenBuilder}.
@@ -855,11 +862,12 @@ class Member implements RepresentableInterface
      * @param Token $token to endorse
      * @param int $keyLevel key level to be used to endorse the token
      * @return TokenOperationResult result of endorse token
-     */
+     *
     public function endorseToken($token, $keyLevel)
     {
         return $this->client->endorseToken($token, $keyLevel);
     }
+     */
 
     /**
      * Creates a new web-app customization.
@@ -873,5 +881,54 @@ class Member implements RepresentableInterface
     public function createCustomization($displayName=null, $logo=null, $consentText=null, $colors=[])
     {
         return $this->client->createCustomization($displayName, $logo, $consentText, $colors);
+    }
+
+    //-------------------------------------New Stuff--------------------------------------------------------//
+
+    public function getTransferTokens($offset, $limit)
+    {
+
+        return $this->client->getTokens(TRANSFER, $offset,$limit);
+    }
+
+    public function createTestBankAccount($balance, $currency)
+    {
+        $money = new Money();
+        $money->setValue($balance)->setCurrency($currency);
+        $accountProto  = $this->client->createAndLinkTestBankAccount($money);
+
+        $account = new Account($this, $accountProto, $this->client);
+        return $account;
+    }
+
+    public function setTrackingMetaData($securityMetadata)
+    {
+        $this->client->setTrackingMetaData($securityMetadata);
+    }
+
+    public function clearTrackingMetaData()
+    {
+        $this->client->clearTrackingMetaData();
+    }
+
+    public function triggerBalanceStepUpNotification($accountIds)
+    {
+        return $this->client->triggerBalanceStepUpNotification($accountIds);
+    }
+
+    public function triggerTransactionStepUpNotification($accountId)
+    {
+        return $this->client->triggerTransactionStepUpNotification($accountId);
+    }
+
+    /**
+     * Resolves transfer destinations for the given account id.
+     *
+     * @param $accountId
+     * @return RepeatedField transfer endpoints
+     */
+    public function resolveTransferDestinations($accountId)
+    {
+        return $this->client->resolveTransferDestinations($accountId);
     }
 }

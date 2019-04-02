@@ -4,9 +4,11 @@ namespace Tokenio\Rpc;
 
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Alias\VerificationStatus;
+use Io\Token\Proto\Common\Bank\BankFilter;
 use Io\Token\Proto\Common\Member\Member;
 use Io\Token\Proto\Common\Member\MemberOperation;
 use Io\Token\Proto\Common\Member\MemberRecoveryOperation;
+use Io\Token\Proto\Common\Member\MemberRecoveryOperation\Authorization;
 use Io\Token\Proto\Common\Member\MemberUpdate;
 use Io\Token\Proto\Common\Security\Key;
 use Io\Token\Proto\Common\Security\Key\Level;
@@ -19,6 +21,8 @@ use Io\Token\Proto\Gateway\CompleteRecoveryResponse;
 use Io\Token\Proto\Gateway\CreateMemberRequest;
 use Io\Token\Proto\Gateway\CreateMemberResponse;
 use Io\Token\Proto\Gateway\GatewayServiceClient;
+use Io\Token\Proto\Gateway\GetBanksCountriesRequest;
+use Io\Token\Proto\Gateway\GetBanksCountriesResponse;
 use Io\Token\Proto\Gateway\GetBanksRequest;
 use Io\Token\Proto\Gateway\GetBanksResponse;
 use Io\Token\Proto\Gateway\GetMemberRequest;
@@ -419,5 +423,36 @@ class UnauthenticatedClient
         /** @var UpdateMemberResponse $updateMemberResponse */
         $updateMemberResponse = Util::executeAndHandleCall($this->gateway->UpdateMember($memberUpdateRequest));
         return $updateMemberResponse->getMember();
+    }
+
+    //-------------------------------------New Stuff------------------------------------------------//
+
+    public function createRecoveryAuthorization($memberId, $privilegedKey)
+    {
+        $getMemberRequest = new GetMemberRequest();
+        $getMemberRequest->setMemberId($memberId);
+        /** @var GetMemberResponse $getMemberResponse */
+        list($getMemberResponse) = $this->gateway->GetMember($getMemberRequest)->wait();
+        $authorization = new Authorization();
+        $authorization->setMemberId($memberId)
+                      ->setMemberKey($privilegedKey)
+                      ->setPrevHash($getMemberResponse->getMember()->getLastHash());
+        return $authorization;
+    }
+
+    public function getCountries($provider)
+    {
+        $bankCountriesRequest = new GetBanksCountriesRequest();
+
+        if($provider)
+        {
+            $filter = new BankFilter();
+            $filter->setProvider($provider);
+            $bankCountriesRequest->setFilter($filter);
+        }
+
+        /** @var GetBanksCountriesResponse $bankCountriesResponse */
+        list($bankCountriesResponse)= Util::executeAndHandleCall($this->gateway->GetBanksCountries($bankCountriesRequest));
+        return $bankCountriesResponse->getCountries();
     }
 }

@@ -16,6 +16,7 @@ use Tokenio\Rpc\ClientFactory;
 use Tokenio\Security\CryptoEngineFactoryInterface;
 use Tokenio\Security\CryptoEngineInterface;
 use Tokenio\Util\Util;
+use Io\Token\Proto\Common\Member\MemberRecoveryOperation\Authorization;
 
 class TokenClient
 {
@@ -369,4 +370,39 @@ class TokenClient
         return new TokenRequestCallback($parameters->getTokenId(), $state->getInnerState());
     }
 
+//----------------------------------------- New Stuff------------------------------------------------
+    /**
+     * Creates a new instance of {@link TokenClient} that's configured to use
+     * the specified environment.
+     *
+     * @param TokenCluster $cluster token cluster to connect to
+     * @param string $developerKey developer key
+     * @return TokenClient instance
+     */
+    public function create($cluster, $developerKey)
+    {
+        return TokenClient::builder()
+            ->connectTo($cluster)
+            ->developerKey($developerKey)
+            ->build();
+    }
+
+    /**
+     * Create a recovery authorization for some agent to sign.
+     *
+     * @param string $memberId Id of member we claim to be.
+     * @param Key $privilegedKey new privileged key we want to use.
+     * @return Authorization authorization structure for agent to sign
+     */
+    public function createRecoveryAuthorization($memberId, $privilegedKey)
+    {
+        $client = ClientFactory::unauthenticated($this->channel);
+        return $client->createRecoveryAuthorization($memberId, $privilegedKey);
+    }
+
+    public function getCountries($provider)
+    {
+        $client = ClientFactory::unauthenticated($this->channel);
+        return $client->getCountries($provider);
+    }
 }

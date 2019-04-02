@@ -336,7 +336,7 @@ class TransferTokenBuilder
      *
      * @return TokenPayload the token payload
      * @throws IllegalArgumentException
-     */
+     *
     public function buildWithBlobAttachments()
     {
         $this->build();
@@ -352,7 +352,7 @@ class TransferTokenBuilder
 
         $attachmentUploads = array();
 
-        /** @var Payload $blobPayload */
+        /** @var Payload $blobPayload /
         foreach ($this->blobPayloads as $blobPayload) {
             $attachment = $this->member->createBlob(
                 $blobPayload->getOwnerId(),
@@ -380,4 +380,5 @@ class TransferTokenBuilder
 
         return $this->payload;
     }
+    */
 }

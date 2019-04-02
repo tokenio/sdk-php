@@ -4,6 +4,9 @@ namespace Tokenio\Rpc;
 
 use Google\Protobuf\Internal\MapField;
 use Google\Protobuf\Internal\RepeatedField;
+use http\Exception\RuntimeException;
+use Io\Token\Proto\Banklink\AccountLinkingStatus;
+use Io\Token\Proto\Banklink\OauthBankAuthorization;
 use Io\Token\Proto\Common\Account\Account;
 use Io\Token\Proto\Common\Address\Address;
 use Io\Token\Proto\Common\Alias\Alias;
@@ -20,7 +23,10 @@ use Io\Token\Proto\Common\Member\MemberUpdate;
 use Io\Token\Proto\Common\Member\Profile;
 use Io\Token\Proto\Common\Member\RecoveryRule;
 use Io\Token\Proto\Common\Member\TrustedBeneficiary;
+use Io\Token\Proto\Common\Money\Money;
+use Io\Token\Proto\Common\Notification\BalanceStepUp;
 use Io\Token\Proto\Common\Security\Key\Level;
+use Io\Token\Proto\Common\Security\SecurityMetadata;
 use Io\Token\Proto\Common\Security\Signature;
 use Io\Token\Proto\Common\Token\Token;
 use Io\Token\Proto\Common\Token\TokenMember;
@@ -44,6 +50,8 @@ use Io\Token\Proto\Gateway\CreateBlobRequest;
 use Io\Token\Proto\Gateway\CreateBlobResponse;
 use Io\Token\Proto\Gateway\CreateCustomizationRequest;
 use Io\Token\Proto\Gateway\CreateCustomizationResponse;
+use Io\Token\Proto\Gateway\CreateTestBankAccountRequest;
+use Io\Token\Proto\Gateway\CreateTestBankAccountResponse;
 use Io\Token\Proto\Gateway\CreateTransferRequest;
 use Io\Token\Proto\Gateway\CreateTransferResponse;
 use Io\Token\Proto\Gateway\DeleteAddressRequest;
@@ -95,9 +103,13 @@ use Io\Token\Proto\Gateway\GetTransfersRequest;
 use Io\Token\Proto\Gateway\GetTransfersResponse;
 use Io\Token\Proto\Gateway\GetTrustedBeneficiariesRequest;
 use Io\Token\Proto\Gateway\GetTrustedBeneficiariesResponse;
+use Io\Token\Proto\Gateway\LinkAccountsOauthRequest;
+use Io\Token\Proto\Gateway\LinkAccountsOauthResponse;
 use Io\Token\Proto\Gateway\Page;
 use Io\Token\Proto\Gateway\RemoveTrustedBeneficiaryRequest;
 use Io\Token\Proto\Gateway\RemoveTrustedBeneficiaryResponse;
+use Io\Token\Proto\Gateway\ResolveTransferDestinationsRequest;
+use Io\Token\Proto\Gateway\ResolveTransferDestinationsResponse;
 use Io\Token\Proto\Gateway\RetryVerificationRequest;
 use Io\Token\Proto\Gateway\RetryVerificationResponse;
 use Io\Token\Proto\Gateway\SetProfilePictureRequest;
@@ -108,6 +120,8 @@ use Io\Token\Proto\Gateway\SignTokenRequestStateRequest;
 use Io\Token\Proto\Gateway\SignTokenRequestStateResponse;
 use Io\Token\Proto\Gateway\StoreTokenRequestRequest;
 use Io\Token\Proto\Gateway\StoreTokenRequestResponse;
+use Io\Token\Proto\Gateway\TriggerStepUpNotificationRequest;
+use Io\Token\Proto\Gateway\TriggerStepUpNotificationResponse;
 use Io\Token\Proto\Gateway\UpdateMemberRequest;
 use Io\Token\Proto\Gateway\UpdateMemberResponse;
 use Io\Token\Proto\Gateway\VerifyAliasRequest;
@@ -137,6 +151,7 @@ class Client
 
     private $customerInitiated = false;
     private $onBehalfOf;
+    private $trackingMetaData;
 
     /**
      * Construct the Client.
@@ -150,6 +165,7 @@ class Client
         $this->memberId = $memberId;
         $this->cryptoEngine = $cryptoEngine;
         $this->gateway = $gateway;
+        $this->trackingMetaData = new SecurityMetadata();
     }
 
     /**
@@ -1075,5 +1091,101 @@ class Client
         /** @var CreateCustomizationResponse $response */
         $response = Util::executeAndHandleCall($this->gateway->CreateCustomization($request));
         return $response->getCustomizationId();
+    }
+
+    //----------------------------New Stuff---------------------------------------//
+
+    public function setTrackingMetaData($trackingMetaData)
+    {
+        $this->trackingMetaData = $trackingMetaData;
+    }
+
+    public function clearTrackingMetaData()
+    {
+        $this->trackingMetaData = new SecurityMetadata();
+    }
+
+    public function triggerBalanceStepUpNotification($accountIds)
+    {
+        $balanceStepUp = new BalanceStepUp();
+        $balanceStepUp->setAccountId($accountIds);
+        $stepUpNotificationRequest = new TriggerStepUpNotificationRequest();
+        $stepUpNotificationRequest->setBalanceStepUp($balanceStepUp);
+
+        /** @var TriggerStepUpNotificationResponse $response*/
+        $response = Util::executeAndHandleCall($this->gateway->TriggerStepUpNotification($stepUpNotificationRequest));
+        return $response->getStatus();
+    }
+
+    public function triggerTransactionStepUpNotification($accountId)
+    {
+        $balanceStepUp = new BalanceStepUp();
+        $balanceStepUp->setAccountId($accountId);
+        $stepUpNotificationRequest = new TriggerStepUpNotificationRequest();
+        $stepUpNotificationRequest->setBalanceStepUp($balanceStepUp);
+
+        /** @var TriggerStepUpNotificationResponse $response*/
+        $response = Util::executeAndHandleCall($this->gateway->TriggerStepUpNotification($stepUpNotificationRequest));
+        return $response->getStatus();
+    }
+
+    public function resolveTransferDestinations($accountId)
+    {
+        $request = new ResolveTransferDestinationsRequest();
+        $request->setAccountId($accountId);
+        $response = Util::executeAndHandleCall($this->gateway->ResolveTransferDestinations($request));
+
+        /** @var ResolveTransferDestinationsResponse $response*/
+        return $response->getDestinations();
+    }
+
+    private function createTestBankAuth($balance)
+    {
+        $request = new CreateTestBankAccountRequest();
+        $request->setBalance($balance);
+
+        /** @var CreateTestBankAccountResponse $response*/
+        $response = Util::executeAndHandleCall($this->gateway->CreateTestBankAccount($request));
+        return $response->getAuthorization();
+    }
+
+    /**
+     * Links a funding bank account to Token.
+     *
+     * @param OauthBankAuthorization $authorization Oauth authorization for linking
+     * @return RepeatedField list of linked accounts
+     * @throws Exception\BankAuthorizationRequiredException if bank authorization payload is required to link accounts
+     */
+    public function linkAccounts($authorization)
+    {
+        $request = new LinkAccountsOauthRequest();
+        $request->setAuthorization($authorization);
+
+        /** @var LinkAccountsOauthResponse $response*/
+        $response = Util::executeAndHandleCall($this->gateway->LinkAccountsOauth($request));
+        if ($response->getStatus() != AccountLinkingStatus::FAILURE_BANK_AUTHORIZATION_REQUIRED)
+             throw new Exception\BankAuthorizationRequiredException(
+                 "Must call linkAccounts with bank authorization payload",
+                 $response->getStatus());
+
+        return $response->getAccounts();
+    }
+
+    /**
+     * Creates a test bank account and links it.
+     *
+     * @param Money $balance account balance to set
+     * @return Account linked account
+     * @throws \RuntimeException if number of linked bank accounts is not equal to 1
+     */
+    public function createAndLinkTestBankAccount($balance)
+    {
+        $authorizations = $this->createTestBankAuth($balance);
+        list($accounts) = $this->linkAccounts($authorizations);
+        if(sizeof($accounts) != 1){
+            throw new RuntimeException("Expected 1 account; found" + sizeof($accounts));
+        }
+
+        return $accounts[0];
     }
 }

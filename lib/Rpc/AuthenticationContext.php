@@ -3,6 +3,7 @@
 namespace Tokenio\Rpc;
 
 use Io\Token\Proto\Common\Security\Key\Level;
+use Io\Token\Proto\Common\Security\SecurityMetadata;
 
 class AuthenticationContext
 {
@@ -20,6 +21,8 @@ class AuthenticationContext
      * @var bool
      */
     private static $customerInitiated = false;
+
+    private static $trackingMetaData;
 
     /**
      * Retrieves the On-Behalf-Of value.
@@ -117,5 +120,19 @@ class AuthenticationContext
     {
         self::$onBehalfOf = null;
         self::$customerInitiated = null;
+    }
+
+    public static function setTrackingMetaData($trackingMetaData)
+    {
+        self::$trackingMetaData = $trackingMetaData;
+    }
+
+    public static function getTrackingMetaData()
+    {
+        if(self::$trackingMetaData == null) {
+            return new SecurityMetadata();
+        }
+
+        return self::$trackingMetaData;
     }
 }
