@@ -32,6 +32,7 @@ class TokenRequestTest extends TestCase
 
     public function testAddAndGetTransferTokenRequest()
     {
+        //Remove createTransferToken
         $payload = $this->member->createTransferToken(10, 'EUR')
                                 ->setToMemberId($this->member->getMemberId())
                                 ->build();

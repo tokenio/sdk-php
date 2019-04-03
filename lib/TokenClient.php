@@ -65,7 +65,7 @@ class TokenClient
      * @param Alias $alias to check
      * @return bool {@code true} if alias exists, {@code false} otherwise
      */
-    public function isAliasExists($alias)
+    public function resolveAlias($alias)
     {
         $client = ClientFactory::unauthenticated($this->channel);
         return $client->aliasExists($alias);
@@ -399,6 +399,28 @@ class TokenClient
         $client = ClientFactory::unauthenticated($this->channel);
         return $client->createRecoveryAuthorization($memberId, $privilegedKey);
     }
+
+    //    public function setUpMember($alias, $memberId)
+    //    {
+    //        $crypto = $this->cryptoEngineFactory->create($memberId);
+    //        $client = ClientFactory::authenticated($this->channel, $memberId, $crypto);
+    //
+    //        $defaultAgentId = ClientFactory::unauthenticated($this->channel)->getDefaultAgent();
+    //        $operations = array();
+    //        array_push($operations, Util::toAddKeyOperations($crypto->generateKey(Key\Level::PRIVILEGED)));
+    //        array_push($operations, Util::toAddKeyOperations($crypto->getPublicKeys(Key\Level::STANDARD)));
+    //        array_push($operations, Util::toAddKeyOperations($crypto->getPublicKeys(Key\Level::LOW)));
+    //        array_push($operations, Util::createRecoveryAgentOperation($defaultAgentId));
+    //
+    //        if($alias != null) {
+    //            array_push($operations, Util::createAddAliasOperation($alias));
+    //        }
+    //
+    //        $metaData = Util::createAddAliasOperationMetadata($alias);
+    //        $signer = $crypto->createSigner(Key\Level::PRIVILEGED);
+    //        $mem = ClientFactory::unauthenticated($this->channel)->createMember($memberId, $operations, $metaData, $signer);
+    //
+    //    }
 
     public function getCountries($provider)
     {

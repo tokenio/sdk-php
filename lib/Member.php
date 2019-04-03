@@ -153,18 +153,6 @@ class Member implements RepresentableInterface
     }
 
     /**
-     * Looks up current account balance.
-     *
-     * @param string $accountId the account id
-     * @param int $keyLevel key level
-     * @return Money
-     *
-    public function getCurrentBalance($accountId, $keyLevel)
-    {
-        return $this->getBalance($accountId, $keyLevel)->getCurrent();
-    }*/
-
-    /**
      * Returns linking information for the specified bank id.
      *
      * @param string $bankId the bank id
@@ -174,19 +162,6 @@ class Member implements RepresentableInterface
     {
         return $this->client->getBankInfo($bankId);
     }
-
-    /**
-     * Looks up available account balance.
-     *
-     * @param string $accountId the account id
-     * @param int $keyLevel key level
-     * @return Money
-     *
-    public function getAvailableBalance($accountId, $keyLevel)
-    {
-        return $this->getBalance($accountId, $keyLevel)->getAvailable();
-    }
-     */
 
     /**
      * Looks up balances for a list of accounts.
@@ -780,7 +755,7 @@ class Member implements RepresentableInterface
      *
      * @param string $memberId the member id of the beneficiary
      * @return bool if success or not
-     */
+     *
     public function addTrustedBeneficiary($memberId)
     {
         $payload = new TrustedBeneficiary\Payload();
@@ -795,7 +770,7 @@ class Member implements RepresentableInterface
      *
      * @param string $memberId the member id of the beneficiary
      * @return bool if success or not
-     */
+     *
     public function removeTrustedBeneficiary($memberId)
     {
         $payload = new TrustedBeneficiary\Payload();
@@ -809,11 +784,13 @@ class Member implements RepresentableInterface
      * Gets a list of all trusted beneficiaries.
      *
      * @return RepeatedField
-     */
+     *
     public function getTrustedBeneficiaries()
     {
         return $this->client->getTrustedBeneficiaries();
     }
+
+     */
 
     /**
      * Creates an access token built from a given {@link AccessTokenBuilder}.
@@ -899,6 +876,11 @@ class Member implements RepresentableInterface
 
         $account = new Account($this, $accountProto, $this->client);
         return $account;
+    }
+
+    public function createAndLinkTestBankAccount($money)
+    {
+        return $this->client->createAndLinkTestBankAccount($money);
     }
 
     public function setTrackingMetaData($securityMetadata)

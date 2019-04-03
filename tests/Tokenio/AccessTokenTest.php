@@ -39,8 +39,8 @@ class AccessTokenTest extends TestCase
 
     public function testGetAccessToken()
     {
-        $address = $this->member1->addAddress(Strings::generateNonce(), TestUtil::generateAddress());
-        $payload = AccessTokenBuilder::createWithAlias($this->member2->getFirstAlias())->forAddress($address->getId())->build();
+        $payload = AccessTokenBuilder::createWithAlias($this->member2->getFirstAlias())->build();
+        //Remove create access token
         $accessToken = $this->member1->createAccessToken($payload);
         $result = $this->member1->getToken($accessToken->getId());
 
@@ -49,10 +49,10 @@ class AccessTokenTest extends TestCase
 
     public function testGetAccessTokens()
     {
-        $address = $this->member1->addAddress(Strings::generateNonce(), TestUtil::generateAddress());
-        $payload = AccessTokenBuilder::createWithAlias($this->member2->getFirstAlias())->forAddress($address->getId())->build();
+        $payload = AccessTokenBuilder::createWithAlias($this->member2->getFirstAlias())->build();
 
         $accessToken = $this->member1->createAccessToken($payload);
+        //Remove endorse token
         $this->member1->endorseToken($accessToken, Level::STANDARD);
         usleep(self::TOKEN_LOOKUP_POLL_FREQUENCY_MICRO * 5);
         $result = $this->member1->getAccessTokens(null, 2);
@@ -71,22 +71,18 @@ class AccessTokenTest extends TestCase
     public function testOnlyOneAccessTokenAllowed()
     {
         $member = $this->tokenIO->createMember(TestUtil::generateAlias());
-        $address = $member->addAddress(Strings::generateNonce(), TestUtil::generateAddress());
         $member->createAccessToken(AccessTokenBuilder::createWithAlias($member->getFirstAlias())
-            ->forAddress($address->getId())
             ->build());
 
         $this->expectException('Tokenio\Exception\StatusRuntimeException');
 
         $member->createAccessToken(AccessTokenBuilder::createWithAlias($member->getFirstAlias())
-            ->forAddress($address->getId())
             ->build());
     }
 
     public function testGetAccessTokenId()
     {
-        $address = $this->member1->addAddress(Strings::generateNonce(), TestUtil::generateAddress());
-        $payload = AccessTokenBuilder::createWithAlias($this->member2->getFirstAlias())->forAddress($address->getId())->build();
+        $payload = AccessTokenBuilder::createWithAlias($this->member2->getFirstAlias())->build();
 
         $request = TokenRequest::builder($payload)->build();
         $tokenRequestId = $this->member2->storeTokenRequest($request);
@@ -104,9 +100,7 @@ class AccessTokenTest extends TestCase
 
     public function testCreateAccessTokenIdempotent()
     {
-        $address = $this->member1->addAddress(Strings::generateNonce(), TestUtil::generateAddress());
         $accessToken = AccessTokenBuilder::createWithAlias($this->member1->getFirstAlias())
-            ->forAddress($address->getId())
             ->build();
 
         $this->member1->endorseToken($this->member1->createAccessToken($accessToken), Level::STANDARD);
