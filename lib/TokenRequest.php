@@ -4,28 +4,45 @@ namespace Tokenio;
 
 use Google\Protobuf\Internal\MapField;
 use Io\Token\Proto\Common\Token\TokenPayload;
+use Io\Token\Proto\Common\Token\TokenRequestPayload;
 
 class TokenRequest
 {
     /**
+     * @deprecated
      * @var TokenPayload
+     *
      */
     private $tokenPayload;
 
     /**
+     * @deprecated
      * @var MapField
+     *
      */
     private $options;
 
     /**
+     * @deprecated
      * @var string
      */
     private $userRefId;
 
     /**
+     * @deprecated
      * @var string
      */
     private $customizationId;
+
+    /**
+     * @var TokenRequestPayload
+     */
+    private $tokenRequestPayload;
+
+    /**
+     * @var TokenRequestOptions
+     */
+    private $tokenRequestOptions;
 
     /**
      * TokenRequest constructor.
@@ -35,15 +52,34 @@ class TokenRequest
      * @param string $userRefId
      * @param string $customizationId
      */
-    public function __construct($tokenPayload, $options, $userRefId, $customizationId)
+    public function __construct($tokenPayload, $options, $userRefId, $customizationId,
+                                $tokanReqPayload = null, $tokenReqOptions = null)
     {
         $this->tokenPayload = $tokenPayload;
         $this->options = $options;
         $this->userRefId = $userRefId;
         $this->customizationId = $customizationId;
+        $this->tokenRequestPayload = $tokanReqPayload;
+        $this->tokenRequestOptions = $tokenReqOptions;
+    }
+
+    public static function fromProtos($payload, $options ){
+        return new TokenRequest(null, null, null, null,
+            $payload, $options);
+    }
+
+    public static function accessTokenRequestBuilder(...$resources)
+    {
+        return new AccessBuilder($resources);
+    }
+
+    public static function transferTokenRequestBuilder($amount, $currency)
+    {
+        return new TransferBuilder($amount, $currency);
     }
 
     /**
+     * @deprecated
      * @return TokenPayload
      */
     public function getTokenPayload()
@@ -52,6 +88,7 @@ class TokenRequest
     }
 
     /**
+     * @deprecated
      * @return MapField
      */
     public function getOptions()
@@ -60,6 +97,7 @@ class TokenRequest
     }
 
     /**
+     * @deprecated
      * @return string
      */
     public function getUserRefId()
@@ -68,6 +106,7 @@ class TokenRequest
     }
 
     /**
+     * @deprecated
      * @return string
      */
     public function getCustomizationId()
@@ -76,6 +115,7 @@ class TokenRequest
     }
 
     /**
+     * @deprecated
      * @param TokenPayload $tokenPayload
      * @return TokenRequestBuilder
      */
