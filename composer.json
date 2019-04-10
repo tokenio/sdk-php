@@ -16,7 +16,7 @@
     }
   ],
   "require": {
-    "php": ">=5.5.0",
+    "php": ">=5.6.0",
     "ext-bcmath" : "*",
     "ext-json": "*",
     "ext-grpc": "*",
@@ -36,7 +36,8 @@
       "Tokenio\\": "lib/",
       "Google\\": "lib/Proto/Google",
       "GPBMetadata\\": "lib/Proto/GPBMetadata",
-      "Io\\": "lib/Proto/Io/"
+      "Io\\": "lib/Proto/Io/",
+      "Sample\\": "samples/"
     }
   },
   "suggest": {
