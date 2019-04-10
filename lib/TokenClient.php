@@ -330,12 +330,12 @@ class TokenClient
      * @param string $code the code
      * @return Member the new member
      */
-    public function completeRecoveryWithDefaultRule($memberId, $verificationId, $code)
+    public function completeRecoveryWithDefaultRule($memberId, $verificationId, $code, $cryptoEngine = null)
     {
         $unauthenticated = ClientFactory::unauthenticated($this->channel);
-        $cryptoEngine = $this->cryptoEngineFactory->create($memberId);
-        $recoveredMember = $unauthenticated->completeRecoveryWithDefaultRule($memberId, $verificationId, $code, $cryptoEngine);
-        $client = ClientFactory::authenticated($this->channel, $recoveredMember->getId(), $cryptoEngine);
+        $cryptoEng = $cryptoEngine == null ? $this->cryptoEngineFactory->create($memberId) : $cryptoEngine;
+        $recoveredMember = $unauthenticated->completeRecoveryWithDefaultRule($memberId, $verificationId, $code, $cryptoEng);
+        $client = ClientFactory::authenticated($this->channel, $recoveredMember->getId(), $cryptoEng);
 
         return new Member($client);
     }
@@ -399,28 +399,6 @@ class TokenClient
         $client = ClientFactory::unauthenticated($this->channel);
         return $client->createRecoveryAuthorization($memberId, $privilegedKey);
     }
-
-    //    public function setUpMember($alias, $memberId)
-    //    {
-    //        $crypto = $this->cryptoEngineFactory->create($memberId);
-    //        $client = ClientFactory::authenticated($this->channel, $memberId, $crypto);
-    //
-    //        $defaultAgentId = ClientFactory::unauthenticated($this->channel)->getDefaultAgent();
-    //        $operations = array();
-    //        array_push($operations, Util::toAddKeyOperations($crypto->generateKey(Key\Level::PRIVILEGED)));
-    //        array_push($operations, Util::toAddKeyOperations($crypto->getPublicKeys(Key\Level::STANDARD)));
-    //        array_push($operations, Util::toAddKeyOperations($crypto->getPublicKeys(Key\Level::LOW)));
-    //        array_push($operations, Util::createRecoveryAgentOperation($defaultAgentId));
-    //
-    //        if($alias != null) {
-    //            array_push($operations, Util::createAddAliasOperation($alias));
-    //        }
-    //
-    //        $metaData = Util::createAddAliasOperationMetadata($alias);
-    //        $signer = $crypto->createSigner(Key\Level::PRIVILEGED);
-    //        $mem = ClientFactory::unauthenticated($this->channel)->createMember($memberId, $operations, $metaData, $signer);
-    //
-    //    }
 
     /**
      * Returns a list of countries with Token-enabled banks.

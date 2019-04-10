@@ -19,7 +19,7 @@ class CancelAccessTokenSample
      */
     public static function cancelAccessToken($grantee, $tokenId){
         /** @var Token **/
-        $accessToken = $grantee->getToken(tokenId);
+        $accessToken = $grantee->getToken($tokenId);
         return $grantee->cancelToken($accessToken);
     }
 

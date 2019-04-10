@@ -626,31 +626,6 @@ class Member implements RepresentableInterface
     }
 
     /**
-     * Creates a new transfer token builder.
-     *
-     * @param double $amount transfer amount
-     * @param string $currency currency code, e.g. "USD"
-     * @return TransferTokenBuilder token returned by the server
-     *
-    public function createTransferToken($amount, $currency)
-    {
-        return new TransferTokenBuilder($this, $amount, $currency);
-    }
-     */
-
-    /**
-     * Creates an access token built from a given {@link AccessTokenBuilder}.
-     *
-     * @param TokenPayload $tokenPayload to create access token from
-     * @return Token
-     *
-    public function createAccessToken($tokenPayload)
-    {
-        return $this->client->createAccessToken($tokenPayload);
-    }
-     */
-
-    /**
      * Creates an access token built from a given {@link AccessTokenBuilder}.
      *
      * @param TokenPayload $tokenPayload to create access token from
@@ -673,24 +648,6 @@ class Member implements RepresentableInterface
     {
         return $this->client->getTokens(Type::ACCESS, $offset, $limit);
     }
-
-    /**
-     * Endorses the token by signing it. The signature is persisted along
-     * with the token.
-     *
-     * <p>If the key's level is too low, the result's status is MORE_SIGNATURES_NEEDED
-     * and the system pushes a notification to the member prompting them to use a
-     * higher-privilege key.
-     *
-     * @param Token $token to endorse
-     * @param int $keyLevel key level to be used to endorse the token
-     * @return TokenOperationResult result of endorse token
-     *
-    public function endorseToken($token, $keyLevel)
-    {
-        return $this->client->endorseToken($token, $keyLevel);
-    }
-     */
 
     /**
      * Creates a new web-app customization.
@@ -716,7 +673,7 @@ class Member implements RepresentableInterface
     public function getTransferTokens($offset, $limit)
     {
 
-        return $this->client->getTokens(TRANSFER, $offset,$limit);
+        return $this->client->getTokens(Type::TRANSFER, $offset,$limit);
     }
 
     /**

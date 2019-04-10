@@ -6,7 +6,6 @@ namespace Sample\Tokenio;
 
 use Io\Token\Proto\Common\Money\Money;
 use Io\Token\Proto\Common\Security\Key\Level;
-use Io\Token\Proto\Common\Transaction\Balance;
 use Tokenio\Account;
 use Tokenio\Member;
 
@@ -75,7 +74,7 @@ class GetBalanceSample
         $accounts = $member->getAccounts();
         $accountIds = array();
         for($idx = 0; $idx < count($accounts); $idx++){
-            $accountIds[idx] = $accounts[idx]->getId();
+            $accountIds[$idx] = $accounts[$idx]->getId();
         }
 
         return $member->getBalances($accountIds, Level::STANDARD);

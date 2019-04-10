@@ -23,7 +23,7 @@ class GetTransferSample
 
         /**@var $transfer Transfer**/
         foreach($transfers as $transfer){
-            displayTransfer($transfer->getStatus(), $transfer->getPayload()->getDescription());
+            self::displayTransfer($transfer->getStatus(), $transfer->getPayload()->getDescription());
         }
     }
 
@@ -38,7 +38,7 @@ class GetTransferSample
         /** @var $token Token*/
         foreach($tokens as $token){
             $transferBody = $token->getPayload()->getTransfer();
-            displayTransferToken($transferBody->getCurrency(), $transferBody->getLifetimeAmount());
+            self::displayTransferToken($transferBody->getLifetimeAmount(), $transferBody->getCurrency());
         }
     }
 
@@ -52,4 +52,8 @@ class GetTransferSample
     public static function getTransfer($payer, $transferId){
         return $payer->getTransfer($transferId);
     }
+
+    private static function displayTransfer($status, $description){}
+
+    private static function displayTransferToken($amount, $currency){}
 }

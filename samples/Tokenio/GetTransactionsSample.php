@@ -24,7 +24,7 @@ class GetTransactionsSample
 
         /**@var $transaction Transaction**/
         foreach($transactions as $transaction) {
-            displayTransaction(
+            self::displayTransaction(
                 $transaction->getAmount()->getCurrency(),
                 $transaction->getAmount()->getValue(),
                 $transaction->getType(),
@@ -60,7 +60,7 @@ class GetTransactionsSample
         $transactions = $account->getTransactions(null, 10, Level::STANDARD)->getList();
 
         foreach($transactions as $transaction){
-            displayTransaction(
+            self::displayTransaction(
                 $transaction->getAmount()->getCurrency(),
                 $transaction->getAmount()->getValue(),
                 $transaction->getType(),
@@ -82,4 +82,5 @@ class GetTransactionsSample
         return $account->getTransaction($txnId, Level::STANDARD);
     }
 
+    private static function displayTransaction($currency, $amount, $type, $status ){}
 }

@@ -1096,8 +1096,6 @@ class Client
         return $response->getCustomizationId();
     }
 
-    //----------------------------New Stuff---------------------------------------//
-
     public function setTrackingMetaData($trackingMetaData)
     {
         $this->trackingMetaData = $trackingMetaData;
@@ -1184,9 +1182,9 @@ class Client
     public function createAndLinkTestBankAccount($balance)
     {
         $authorizations = $this->createTestBankAuth($balance);
-        list($accounts) = $this->linkAccounts($authorizations);
-        if(sizeof($accounts) != 1){
-            throw new RuntimeException("Expected 1 account; found" + sizeof($accounts));
+        $accounts = $this->linkAccounts($authorizations);
+        if($accounts->count() != 1){
+            throw new \RuntimeException("Expected 1 account; found ".sizeof($accounts));
         }
 
         return $accounts[0];

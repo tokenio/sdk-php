@@ -7,6 +7,7 @@ use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Blob\Attachment;
 use Io\Token\Proto\Common\Blob\Blob\Payload;
 use Io\Token\Proto\Common\Pricing\Pricing;
+use Io\Token\Proto\Common\Token\ActingAs;
 use Io\Token\Proto\Common\Token\TokenMember;
 use Io\Token\Proto\Common\Token\TokenPayload;
 use Io\Token\Proto\Common\Token\TransferBody;
@@ -306,7 +307,7 @@ class TransferTokenBuilder
     /**
      * Sets acting as on the token
      *
-     * @param TokenPayload\ActingAs $actingAs entity the redeemer is acting on behalf of
+     * @param ActingAs $actingAs entity the redeemer is acting on behalf of
      * @return TransferTokenBuilder
      */
     public function setActingAs($actingAs)

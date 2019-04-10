@@ -15,7 +15,7 @@ class NotifySample
      *
      * @param $member Member
      * @param $accountIds Account[]
-     * @return Notification status;
+     * @return int status;
      */
     public static function triggerBalanceStepUpNotification($member, $accountIds){
         return $member->triggerBalanceStepUpNotification($accountIds);
