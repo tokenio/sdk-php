@@ -2,6 +2,7 @@
 
 namespace Tokenio\Rpc;
 
+use Google\Protobuf\Internal\RepeatedField;
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Alias\VerificationStatus;
 use Io\Token\Proto\Common\Bank\BankFilter;
@@ -425,8 +426,13 @@ class UnauthenticatedClient
         return $updateMemberResponse->getMember();
     }
 
-    //-------------------------------------New Stuff------------------------------------------------//
-
+    /**
+     * Create a recovery authorization for some agent to sign.
+     *
+     * @param memberId Id of member we claim to be.
+     * @param privilegedKey new privileged key we want to use.
+     * @return authorization structure for agent to sign
+     */
     public function createRecoveryAuthorization($memberId, $privilegedKey)
     {
         $getMemberRequest = new GetMemberRequest();
@@ -440,6 +446,13 @@ class UnauthenticatedClient
         return $authorization;
     }
 
+    /**
+     * Returns a list of countries with Token-enabled banks.
+     *
+     * @param provider If specified, return banks whose 'provider' matches the given provider
+     *     (case insensitive).
+     * @return RepeatedField a list of country codes
+     */
     public function getCountries($provider)
     {
         $bankCountriesRequest = new GetBanksCountriesRequest();
