@@ -30,26 +30,6 @@ class TokenRequestTest extends TestCase
         TestUtil::removeDirectory(__DIR__ . '/test-keys/');
     }
 
-    public function testAddAndGetTransferTokenRequest()
-    {
-        //Remove createTransferToken
-        $payload = $this->member->createTransferToken(10, 'EUR')
-                                ->setToMemberId($this->member->getMemberId())
-                                ->build();
-
-        $storedRequest = TokenRequest::builder($payload)->addAllOptions(['redirectUrl' => self::TOKEN_URL])->build();
-
-        $requestId = $this->member->storeTokenRequest($storedRequest);
-        $this->assertNotEmpty($requestId);
-
-        $retrievedRequest = $this->tokenIO->retrieveTokenRequest($requestId);
-        $this->assertEquals($storedRequest->getTokenPayload(), $retrievedRequest->getPayload());
-        $this->assertEquals($requestId, $retrievedRequest->getId());
-        foreach ($storedRequest->getOptions() as $k => $v){
-            $this->assertEquals($v, $retrievedRequest->getOptions()->offsetGet($k));
-        }
-    }
-
     public function testAddAndGetAccessTokenRequest()
     {
         $toMember = new TokenMember();
@@ -86,18 +66,5 @@ class TokenRequestTest extends TestCase
 
         $this->assertEmpty($token1);
         $this->assertEmpty($token2);
-    }
-
-    public function testAddAndGetTokenRequest_WrongMember()
-    {
-        $payload = $this->member->createTransferToken(10, 'EUR')
-                                ->setToMemberId($this->tokenIO->createMember()->getMemberId())
-                                ->build();
-
-        $storedRequest = TokenRequest::builder($payload)->build();
-
-        $this->expectException('Tokenio\Exception\StatusRuntimeException');
-        $this->member->storeTokenRequest($storedRequest);
-
     }
 }
