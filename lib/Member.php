@@ -18,7 +18,6 @@ use Io\Token\Proto\Common\Member\MemberRecoveryRulesOperation;
 use Io\Token\Proto\Common\Member\MemberRemoveKeyOperation;
 use Io\Token\Proto\Common\Member\Profile;
 use Io\Token\Proto\Common\Member\RecoveryRule;
-use Io\Token\Proto\Common\Member\TrustedBeneficiary;
 use Io\Token\Proto\Common\Money\Money;
 use Io\Token\Proto\Common\Security\Key;
 use Io\Token\Proto\Common\Security\Signature;
@@ -369,36 +368,6 @@ class Member implements RepresentableInterface
     }
 
     /**
-     * Creates and uploads a blob.
-     *
-     * @param string $ownerId the id of the owner of the blob
-     * @param string $type the MIME type of the file
-     * @param string $name the name of the file
-     * @param string $data the file data
-     * @param int $accessMode the access mode, normal or public
-     * @return Attachment
-     *
-    public function createBlob($ownerId, $type, $name, $data, $accessMode = AccessMode::PBDEFAULT)
-    {
-        $payload = new Payload();
-        $payload->setOwnerId($ownerId);
-        $payload->setType($type);
-        $payload->setName($name);
-        $payload->setData($data);
-        $payload->setAccessMode($accessMode);
-
-        $blobId = $this->client->createBlob($payload);
-
-        $attachment = new Attachment();
-        $attachment->setBlobId($blobId);
-        $attachment->setName($name);
-        $attachment->setType($type);
-
-        return $attachment;
-    }
-     */
-
-    /**
      * Redeems a transfer token.
      *
      * @param Token $token the transfer token
@@ -646,29 +615,6 @@ class Member implements RepresentableInterface
     }
 
     /**
-     * Removes all public keys that do not have a corresponding private key stored on
-     * the current device from tke member.
-     *
-     * @return bool that indicates whether the operation finished or had an error
-     *
-    public function removeNonStoredKeys()
-    {
-        $storedKeys = $this->client->getCryptoEngine()->getPublicKeys();
-        $member = $this->client->getMember($this->getMemberId());
-        $keyIdsToRemove = array();
-        foreach($member->getKeys() as $key) {
-            if(!in_array($key, $storedKeys, true)){
-                $keyIdsToRemove[] = $key->getId();
-            }
-        }
-        if(!empty($keyIdsToRemove)){
-            return $this->removeKeys($keyIdsToRemove);
-        }
-        return false;
-    }
-     */
-
-    /**
      * Retrieves a blob from the server.
      *
      * @param string $blobId id of the blob
@@ -678,64 +624,6 @@ class Member implements RepresentableInterface
     {
         return $this->client->getBlob($blobId);
     }
-
-    /**
-     * Retrieves a blob that is attached to a transfer token.
-     *
-     * @param string $tokenId id of the token
-     * @param string $blobId id of the blob
-     * @return Blob
-     *
-    public function getTokenBlob($tokenId, $blobId)
-    {
-        return $this->client->getTokenBlob($tokenId, $blobId);
-    }
-     */
-
-    /**
-     * Creates a new member address.
-     *
-     * @param string $name the name of the address
-     * @param Address $address the address
-     * @return AddressRecord record created
-
-    public function addAddress($name, $address)
-    {
-        return $this->client->addAddress($name, $address);
-    }
-
-    /**
-     * Looks up an address by id.
-     *
-     * @param string $addressId the address id
-     * @return AddressRecord
-
-    public function getAddress($addressId)
-    {
-        return $this->client->getAddress($addressId);
-    }
-
-    /**
-     * Looks up member addresses.
-     *
-     * @return RepeatedField a list of addresses
-
-    public function getAddresses()
-    {
-        return $this->client->getAddresses();
-    }
-
-    /**
-     * Deletes a member address by its id.
-     *
-     * @param string $addressId the id of the address
-     * @return bool that indicates whether the operation finished or had an error
-     *
-    public function deleteAddress($addressId)
-    {
-        return $this->client->deleteAddress($addressId);
-    }
-    */
 
     /**
      * Creates a new transfer token builder.
@@ -748,48 +636,6 @@ class Member implements RepresentableInterface
     {
         return new TransferTokenBuilder($this, $amount, $currency);
     }
-     */
-
-    /**
-     * Adds a trusted beneficiary for whom the SCA will be skipped.
-     *
-     * @param string $memberId the member id of the beneficiary
-     * @return bool if success or not
-     *
-    public function addTrustedBeneficiary($memberId)
-    {
-        $payload = new TrustedBeneficiary\Payload();
-        $payload->setMemberId($memberId)
-            ->setNonce(Strings::generateNonce());
-
-        return $this->client->addTrustedBeneficiary($payload);
-    }
-
-    /**
-     * Removes a trusted beneficiary.
-     *
-     * @param string $memberId the member id of the beneficiary
-     * @return bool if success or not
-     *
-    public function removeTrustedBeneficiary($memberId)
-    {
-        $payload = new TrustedBeneficiary\Payload();
-        $payload->setMemberId($memberId)
-                ->setNonce(Strings::generateNonce());
-
-        return $this->client->removeTrustedBeneficiary($payload);
-    }
-
-    /**
-     * Gets a list of all trusted beneficiaries.
-     *
-     * @return RepeatedField
-     *
-    public function getTrustedBeneficiaries()
-    {
-        return $this->client->getTrustedBeneficiaries();
-    }
-
      */
 
     /**
@@ -860,14 +706,26 @@ class Member implements RepresentableInterface
         return $this->client->createCustomization($displayName, $logo, $consentText, $colors);
     }
 
-    //-------------------------------------New Stuff--------------------------------------------------------//
-
+    /**
+     * Looks up transfer tokens owned by the member.
+     *
+     * @param offset optional offset to start at
+     * @param limit max number of records to return
+     * @return PagedList transfer tokens owned by the member
+     */
     public function getTransferTokens($offset, $limit)
     {
 
         return $this->client->getTokens(TRANSFER, $offset,$limit);
     }
 
+    /**
+     * Creates a test bank account in a fake bank and links the account.
+     *
+     * @param balance account balance to set
+     * @param currency currency code, e.g. "EUR"
+     * @return Account the linked account
+     */
     public function createTestBankAccount($balance, $currency)
     {
         $money = new Money();
@@ -878,26 +736,53 @@ class Member implements RepresentableInterface
         return $account;
     }
 
+    /**
+     * Creates a test bank account in a fake bank and links the account.
+     *
+     * @param balance account balance to set
+     * @param currency currency code, e.g. "EUR"
+     * @return \Io\Token\Proto\Common\Account\Account the linked account
+     */
     public function createAndLinkTestBankAccount($money)
     {
         return $this->client->createAndLinkTestBankAccount($money);
     }
 
+    /**
+     * Sets security metadata included in all requests.
+     *
+     * @param securityMetadata security metadata
+     */
     public function setTrackingMetaData($securityMetadata)
     {
         $this->client->setTrackingMetaData($securityMetadata);
     }
 
+    /**
+     * Clears security metadata.
+     */
     public function clearTrackingMetaData()
     {
         $this->client->clearTrackingMetaData();
     }
 
+    /**
+     * Trigger a step up notification for balance requests.
+     *
+     * @param string[] accountIds list of account ids
+     * @return int
+     */
     public function triggerBalanceStepUpNotification($accountIds)
     {
         return $this->client->triggerBalanceStepUpNotification($accountIds);
     }
 
+    /**
+     * Trigger a step up notification for transaction requests.
+     *
+     * @param string account id
+     * @return int
+     */
     public function triggerTransactionStepUpNotification($accountId)
     {
         return $this->client->triggerTransactionStepUpNotification($accountId);
@@ -909,7 +794,7 @@ class Member implements RepresentableInterface
      * @param $accountId
      * @return RepeatedField transfer endpoints
      */
-    public function resolveTransferDestinations($accountId)
+    public function getTransferDestinations($accountId)
     {
         return $this->client->resolveTransferDestinations($accountId);
     }

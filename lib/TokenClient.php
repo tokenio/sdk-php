@@ -2,6 +2,7 @@
 
 namespace Tokenio;
 
+use Google\Protobuf\Internal\RepeatedField;
 use Grpc\Channel;
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Member\CreateMemberType;
@@ -370,7 +371,6 @@ class TokenClient
         return new TokenRequestCallback($parameters->getTokenId(), $state->getInnerState());
     }
 
-//----------------------------------------- New Stuff------------------------------------------------
     /**
      * Creates a new instance of {@link TokenClient} that's configured to use
      * the specified environment.
@@ -422,6 +422,12 @@ class TokenClient
     //
     //    }
 
+    /**
+     * Returns a list of countries with Token-enabled banks.
+     *
+     * @param provider If specified, return banks whose 'provider' matches the given provider (case insensitive).
+     * @return RepeatedField a list of country codes
+     */
     public function getCountries($provider)
     {
         $client = ClientFactory::unauthenticated($this->channel);
