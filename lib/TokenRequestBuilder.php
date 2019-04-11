@@ -71,7 +71,7 @@ class TokenRequestBuilder
      * Optional. Sets the bank ID in order to bypass the Token bank selection UI.
      *
      * @param string bankId bank ID
-     * @return TokenRequestBuilder
+     * @return $this
      */
     public function setBankId($bankId)
     {
@@ -83,7 +83,7 @@ class TokenRequestBuilder
      * Optional. Sets the payer/grantor member ID in order to bypass the Token email input UI.
      *
      * @param string romMemberId payer/grantor member ID
-     * @return TokenRequestBuilder
+     * @return $this
      */
     public function setFromMemberId($memberId)
     {
@@ -95,7 +95,7 @@ class TokenRequestBuilder
      * Optional. Sets the payer/grantor alias in order to bypass the Token email input UI.
      *
      * @param Alias fromAlias payer/grantor alias
-     * @return TokenRequestBuilder
+     * @return $this
      */
     public function setFromAlias($fromAlias)
     {
@@ -107,7 +107,7 @@ class TokenRequestBuilder
      * Optional. Sets the account ID of the source bank account.
      *
      * @param string sourceAccountId source bank account ID
-     * @return TokenRequestBuilder
+     * @return $this
      */
     public function setSourceAccount($sourceAccountId)
     {
@@ -120,7 +120,7 @@ class TokenRequestBuilder
      * receipt email/SMS/etc.
      *
      * @param bool receipt requested flag
-     * @return TokenRequestBuilder
+     * @return $this
      */
     public function setReceiptRequest($receiptRequested)
     {
@@ -132,7 +132,7 @@ class TokenRequestBuilder
      * Optional. Sets the ID used to track a member claimed by a TPP.
      *
      * @param string userRefId user ref ID
-     * @return TokenRequestBuilder
+     * @return $this
      */
     public function setUserRefId($userRefId)
     {
@@ -145,7 +145,7 @@ class TokenRequestBuilder
      * Optional. Sets the ID used to customize the UI of the web-app.
      *
      * @param string customization ID
-     * @return TokenRequestBuilder
+     * @return $this
      */
     public function setCustomizationId($customizationId)
     {
@@ -158,7 +158,7 @@ class TokenRequestBuilder
      * Sets the callback URL to the server that will initiate redemption of the token.
      *
      * @param string redirectUrl redirect URL
-     * @return TokenRequestBuilder
+     * @return $this
      */
     public function setRedirectUrl($redirectUrl)
     {
@@ -170,7 +170,7 @@ class TokenRequestBuilder
      * Sets the reference ID of the token.
      *
      * @param string refId token ref ID
-     * @return TokenRequestBuilder
+     * @return $this
      */
     public function setRefId($refId)
     {
@@ -182,7 +182,7 @@ class TokenRequestBuilder
      * Sets the alias of the payee/grantee.
      *
      * @param Alias toAlias alias
-     * @return TokenRequestBuilder
+     * @return $this
      */
     public function setToAlias($toAlias)
     {
@@ -194,7 +194,7 @@ class TokenRequestBuilder
      * Sets the memberId of the payee/grantee.
      *
      * @param string toMemberId memberId
-     * @return TokenRequestBuilder
+     * @return $this
      */
     public function setToMemberId($toMemberId)
     {
@@ -206,7 +206,7 @@ class TokenRequestBuilder
      * Sets acting as on the token.
      *
      * @param ActingAs actingAs entity the redeemer is acting on behalf of
-     * @return TokenRequestBuilder
+     * @return $this
      */
     public function setActingAs($actingAs)
     {
@@ -218,7 +218,7 @@ class TokenRequestBuilder
      * Sets the description.
      *
      * @param string description description
-     * @return TokenRequestBuilder
+     * @return $this
      */
     public function setDescription($description)
     {
@@ -231,7 +231,7 @@ class TokenRequestBuilder
      * between the the request and callback phases of the flow.
      *
      * @param string state state
-     * @return TokenRequestBuilder
+     * @return $this
      */
     public function setState($state){
         $this->oauthState = $state;
@@ -243,7 +243,7 @@ class TokenRequestBuilder
      * Used for CSRF attack mitigation.
      *
      * @param string csrfToken CSRF token
-     * @return TokenRequestBuilder
+     * @return $this
      */
     public function setCsrfToken($csrfToken)
     {
@@ -255,7 +255,7 @@ class TokenRequestBuilder
      * @deprecated
      * @param string $option
      * @param string $value
-     * @return TokenRequestBuilder
+     * @return $this
      */
     public function addOption($option, $value)
     {
@@ -266,7 +266,7 @@ class TokenRequestBuilder
     /**
      * @deprecated
      * @param array $options
-     * @return TokenRequestBuilder
+     * @return $this
      */
     public function addAllOptions(array $options)
     {
