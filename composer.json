@@ -37,7 +37,7 @@
       "Google\\": "lib/Proto/Google",
       "GPBMetadata\\": "lib/Proto/GPBMetadata",
       "Io\\": "lib/Proto/Io/",
-      "Sample\\": "samples/"
+      "Io\\Token\\Sample\\": "samples/"
     }
   },
   "suggest": {

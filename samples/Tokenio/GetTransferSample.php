@@ -1,8 +1,7 @@
 <?php
 
 
-namespace Sample\Tokenio;
-
+namespace Io\Token\Sample\Tokenio;
 
 use Io\Token\Proto\Common\Token\Token;
 use Io\Token\Proto\Common\Transfer\Transfer;

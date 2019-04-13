@@ -73,6 +73,19 @@ class TokenClient
     }
 
     /**
+     * @deprecated
+     * Use resolveAlias($alias) instead of this.
+     *
+     * @param Alias $alias to check
+     * @return bool {@code true} if alias exists, {@code false} otherwise
+     */
+    public function isAliasExists($alias)
+    {
+        $client = ClientFactory::unauthenticated($this->channel);
+        return $client->aliasExists($alias);
+    }
+
+    /**
      * Looks up member id for a given alias.
      *
      * @param Alias $alias to check
@@ -379,7 +392,7 @@ class TokenClient
      * @param string $developerKey developer key
      * @return TokenClient instance
      */
-    public function create($cluster, $developerKey)
+    public static function create($cluster, $developerKey)
     {
         return TokenClient::builder()
             ->connectTo($cluster)

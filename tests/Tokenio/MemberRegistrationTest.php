@@ -36,7 +36,7 @@ class MemberRegistrationTest extends TestCase
     public function testCreateMember_noAlias()
     {
         $member = $this->tokenIO->createMember();
-        $this->assertEmpty($member->aliases());
+        $this->assertEmpty($member->getAliases());
         $this->assertCount(3, $member->getKeys());
     }
 
@@ -47,11 +47,11 @@ class MemberRegistrationTest extends TestCase
         $loggedIn = $this->tokenIO->getMember($member->getMemberId());
 
         $expectedAliases = array();
-        foreach ($member->aliases() as $alias){
+        foreach ($member->getAliases() as $alias){
             $expectedAliases[] = $alias;
         }
         $actualAliases = array();
-        foreach ($loggedIn->aliases() as $alias){
+        foreach ($loggedIn->getAliases() as $alias){
             $actualAliases[] = $alias;
         }
         sort($expectedAliases);
@@ -77,11 +77,11 @@ class MemberRegistrationTest extends TestCase
         $alias2 = TestUtil::generateAlias();
 
         $member = $this->tokenIO->createMember($alias1);
-        $receivedAliases = TestUtil::repeatedFieldsToArray($member->aliases());
+        $receivedAliases = TestUtil::repeatedFieldsToArray($member->getAliases());
         $this->assertEquals($receivedAliases, [$alias1]);
 
         $member->addAlias($alias2);
-        $receivedAliases = TestUtil::repeatedFieldsToArray($member->aliases());
+        $receivedAliases = TestUtil::repeatedFieldsToArray($member->getAliases());
         $expected = [$alias1,$alias2];
         sort($expected);
         sort($receivedAliases);
@@ -95,18 +95,18 @@ class MemberRegistrationTest extends TestCase
         $alias2 = TestUtil::generateAlias();
 
         $member = $this->tokenIO->createMember($alias1);
-        $actualAliases = TestUtil::repeatedFieldsToArray($member->aliases());
+        $actualAliases = TestUtil::repeatedFieldsToArray($member->getAliases());
         $this->assertEquals([$alias1], $actualAliases);
 
         $member->addAlias($alias2);
-        $actualAliases = TestUtil::repeatedFieldsToArray($member->aliases());
+        $actualAliases = TestUtil::repeatedFieldsToArray($member->getAliases());
         $expectedAliases = [$alias1, $alias2];
         sort($actualAliases);
         sort($expectedAliases);
         $this->assertEquals($expectedAliases, $actualAliases);
 
         $member->removeAlias($alias2);
-        $actualAliases = TestUtil::repeatedFieldsToArray($member->aliases());
+        $actualAliases = TestUtil::repeatedFieldsToArray($member->getAliases());
         $this->assertEquals([$alias1], $actualAliases);
     }
 
@@ -133,12 +133,12 @@ class MemberRegistrationTest extends TestCase
 
         $this->assertEquals($member->getMemberId(), $recovered->getMemberId());
         $this->assertCount(3, $recovered->getKeys());
-        $this->assertEmpty($recovered->aliases());
+        $this->assertEmpty($recovered->getAliases());
         $this->assertFalse($this->tokenIO->resolveAlias($alias));
 
         $recovered->verifyAlias($verificationId, 'code');
         $this->assertTrue($this->tokenIO->resolveAlias($alias));
-        $actualAliases = TestUtil::repeatedFieldsToArray($recovered->aliases());
+        $actualAliases = TestUtil::repeatedFieldsToArray($recovered->getAliases());
         $this->assertEquals([$alias], $actualAliases);
     }
 
@@ -175,11 +175,11 @@ class MemberRegistrationTest extends TestCase
 
         $this->assertEquals($member->getMemberId(), $recovered->getMemberId());
         $this->assertCount(3, $recovered->getKeys());
-        $this->assertEmpty($recovered->aliases());
+        $this->assertEmpty($recovered->getAliases());
         $this->assertFalse($this->tokenIO->resolveAlias($alias));
 
         $recovered->verifyAlias($verificationId, 'code');
         $this->assertTrue($this->tokenIO->resolveAlias($alias));
-        $this->assertEquals([$alias], TestUtil::repeatedFieldsToArray($recovered->aliases()));
+        $this->assertEquals([$alias], TestUtil::repeatedFieldsToArray($recovered->getAliases()));
     }
 }

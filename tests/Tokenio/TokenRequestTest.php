@@ -11,7 +11,7 @@ use Tokenio\Member;
 
 class TokenRequestTest extends TestCase
 {
-    const TOKEN_URL = 'https://token.io';
+    const TOKEN_URL = 'https://token.io/callback';
 
     /** @var \Tokenio\TokenClient */
     protected $tokenIO;
@@ -34,6 +34,8 @@ class TokenRequestTest extends TestCase
     {
         $toMember = new TokenMember();
         $toMember->setId($this->member->getMemberId());
+
+        echo $this->member->getMemberId() . "\n";
 
         $resource = new AccessBody\Resource();
         $resource->setAllAddresses(new AccessBody\Resource\AllAddresses());

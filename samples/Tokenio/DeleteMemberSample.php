@@ -1,14 +1,12 @@
 <?php
 
 
-namespace Sample\Tokenio;
-
+namespace Io\Token\Sample\Tokenio;
 
 use Tokenio\Member;
 
 class DeleteMemberSample
 {
-
     /**
      * Deletes a member.
      *

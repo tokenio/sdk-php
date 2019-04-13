@@ -1,8 +1,7 @@
 <?php
 
 
-namespace Sample\Tokenio;
-
+namespace Io\Token\Sample\Tokenio;
 
 use Io\Token\Proto\Common\Token\Token;
 use Io\Token\Proto\Common\Token\TokenOperationResult;
@@ -10,7 +9,6 @@ use Tokenio\Member;
 
 class CancelTransferTokenSample
 {
-
     /**
      * Cancels a transfer token
      *
@@ -20,9 +18,7 @@ class CancelTransferTokenSample
      */
     public static function cancelTransferToken($grantee, $tokenId)
     {
-        /**
-         * @var Token
-         */
+        /** @var Token **/
         $transferToken = $grantee->getToken($tokenId);
         return $grantee->cancelToken($transferToken);
     }

@@ -1,8 +1,7 @@
 <?php
 
 
-namespace Sample\Tokenio;
-
+namespace Io\Token\Sample\Tokenio;
 
 use Io\Token\Proto\Common\Notification\Notification;
 use Tokenio\Account;

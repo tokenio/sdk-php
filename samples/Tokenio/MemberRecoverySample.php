@@ -1,8 +1,7 @@
 <?php
 
 
-namespace Sample\Tokenio;
-
+namespace Io\Token\Sample\Tokenio;
 
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Member\MemberRecoveryOperation;
@@ -17,7 +16,6 @@ use Tokenio\TokenClient;
 
 class MemberRecoverySample
 {
-
     /**@var Member**/
     public $agentMember;
 
@@ -28,7 +26,6 @@ class MemberRecoverySample
     {
         $member->useDefaultRecoveryRule();
     }
-
 
     /**
      * Recover previously-created member, assuming they were

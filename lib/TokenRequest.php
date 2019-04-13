@@ -40,7 +40,7 @@ class TokenRequest
     private $tokenRequestPayload;
 
     /**
-     * @var TokenRequestOptions
+     * @var \Io\Token\Proto\Common\Token\TokenRequestOptions
      */
     private $tokenRequestOptions;
 
@@ -51,26 +51,38 @@ class TokenRequest
      * @param string[] $options
      * @param string $userRefId
      * @param string $customizationId
+     * @param TokenRequestPayload $tokenReqPayload
+     * @param \Io\Token\Proto\Common\Token\TokenRequestOptions $tokenReqOptions
      */
     public function __construct($tokenPayload, $options, $userRefId, $customizationId,
-                                $tokanReqPayload = null, $tokenReqOptions = null)
+                                $tokenRequestPayload = null, $tokenRequestOptions = null)
     {
         $this->tokenPayload = $tokenPayload;
         $this->options = $options;
         $this->userRefId = $userRefId;
         $this->customizationId = $customizationId;
-        $this->tokenRequestPayload = $tokanReqPayload;
-        $this->tokenRequestOptions = $tokenReqOptions;
+        $this->tokenRequestPayload = $tokenRequestPayload;
+        $this->tokenRequestOptions = $tokenRequestOptions;
     }
 
-    public static function fromProtos($payload, $options ){
-        return new TokenRequest(null, null, null, null,
-            $payload, $options);
+    public static function fromProtos($tokenRequestPayload, $tokenRequestOptions)
+    {
+        return new TokenRequest(
+            null,
+            null,
+            null,
+            null,
+            $tokenRequestPayload,
+            $tokenRequestOptions);
     }
 
+    /**
+     * @param mixed ...$resources
+     * @return AccessBuilder
+     */
     public static function accessTokenRequestBuilder(...$resources)
     {
-        return new AccessBuilder($resources);
+        return new AccessBuilder(...$resources);
     }
 
     public static function transferTokenRequestBuilder($amount, $currency)
@@ -113,6 +125,23 @@ class TokenRequest
     {
         return $this->customizationId;
     }
+
+    /**
+     * @return TokenRequestPayload|null
+     */
+    public function getTokenRequestPayload()
+    {
+        return $this->tokenRequestPayload;
+    }
+
+    /**
+     * @return \Io\Token\Proto\Common\Token\TokenRequestOptions|null
+     */
+    public function getTokenRequestOptions()
+    {
+        return $this->tokenRequestOptions;
+    }
+
 
     /**
      * @deprecated

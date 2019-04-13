@@ -77,7 +77,7 @@ class Member implements RepresentableInterface
      *
      * @return RepeatedField a list of aliases
      */
-    public function aliases()
+    public function getAliases()
     {
         return $this->client->getAliases();
     }
@@ -315,7 +315,9 @@ class Member implements RepresentableInterface
             $tokenRequest->getTokenPayload(),
             $tokenRequest->getOptions(),
             $tokenRequest->getUserRefId(),
-            $tokenRequest->getCustomizationId());
+            $tokenRequest->getCustomizationId(),
+            $tokenRequest->getTokenRequestPayload(),
+            $tokenRequest->getTokenRequestOptions());
     }
 
     /**
@@ -674,35 +676,6 @@ class Member implements RepresentableInterface
     {
 
         return $this->client->getTokens(Type::TRANSFER, $offset,$limit);
-    }
-
-    /**
-     * Creates a test bank account in a fake bank and links the account.
-     *
-     * @param balance account balance to set
-     * @param currency currency code, e.g. "EUR"
-     * @return Account the linked account
-     */
-    public function createTestBankAccount($balance, $currency)
-    {
-        $money = new Money();
-        $money->setValue($balance)->setCurrency($currency);
-        $accountProto  = $this->client->createAndLinkTestBankAccount($money);
-
-        $account = new Account($this, $accountProto, $this->client);
-        return $account;
-    }
-
-    /**
-     * Creates a test bank account in a fake bank and links the account.
-     *
-     * @param balance account balance to set
-     * @param currency currency code, e.g. "EUR"
-     * @return \Io\Token\Proto\Common\Account\Account the linked account
-     */
-    public function createAndLinkTestBankAccount($money)
-    {
-        return $this->client->createAndLinkTestBankAccount($money);
     }
 
     /**

@@ -1,8 +1,6 @@
 <?php
 
-
-namespace Sample\Tokenio;
-
+namespace Io\Token\Sample\Tokenio;
 
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Token\TokenRequestPayload;
@@ -23,8 +21,8 @@ final class StoreAndRetrieveTokenRequestSample
     {
         $alias = new Alias();
         $alias->setValue("payer-alias@token.io")->setType(Alias\Type::EMAIL);
-        $transferBuilder = TokenRequest::transferTokenRequestBuilder(100, "EUR");
-        $tokenRequest = $transferBuilder->setToMemberId($payee->getMemberId())
+        $tokenRequest = TokenRequest::transferTokenRequestBuilder(100, "EUR")
+                            ->setToMemberId($payee->getMemberId())
                             ->setDescription("Book purchase")
                             ->setRedirectUrl("https://token.io/callback")
                             ->setFromAlias($alias)
@@ -32,6 +30,7 @@ final class StoreAndRetrieveTokenRequestSample
                             ->setCsrfToken(Strings::generateNonce())
                             ->build();
 
+        echo $tokenRequest->getTokenRequestPayload()->getTo()->getId();
         return $payee->storeTokenRequest($tokenRequest);
     }
 
@@ -44,19 +43,18 @@ final class StoreAndRetrieveTokenRequestSample
     public static function storeAccessTokenRequest($grantee)
     {
         $alias = new Alias();
-        $alias->setValue("payer-alias@token.io")->setType(Alias\Type::EMAIL);
-
-        $transferBuilder = TokenRequest::accessTokenRequestBuilder(
+        $alias->setValue("grantor-alias@token.io")->setType(Alias\Type::EMAIL);
+        $tokenRequest = TokenRequest::accessTokenRequestBuilder(
             TokenRequestPayload\AccessBody\ResourceType::ACCOUNTS,
-                      TokenRequestPayload\AccessBody\ResourceType::BALANCES);
-
-        $tokenRequest = $transferBuilder->setToMemberId($grantee->getMemberId())
+                      TokenRequestPayload\AccessBody\ResourceType::BALANCES)
+                        ->setToMemberId($grantee->getMemberId())
                         ->setRedirectUrl("https://token.io/callback")
                         ->setFromAlias($alias)
                         ->setBankId("iron")
                         ->setCsrfToken(Strings::generateNonce())
                         ->build();
 
+        echo $tokenRequest->getTokenRequestPayload()->getTo()->getId();
         return $grantee->storeTokenRequest($tokenRequest);
     }
 

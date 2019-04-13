@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Sample\Tokenio;
+namespace Io\Token\Sample\Tokenio;
 
 use Io\Token\Proto\Common\Token\Token;
 use Io\Token\Proto\Common\Token\TokenOperationResult;
@@ -9,7 +9,6 @@ use Tokenio\Member;
 
 class CancelAccessTokenSample
 {
-
     /**
      * Cancels the access token
      *
@@ -22,5 +21,4 @@ class CancelAccessTokenSample
         $accessToken = $grantee->getToken($tokenId);
         return $grantee->cancelToken($accessToken);
     }
-
 }

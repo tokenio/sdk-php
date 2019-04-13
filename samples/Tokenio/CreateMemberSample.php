@@ -1,8 +1,7 @@
 <?php
 
 
-namespace Sample\Tokenio;
-
+namespace Io\Token\Sample\Tokenio;
 
 use Io\Token\Proto\Common\Alias\Alias;
 use Symfony\Component\Filesystem\Exception\IOException;
@@ -40,8 +39,7 @@ class CreateMemberSample
             $member->useDefaultRecoveryRule();
 
             return $member;
-
-        }catch (IOException $exception){
+        } catch (IOException $exception) {
             throw new \RuntimeException($exception);
         }
     }

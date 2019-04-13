@@ -29,6 +29,10 @@ class ResourceType
      * Generated from protobuf enum <code>TRANSFER_DESTINATIONS = 4;</code>
      */
     const TRANSFER_DESTINATIONS = 4;
+    /**
+     * Generated from protobuf enum <code>FUNDS_CONFIRMATIONS = 5;</code>
+     */
+    const FUNDS_CONFIRMATIONS = 5;
 }
 
 // Adding a class alias for backwards compatibility with the previous class name.

@@ -1,8 +1,7 @@
 <?php
 
 
-namespace Sample\Tokenio;
-
+namespace Io\Token\Sample\Tokenio;
 
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Member\Profile;
@@ -14,7 +13,6 @@ use Tokenio\TokenClient;
 
 class MemberMethodsSample
 {
-
     /**
      * Add or removes alias
      *

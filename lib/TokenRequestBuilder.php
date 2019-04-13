@@ -4,6 +4,7 @@ namespace Tokenio;
 
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Token\ActingAs;
+use Io\Token\Proto\Common\Token\TokenMember;
 use Io\Token\Proto\Common\Token\TokenPayload;
 use Io\Token\Proto\Common\Token\TokenRequestPayload;
 use \Io\Token\Proto\Common\Token\TokenRequestOptions;
@@ -65,6 +66,8 @@ class TokenRequestBuilder
         $this->options = array();
         $this->requestPayload = new TokenRequestPayload();
         $this->requestOptions = new TokenRequestOptions();
+        $this->requestPayload->setTo(new TokenMember());
+        $this->requestOptions->setFrom(new TokenMember());
     }
 
     /**

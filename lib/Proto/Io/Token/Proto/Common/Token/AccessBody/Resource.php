@@ -21,16 +21,20 @@ class Resource extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
+     *     @type \Io\Token\Proto\Common\Token\AccessBody\Resource\Account $account
+     *           access to account data
+     *     @type \Io\Token\Proto\Common\Token\AccessBody\Resource\AccountTransactions $transactions
+     *     @type \Io\Token\Proto\Common\Token\AccessBody\Resource\AccountBalance $balance
+     *     @type \Io\Token\Proto\Common\Token\AccessBody\Resource\TransferDestinations $transfer_destinations
+     *     @type \Io\Token\Proto\Common\Token\AccessBody\Resource\FundsConfirmation $funds_confirmation
+     *           other permissions
+     *     @type \Io\Token\Proto\Common\Token\AccessBody\Resource\Address $address
+     *           deprecated
      *     @type \Io\Token\Proto\Common\Token\AccessBody\Resource\AllAddresses $all_addresses
      *     @type \Io\Token\Proto\Common\Token\AccessBody\Resource\AllAccounts $all_accounts
      *     @type \Io\Token\Proto\Common\Token\AccessBody\Resource\AllAccountTransactions $all_transactions
      *     @type \Io\Token\Proto\Common\Token\AccessBody\Resource\AllAccountBalances $all_balances
      *     @type \Io\Token\Proto\Common\Token\AccessBody\Resource\AllTransferDestinations $all_transfer_destinations
-     *     @type \Io\Token\Proto\Common\Token\AccessBody\Resource\Address $address
-     *     @type \Io\Token\Proto\Common\Token\AccessBody\Resource\Account $account
-     *     @type \Io\Token\Proto\Common\Token\AccessBody\Resource\AccountTransactions $transactions
-     *     @type \Io\Token\Proto\Common\Token\AccessBody\Resource\AccountBalance $balance
-     *     @type \Io\Token\Proto\Common\Token\AccessBody\Resource\TransferDestinations $transfer_destinations
      *     @type \Io\Token\Proto\Common\Token\AccessBody\Resource\AllAccountsAtBank $all_accounts_at_bank
      *     @type \Io\Token\Proto\Common\Token\AccessBody\Resource\AllTransactionsAtBank $all_transactions_at_bank
      *     @type \Io\Token\Proto\Common\Token\AccessBody\Resource\AllBalancesAtBank $all_balances_at_bank
@@ -40,6 +44,150 @@ class Resource extends \Google\Protobuf\Internal\Message
     public function __construct($data = NULL) {
         \GPBMetadata\Token::initOnce();
         parent::__construct($data);
+    }
+
+    /**
+     * access to account data
+     *
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.Account account = 6;</code>
+     * @return \Io\Token\Proto\Common\Token\AccessBody\Resource\Account
+     */
+    public function getAccount()
+    {
+        return $this->readOneof(6);
+    }
+
+    /**
+     * access to account data
+     *
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.Account account = 6;</code>
+     * @param \Io\Token\Proto\Common\Token\AccessBody\Resource\Account $var
+     * @return $this
+     */
+    public function setAccount($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\AccessBody_Resource_Account::class);
+        $this->writeOneof(6, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AccountTransactions transactions = 7;</code>
+     * @return \Io\Token\Proto\Common\Token\AccessBody\Resource\AccountTransactions
+     */
+    public function getTransactions()
+    {
+        return $this->readOneof(7);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AccountTransactions transactions = 7;</code>
+     * @param \Io\Token\Proto\Common\Token\AccessBody\Resource\AccountTransactions $var
+     * @return $this
+     */
+    public function setTransactions($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\AccessBody_Resource_AccountTransactions::class);
+        $this->writeOneof(7, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AccountBalance balance = 8;</code>
+     * @return \Io\Token\Proto\Common\Token\AccessBody\Resource\AccountBalance
+     */
+    public function getBalance()
+    {
+        return $this->readOneof(8);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AccountBalance balance = 8;</code>
+     * @param \Io\Token\Proto\Common\Token\AccessBody\Resource\AccountBalance $var
+     * @return $this
+     */
+    public function setBalance($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\AccessBody_Resource_AccountBalance::class);
+        $this->writeOneof(8, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.TransferDestinations transfer_destinations = 12;</code>
+     * @return \Io\Token\Proto\Common\Token\AccessBody\Resource\TransferDestinations
+     */
+    public function getTransferDestinations()
+    {
+        return $this->readOneof(12);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.TransferDestinations transfer_destinations = 12;</code>
+     * @param \Io\Token\Proto\Common\Token\AccessBody\Resource\TransferDestinations $var
+     * @return $this
+     */
+    public function setTransferDestinations($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\AccessBody_Resource_TransferDestinations::class);
+        $this->writeOneof(12, $var);
+
+        return $this;
+    }
+
+    /**
+     * other permissions
+     *
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.FundsConfirmation funds_confirmation = 15;</code>
+     * @return \Io\Token\Proto\Common\Token\AccessBody\Resource\FundsConfirmation
+     */
+    public function getFundsConfirmation()
+    {
+        return $this->readOneof(15);
+    }
+
+    /**
+     * other permissions
+     *
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.FundsConfirmation funds_confirmation = 15;</code>
+     * @param \Io\Token\Proto\Common\Token\AccessBody\Resource\FundsConfirmation $var
+     * @return $this
+     */
+    public function setFundsConfirmation($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\AccessBody_Resource_FundsConfirmation::class);
+        $this->writeOneof(15, $var);
+
+        return $this;
+    }
+
+    /**
+     * deprecated
+     *
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.Address address = 5 [deprecated = true];</code>
+     * @return \Io\Token\Proto\Common\Token\AccessBody\Resource\Address
+     */
+    public function getAddress()
+    {
+        return $this->readOneof(5);
+    }
+
+    /**
+     * deprecated
+     *
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.Address address = 5 [deprecated = true];</code>
+     * @param \Io\Token\Proto\Common\Token\AccessBody\Resource\Address $var
+     * @return $this
+     */
+    public function setAddress($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\AccessBody_Resource_Address::class);
+        $this->writeOneof(5, $var);
+
+        return $this;
     }
 
     /**
@@ -148,116 +296,6 @@ class Resource extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\AccessBody_Resource_AllTransferDestinations::class);
         $this->writeOneof(13, $var);
-
-        return $this;
-    }
-
-    /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.Address address = 5;</code>
-     * @return \Io\Token\Proto\Common\Token\AccessBody\Resource\Address
-     */
-    public function getAddress()
-    {
-        return $this->readOneof(5);
-    }
-
-    /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.Address address = 5;</code>
-     * @param \Io\Token\Proto\Common\Token\AccessBody\Resource\Address $var
-     * @return $this
-     */
-    public function setAddress($var)
-    {
-        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\AccessBody_Resource_Address::class);
-        $this->writeOneof(5, $var);
-
-        return $this;
-    }
-
-    /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.Account account = 6;</code>
-     * @return \Io\Token\Proto\Common\Token\AccessBody\Resource\Account
-     */
-    public function getAccount()
-    {
-        return $this->readOneof(6);
-    }
-
-    /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.Account account = 6;</code>
-     * @param \Io\Token\Proto\Common\Token\AccessBody\Resource\Account $var
-     * @return $this
-     */
-    public function setAccount($var)
-    {
-        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\AccessBody_Resource_Account::class);
-        $this->writeOneof(6, $var);
-
-        return $this;
-    }
-
-    /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AccountTransactions transactions = 7;</code>
-     * @return \Io\Token\Proto\Common\Token\AccessBody\Resource\AccountTransactions
-     */
-    public function getTransactions()
-    {
-        return $this->readOneof(7);
-    }
-
-    /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AccountTransactions transactions = 7;</code>
-     * @param \Io\Token\Proto\Common\Token\AccessBody\Resource\AccountTransactions $var
-     * @return $this
-     */
-    public function setTransactions($var)
-    {
-        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\AccessBody_Resource_AccountTransactions::class);
-        $this->writeOneof(7, $var);
-
-        return $this;
-    }
-
-    /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AccountBalance balance = 8;</code>
-     * @return \Io\Token\Proto\Common\Token\AccessBody\Resource\AccountBalance
-     */
-    public function getBalance()
-    {
-        return $this->readOneof(8);
-    }
-
-    /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AccountBalance balance = 8;</code>
-     * @param \Io\Token\Proto\Common\Token\AccessBody\Resource\AccountBalance $var
-     * @return $this
-     */
-    public function setBalance($var)
-    {
-        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\AccessBody_Resource_AccountBalance::class);
-        $this->writeOneof(8, $var);
-
-        return $this;
-    }
-
-    /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.TransferDestinations transfer_destinations = 12;</code>
-     * @return \Io\Token\Proto\Common\Token\AccessBody\Resource\TransferDestinations
-     */
-    public function getTransferDestinations()
-    {
-        return $this->readOneof(12);
-    }
-
-    /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.TransferDestinations transfer_destinations = 12;</code>
-     * @param \Io\Token\Proto\Common\Token\AccessBody\Resource\TransferDestinations $var
-     * @return $this
-     */
-    public function setTransferDestinations($var)
-    {
-        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\AccessBody_Resource_TransferDestinations::class);
-        $this->writeOneof(12, $var);
 
         return $this;
     }

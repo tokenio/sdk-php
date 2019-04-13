@@ -475,13 +475,16 @@ class Client
      * @param string $customizationId (optional) customization id
      * @return string id to reference token request
      */
-    public function storeTokenRequest($payload, $options, $userRefId = '', $customizationId = '')
+    public function storeTokenRequest($payload, $options, $userRefId = '', $customizationId = '',
+                                      $tokenRequestPayload = null, $tokenRequestOptions = null)
     {
         $request = new StoreTokenRequestRequest();
         $request->setPayload($payload)
             ->setOptions($options)
             ->setUserRefId($userRefId)
-            ->setCustomizationId($customizationId);
+            ->setCustomizationId($customizationId)
+            ->setRequestPayload($tokenRequestPayload)
+            ->setRequestOptions($tokenRequestOptions);
 
         /** @var StoreTokenRequestResponse $response */
         $response = Util::executeAndHandleCall($this->gateway->StoreTokenRequest($request));
@@ -1148,45 +1151,5 @@ class Client
         /** @var CreateTestBankAccountResponse $response*/
         $response = Util::executeAndHandleCall($this->gateway->CreateTestBankAccount($request));
         return $response->getAuthorization();
-    }
-
-    /**
-     * Links a funding bank account to Token.
-     *
-     * @param OauthBankAuthorization $authorization Oauth authorization for linking
-     * @return RepeatedField list of linked accounts
-     * @throws Exception\BankAuthorizationRequiredException if bank authorization payload is required to link accounts
-     */
-    public function linkAccounts($authorization)
-    {
-        $request = new LinkAccountsOauthRequest();
-        $request->setAuthorization($authorization);
-
-        /** @var LinkAccountsOauthResponse $response*/
-        $response = Util::executeAndHandleCall($this->gateway->LinkAccountsOauth($request));
-        if ($response->getStatus() != AccountLinkingStatus::FAILURE_BANK_AUTHORIZATION_REQUIRED)
-             throw new Exception\BankAuthorizationRequiredException(
-                 "Must call linkAccounts with bank authorization payload",
-                 $response->getStatus());
-
-        return $response->getAccounts();
-    }
-
-    /**
-     * Creates a test bank account and links it.
-     *
-     * @param Money $balance account balance to set
-     * @return Account linked account
-     * @throws \RuntimeException if number of linked bank accounts is not equal to 1
-     */
-    public function createAndLinkTestBankAccount($balance)
-    {
-        $authorizations = $this->createTestBankAuth($balance);
-        $accounts = $this->linkAccounts($authorizations);
-        if($accounts->count() != 1){
-            throw new \RuntimeException("Expected 1 account; found ".sizeof($accounts));
-        }
-
-        return $accounts[0];
     }
 }

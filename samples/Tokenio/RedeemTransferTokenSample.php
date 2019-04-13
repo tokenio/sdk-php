@@ -1,8 +1,7 @@
 <?php
 
 
-namespace Sample\Tokenio;
-
+namespace Io\Token\Sample\Tokenio;
 
 use Io\Token\Proto\Common\Account\BankAccount;
 use Io\Token\Proto\Common\Transferinstructions\TransferEndpoint;
@@ -11,7 +10,6 @@ use Tokenio\Util\Strings;
 
 final class RedeemTransferTokenSample
 {
-
     /**
      * Redeems a transfer token to transfer money from payer bank account to payee bank account.
      *

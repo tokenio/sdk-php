@@ -7,7 +7,10 @@ use Io\Token\Proto\Common\Token\AccessBody;
 use Io\Token\Proto\Common\Token\TokenMember;
 use Io\Token\Proto\Common\Token\TokenPayload;
 use PHPUnit\Framework\TestCase;
+use Tokenio\TokenClient;
+use Tokenio\TokenCluster;
 use Tokenio\Util\Base58;
+use Tokenio\Util\Strings;
 use Tokenio\Util\Util;
 
 class UtilTest extends TestCase
@@ -48,4 +51,6 @@ class UtilTest extends TestCase
         $result = Base58::encode('bob@token.io');
         $this->assertEquals('2rjpGWoxbc8ASyDVx', $result);
     }
+
+
 }

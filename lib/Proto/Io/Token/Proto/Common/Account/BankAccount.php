@@ -41,6 +41,7 @@ class BankAccount extends \Google\Protobuf\Internal\Message
      *     @type \Io\Token\Proto\Common\Account\BankAccount\Bank $bank
      *     @type \Io\Token\Proto\Common\Account\BankAccount\FasterPayments $faster_payments
      *     @type \Io\Token\Proto\Common\Account\BankAccount\Custom $custom
+     *     @type \Io\Token\Proto\Common\Account\BankAccount\Guest $guest
      *     @type array|\Google\Protobuf\Internal\MapField $metadata
      *     @type \Io\Token\Proto\Common\Account\AccountFeatures $account_features
      * }
@@ -222,6 +223,28 @@ class BankAccount extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Account\BankAccount_Custom::class);
         $this->writeOneof(10, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.Guest guest = 11;</code>
+     * @return \Io\Token\Proto\Common\Account\BankAccount\Guest
+     */
+    public function getGuest()
+    {
+        return $this->readOneof(11);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.Guest guest = 11;</code>
+     * @param \Io\Token\Proto\Common\Account\BankAccount\Guest $var
+     * @return $this
+     */
+    public function setGuest($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Account\BankAccount_Guest::class);
+        $this->writeOneof(11, $var);
 
         return $this;
     }
