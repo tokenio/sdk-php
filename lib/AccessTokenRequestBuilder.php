@@ -6,7 +6,7 @@ namespace Tokenio;
 
 use Io\Token\Proto\Common\Token\TokenRequestPayload;
 
-class AccessBuilder extends TokenRequestBuilder
+class AccessTokenRequestBuilder extends TokenRequestBuilder
 {
     public function __construct($resources)
     {

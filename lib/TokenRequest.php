@@ -78,16 +78,16 @@ class TokenRequest
 
     /**
      * @param TokenRequestPayload\AccessBody\ResourceType[] $resources
-     * @return AccessBuilder
+     * @return AccessTokenRequestBuilder
      */
     public static function accessTokenRequestBuilder($resources)
     {
-        return new AccessBuilder($resources);
+        return new AccessTokenRequestBuilder($resources);
     }
 
     public static function transferTokenRequestBuilder($amount, $currency)
     {
-        return new TransferBuilder($amount, $currency);
+        return new TransferTokenRequestBuilder($amount, $currency);
     }
 
     /**

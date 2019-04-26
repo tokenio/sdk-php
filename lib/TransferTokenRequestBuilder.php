@@ -7,7 +7,7 @@ namespace Tokenio;
 use Io\Token\Proto\Common\Token\TokenRequestPayload\TransferBody;
 use Io\Token\Proto\Common\Transferinstructions\TransferEndpoint;
 
-class TransferBuilder extends TokenRequestBuilder
+class TransferTokenRequestBuilder extends TokenRequestBuilder
 {
     public function __construct($amount, $currency)
     {
@@ -24,7 +24,7 @@ class TransferBuilder extends TokenRequestBuilder
      * the country selection in the web-app UI.
      *
      * @param string destinationCountry destination country
-     * @return TransferBuilder
+     * @return TransferTokenRequestBuilder
      */
     public function setDestinationCountry($destinationCountry)
     {
@@ -36,7 +36,7 @@ class TransferBuilder extends TokenRequestBuilder
      * Adds a transfer destination to a transfer token request.
      *
      * @param TransferEndpoint destination
-     * @return TransferBuilder
+     * @return TransferTokenRequestBuilder
      */
     public function addDestination($destination)
     {
@@ -48,7 +48,7 @@ class TransferBuilder extends TokenRequestBuilder
      * Sets the maximum amount per charge on a transfer token request.
      *
      * @param string chargeAmount
-     * @return TransferBuilder
+     * @return TransferTokenRequestBuilder
      */
     public function setChargeAmount($chargeAmount)
     {

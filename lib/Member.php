@@ -694,6 +694,7 @@ class Member implements RepresentableInterface
      * Sets security metadata included in all requests.
      *
      * @param securityMetadata security metadata
+     * TODO (RD-2335): Change class from SecurityMetaData to TrackingMetaData
      */
     public function setTrackingMetaData($securityMetadata)
     {

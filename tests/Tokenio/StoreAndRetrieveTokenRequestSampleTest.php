@@ -17,7 +17,6 @@ class StoreAndRetrieveTokenRequestSampleTest extends TestCase
     {
         $this->tokenClient = TestUtil::initializeSDK();
         $this->member = $this->tokenClient->createMember(TestUtil::generateAlias());
-        echo "Setup called\n";
     }
 
     protected function tearDown()
@@ -42,14 +41,13 @@ class StoreAndRetrieveTokenRequestSampleTest extends TestCase
 //        echo Util::toJson($tokenReq) . "\n\n";
 
         $requestId = StoreAndRetrieveTokenRequestSample::storeAccessTokenRequest($this->member);
-        echo "Access Token req " . $requestId . "\n\n";
         $request = $this->tokenClient->retrieveTokenRequest($requestId);
         $this->assertNotNull($request);
     }
+
     public function testStoreTransferTokenRequest()
     {
         $requestId = StoreAndRetrieveTokenRequestSample::storeTransferTokenRequest($this->member);
-        echo " Transfer Token req " . $requestId . "\n\n";
         $request = $this->tokenClient->retrieveTokenRequest($requestId);
 
         $this->assertNotNull($request);
