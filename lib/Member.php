@@ -152,6 +152,18 @@ class Member implements RepresentableInterface
     }
 
     /**
+     * Looks up current account balance.
+     *
+     * @param string $accountId the account id
+     * @param int $keyLevel key level
+     * @return Money
+     */
+    public function getCurrentBalance($accountId, $keyLevel)
+    {
+        return $this->getBalance($accountId, $keyLevel)->getCurrent();
+    }
+
+    /**
      * Returns linking information for the specified bank id.
      *
      * @param string $bankId the bank id
@@ -160,6 +172,18 @@ class Member implements RepresentableInterface
     public function getBankInfo($bankId)
     {
         return $this->client->getBankInfo($bankId);
+    }
+
+    /**
+     * Looks up available account balance.
+     *
+     * @param string $accountId the account id
+     * @param int $keyLevel key level
+     * @return Money
+     */
+    public function getAvailableBalance($accountId, $keyLevel)
+    {
+        return $this->getBalance($accountId, $keyLevel)->getAvailable();
     }
 
     /**
@@ -628,18 +652,6 @@ class Member implements RepresentableInterface
     }
 
     /**
-     * Creates an access token built from a given {@link AccessTokenBuilder}.
-     *
-     * @param TokenPayload $tokenPayload to create access token from
-     * @param string $tokenRequestId token request id
-     * @return Token
-     */
-    public function createAccessTokenForTokenRequestId($tokenPayload, $tokenRequestId)
-    {
-        return $this->client->createAccessTokenForTokenRequestId($tokenPayload, $tokenRequestId);
-    }
-
-    /**
      * Looks up access tokens owned by the member.
      *
      * @param string $offset optional offset to start at
@@ -724,7 +736,7 @@ class Member implements RepresentableInterface
      * @param $accountId
      * @return RepeatedField transfer endpoints
      */
-    public function getTransferDestinations($accountId)
+    public function resolveTransferDestinations($accountId)
     {
         return $this->client->resolveTransferDestinations($accountId);
     }

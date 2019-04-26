@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Io\Token\Sample\Tokenio;
+namespace Io\Token\Samples;
 
 use Io\Token\Proto\Common\Alias\Alias;
 use Symfony\Component\Filesystem\Exception\IOException;

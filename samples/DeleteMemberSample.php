@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Io\Token\Sample\Tokenio;
+namespace Io\Token\Samples;
 
 use Tokenio\Member;
 

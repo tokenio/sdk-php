@@ -40,6 +40,12 @@ class Bank extends \Google\Protobuf\Internal\Message
      */
     private $supports_appless = false;
     /**
+     * Connection supports guest checkout
+     *
+     * Generated from protobuf field <code>bool supports_guest_checkout = 15;</code>
+     */
+    private $supports_guest_checkout = false;
+    /**
      * Connection allows for retrieval of information
      *
      * Generated from protobuf field <code>bool supports_information = 7;</code>
@@ -102,6 +108,8 @@ class Bank extends \Google\Protobuf\Internal\Message
      *           Full size bank icon
      *     @type bool $supports_appless
      *           Works with appless payments
+     *     @type bool $supports_guest_checkout
+     *           Connection supports guest checkout
      *     @type bool $supports_information
      *           Connection allows for retrieval of information
      *     @type bool $requires_external_auth
@@ -243,6 +251,32 @@ class Bank extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkBool($var);
         $this->supports_appless = $var;
+
+        return $this;
+    }
+
+    /**
+     * Connection supports guest checkout
+     *
+     * Generated from protobuf field <code>bool supports_guest_checkout = 15;</code>
+     * @return bool
+     */
+    public function getSupportsGuestCheckout()
+    {
+        return $this->supports_guest_checkout;
+    }
+
+    /**
+     * Connection supports guest checkout
+     *
+     * Generated from protobuf field <code>bool supports_guest_checkout = 15;</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setSupportsGuestCheckout($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->supports_guest_checkout = $var;
 
         return $this;
     }

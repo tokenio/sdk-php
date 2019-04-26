@@ -486,6 +486,8 @@ class Client
             ->setRequestPayload($tokenRequestPayload)
             ->setRequestOptions($tokenRequestOptions);
 
+        //echo "Token Req". Util::toJson($request) . "\n\n";
+
         /** @var StoreTokenRequestResponse $response */
         $response = Util::executeAndHandleCall($this->gateway->StoreTokenRequest($request));
         return $response->getTokenRequest()->getId();

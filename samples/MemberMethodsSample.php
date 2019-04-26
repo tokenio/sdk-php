@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Io\Token\Sample\Tokenio;
+namespace Io\Token\Samples;
 
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Member\Profile;

@@ -35,7 +35,7 @@ class TokenRequest
     private $customizationId;
 
     /**
-     * @var TokenRequestPayload
+     * @var \Io\Token\Proto\Common\Token\TokenRequestPayload
      */
     private $tokenRequestPayload;
 
@@ -69,20 +69,20 @@ class TokenRequest
     {
         return new TokenRequest(
             null,
-            null,
-            null,
-            null,
+            array(),
+            "",
+            "",
             $tokenRequestPayload,
             $tokenRequestOptions);
     }
 
     /**
-     * @param mixed ...$resources
+     * @param TokenRequestPayload\AccessBody\ResourceType[] $resources
      * @return AccessBuilder
      */
-    public static function accessTokenRequestBuilder(...$resources)
+    public static function accessTokenRequestBuilder($resources)
     {
-        return new AccessBuilder(...$resources);
+        return new AccessBuilder($resources);
     }
 
     public static function transferTokenRequestBuilder($amount, $currency)

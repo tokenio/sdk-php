@@ -2,8 +2,8 @@
 
 namespace Test\Tokenio;
 
+use Io\Token\Samples\StoreAndRetrieveTokenRequestSample;
 use PHPUnit\Framework\TestCase;
-use Io\Token\Sample\Tokenio\StoreAndRetrieveTokenRequestSample;
 use Tokenio\Member;
 
 class StoreAndRetrieveTokenRequestSampleTest extends TestCase
@@ -17,7 +17,7 @@ class StoreAndRetrieveTokenRequestSampleTest extends TestCase
     {
         $this->tokenClient = TestUtil::initializeSDK();
         $this->member = $this->tokenClient->createMember(TestUtil::generateAlias());
-        echo "Setup called";
+        echo "Setup called\n";
     }
 
     protected function tearDown()
@@ -26,21 +26,32 @@ class StoreAndRetrieveTokenRequestSampleTest extends TestCase
         TestUtil::removeDirectory(__DIR__ . '/test-keys/');
     }
 
-    public function testStoreTransferTokenRequest()
-    {
-        $requestId = StoreAndRetrieveTokenRequestSample::storeTransferTokenRequest($this->member);
-        echo " Transfer Token req " . $requestId;
-        $request = $this->tokenClient->retrieveTokenRequest($requestId);
-
-        $this->assertNotNull($request);
-    }
 
     public function testStoreAccessTokenRequest()
     {
+//        $accBdy = new TokenRequestPayload\AccessBody();
+//        $types = array();
+//        $types[] = TokenRequestPayload\AccessBody\ResourceType::ACCOUNTS;
+//        $types[] = TokenRequestPayload\AccessBody\ResourceType::BALANCES;
+//        $accBdy->setType($types);
+//        $trp = new TokenRequestPayload();
+//        $trp->setAccessBody($accBdy);
+//        $tokenReq = new TokenRequest();
+//        $tokenReq->setRequestPayload($trp);
+//
+//        echo Util::toJson($tokenReq) . "\n\n";
+
         $requestId = StoreAndRetrieveTokenRequestSample::storeAccessTokenRequest($this->member);
-        echo "Access Token req " . $requestId;
+        echo "Access Token req " . $requestId . "\n\n";
         $request = $this->tokenClient->retrieveTokenRequest($requestId);
         $this->assertNotNull($request);
     }
+    public function testStoreTransferTokenRequest()
+    {
+        $requestId = StoreAndRetrieveTokenRequestSample::storeTransferTokenRequest($this->member);
+        echo " Transfer Token req " . $requestId . "\n\n";
+        $request = $this->tokenClient->retrieveTokenRequest($requestId);
 
+        $this->assertNotNull($request);
+    }
 }

@@ -272,6 +272,19 @@ class GatewayServiceClient extends \Grpc\BaseStub {
     }
 
     /**
+     * @param \Io\Token\Proto\Gateway\SetAppCallbackUrlRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function SetAppCallbackUrl(\Io\Token\Proto\Gateway\SetAppCallbackUrlRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/SetAppCallbackUrl',
+        $argument,
+        ['\Io\Token\Proto\Gateway\SetAppCallbackUrlResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * //////////////////////////////////////////////////////////////////////////////////////////////////
      * Member account recovery
      *

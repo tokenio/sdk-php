@@ -1,6 +1,6 @@
 <?php
 
-namespace Io\Token\Sample\Tokenio;
+namespace Io\Token\Samples;
 
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Token\TokenRequestPayload;
@@ -44,9 +44,10 @@ final class StoreAndRetrieveTokenRequestSample
     {
         $alias = new Alias();
         $alias->setValue("grantor-alias@token.io")->setType(Alias\Type::EMAIL);
-        $tokenRequest = TokenRequest::accessTokenRequestBuilder(
-            TokenRequestPayload\AccessBody\ResourceType::ACCOUNTS,
-                      TokenRequestPayload\AccessBody\ResourceType::BALANCES)
+        $resources = array();
+        $resources[] = TokenRequestPayload\AccessBody\ResourceType::ACCOUNTS;
+        $resources[] = TokenRequestPayload\AccessBody\ResourceType::BALANCES;
+        $tokenRequest = TokenRequest::accessTokenRequestBuilder($resources)
                         ->setToMemberId($grantee->getMemberId())
                         ->setRedirectUrl("https://token.io/callback")
                         ->setFromAlias($alias)

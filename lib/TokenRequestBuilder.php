@@ -286,16 +286,19 @@ class TokenRequestBuilder
     {
         $serializeState = new TokenRequestState(
             $this->csrfToken == null ? "" : Util::hashString($this->csrfToken),
-            $this->oauthState);
+            $this->oauthState == null ? "" : $this->oauthState);
 
         $this->requestPayload->setCallbackState($serializeState->serialize());
+        $this->userRefId = "";
+
+        if($this->tokenPayload == null){
+            return TokenRequest::fromProtos($this->requestPayload, $this->requestOptions);
+        }
 
         return new TokenRequest(
             $this->tokenPayload,
             $this->options,
             $this->userRefId,
-            $this->customizationId,
-            $this->requestPayload,
-            $this->requestOptions);
+            $this->customizationId);
     }
 }

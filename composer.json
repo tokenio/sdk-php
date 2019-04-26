@@ -23,7 +23,7 @@
     "paragonie/sodium_compat": "1.7.0",
     "paragonie/random_compat": ">=2",
     "stephenhill/base58": "~1.0",
-    "grpc/grpc": "^1.6.0",
+    "grpc/grpc": "^1.20.0",
     "google/protobuf": "^3.6.1",
     "jms/serializer": "1.7.1"
   },
@@ -37,7 +37,7 @@
       "Google\\": "lib/Proto/Google",
       "GPBMetadata\\": "lib/Proto/GPBMetadata",
       "Io\\": "lib/Proto/Io/",
-      "Io\\Token\\Sample\\": "samples/"
+      "Io\\Token\\Samples\\": "samples/"
     }
   },
   "suggest": {

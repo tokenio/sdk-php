@@ -100,6 +100,27 @@ class Account
     }
 
     /**
+     * Looks up an account current balance.
+     *
+     * @param int $level key level
+     * @return Money the current balance
+     */
+    public function getCurrentBalance($level)
+    {
+        return $this->getBalance($level)->getCurrent();
+    }
+    /**
+     * Looks up an account available balance.
+     *
+     * @param int $level key level
+     * @return Money the available balance
+     */
+    public function getAvailableBalance($level)
+    {
+        return $this->getBalance($level)->getAvailable();
+    }
+
+    /**
      * Looks up transaction.
      *
      * @param string $transactionId transaction id
