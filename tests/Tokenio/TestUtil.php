@@ -20,7 +20,7 @@ abstract class TestUtil
     {
         $keyStore = new UnsecuredFileSystemKeyStore(__DIR__ . '/test-keys/');
         $builder = new TokenClientBuilder();
-        $builder->connectTo(TokenCluster::get(TokenEnvironment::SANDBOX));
+        $builder->connectTo(TokenCluster::get(TokenEnvironment::DEVELOPMENT));
         $builder->developerKey(self::DEVELOPER_KEY);
         $builder->withKeyStore($keyStore);
         return $builder->build();
@@ -29,11 +29,9 @@ abstract class TestUtil
     public static function generateAlias()
     {
         $email = 'asphp-' . strtolower(Strings::generateNonce()) . '+noverify@example.com';
-
         $alias = new Alias();
         $alias->setType(Alias\Type::EMAIL);
         $alias->setValue($email);
-
         return $alias;
     }
 

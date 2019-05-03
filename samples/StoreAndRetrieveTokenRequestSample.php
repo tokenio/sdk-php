@@ -30,7 +30,6 @@ final class StoreAndRetrieveTokenRequestSample
                             ->setCsrfToken(Strings::generateNonce())
                             ->build();
 
-        echo $tokenRequest->getTokenRequestPayload()->getTo()->getId();
         return $payee->storeTokenRequest($tokenRequest);
     }
 
@@ -55,7 +54,6 @@ final class StoreAndRetrieveTokenRequestSample
                         ->setCsrfToken(Strings::generateNonce())
                         ->build();
 
-        echo $tokenRequest->getTokenRequestPayload()->getTo()->getId();
         return $grantee->storeTokenRequest($tokenRequest);
     }
 

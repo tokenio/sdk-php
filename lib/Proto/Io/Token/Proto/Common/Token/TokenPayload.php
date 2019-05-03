@@ -20,33 +20,29 @@ class TokenPayload extends \Google\Protobuf\Internal\Message
      */
     private $version = '';
     /**
-     * random string used to de-dupe tokens, set by client.
+     * Random string used to de-dupe tokens; must be unique per initiator
      *
      * Generated from protobuf field <code>string ref_id = 2;</code>
      */
     private $ref_id = '';
     /**
-     * Token issuer, bank.
+     * Token issuer, bank
      *
      * Generated from protobuf field <code>.io.token.proto.common.token.TokenMember issuer = 3;</code>
      */
     private $issuer = null;
     /**
-     * Payer member.
+     * Payer member
      *
      * Generated from protobuf field <code>.io.token.proto.common.token.TokenMember from = 4;</code>
      */
     private $from = null;
     /**
-     * Payee member.
+     * Payee member
      *
      * Generated from protobuf field <code>.io.token.proto.common.token.TokenMember to = 5;</code>
      */
     private $to = null;
-    /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.ActingAs acting_as = 12;</code>
-     */
-    private $acting_as = null;
     /**
      * Optional
      *
@@ -62,21 +58,37 @@ class TokenPayload extends \Google\Protobuf\Internal\Message
      */
     private $expires_at_ms = 0;
     /**
-     * Optional, can be endorsed until this time
-     *
-     * Generated from protobuf field <code>int64 endorse_until_ms = 11;</code>
-     */
-    private $endorse_until_ms = 0;
-    /**
      * Optional
      *
      * Generated from protobuf field <code>string description = 8 [(.io.token.proto.extensions.field.redact) = true];</code>
      */
     private $description = '';
     /**
+     * Optional, can be endorsed until this time
+     *
+     * Generated from protobuf field <code>int64 endorse_until_ms = 11;</code>
+     */
+    private $endorse_until_ms = 0;
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.token.ActingAs acting_as = 12;</code>
+     */
+    private $acting_as = null;
+    /**
      * Generated from protobuf field <code>bool receipt_requested = 13;</code>
      */
     private $receipt_requested = false;
+    /**
+     * Optional; indicates token request flow
+     *
+     * Generated from protobuf field <code>string token_request_id = 14;</code>
+     */
+    private $token_request_id = '';
+    /**
+     * ID of member who requested token creation
+     *
+     * Generated from protobuf field <code>string initiator_id = 15;</code>
+     */
+    private $initiator_id = '';
     protected $body;
 
     /**
@@ -88,27 +100,31 @@ class TokenPayload extends \Google\Protobuf\Internal\Message
      *     @type string $version
      *           1.0
      *     @type string $ref_id
-     *           random string used to de-dupe tokens, set by client.
+     *           Random string used to de-dupe tokens; must be unique per initiator
      *     @type \Io\Token\Proto\Common\Token\TokenMember $issuer
-     *           Token issuer, bank.
+     *           Token issuer, bank
      *     @type \Io\Token\Proto\Common\Token\TokenMember $from
-     *           Payer member.
+     *           Payer member
      *     @type \Io\Token\Proto\Common\Token\TokenMember $to
-     *           Payee member.
-     *     @type \Io\Token\Proto\Common\Token\ActingAs $acting_as
+     *           Payee member
      *     @type int|string $effective_at_ms
      *           Optional
      *     @type int|string $expires_at_ms
      *           Expiration time. Access tokens ignore this; all access tokens
      *           have a 90-day lifespan. For transfer tokens, this is an optional
      *           expiration time.
-     *     @type int|string $endorse_until_ms
-     *           Optional, can be endorsed until this time
      *     @type string $description
      *           Optional
      *     @type \Io\Token\Proto\Common\Token\TransferBody $transfer
      *     @type \Io\Token\Proto\Common\Token\AccessBody $access
+     *     @type int|string $endorse_until_ms
+     *           Optional, can be endorsed until this time
+     *     @type \Io\Token\Proto\Common\Token\ActingAs $acting_as
      *     @type bool $receipt_requested
+     *     @type string $token_request_id
+     *           Optional; indicates token request flow
+     *     @type string $initiator_id
+     *           ID of member who requested token creation
      * }
      */
     public function __construct($data = NULL) {
@@ -143,7 +159,7 @@ class TokenPayload extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * random string used to de-dupe tokens, set by client.
+     * Random string used to de-dupe tokens; must be unique per initiator
      *
      * Generated from protobuf field <code>string ref_id = 2;</code>
      * @return string
@@ -154,7 +170,7 @@ class TokenPayload extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * random string used to de-dupe tokens, set by client.
+     * Random string used to de-dupe tokens; must be unique per initiator
      *
      * Generated from protobuf field <code>string ref_id = 2;</code>
      * @param string $var
@@ -169,7 +185,7 @@ class TokenPayload extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Token issuer, bank.
+     * Token issuer, bank
      *
      * Generated from protobuf field <code>.io.token.proto.common.token.TokenMember issuer = 3;</code>
      * @return \Io\Token\Proto\Common\Token\TokenMember
@@ -180,7 +196,7 @@ class TokenPayload extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Token issuer, bank.
+     * Token issuer, bank
      *
      * Generated from protobuf field <code>.io.token.proto.common.token.TokenMember issuer = 3;</code>
      * @param \Io\Token\Proto\Common\Token\TokenMember $var
@@ -195,7 +211,7 @@ class TokenPayload extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Payer member.
+     * Payer member
      *
      * Generated from protobuf field <code>.io.token.proto.common.token.TokenMember from = 4;</code>
      * @return \Io\Token\Proto\Common\Token\TokenMember
@@ -206,7 +222,7 @@ class TokenPayload extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Payer member.
+     * Payer member
      *
      * Generated from protobuf field <code>.io.token.proto.common.token.TokenMember from = 4;</code>
      * @param \Io\Token\Proto\Common\Token\TokenMember $var
@@ -221,7 +237,7 @@ class TokenPayload extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Payee member.
+     * Payee member
      *
      * Generated from protobuf field <code>.io.token.proto.common.token.TokenMember to = 5;</code>
      * @return \Io\Token\Proto\Common\Token\TokenMember
@@ -232,7 +248,7 @@ class TokenPayload extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Payee member.
+     * Payee member
      *
      * Generated from protobuf field <code>.io.token.proto.common.token.TokenMember to = 5;</code>
      * @param \Io\Token\Proto\Common\Token\TokenMember $var
@@ -242,28 +258,6 @@ class TokenPayload extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\TokenMember::class);
         $this->to = $var;
-
-        return $this;
-    }
-
-    /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.ActingAs acting_as = 12;</code>
-     * @return \Io\Token\Proto\Common\Token\ActingAs
-     */
-    public function getActingAs()
-    {
-        return $this->acting_as;
-    }
-
-    /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.ActingAs acting_as = 12;</code>
-     * @param \Io\Token\Proto\Common\Token\ActingAs $var
-     * @return $this
-     */
-    public function setActingAs($var)
-    {
-        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\ActingAs::class);
-        $this->acting_as = $var;
 
         return $this;
     }
@@ -320,32 +314,6 @@ class TokenPayload extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt64($var);
         $this->expires_at_ms = $var;
-
-        return $this;
-    }
-
-    /**
-     * Optional, can be endorsed until this time
-     *
-     * Generated from protobuf field <code>int64 endorse_until_ms = 11;</code>
-     * @return int|string
-     */
-    public function getEndorseUntilMs()
-    {
-        return $this->endorse_until_ms;
-    }
-
-    /**
-     * Optional, can be endorsed until this time
-     *
-     * Generated from protobuf field <code>int64 endorse_until_ms = 11;</code>
-     * @param int|string $var
-     * @return $this
-     */
-    public function setEndorseUntilMs($var)
-    {
-        GPBUtil::checkInt64($var);
-        $this->endorse_until_ms = $var;
 
         return $this;
     }
@@ -421,6 +389,54 @@ class TokenPayload extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Optional, can be endorsed until this time
+     *
+     * Generated from protobuf field <code>int64 endorse_until_ms = 11;</code>
+     * @return int|string
+     */
+    public function getEndorseUntilMs()
+    {
+        return $this->endorse_until_ms;
+    }
+
+    /**
+     * Optional, can be endorsed until this time
+     *
+     * Generated from protobuf field <code>int64 endorse_until_ms = 11;</code>
+     * @param int|string $var
+     * @return $this
+     */
+    public function setEndorseUntilMs($var)
+    {
+        GPBUtil::checkInt64($var);
+        $this->endorse_until_ms = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.token.ActingAs acting_as = 12;</code>
+     * @return \Io\Token\Proto\Common\Token\ActingAs
+     */
+    public function getActingAs()
+    {
+        return $this->acting_as;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.token.ActingAs acting_as = 12;</code>
+     * @param \Io\Token\Proto\Common\Token\ActingAs $var
+     * @return $this
+     */
+    public function setActingAs($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\ActingAs::class);
+        $this->acting_as = $var;
+
+        return $this;
+    }
+
+    /**
      * Generated from protobuf field <code>bool receipt_requested = 13;</code>
      * @return bool
      */
@@ -438,6 +454,58 @@ class TokenPayload extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkBool($var);
         $this->receipt_requested = $var;
+
+        return $this;
+    }
+
+    /**
+     * Optional; indicates token request flow
+     *
+     * Generated from protobuf field <code>string token_request_id = 14;</code>
+     * @return string
+     */
+    public function getTokenRequestId()
+    {
+        return $this->token_request_id;
+    }
+
+    /**
+     * Optional; indicates token request flow
+     *
+     * Generated from protobuf field <code>string token_request_id = 14;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setTokenRequestId($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->token_request_id = $var;
+
+        return $this;
+    }
+
+    /**
+     * ID of member who requested token creation
+     *
+     * Generated from protobuf field <code>string initiator_id = 15;</code>
+     * @return string
+     */
+    public function getInitiatorId()
+    {
+        return $this->initiator_id;
+    }
+
+    /**
+     * ID of member who requested token creation
+     *
+     * Generated from protobuf field <code>string initiator_id = 15;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setInitiatorId($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->initiator_id = $var;
 
         return $this;
     }

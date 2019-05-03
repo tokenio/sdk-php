@@ -20,7 +20,7 @@ class AccessBody extends \Google\Protobuf\Internal\Message
     /**
      *ToDo: Remove once the issue (https://github.com/protocolbuffers/protobuf/issues/6045) is resolved.
      *
-     * Generated from protobuf field <code>repeated int64 resource_types = 2 [deprecated = true];</code>
+     * Generated from protobuf field <code>repeated string resource_types = 2 [deprecated = true];</code>
      */
     private $resource_types;
 
@@ -31,7 +31,7 @@ class AccessBody extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type int[]|\Google\Protobuf\Internal\RepeatedField $type
-     *     @type int[]|string[]|\Google\Protobuf\Internal\RepeatedField $resource_types
+     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $resource_types
      *          ToDo: Remove once the issue (https://github.com/protocolbuffers/protobuf/issues/6045) is resolved.
      * }
      */
@@ -65,7 +65,7 @@ class AccessBody extends \Google\Protobuf\Internal\Message
     /**
      *ToDo: Remove once the issue (https://github.com/protocolbuffers/protobuf/issues/6045) is resolved.
      *
-     * Generated from protobuf field <code>repeated int64 resource_types = 2 [deprecated = true];</code>
+     * Generated from protobuf field <code>repeated string resource_types = 2 [deprecated = true];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getResourceTypes()
@@ -76,13 +76,13 @@ class AccessBody extends \Google\Protobuf\Internal\Message
     /**
      *ToDo: Remove once the issue (https://github.com/protocolbuffers/protobuf/issues/6045) is resolved.
      *
-     * Generated from protobuf field <code>repeated int64 resource_types = 2 [deprecated = true];</code>
-     * @param int[]|string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated string resource_types = 2 [deprecated = true];</code>
+     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setResourceTypes($var)
     {
-        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::INT64);
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
         $this->resource_types = $arr;
 
         return $this;

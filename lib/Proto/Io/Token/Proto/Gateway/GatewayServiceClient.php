@@ -1394,4 +1394,21 @@ class GatewayServiceClient extends \Grpc\BaseStub {
         $metadata, $options);
     }
 
+    /**
+     * //////////////////////////////////////////////////////////////////////////////////////////////////
+     * Reports (bank member only requests).
+     *
+     * Get TPP performance report.
+     * @param \Io\Token\Proto\Gateway\GetTppPerformanceReportRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetTppPerformanceReport(\Io\Token\Proto\Gateway\GetTppPerformanceReportRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetTppPerformanceReport',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetTppPerformanceReportResponse', 'decode'],
+        $metadata, $options);
+    }
+
 }

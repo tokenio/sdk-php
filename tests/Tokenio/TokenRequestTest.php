@@ -37,8 +37,6 @@ class TokenRequestTest extends TestCase
         $toMember = new TokenMember();
         $toMember->setId($this->member->getMemberId());
 
-        echo $this->member->getMemberId() . "\n";
-
         $resource = new AccessBody\Resource();
         $resource->setAllAddresses(new AccessBody\Resource\AllAddresses());
 

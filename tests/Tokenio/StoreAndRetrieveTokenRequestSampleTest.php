@@ -2,9 +2,14 @@
 
 namespace Test\Tokenio;
 
+use Io\Token\Proto\Common\Token\TokenRequestPayload;
+use Io\Token\Proto\Common\Token\TokenRequestPayload\AccessBody;
 use Io\Token\Samples\StoreAndRetrieveTokenRequestSample;
 use PHPUnit\Framework\TestCase;
 use Tokenio\Member;
+use Tokenio\TokenRequest;
+use Tokenio\Util\Strings;
+use Tokenio\Util\Util;
 
 class StoreAndRetrieveTokenRequestSampleTest extends TestCase
 {
@@ -28,18 +33,6 @@ class StoreAndRetrieveTokenRequestSampleTest extends TestCase
 
     public function testStoreAccessTokenRequest()
     {
-//        $accBdy = new TokenRequestPayload\AccessBody();
-//        $types = array();
-//        $types[] = TokenRequestPayload\AccessBody\ResourceType::ACCOUNTS;
-//        $types[] = TokenRequestPayload\AccessBody\ResourceType::BALANCES;
-//        $accBdy->setType($types);
-//        $trp = new TokenRequestPayload();
-//        $trp->setAccessBody($accBdy);
-//        $tokenReq = new TokenRequest();
-//        $tokenReq->setRequestPayload($trp);
-//
-//        echo Util::toJson($tokenReq) . "\n\n";
-
         $requestId = StoreAndRetrieveTokenRequestSample::storeAccessTokenRequest($this->member);
         $request = $this->tokenClient->retrieveTokenRequest($requestId);
         $this->assertNotNull($request);
@@ -49,7 +42,6 @@ class StoreAndRetrieveTokenRequestSampleTest extends TestCase
     {
         $requestId = StoreAndRetrieveTokenRequestSample::storeTransferTokenRequest($this->member);
         $request = $this->tokenClient->retrieveTokenRequest($requestId);
-
         $this->assertNotNull($request);
     }
 }
