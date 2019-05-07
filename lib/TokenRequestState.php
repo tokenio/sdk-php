@@ -3,6 +3,7 @@
 namespace Tokenio;
 
 use stdClass;
+use Tokenio\Util\Base64Url;
 
 class TokenRequestState
 {
@@ -24,7 +25,8 @@ class TokenRequestState
 
     public static function parse($serialized)
     {
-        $object = json_decode($serialized);
+        $urlDecoded = Base64Url::decode($serialized);
+        $object = json_decode($urlDecoded);
         return new TokenRequestState($object->csrfTokenHash, $object->state);
     }
 
@@ -50,6 +52,6 @@ class TokenRequestState
         $obj->csrfTokenHash = $this->csrfTokenHash;
         $obj->state = $this->state;
 
-        return json_encode($obj);
+        return Base64Url::encode(json_encode($obj));
     }
 }
