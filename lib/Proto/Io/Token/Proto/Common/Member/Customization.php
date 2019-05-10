@@ -42,7 +42,7 @@ class Customization extends \Google\Protobuf\Internal\Message
      */
     private $consent_text = '';
     /**
-     * the name of the corresponding app
+     * TODO(RD-1985): re-evaluate app_name
      *
      * Generated from protobuf field <code>string app_name = 6;</code>
      */
@@ -64,7 +64,7 @@ class Customization extends \Google\Protobuf\Internal\Message
      *     @type string $consent_text
      *           use '\n' for line breaks.
      *     @type string $app_name
-     *           the name of the corresponding app
+     *           TODO(RD-1985): re-evaluate app_name
      * }
      */
     public function __construct($data = NULL) {
@@ -199,7 +199,7 @@ class Customization extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * the name of the corresponding app
+     * TODO(RD-1985): re-evaluate app_name
      *
      * Generated from protobuf field <code>string app_name = 6;</code>
      * @return string
@@ -210,7 +210,7 @@ class Customization extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * the name of the corresponding app
+     * TODO(RD-1985): re-evaluate app_name
      *
      * Generated from protobuf field <code>string app_name = 6;</code>
      * @param string $var

@@ -26,12 +26,6 @@ class TokenRequestPayload extends \Google\Protobuf\Internal\Message
      */
     private $redirect_url = '';
     /**
-     * ref ID that will be transferred to the token payload
-     *
-     * Generated from protobuf field <code>string ref_id = 11;</code>
-     */
-    private $ref_id = '';
-    /**
      * Generated from protobuf field <code>.io.token.proto.common.token.TokenMember to = 4;</code>
      */
     private $to = null;
@@ -51,6 +45,12 @@ class TokenRequestPayload extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string destination_country = 10;</code>
      */
     private $destination_country = '';
+    /**
+     * ref ID that will be transferred to the token payload
+     *
+     * Generated from protobuf field <code>string ref_id = 11;</code>
+     */
+    private $ref_id = '';
     protected $request_body;
 
     /**
@@ -62,8 +62,6 @@ class TokenRequestPayload extends \Google\Protobuf\Internal\Message
      *     @type string $user_ref_id
      *     @type string $customization_id
      *     @type string $redirect_url
-     *     @type string $ref_id
-     *           ref ID that will be transferred to the token payload
      *     @type \Io\Token\Proto\Common\Token\TokenMember $to
      *     @type \Io\Token\Proto\Common\Token\ActingAs $acting_as
      *     @type \Io\Token\Proto\Common\Token\TokenRequestPayload\AccessBody $access_body
@@ -71,6 +69,8 @@ class TokenRequestPayload extends \Google\Protobuf\Internal\Message
      *     @type string $description
      *     @type string $callback_state
      *     @type string $destination_country
+     *     @type string $ref_id
+     *           ref ID that will be transferred to the token payload
      * }
      */
     public function __construct($data = NULL) {
@@ -140,32 +140,6 @@ class TokenRequestPayload extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->redirect_url = $var;
-
-        return $this;
-    }
-
-    /**
-     * ref ID that will be transferred to the token payload
-     *
-     * Generated from protobuf field <code>string ref_id = 11;</code>
-     * @return string
-     */
-    public function getRefId()
-    {
-        return $this->ref_id;
-    }
-
-    /**
-     * ref ID that will be transferred to the token payload
-     *
-     * Generated from protobuf field <code>string ref_id = 11;</code>
-     * @param string $var
-     * @return $this
-     */
-    public function setRefId($var)
-    {
-        GPBUtil::checkString($var, True);
-        $this->ref_id = $var;
 
         return $this;
     }
@@ -320,6 +294,32 @@ class TokenRequestPayload extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->destination_country = $var;
+
+        return $this;
+    }
+
+    /**
+     * ref ID that will be transferred to the token payload
+     *
+     * Generated from protobuf field <code>string ref_id = 11;</code>
+     * @return string
+     */
+    public function getRefId()
+    {
+        return $this->ref_id;
+    }
+
+    /**
+     * ref ID that will be transferred to the token payload
+     *
+     * Generated from protobuf field <code>string ref_id = 11;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setRefId($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->ref_id = $var;
 
         return $this;
     }

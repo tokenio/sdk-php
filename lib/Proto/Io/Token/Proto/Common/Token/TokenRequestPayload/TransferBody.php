@@ -26,15 +26,15 @@ class TransferBody extends \Google\Protobuf\Internal\Message
      */
     private $amount = '';
     /**
+     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferEndpoint destinations = 3;</code>
+     */
+    private $destinations;
+    /**
      * Optional: Token total lifetime amount. Double.
      *
      * Generated from protobuf field <code>string lifetime_amount = 4;</code>
      */
     private $lifetime_amount = '';
-    /**
-     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferEndpoint destinations = 3;</code>
-     */
-    private $destinations;
 
     /**
      * Constructor.
@@ -46,9 +46,9 @@ class TransferBody extends \Google\Protobuf\Internal\Message
      *           Optional: ISO4217, 3 letter currency code such as "USD" or "EUR".
      *     @type string $amount
      *           Optional: Single token charge request acceptable range. Double.
+     *     @type \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint[]|\Google\Protobuf\Internal\RepeatedField $destinations
      *     @type string $lifetime_amount
      *           Optional: Token total lifetime amount. Double.
-     *     @type \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint[]|\Google\Protobuf\Internal\RepeatedField $destinations
      * }
      */
     public function __construct($data = NULL) {
@@ -109,6 +109,28 @@ class TransferBody extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferEndpoint destinations = 3;</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getDestinations()
+    {
+        return $this->destinations;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferEndpoint destinations = 3;</code>
+     * @param \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setDestinations($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint::class);
+        $this->destinations = $arr;
+
+        return $this;
+    }
+
+    /**
      * Optional: Token total lifetime amount. Double.
      *
      * Generated from protobuf field <code>string lifetime_amount = 4;</code>
@@ -130,28 +152,6 @@ class TransferBody extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->lifetime_amount = $var;
-
-        return $this;
-    }
-
-    /**
-     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferEndpoint destinations = 3;</code>
-     * @return \Google\Protobuf\Internal\RepeatedField
-     */
-    public function getDestinations()
-    {
-        return $this->destinations;
-    }
-
-    /**
-     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferEndpoint destinations = 3;</code>
-     * @param \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint[]|\Google\Protobuf\Internal\RepeatedField $var
-     * @return $this
-     */
-    public function setDestinations($var)
-    {
-        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint::class);
-        $this->destinations = $arr;
 
         return $this;
     }

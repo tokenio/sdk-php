@@ -29,6 +29,10 @@ class AccountType
      * Generated from protobuf enum <code>LOAN = 4;</code>
      */
     const LOAN = 4;
+    /**
+     * Generated from protobuf enum <code>CARD = 5;</code>
+     */
+    const CARD = 5;
 }
 
 // Adding a class alias for backwards compatibility with the previous class name.

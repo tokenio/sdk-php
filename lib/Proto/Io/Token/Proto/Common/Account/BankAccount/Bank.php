@@ -9,7 +9,7 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * Source account managed by a coop bank
+ * Source account managed by a co-opt bank
  *
  * Generated from protobuf message <code>io.token.proto.common.account.BankAccount.Bank</code>
  */

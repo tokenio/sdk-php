@@ -2,6 +2,7 @@
 
 namespace Tokenio;
 
+use Google\Protobuf\Internal\RepeatedField;
 use Grpc\Channel;
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Member\CreateMemberType;
@@ -16,6 +17,7 @@ use Tokenio\Rpc\ClientFactory;
 use Tokenio\Security\CryptoEngineFactoryInterface;
 use Tokenio\Security\CryptoEngineInterface;
 use Tokenio\Util\Util;
+use Io\Token\Proto\Common\Member\MemberRecoveryOperation\Authorization;
 
 class TokenClient
 {
@@ -60,6 +62,19 @@ class TokenClient
 
     /**
      * Checks if a given alias already exists.
+     *
+     * @param Alias $alias to check
+     * @return bool {@code true} if alias exists, {@code false} otherwise
+     */
+    public function resolveAlias($alias)
+    {
+        $client = ClientFactory::unauthenticated($this->channel);
+        return $client->aliasExists($alias);
+    }
+
+    /**
+     * @deprecated
+     * Use resolveAlias($alias) instead of this.
      *
      * @param Alias $alias to check
      * @return bool {@code true} if alias exists, {@code false} otherwise
@@ -328,12 +343,12 @@ class TokenClient
      * @param string $code the code
      * @return Member the new member
      */
-    public function completeRecoveryWithDefaultRule($memberId, $verificationId, $code)
+    public function completeRecoveryWithDefaultRule($memberId, $verificationId, $code, $cryptoEngine = null)
     {
         $unauthenticated = ClientFactory::unauthenticated($this->channel);
-        $cryptoEngine = $this->cryptoEngineFactory->create($memberId);
-        $recoveredMember = $unauthenticated->completeRecoveryWithDefaultRule($memberId, $verificationId, $code, $cryptoEngine);
-        $client = ClientFactory::authenticated($this->channel, $recoveredMember->getId(), $cryptoEngine);
+        $cryptoEng = $cryptoEngine == null ? $this->cryptoEngineFactory->create($memberId) : $cryptoEngine;
+        $recoveredMember = $unauthenticated->completeRecoveryWithDefaultRule($memberId, $verificationId, $code, $cryptoEng);
+        $client = ClientFactory::authenticated($this->channel, $recoveredMember->getId(), $cryptoEng);
 
         return new Member($client);
     }
@@ -369,4 +384,44 @@ class TokenClient
         return new TokenRequestCallback($parameters->getTokenId(), $state->getInnerState());
     }
 
+    /**
+     * Creates a new instance of {@link TokenClient} that's configured to use
+     * the specified environment.
+     *
+     * @param TokenCluster $cluster token cluster to connect to
+     * @param string $developerKey developer key
+     * @return TokenClient instance
+     */
+    public static function create($cluster, $developerKey)
+    {
+        return TokenClient::builder()
+            ->connectTo($cluster)
+            ->developerKey($developerKey)
+            ->build();
+    }
+
+    /**
+     * Create a recovery authorization for some agent to sign.
+     *
+     * @param string $memberId Id of member we claim to be.
+     * @param Key $privilegedKey new privileged key we want to use.
+     * @return Authorization authorization structure for agent to sign
+     */
+    public function createRecoveryAuthorization($memberId, $privilegedKey)
+    {
+        $client = ClientFactory::unauthenticated($this->channel);
+        return $client->createRecoveryAuthorization($memberId, $privilegedKey);
+    }
+
+    /**
+     * Returns a list of countries with Token-enabled banks.
+     *
+     * @param provider If specified, return banks whose 'provider' matches the given provider (case insensitive).
+     * @return RepeatedField a list of country codes
+     */
+    public function getCountries($provider)
+    {
+        $client = ClientFactory::unauthenticated($this->channel);
+        return $client->getCountries($provider);
+    }
 }

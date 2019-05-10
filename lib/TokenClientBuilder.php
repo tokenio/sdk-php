@@ -64,7 +64,7 @@ class TokenClientBuilder
      * Sets the host name of the Token Gateway Service to connect to.
      *
      * @param string $hostName the host name to set
-     * @return TokenIoBuilder
+     * @return TokenClientBuilder
      */
     public function hostName($hostName)
     {
@@ -76,7 +76,7 @@ class TokenClientBuilder
      * Sets the port of the Token Gateway Service to connect to.
      *
      * @param int $port the port number
-     * @return TokenIoBuilder
+     * @return TokenClientBuilder
      */
     public function port($port)
     {
@@ -89,7 +89,7 @@ class TokenClientBuilder
      * Sets Token cluster to connect to.
      *
      * @param TokenCluster $cluster the token cluster
-     * @return TokenIoBuilder
+     * @return TokenClientBuilder
      */
     public function connectTo($cluster)
     {
@@ -103,7 +103,7 @@ class TokenClientBuilder
      * Sets timeoutMs that is used for the RPC calls.
      *
      * @param int $timeoutMs the RPC call timeoutMs
-     * @return TokenIoBuilder
+     * @return TokenClientBuilder
      */
     public function timeout($timeoutMs)
     {
@@ -115,7 +115,7 @@ class TokenClientBuilder
      * Sets the keystore to be used with the SDK.
      *
      * @param KeyStoreInterface $keyStore the key store to be used
-     * @return TokenIoBuilder
+     * @return TokenClientBuilder
      */
     public function withKeyStore($keyStore)
     {
@@ -127,7 +127,7 @@ class TokenClientBuilder
      * Sets the crypto engine to be used with the SDK.
      *
      * @param CryptoEngineFactoryInterface $cryptoEngineFactory
-     * @return TokenIoBuilder
+     * @return TokenClientBuilder
      */
     public function withCryptoEngine($cryptoEngineFactory)
     {
@@ -139,7 +139,7 @@ class TokenClientBuilder
      * Sets the developer key to be used with the SDK.
      *
      * @param string $devKey
-     * @return TokenIoBuilder
+     * @return TokenClientBuilder
      */
     public function developerKey($devKey)
     {

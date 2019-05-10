@@ -7,7 +7,10 @@ use Io\Token\Proto\Common\Token\AccessBody;
 use Io\Token\Proto\Common\Token\TokenMember;
 use Io\Token\Proto\Common\Token\TokenPayload;
 use PHPUnit\Framework\TestCase;
+use Tokenio\TokenClient;
+use Tokenio\TokenCluster;
 use Tokenio\Util\Base58;
+use Tokenio\Util\Strings;
 use Tokenio\Util\Util;
 
 class UtilTest extends TestCase
@@ -26,8 +29,8 @@ class UtilTest extends TestCase
 
         $payload = new TokenPayload();
         $payload->setTo($tokenMember)
-                ->setAccess($access)
-                ->setRefId('refId');
+            ->setAccess($access)
+            ->setRefId('refId');
 
         $expected = "{\"access\":{\"resources\":[{\"allAddresses\":{}}]},\"refId\":\"refId\",\"to\":{\"id\":\"memberId\"}}";
         $this->assertEquals($expected, Util::toJson($payload));
@@ -38,7 +41,7 @@ class UtilTest extends TestCase
     {
         $alias = new Alias();
         $alias->setType(Alias\Type::EMAIL)
-              ->setValue('bob@token.io');
+            ->setValue('bob@token.io');
 
         $this->assertEquals('HHzc3XVck27qD2gadGVzjffaBZrU8ZLEd2jmtcyPKeev', Util::hashAlias($alias));
     }
@@ -48,4 +51,6 @@ class UtilTest extends TestCase
         $result = Base58::encode('bob@token.io');
         $this->assertEquals('2rjpGWoxbc8ASyDVx', $result);
     }
+
+
 }

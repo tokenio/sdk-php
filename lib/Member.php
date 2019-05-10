@@ -18,7 +18,6 @@ use Io\Token\Proto\Common\Member\MemberRecoveryRulesOperation;
 use Io\Token\Proto\Common\Member\MemberRemoveKeyOperation;
 use Io\Token\Proto\Common\Member\Profile;
 use Io\Token\Proto\Common\Member\RecoveryRule;
-use Io\Token\Proto\Common\Member\TrustedBeneficiary;
 use Io\Token\Proto\Common\Money\Money;
 use Io\Token\Proto\Common\Security\Key;
 use Io\Token\Proto\Common\Security\Signature;
@@ -90,7 +89,7 @@ class Member implements RepresentableInterface
      */
     public function getFirstAlias()
     {
-        $aliases = $this->getAliases();
+        $aliases = $this->client->getAliases();
         if (empty($aliases)) {
             return null;
         }
@@ -340,7 +339,9 @@ class Member implements RepresentableInterface
             $tokenRequest->getTokenPayload(),
             $tokenRequest->getOptions(),
             $tokenRequest->getUserRefId(),
-            $tokenRequest->getCustomizationId());
+            $tokenRequest->getCustomizationId(),
+            $tokenRequest->getTokenRequestPayload(),
+            $tokenRequest->getTokenRequestOptions());
     }
 
     /**
@@ -390,35 +391,6 @@ class Member implements RepresentableInterface
     public function signTokenRequestState($tokenRequestId, $tokenId, $state)
     {
         return $this->client->signTokenRequestState($tokenRequestId, $tokenId, $state);
-    }
-
-    /**
-     * Creates and uploads a blob.
-     *
-     * @param string $ownerId the id of the owner of the blob
-     * @param string $type the MIME type of the file
-     * @param string $name the name of the file
-     * @param string $data the file data
-     * @param int $accessMode the access mode, normal or public
-     * @return Attachment
-     */
-    public function createBlob($ownerId, $type, $name, $data, $accessMode = AccessMode::PBDEFAULT)
-    {
-        $payload = new Payload();
-        $payload->setOwnerId($ownerId);
-        $payload->setType($type);
-        $payload->setName($name);
-        $payload->setData($data);
-        $payload->setAccessMode($accessMode);
-
-        $blobId = $this->client->createBlob($payload);
-
-        $attachment = new Attachment();
-        $attachment->setBlobId($blobId);
-        $attachment->setName($name);
-        $attachment->setType($type);
-
-        return $attachment;
     }
 
     /**
@@ -669,28 +641,6 @@ class Member implements RepresentableInterface
     }
 
     /**
-     * Removes all public keys that do not have a corresponding private key stored on
-     * the current device from tke member.
-     *
-     * @return bool that indicates whether the operation finished or had an error
-     */
-    public function removeNonStoredKeys()
-    {
-        $storedKeys = $this->client->getCryptoEngine()->getPublicKeys();
-        $member = $this->client->getMember($this->getMemberId());
-        $keyIdsToRemove = array();
-        foreach($member->getKeys() as $key) {
-            if(!in_array($key, $storedKeys, true)){
-                $keyIdsToRemove[] = $key->getId();
-            }
-        }
-        if(!empty($keyIdsToRemove)){
-            return $this->removeKeys($keyIdsToRemove);
-        }
-        return false;
-    }
-
-    /**
      * Retrieves a blob from the server.
      *
      * @param string $blobId id of the blob
@@ -699,137 +649,6 @@ class Member implements RepresentableInterface
     public function getBlob($blobId)
     {
         return $this->client->getBlob($blobId);
-    }
-
-    /**
-     * Retrieves a blob that is attached to a transfer token.
-     *
-     * @param string $tokenId id of the token
-     * @param string $blobId id of the blob
-     * @return Blob
-     */
-    public function getTokenBlob($tokenId, $blobId)
-    {
-        return $this->client->getTokenBlob($tokenId, $blobId);
-    }
-
-    /**
-     * Creates a new member address.
-     *
-     * @param string $name the name of the address
-     * @param Address $address the address
-     * @return AddressRecord record created
-     */
-    public function addAddress($name, $address)
-    {
-        return $this->client->addAddress($name, $address);
-    }
-
-    /**
-     * Looks up an address by id.
-     *
-     * @param string $addressId the address id
-     * @return AddressRecord
-     */
-    public function getAddress($addressId)
-    {
-        return $this->client->getAddress($addressId);
-    }
-
-    /**
-     * Looks up member addresses.
-     *
-     * @return RepeatedField a list of addresses
-     */
-    public function getAddresses()
-    {
-        return $this->client->getAddresses();
-    }
-
-    /**
-     * Deletes a member address by its id.
-     *
-     * @param string $addressId the id of the address
-     * @return bool that indicates whether the operation finished or had an error
-     */
-    public function deleteAddress($addressId)
-    {
-        return $this->client->deleteAddress($addressId);
-    }
-
-    /**
-     * Creates a new transfer token builder.
-     *
-     * @param double $amount transfer amount
-     * @param string $currency currency code, e.g. "USD"
-     * @return TransferTokenBuilder token returned by the server
-     */
-    public function createTransferToken($amount, $currency)
-    {
-        return new TransferTokenBuilder($this, $amount, $currency);
-    }
-
-    /**
-     * Adds a trusted beneficiary for whom the SCA will be skipped.
-     *
-     * @param string $memberId the member id of the beneficiary
-     * @return bool if success or not
-     */
-    public function addTrustedBeneficiary($memberId)
-    {
-        $payload = new TrustedBeneficiary\Payload();
-        $payload->setMemberId($memberId)
-            ->setNonce(Strings::generateNonce());
-
-        return $this->client->addTrustedBeneficiary($payload);
-    }
-
-    /**
-     * Removes a trusted beneficiary.
-     *
-     * @param string $memberId the member id of the beneficiary
-     * @return bool if success or not
-     */
-    public function removeTrustedBeneficiary($memberId)
-    {
-        $payload = new TrustedBeneficiary\Payload();
-        $payload->setMemberId($memberId)
-                ->setNonce(Strings::generateNonce());
-
-        return $this->client->removeTrustedBeneficiary($payload);
-    }
-
-    /**
-     * Gets a list of all trusted beneficiaries.
-     *
-     * @return RepeatedField
-     */
-    public function getTrustedBeneficiaries()
-    {
-        return $this->client->getTrustedBeneficiaries();
-    }
-
-    /**
-     * Creates an access token built from a given {@link AccessTokenBuilder}.
-     *
-     * @param TokenPayload $tokenPayload to create access token from
-     * @return Token
-     */
-    public function createAccessToken($tokenPayload)
-    {
-        return $this->client->createAccessToken($tokenPayload);
-    }
-
-    /**
-     * Creates an access token built from a given {@link AccessTokenBuilder}.
-     *
-     * @param TokenPayload $tokenPayload to create access token from
-     * @param string $tokenRequestId token request id
-     * @return Token
-     */
-    public function createAccessTokenForTokenRequestId($tokenPayload, $tokenRequestId)
-    {
-        return $this->client->createAccessTokenForTokenRequestId($tokenPayload, $tokenRequestId);
     }
 
     /**
@@ -845,23 +664,6 @@ class Member implements RepresentableInterface
     }
 
     /**
-     * Endorses the token by signing it. The signature is persisted along
-     * with the token.
-     *
-     * <p>If the key's level is too low, the result's status is MORE_SIGNATURES_NEEDED
-     * and the system pushes a notification to the member prompting them to use a
-     * higher-privilege key.
-     *
-     * @param Token $token to endorse
-     * @param int $keyLevel key level to be used to endorse the token
-     * @return TokenOperationResult result of endorse token
-     */
-    public function endorseToken($token, $keyLevel)
-    {
-        return $this->client->endorseToken($token, $keyLevel);
-    }
-
-    /**
      * Creates a new web-app customization.
      *
      * @param string $displayName display name
@@ -873,5 +675,70 @@ class Member implements RepresentableInterface
     public function createCustomization($displayName=null, $logo=null, $consentText=null, $colors=[])
     {
         return $this->client->createCustomization($displayName, $logo, $consentText, $colors);
+    }
+
+    /**
+     * Looks up transfer tokens owned by the member.
+     *
+     * @param offset optional offset to start at
+     * @param limit max number of records to return
+     * @return PagedList transfer tokens owned by the member
+     */
+    public function getTransferTokens($offset, $limit)
+    {
+
+        return $this->client->getTokens(Type::TRANSFER, $offset,$limit);
+    }
+
+    /**
+     * Sets security metadata included in all requests.
+     *
+     * @param securityMetadata security metadata
+     * TODO (RD-2335): Change class from SecurityMetaData to TrackingMetaData
+     */
+    public function setTrackingMetaData($securityMetadata)
+    {
+        $this->client->setTrackingMetaData($securityMetadata);
+    }
+
+    /**
+     * Clears security metadata.
+     */
+    public function clearTrackingMetaData()
+    {
+        $this->client->clearTrackingMetaData();
+    }
+
+    /**
+     * Trigger a step up notification for balance requests.
+     *
+     * @param string[] accountIds list of account ids
+     * @return int
+     */
+    public function triggerBalanceStepUpNotification($accountIds)
+    {
+        return $this->client->triggerBalanceStepUpNotification($accountIds);
+    }
+
+    /**
+     * Trigger a step up notification for transaction requests.
+     *
+     * @param string account id
+     * @return int
+     */
+    public function triggerTransactionStepUpNotification($accountId)
+    {
+        return $this->client->triggerTransactionStepUpNotification($accountId);
+    }
+
+    /**
+     * Resolves transfer destinations for the given account id.
+     *
+     * @param $accountId
+     * @return RepeatedField transfer endpoints
+     */
+    public function resolveTransferDestinations($accountId)
+    {
+        return $this->client->resolveTransferDestinations($accountId);
     }
 }

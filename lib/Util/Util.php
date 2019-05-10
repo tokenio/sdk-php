@@ -45,7 +45,10 @@ abstract class Util
             return $alias->getValue();
         }
 
-        return Base58::encode(self::sha256hash(self::toJson($alias)));
+        $aliasClone = clone $alias;
+        $aliasClone->setRealm("");
+
+        return Base58::encode(self::sha256hash(self::toJson($aliasClone)));
     }
 
     /**
@@ -58,6 +61,7 @@ abstract class Util
     {
         return Base58::encode(self::sha256hash($message->serializeToString()));
     }
+
     /**
      * Creates AddKey operation with Key.
      *
@@ -312,5 +316,18 @@ abstract class Util
         }else{
             throw new Exception\StatusRuntimeException($status->code, $status->details);
         }
+    }
+
+    /**
+     * Use reflection to return all constants as (value, constant name) array from the class
+     * @param $classname
+     * @return array|null
+     * @throws \ReflectionException
+     */
+    public static function reflectEnum($classname)
+    {
+        $clazz = new \ReflectionClass($classname);
+        $reverseMap = array_flip($clazz->getConstants());
+        return $reverseMap;
     }
 }

@@ -1,10 +1,11 @@
 #
 # Fetches specified proto files from the artifact repository.
 #
-TOKEN_PROTOS_VER = "1.1.60"
-RPC_PROTOS_VER = "1.1.0"
+TOKEN_PROTOS_VER = "1.1.90"
+RPC_PROTOS_VER = "1.1.38"
 
 require 'open-uri'
+require 'fileutils'
 
 def fetch_protos()
     def download(path, name, type, version)

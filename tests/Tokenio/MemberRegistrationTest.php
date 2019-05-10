@@ -113,14 +113,14 @@ class MemberRegistrationTest extends TestCase
     public function testAliasDoesNotExist()
     {
         $alias = TestUtil::generateAlias();
-        $this->assertFalse($this->tokenIO->isAliasExists($alias));
+        $this->assertFalse($this->tokenIO->resolveAlias($alias));
     }
 
     public function testAliasExists()
     {
         $alias = TestUtil::generateAlias();
         $member = $this->tokenIO->createMember($alias);
-        $this->assertTrue($this->tokenIO->isAliasExists($alias));
+        $this->assertTrue($this->tokenIO->resolveAlias($alias));
     }
 
     public function testRecovery()
@@ -134,10 +134,10 @@ class MemberRegistrationTest extends TestCase
         $this->assertEquals($member->getMemberId(), $recovered->getMemberId());
         $this->assertCount(3, $recovered->getKeys());
         $this->assertEmpty($recovered->getAliases());
-        $this->assertFalse($this->tokenIO->isAliasExists($alias));
+        $this->assertFalse($this->tokenIO->resolveAlias($alias));
 
         $recovered->verifyAlias($verificationId, 'code');
-        $this->assertTrue($this->tokenIO->isAliasExists($alias));
+        $this->assertTrue($this->tokenIO->resolveAlias($alias));
         $actualAliases = TestUtil::repeatedFieldsToArray($recovered->getAliases());
         $this->assertEquals([$alias], $actualAliases);
     }
@@ -176,10 +176,10 @@ class MemberRegistrationTest extends TestCase
         $this->assertEquals($member->getMemberId(), $recovered->getMemberId());
         $this->assertCount(3, $recovered->getKeys());
         $this->assertEmpty($recovered->getAliases());
-        $this->assertFalse($this->tokenIO->isAliasExists($alias));
+        $this->assertFalse($this->tokenIO->resolveAlias($alias));
 
         $recovered->verifyAlias($verificationId, 'code');
-        $this->assertTrue($this->tokenIO->isAliasExists($alias));
+        $this->assertTrue($this->tokenIO->resolveAlias($alias));
         $this->assertEquals([$alias], TestUtil::repeatedFieldsToArray($recovered->getAliases()));
     }
 }

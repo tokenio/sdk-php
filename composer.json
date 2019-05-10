@@ -1,7 +1,7 @@
 {
   "name": "tokenio/sdk",
   "description": "PHP SDK for interacting with the Token System",
-  "version": "1.0.0-beta-4",
+  "version": "1.0.0",
   "keywords": [
     "token",
     "payment processing",
@@ -16,14 +16,14 @@
     }
   ],
   "require": {
-    "php": ">=5.5.0",
+    "php": ">=5.6.0",
     "ext-bcmath" : "*",
     "ext-json": "*",
     "ext-grpc": "*",
     "paragonie/sodium_compat": "1.7.0",
     "paragonie/random_compat": ">=2",
     "stephenhill/base58": "~1.0",
-    "grpc/grpc": "^1.6.0",
+    "grpc/grpc": "^1.20.0",
     "google/protobuf": "^3.6.1",
     "jms/serializer": "1.7.1"
   },
@@ -36,7 +36,8 @@
       "Tokenio\\": "lib/",
       "Google\\": "lib/Proto/Google",
       "GPBMetadata\\": "lib/Proto/GPBMetadata",
-      "Io\\": "lib/Proto/Io/"
+      "Io\\": "lib/Proto/Io/",
+      "Io\\Token\\Samples\\": "samples/"
     }
   },
   "suggest": {

@@ -4,6 +4,9 @@ namespace Tokenio\Rpc;
 
 use Google\Protobuf\Internal\MapField;
 use Google\Protobuf\Internal\RepeatedField;
+use http\Exception\RuntimeException;
+use Io\Token\Proto\Banklink\AccountLinkingStatus;
+use Io\Token\Proto\Banklink\OauthBankAuthorization;
 use Io\Token\Proto\Common\Account\Account;
 use Io\Token\Proto\Common\Address\Address;
 use Io\Token\Proto\Common\Alias\Alias;
@@ -20,7 +23,10 @@ use Io\Token\Proto\Common\Member\MemberUpdate;
 use Io\Token\Proto\Common\Member\Profile;
 use Io\Token\Proto\Common\Member\RecoveryRule;
 use Io\Token\Proto\Common\Member\TrustedBeneficiary;
+use Io\Token\Proto\Common\Money\Money;
+use Io\Token\Proto\Common\Notification\BalanceStepUp;
 use Io\Token\Proto\Common\Security\Key\Level;
+use Io\Token\Proto\Common\Security\SecurityMetadata;
 use Io\Token\Proto\Common\Security\Signature;
 use Io\Token\Proto\Common\Token\Token;
 use Io\Token\Proto\Common\Token\TokenMember;
@@ -44,6 +50,8 @@ use Io\Token\Proto\Gateway\CreateBlobRequest;
 use Io\Token\Proto\Gateway\CreateBlobResponse;
 use Io\Token\Proto\Gateway\CreateCustomizationRequest;
 use Io\Token\Proto\Gateway\CreateCustomizationResponse;
+use Io\Token\Proto\Gateway\CreateTestBankAccountRequest;
+use Io\Token\Proto\Gateway\CreateTestBankAccountResponse;
 use Io\Token\Proto\Gateway\CreateTransferRequest;
 use Io\Token\Proto\Gateway\CreateTransferResponse;
 use Io\Token\Proto\Gateway\DeleteAddressRequest;
@@ -71,6 +79,8 @@ use Io\Token\Proto\Gateway\GetBankInfoRequest;
 use Io\Token\Proto\Gateway\GetBankInfoResponse;
 use Io\Token\Proto\Gateway\GetBlobRequest;
 use Io\Token\Proto\Gateway\GetBlobResponse;
+use Io\Token\Proto\Gateway\GetDefaultAccountRequest;
+use Io\Token\Proto\Gateway\GetDefaultAccountResponse;
 use Io\Token\Proto\Gateway\GetDefaultAgentRequest;
 use Io\Token\Proto\Gateway\GetDefaultAgentResponse;
 use Io\Token\Proto\Gateway\GetMemberRequest;
@@ -95,11 +105,16 @@ use Io\Token\Proto\Gateway\GetTransfersRequest;
 use Io\Token\Proto\Gateway\GetTransfersResponse;
 use Io\Token\Proto\Gateway\GetTrustedBeneficiariesRequest;
 use Io\Token\Proto\Gateway\GetTrustedBeneficiariesResponse;
+use Io\Token\Proto\Gateway\LinkAccountsOauthRequest;
+use Io\Token\Proto\Gateway\LinkAccountsOauthResponse;
 use Io\Token\Proto\Gateway\Page;
 use Io\Token\Proto\Gateway\RemoveTrustedBeneficiaryRequest;
 use Io\Token\Proto\Gateway\RemoveTrustedBeneficiaryResponse;
+use Io\Token\Proto\Gateway\ResolveTransferDestinationsRequest;
+use Io\Token\Proto\Gateway\ResolveTransferDestinationsResponse;
 use Io\Token\Proto\Gateway\RetryVerificationRequest;
 use Io\Token\Proto\Gateway\RetryVerificationResponse;
+use Io\Token\Proto\Gateway\SetDefaultAccountRequest;
 use Io\Token\Proto\Gateway\SetProfilePictureRequest;
 use Io\Token\Proto\Gateway\SetProfilePictureResponse;
 use Io\Token\Proto\Gateway\SetProfileRequest;
@@ -108,6 +123,8 @@ use Io\Token\Proto\Gateway\SignTokenRequestStateRequest;
 use Io\Token\Proto\Gateway\SignTokenRequestStateResponse;
 use Io\Token\Proto\Gateway\StoreTokenRequestRequest;
 use Io\Token\Proto\Gateway\StoreTokenRequestResponse;
+use Io\Token\Proto\Gateway\TriggerStepUpNotificationRequest;
+use Io\Token\Proto\Gateway\TriggerStepUpNotificationResponse;
 use Io\Token\Proto\Gateway\UpdateMemberRequest;
 use Io\Token\Proto\Gateway\UpdateMemberResponse;
 use Io\Token\Proto\Gateway\VerifyAliasRequest;
@@ -137,6 +154,7 @@ class Client
 
     private $customerInitiated = false;
     private $onBehalfOf;
+    private $trackingMetaData;
 
     /**
      * Construct the Client.
@@ -150,6 +168,7 @@ class Client
         $this->memberId = $memberId;
         $this->cryptoEngine = $cryptoEngine;
         $this->gateway = $gateway;
+        $this->trackingMetaData = new SecurityMetadata();
     }
 
     /**
@@ -456,13 +475,16 @@ class Client
      * @param string $customizationId (optional) customization id
      * @return string id to reference token request
      */
-    public function storeTokenRequest($payload, $options, $userRefId = '', $customizationId = '')
+    public function storeTokenRequest($payload, $options, $userRefId = '', $customizationId = '',
+                                      $tokenRequestPayload = null, $tokenRequestOptions = null)
     {
         $request = new StoreTokenRequestRequest();
         $request->setPayload($payload)
             ->setOptions($options)
             ->setUserRefId($userRefId)
-            ->setCustomizationId($customizationId);
+            ->setCustomizationId($customizationId)
+            ->setRequestPayload($tokenRequestPayload)
+            ->setRequestOptions($tokenRequestOptions);
 
         /** @var StoreTokenRequestResponse $response */
         $response = Util::executeAndHandleCall($this->gateway->StoreTokenRequest($request));
@@ -1075,5 +1097,59 @@ class Client
         /** @var CreateCustomizationResponse $response */
         $response = Util::executeAndHandleCall($this->gateway->CreateCustomization($request));
         return $response->getCustomizationId();
+    }
+
+    public function setTrackingMetaData($trackingMetaData)
+    {
+        $this->trackingMetaData = $trackingMetaData;
+    }
+
+    public function clearTrackingMetaData()
+    {
+        $this->trackingMetaData = new SecurityMetadata();
+    }
+
+    public function triggerBalanceStepUpNotification($accountIds)
+    {
+        $balanceStepUp = new BalanceStepUp();
+        $balanceStepUp->setAccountId($accountIds);
+        $stepUpNotificationRequest = new TriggerStepUpNotificationRequest();
+        $stepUpNotificationRequest->setBalanceStepUp($balanceStepUp);
+
+        /** @var TriggerStepUpNotificationResponse $response*/
+        $response = Util::executeAndHandleCall($this->gateway->TriggerStepUpNotification($stepUpNotificationRequest));
+        return $response->getStatus();
+    }
+
+    public function triggerTransactionStepUpNotification($accountId)
+    {
+        $balanceStepUp = new BalanceStepUp();
+        $balanceStepUp->setAccountId($accountId);
+        $stepUpNotificationRequest = new TriggerStepUpNotificationRequest();
+        $stepUpNotificationRequest->setBalanceStepUp($balanceStepUp);
+
+        /** @var TriggerStepUpNotificationResponse $response*/
+        $response = Util::executeAndHandleCall($this->gateway->TriggerStepUpNotification($stepUpNotificationRequest));
+        return $response->getStatus();
+    }
+
+    public function resolveTransferDestinations($accountId)
+    {
+        $request = new ResolveTransferDestinationsRequest();
+        $request->setAccountId($accountId);
+        $response = Util::executeAndHandleCall($this->gateway->ResolveTransferDestinations($request));
+
+        /** @var ResolveTransferDestinationsResponse $response*/
+        return $response->getDestinations();
+    }
+
+    private function createTestBankAuth($balance)
+    {
+        $request = new CreateTestBankAccountRequest();
+        $request->setBalance($balance);
+
+        /** @var CreateTestBankAccountResponse $response*/
+        $response = Util::executeAndHandleCall($this->gateway->CreateTestBankAccount($request));
+        return $response->getAuthorization();
     }
 }

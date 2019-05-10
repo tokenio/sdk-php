@@ -14,14 +14,6 @@ use Google\Protobuf\Internal\GPBUtil;
 class StoreTokenRequestRequest extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.TokenRequestPayload request_payload = 5;</code>
-     */
-    private $request_payload = null;
-    /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.TokenRequestOptions request_options = 6;</code>
-     */
-    private $request_options = null;
-    /**
      * deprecated fields
      *
      * Generated from protobuf field <code>.io.token.proto.common.token.TokenPayload payload = 1 [deprecated = true];</code>
@@ -39,6 +31,14 @@ class StoreTokenRequestRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string customization_id = 4 [deprecated = true];</code>
      */
     private $customization_id = '';
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.token.TokenRequestPayload request_payload = 5;</code>
+     */
+    private $request_payload = null;
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.token.TokenRequestOptions request_options = 6;</code>
+     */
+    private $request_options = null;
 
     /**
      * Constructor.
@@ -46,62 +46,18 @@ class StoreTokenRequestRequest extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Io\Token\Proto\Common\Token\TokenRequestPayload $request_payload
-     *     @type \Io\Token\Proto\Common\Token\TokenRequestOptions $request_options
      *     @type \Io\Token\Proto\Common\Token\TokenPayload $payload
      *           deprecated fields
      *     @type array|\Google\Protobuf\Internal\MapField $options
      *     @type string $user_ref_id
      *     @type string $customization_id
+     *     @type \Io\Token\Proto\Common\Token\TokenRequestPayload $request_payload
+     *     @type \Io\Token\Proto\Common\Token\TokenRequestOptions $request_options
      * }
      */
     public function __construct($data = NULL) {
         \GPBMetadata\Gateway\Gateway::initOnce();
         parent::__construct($data);
-    }
-
-    /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.TokenRequestPayload request_payload = 5;</code>
-     * @return \Io\Token\Proto\Common\Token\TokenRequestPayload
-     */
-    public function getRequestPayload()
-    {
-        return $this->request_payload;
-    }
-
-    /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.TokenRequestPayload request_payload = 5;</code>
-     * @param \Io\Token\Proto\Common\Token\TokenRequestPayload $var
-     * @return $this
-     */
-    public function setRequestPayload($var)
-    {
-        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\TokenRequestPayload::class);
-        $this->request_payload = $var;
-
-        return $this;
-    }
-
-    /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.TokenRequestOptions request_options = 6;</code>
-     * @return \Io\Token\Proto\Common\Token\TokenRequestOptions
-     */
-    public function getRequestOptions()
-    {
-        return $this->request_options;
-    }
-
-    /**
-     * Generated from protobuf field <code>.io.token.proto.common.token.TokenRequestOptions request_options = 6;</code>
-     * @param \Io\Token\Proto\Common\Token\TokenRequestOptions $var
-     * @return $this
-     */
-    public function setRequestOptions($var)
-    {
-        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\TokenRequestOptions::class);
-        $this->request_options = $var;
-
-        return $this;
     }
 
     /**
@@ -192,6 +148,50 @@ class StoreTokenRequestRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->customization_id = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.token.TokenRequestPayload request_payload = 5;</code>
+     * @return \Io\Token\Proto\Common\Token\TokenRequestPayload
+     */
+    public function getRequestPayload()
+    {
+        return $this->request_payload;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.token.TokenRequestPayload request_payload = 5;</code>
+     * @param \Io\Token\Proto\Common\Token\TokenRequestPayload $var
+     * @return $this
+     */
+    public function setRequestPayload($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\TokenRequestPayload::class);
+        $this->request_payload = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.token.TokenRequestOptions request_options = 6;</code>
+     * @return \Io\Token\Proto\Common\Token\TokenRequestOptions
+     */
+    public function getRequestOptions()
+    {
+        return $this->request_options;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.token.TokenRequestOptions request_options = 6;</code>
+     * @param \Io\Token\Proto\Common\Token\TokenRequestOptions $var
+     * @return $this
+     */
+    public function setRequestOptions($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\TokenRequestOptions::class);
+        $this->request_options = $var;
 
         return $this;
     }

@@ -246,19 +246,6 @@ class GatewayServiceClient extends \Grpc\BaseStub {
     }
 
     /**
-     * @param \Io\Token\Proto\Gateway\VerifyAliasOnBehalfRequest $argument input argument
-     * @param array $metadata metadata
-     * @param array $options call options
-     */
-    public function VerifyAliasOnBehalf(\Io\Token\Proto\Gateway\VerifyAliasOnBehalfRequest $argument,
-      $metadata = [], $options = []) {
-        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/VerifyAliasOnBehalf',
-        $argument,
-        ['\Io\Token\Proto\Gateway\VerifyAliasOnBehalfResponse', 'decode'],
-        $metadata, $options);
-    }
-
-    /**
      * @param \Io\Token\Proto\Gateway\NormalizeAliasRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -281,6 +268,19 @@ class GatewayServiceClient extends \Grpc\BaseStub {
         return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/VerifyAffiliate',
         $argument,
         ['\Io\Token\Proto\Gateway\VerifyAffiliateResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Io\Token\Proto\Gateway\SetAppCallbackUrlRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function SetAppCallbackUrl(\Io\Token\Proto\Gateway\SetAppCallbackUrlRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/SetAppCallbackUrl',
+        $argument,
+        ['\Io\Token\Proto\Gateway\SetAppCallbackUrlResponse', 'decode'],
         $metadata, $options);
     }
 
@@ -847,6 +847,20 @@ class GatewayServiceClient extends \Grpc\BaseStub {
     }
 
     /**
+     * Confirm that the given account has sufficient funds to cover the charge.
+     * @param \Io\Token\Proto\Gateway\ConfirmFundsRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function ConfirmFunds(\Io\Token\Proto\Gateway\ConfirmFundsRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/ConfirmFunds',
+        $argument,
+        ['\Io\Token\Proto\Gateway\ConfirmFundsResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * //////////////////////////////////////////////////////////////////////////////////////////////////
      * Testing.
      *
@@ -965,7 +979,7 @@ class GatewayServiceClient extends \Grpc\BaseStub {
     }
 
     /**
-     * Retrviee a Token Request
+     * Retrieve a Token Request
      * @param \Io\Token\Proto\Gateway\RetrieveTokenRequestRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -996,6 +1010,34 @@ class GatewayServiceClient extends \Grpc\BaseStub {
      * Tokens.
      *
      *
+     * Prepare a token (resolve token payload and determine policy)
+     * @param \Io\Token\Proto\Gateway\PrepareTokenRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function PrepareToken(\Io\Token\Proto\Gateway\PrepareTokenRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/PrepareToken',
+        $argument,
+        ['\Io\Token\Proto\Gateway\PrepareTokenResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * Create a Token.
+     * @param \Io\Token\Proto\Gateway\CreateTokenRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function CreateToken(\Io\Token\Proto\Gateway\CreateTokenRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/CreateToken',
+        $argument,
+        ['\Io\Token\Proto\Gateway\CreateTokenResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * Create a Transfer Token.
      * https://developer.token.io/sdk/#create-transfer-token
      * @param \Io\Token\Proto\Gateway\CreateTransferTokenRequest $argument input argument
@@ -1151,6 +1193,20 @@ class GatewayServiceClient extends \Grpc\BaseStub {
     }
 
     /**
+     * Gets a payload to sign
+     * @param \Io\Token\Proto\Gateway\GetAuthRequestPayloadRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetAuthRequestPayload(\Io\Token\Proto\Gateway\GetAuthRequestPayloadRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetAuthRequestPayload',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetAuthRequestPayloadResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * //////////////////////////////////////////////////////////////////////////////////////////////////
      * Token Transfers.
      *
@@ -1292,6 +1348,66 @@ class GatewayServiceClient extends \Grpc\BaseStub {
         return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetKeychains',
         $argument,
         ['\Io\Token\Proto\Gateway\GetKeychainsResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * //////////////////////////////////////////////////////////////////////////////////////////////////
+     * Bank member only requests.
+     *
+     * Get member information about a member who links at least an account from this bank
+     * @param \Io\Token\Proto\Gateway\GetMemberInfoRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetMemberInfo(\Io\Token\Proto\Gateway\GetMemberInfoRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetMemberInfo',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetMemberInfoResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Io\Token\Proto\Gateway\GetConsentRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetConsent(\Io\Token\Proto\Gateway\GetConsentRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetConsent',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetConsentResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Io\Token\Proto\Gateway\GetConsentsRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetConsents(\Io\Token\Proto\Gateway\GetConsentsRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetConsents',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetConsentsResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * //////////////////////////////////////////////////////////////////////////////////////////////////
+     * Reports (bank member only requests).
+     *
+     * Get TPP performance report.
+     * @param \Io\Token\Proto\Gateway\GetTppPerformanceReportRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetTppPerformanceReport(\Io\Token\Proto\Gateway\GetTppPerformanceReportRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetTppPerformanceReport',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetTppPerformanceReportResponse', 'decode'],
         $metadata, $options);
     }
 

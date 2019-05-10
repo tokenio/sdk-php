@@ -14,12 +14,13 @@ use Tokenio\Util\Strings;
 abstract class TestUtil
 {
     const DEVELOPER_KEY = '4qY7lqQw8NOl9gng0ZHgT4xdiDqxqoGVutuZwrUYQsI';
+    //const DEVELOPER_KEY = "f3982819-5d8d-4123-9601-886df2780f42";
 
     public static function initializeSDK()
     {
         $keyStore = new UnsecuredFileSystemKeyStore(__DIR__ . '/test-keys/');
         $builder = new TokenClientBuilder();
-        $builder->connectTo(TokenCluster::get(TokenEnvironment::SANDBOX));
+        $builder->connectTo(TokenCluster::get(TokenEnvironment::DEVELOPMENT));
         $builder->developerKey(self::DEVELOPER_KEY);
         $builder->withKeyStore($keyStore);
         return $builder->build();
@@ -28,11 +29,9 @@ abstract class TestUtil
     public static function generateAlias()
     {
         $email = 'asphp-' . strtolower(Strings::generateNonce()) . '+noverify@example.com';
-
         $alias = new Alias();
         $alias->setType(Alias\Type::EMAIL);
         $alias->setValue($email);
-
         return $alias;
     }
 

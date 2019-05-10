@@ -109,7 +109,6 @@ class Account
     {
         return $this->getBalance($level)->getCurrent();
     }
-
     /**
      * Looks up an account available balance.
      *
@@ -145,4 +144,15 @@ class Account
     {
         return $this->client->getTransactions($this->account->getId(), $offset, $limit, $level);
     }
+
+    /**
+     * Fetches the original {@link AccountProtos.Account} object.
+     *
+     * @return \Io\Token\Proto\Common\Account\Account the account.
+     */
+    public function toProto()
+    {
+        return $this->account;
+    }
+
 }

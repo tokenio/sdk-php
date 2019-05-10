@@ -50,6 +50,12 @@ class Type
      * Generated from protobuf enum <code>BANK = 6;</code>
      */
     const BANK = 6;
+    /**
+     * Custom type, for instance a bank specific customer ID.
+     *
+     * Generated from protobuf enum <code>CUSTOM = 7;</code>
+     */
+    const CUSTOM = 7;
 }
 
 // Adding a class alias for backwards compatibility with the previous class name.
