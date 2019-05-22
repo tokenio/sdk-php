@@ -1411,4 +1411,18 @@ class GatewayServiceClient extends \Grpc\BaseStub {
         $metadata, $options);
     }
 
+    /**
+     * Get availability report.
+     * @param \Io\Token\Proto\Gateway\GetAvailabilityReportRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetAvailabilityReport(\Io\Token\Proto\Gateway\GetAvailabilityReportRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetAvailabilityReport',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetAvailabilityReportResponse', 'decode'],
+        $metadata, $options);
+    }
+
 }

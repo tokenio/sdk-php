@@ -34,9 +34,7 @@ class TransferPayload extends \Google\Protobuf\Internal\Message
      */
     private $amount = null;
     /**
-     * Transfer destinations, sorted in priority order.
-     *
-     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferEndpoint destinations = 5;</code>
+     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferEndpoint destinations = 5 [deprecated = true];</code>
      */
     private $destinations;
     /**
@@ -45,6 +43,12 @@ class TransferPayload extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string description = 6;</code>
      */
     private $description = '';
+    /**
+     * Transfer destinations, sorted in priority order.
+     *
+     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferDestination transfer_destinations = 7;</code>
+     */
+    private $transfer_destinations;
 
     /**
      * Constructor.
@@ -59,9 +63,10 @@ class TransferPayload extends \Google\Protobuf\Internal\Message
      *     @type \Io\Token\Proto\Common\Money\Money $amount
      *           Amount and currency.
      *     @type \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint[]|\Google\Protobuf\Internal\RepeatedField $destinations
-     *           Transfer destinations, sorted in priority order.
      *     @type string $description
      *           Optional
+     *     @type \Io\Token\Proto\Common\Transferinstructions\TransferDestination[]|\Google\Protobuf\Internal\RepeatedField $transfer_destinations
+     *           Transfer destinations, sorted in priority order.
      * }
      */
     public function __construct($data = NULL) {
@@ -148,9 +153,7 @@ class TransferPayload extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Transfer destinations, sorted in priority order.
-     *
-     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferEndpoint destinations = 5;</code>
+     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferEndpoint destinations = 5 [deprecated = true];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getDestinations()
@@ -159,9 +162,7 @@ class TransferPayload extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Transfer destinations, sorted in priority order.
-     *
-     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferEndpoint destinations = 5;</code>
+     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferEndpoint destinations = 5 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint[]|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
@@ -195,6 +196,32 @@ class TransferPayload extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->description = $var;
+
+        return $this;
+    }
+
+    /**
+     * Transfer destinations, sorted in priority order.
+     *
+     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferDestination transfer_destinations = 7;</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getTransferDestinations()
+    {
+        return $this->transfer_destinations;
+    }
+
+    /**
+     * Transfer destinations, sorted in priority order.
+     *
+     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferDestination transfer_destinations = 7;</code>
+     * @param \Io\Token\Proto\Common\Transferinstructions\TransferDestination[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setTransferDestinations($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Io\Token\Proto\Common\Transferinstructions\TransferDestination::class);
+        $this->transfer_destinations = $arr;
 
         return $this;
     }

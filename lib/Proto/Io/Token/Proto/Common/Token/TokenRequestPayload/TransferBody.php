@@ -26,7 +26,7 @@ class TransferBody extends \Google\Protobuf\Internal\Message
      */
     private $amount = '';
     /**
-     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferEndpoint destinations = 3;</code>
+     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferEndpoint destinations = 3 [deprecated = true];</code>
      */
     private $destinations;
     /**
@@ -35,6 +35,10 @@ class TransferBody extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string lifetime_amount = 4;</code>
      */
     private $lifetime_amount = '';
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferInstructions instructions = 5;</code>
+     */
+    private $instructions = null;
 
     /**
      * Constructor.
@@ -49,6 +53,7 @@ class TransferBody extends \Google\Protobuf\Internal\Message
      *     @type \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint[]|\Google\Protobuf\Internal\RepeatedField $destinations
      *     @type string $lifetime_amount
      *           Optional: Token total lifetime amount. Double.
+     *     @type \Io\Token\Proto\Common\Transferinstructions\TransferInstructions $instructions
      * }
      */
     public function __construct($data = NULL) {
@@ -109,7 +114,7 @@ class TransferBody extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferEndpoint destinations = 3;</code>
+     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferEndpoint destinations = 3 [deprecated = true];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getDestinations()
@@ -118,7 +123,7 @@ class TransferBody extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferEndpoint destinations = 3;</code>
+     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferEndpoint destinations = 3 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint[]|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
@@ -152,6 +157,28 @@ class TransferBody extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->lifetime_amount = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferInstructions instructions = 5;</code>
+     * @return \Io\Token\Proto\Common\Transferinstructions\TransferInstructions
+     */
+    public function getInstructions()
+    {
+        return $this->instructions;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferInstructions instructions = 5;</code>
+     * @param \Io\Token\Proto\Common\Transferinstructions\TransferInstructions $var
+     * @return $this
+     */
+    public function setInstructions($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Transferinstructions\TransferInstructions::class);
+        $this->instructions = $var;
 
         return $this;
     }

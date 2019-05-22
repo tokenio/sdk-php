@@ -9,8 +9,6 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * ACH transfer
- *
  * Generated from protobuf message <code>io.token.proto.common.account.BankAccount.Ach</code>
  */
 class Ach extends \Google\Protobuf\Internal\Message

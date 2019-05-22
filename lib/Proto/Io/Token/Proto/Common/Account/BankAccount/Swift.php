@@ -9,8 +9,6 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * SWIFT transfer
- *
  * Generated from protobuf message <code>io.token.proto.common.account.BankAccount.Swift</code>
  */
 class Swift extends \Google\Protobuf\Internal\Message
