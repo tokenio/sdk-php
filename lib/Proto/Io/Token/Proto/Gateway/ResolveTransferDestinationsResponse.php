@@ -14,9 +14,13 @@ use Google\Protobuf\Internal\GPBUtil;
 class ResolveTransferDestinationsResponse extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferEndpoint destinations = 1;</code>
+     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferEndpoint destinations = 1 [deprecated = true];</code>
      */
     private $destinations;
+    /**
+     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferDestination transfer_destinations = 2;</code>
+     */
+    private $transfer_destinations;
 
     /**
      * Constructor.
@@ -25,6 +29,7 @@ class ResolveTransferDestinationsResponse extends \Google\Protobuf\Internal\Mess
      *     Optional. Data for populating the Message object.
      *
      *     @type \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint[]|\Google\Protobuf\Internal\RepeatedField $destinations
+     *     @type \Io\Token\Proto\Common\Transferinstructions\TransferDestination[]|\Google\Protobuf\Internal\RepeatedField $transfer_destinations
      * }
      */
     public function __construct($data = NULL) {
@@ -33,7 +38,7 @@ class ResolveTransferDestinationsResponse extends \Google\Protobuf\Internal\Mess
     }
 
     /**
-     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferEndpoint destinations = 1;</code>
+     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferEndpoint destinations = 1 [deprecated = true];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getDestinations()
@@ -42,7 +47,7 @@ class ResolveTransferDestinationsResponse extends \Google\Protobuf\Internal\Mess
     }
 
     /**
-     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferEndpoint destinations = 1;</code>
+     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferEndpoint destinations = 1 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint[]|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
@@ -50,6 +55,28 @@ class ResolveTransferDestinationsResponse extends \Google\Protobuf\Internal\Mess
     {
         $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint::class);
         $this->destinations = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferDestination transfer_destinations = 2;</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getTransferDestinations()
+    {
+        return $this->transfer_destinations;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferDestination transfer_destinations = 2;</code>
+     * @param \Io\Token\Proto\Common\Transferinstructions\TransferDestination[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setTransferDestinations($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Io\Token\Proto\Common\Transferinstructions\TransferDestination::class);
+        $this->transfer_destinations = $arr;
 
         return $this;
     }

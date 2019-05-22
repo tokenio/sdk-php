@@ -43,6 +43,10 @@ class Metadata extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.io.token.proto.common.address.Address delivery_address = 5;</code>
      */
     private $delivery_address = null;
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferInstructions.Metadata.ProviderSpecificMetadata provider_metadata = 6;</code>
+     */
+    private $provider_metadata = null;
 
     /**
      * Constructor.
@@ -60,6 +64,7 @@ class Metadata extends \Google\Protobuf\Internal\Message
      *           Optional Unique merchant customer identifier
      *     @type \Io\Token\Proto\Common\Address\Address $delivery_address
      *           Optional delivery address
+     *     @type \Io\Token\Proto\Common\Transferinstructions\TransferInstructions\Metadata\ProviderSpecificMetadata $provider_metadata
      * }
      */
     public function __construct($data = NULL) {
@@ -193,6 +198,28 @@ class Metadata extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Address\Address::class);
         $this->delivery_address = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferInstructions.Metadata.ProviderSpecificMetadata provider_metadata = 6;</code>
+     * @return \Io\Token\Proto\Common\Transferinstructions\TransferInstructions\Metadata\ProviderSpecificMetadata
+     */
+    public function getProviderMetadata()
+    {
+        return $this->provider_metadata;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferInstructions.Metadata.ProviderSpecificMetadata provider_metadata = 6;</code>
+     * @param \Io\Token\Proto\Common\Transferinstructions\TransferInstructions\Metadata\ProviderSpecificMetadata $var
+     * @return $this
+     */
+    public function setProviderMetadata($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Transferinstructions\TransferInstructions_Metadata_ProviderSpecificMetadata::class);
+        $this->provider_metadata = $var;
 
         return $this;
     }

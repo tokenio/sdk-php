@@ -22,15 +22,19 @@ class TransferInstructions extends \Google\Protobuf\Internal\Message
      */
     private $source = null;
     /**
-     * Transfer destination.
+     * Transfer destinations.
      *
-     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferEndpoint destinations = 2;</code>
+     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferEndpoint destinations = 2 [deprecated = true];</code>
      */
     private $destinations;
     /**
      * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferInstructions.Metadata metadata = 3;</code>
      */
     private $metadata = null;
+    /**
+     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferDestination transfer_destinations = 4;</code>
+     */
+    private $transfer_destinations;
 
     /**
      * Constructor.
@@ -41,8 +45,9 @@ class TransferInstructions extends \Google\Protobuf\Internal\Message
      *     @type \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint $source
      *           Transfer source.
      *     @type \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint[]|\Google\Protobuf\Internal\RepeatedField $destinations
-     *           Transfer destination.
+     *           Transfer destinations.
      *     @type \Io\Token\Proto\Common\Transferinstructions\TransferInstructions\Metadata $metadata
+     *     @type \Io\Token\Proto\Common\Transferinstructions\TransferDestination[]|\Google\Protobuf\Internal\RepeatedField $transfer_destinations
      * }
      */
     public function __construct($data = NULL) {
@@ -77,9 +82,9 @@ class TransferInstructions extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Transfer destination.
+     * Transfer destinations.
      *
-     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferEndpoint destinations = 2;</code>
+     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferEndpoint destinations = 2 [deprecated = true];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getDestinations()
@@ -88,9 +93,9 @@ class TransferInstructions extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Transfer destination.
+     * Transfer destinations.
      *
-     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferEndpoint destinations = 2;</code>
+     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferEndpoint destinations = 2 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint[]|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
@@ -120,6 +125,28 @@ class TransferInstructions extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Transferinstructions\TransferInstructions_Metadata::class);
         $this->metadata = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferDestination transfer_destinations = 4;</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getTransferDestinations()
+    {
+        return $this->transfer_destinations;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferDestination transfer_destinations = 4;</code>
+     * @param \Io\Token\Proto\Common\Transferinstructions\TransferDestination[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setTransferDestinations($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Io\Token\Proto\Common\Transferinstructions\TransferDestination::class);
+        $this->transfer_destinations = $arr;
 
         return $this;
     }

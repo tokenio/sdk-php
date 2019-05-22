@@ -42,6 +42,8 @@ class BankAccount extends \Google\Protobuf\Internal\Message
      *     @type \Io\Token\Proto\Common\Account\BankAccount\FasterPayments $faster_payments
      *     @type \Io\Token\Proto\Common\Account\BankAccount\Custom $custom
      *     @type \Io\Token\Proto\Common\Account\BankAccount\Guest $guest
+     *     @type \Io\Token\Proto\Common\Account\BankAccount\Iban $iban
+     *     @type \Io\Token\Proto\Common\Account\BankAccount\Domestic $domestic
      *     @type array|\Google\Protobuf\Internal\MapField $metadata
      *     @type \Io\Token\Proto\Common\Account\AccountFeatures $account_features
      * }
@@ -96,7 +98,7 @@ class BankAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.Swift swift = 3;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.Swift swift = 3 [deprecated = true];</code>
      * @return \Io\Token\Proto\Common\Account\BankAccount\Swift
      */
     public function getSwift()
@@ -105,7 +107,7 @@ class BankAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.Swift swift = 3;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.Swift swift = 3 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Account\BankAccount\Swift $var
      * @return $this
      */
@@ -118,7 +120,7 @@ class BankAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.Sepa sepa = 4;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.Sepa sepa = 4 [deprecated = true];</code>
      * @return \Io\Token\Proto\Common\Account\BankAccount\Sepa
      */
     public function getSepa()
@@ -127,7 +129,7 @@ class BankAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.Sepa sepa = 4;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.Sepa sepa = 4 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Account\BankAccount\Sepa $var
      * @return $this
      */
@@ -140,7 +142,7 @@ class BankAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.Ach ach = 5;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.Ach ach = 5 [deprecated = true];</code>
      * @return \Io\Token\Proto\Common\Account\BankAccount\Ach
      */
     public function getAch()
@@ -149,7 +151,7 @@ class BankAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.Ach ach = 5;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.Ach ach = 5 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Account\BankAccount\Ach $var
      * @return $this
      */
@@ -162,7 +164,7 @@ class BankAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.Bank bank = 6;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.Bank bank = 6 [deprecated = true];</code>
      * @return \Io\Token\Proto\Common\Account\BankAccount\Bank
      */
     public function getBank()
@@ -171,7 +173,7 @@ class BankAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.Bank bank = 6;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.Bank bank = 6 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Account\BankAccount\Bank $var
      * @return $this
      */
@@ -184,7 +186,7 @@ class BankAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.FasterPayments faster_payments = 9;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.FasterPayments faster_payments = 9 [deprecated = true];</code>
      * @return \Io\Token\Proto\Common\Account\BankAccount\FasterPayments
      */
     public function getFasterPayments()
@@ -193,7 +195,7 @@ class BankAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.FasterPayments faster_payments = 9;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.FasterPayments faster_payments = 9 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Account\BankAccount\FasterPayments $var
      * @return $this
      */
@@ -245,6 +247,50 @@ class BankAccount extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Account\BankAccount_Guest::class);
         $this->writeOneof(11, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.Iban iban = 12;</code>
+     * @return \Io\Token\Proto\Common\Account\BankAccount\Iban
+     */
+    public function getIban()
+    {
+        return $this->readOneof(12);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.Iban iban = 12;</code>
+     * @param \Io\Token\Proto\Common\Account\BankAccount\Iban $var
+     * @return $this
+     */
+    public function setIban($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Account\BankAccount_Iban::class);
+        $this->writeOneof(12, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.Domestic domestic = 13;</code>
+     * @return \Io\Token\Proto\Common\Account\BankAccount\Domestic
+     */
+    public function getDomestic()
+    {
+        return $this->readOneof(13);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.Domestic domestic = 13;</code>
+     * @param \Io\Token\Proto\Common\Account\BankAccount\Domestic $var
+     * @return $this
+     */
+    public function setDomestic($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Account\BankAccount_Domestic::class);
+        $this->writeOneof(13, $var);
 
         return $this;
     }

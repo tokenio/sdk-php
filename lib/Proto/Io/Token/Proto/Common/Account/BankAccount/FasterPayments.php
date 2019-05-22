@@ -9,8 +9,6 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * Faster Payments Service transfer (UK)
- *
  * Generated from protobuf message <code>io.token.proto.common.account.BankAccount.FasterPayments</code>
  */
 class FasterPayments extends \Google\Protobuf\Internal\Message

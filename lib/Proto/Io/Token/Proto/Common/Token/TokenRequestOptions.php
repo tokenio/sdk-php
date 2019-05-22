@@ -22,7 +22,9 @@ class TokenRequestOptions extends \Google\Protobuf\Internal\Message
      */
     private $from = null;
     /**
-     * Generated from protobuf field <code>string source_account_id = 3;</code>
+     * Set in TransferInstructions on TokenRequestPayload instead
+     *
+     * Generated from protobuf field <code>string source_account_id = 3 [deprecated = true];</code>
      */
     private $source_account_id = '';
     /**
@@ -39,6 +41,7 @@ class TokenRequestOptions extends \Google\Protobuf\Internal\Message
      *     @type string $bank_id
      *     @type \Io\Token\Proto\Common\Token\TokenMember $from
      *     @type string $source_account_id
+     *           Set in TransferInstructions on TokenRequestPayload instead
      *     @type bool $receipt_requested
      * }
      */
@@ -92,7 +95,9 @@ class TokenRequestOptions extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string source_account_id = 3;</code>
+     * Set in TransferInstructions on TokenRequestPayload instead
+     *
+     * Generated from protobuf field <code>string source_account_id = 3 [deprecated = true];</code>
      * @return string
      */
     public function getSourceAccountId()
@@ -101,7 +106,9 @@ class TokenRequestOptions extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string source_account_id = 3;</code>
+     * Set in TransferInstructions on TokenRequestPayload instead
+     *
+     * Generated from protobuf field <code>string source_account_id = 3 [deprecated = true];</code>
      * @param string $var
      * @return $this
      */

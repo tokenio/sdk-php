@@ -9,8 +9,6 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * SEPA transfer.
- *
  * Generated from protobuf message <code>io.token.proto.common.account.BankAccount.Sepa</code>
  */
 class Sepa extends \Google\Protobuf\Internal\Message
