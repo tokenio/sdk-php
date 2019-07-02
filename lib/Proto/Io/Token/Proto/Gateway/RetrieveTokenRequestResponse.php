@@ -21,6 +21,10 @@ class RetrieveTokenRequestResponse extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.io.token.proto.common.member.Customization customization = 2;</code>
      */
     private $customization = null;
+    /**
+     * Generated from protobuf field <code>bool hide_consent = 3;</code>
+     */
+    private $hide_consent = false;
 
     /**
      * Constructor.
@@ -30,6 +34,7 @@ class RetrieveTokenRequestResponse extends \Google\Protobuf\Internal\Message
      *
      *     @type \Io\Token\Proto\Common\Token\TokenRequest $token_request
      *     @type \Io\Token\Proto\Common\Member\Customization $customization
+     *     @type bool $hide_consent
      * }
      */
     public function __construct($data = NULL) {
@@ -77,6 +82,28 @@ class RetrieveTokenRequestResponse extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Member\Customization::class);
         $this->customization = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool hide_consent = 3;</code>
+     * @return bool
+     */
+    public function getHideConsent()
+    {
+        return $this->hide_consent;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool hide_consent = 3;</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setHideConsent($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->hide_consent = $var;
 
         return $this;
     }

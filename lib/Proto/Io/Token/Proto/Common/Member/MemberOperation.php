@@ -31,6 +31,7 @@ class MemberOperation extends \Google\Protobuf\Internal\Message
      *     @type \Io\Token\Proto\Common\Member\MemberDeleteOperation $delete
      *     @type \Io\Token\Proto\Common\Member\MemberPartnerOperation $verify_partner
      *     @type \Io\Token\Proto\Common\Member\MemberPartnerOperation $unverify_partner
+     *     @type \Io\Token\Proto\Common\Member\MemberRealmPermissionOperation $realm_permissions
      * }
      */
     public function __construct($data = NULL) {
@@ -254,6 +255,28 @@ class MemberOperation extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Member\MemberPartnerOperation::class);
         $this->writeOneof(11, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.member.MemberRealmPermissionOperation realm_permissions = 12;</code>
+     * @return \Io\Token\Proto\Common\Member\MemberRealmPermissionOperation
+     */
+    public function getRealmPermissions()
+    {
+        return $this->readOneof(12);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.member.MemberRealmPermissionOperation realm_permissions = 12;</code>
+     * @param \Io\Token\Proto\Common\Member\MemberRealmPermissionOperation $var
+     * @return $this
+     */
+    public function setRealmPermissions($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Member\MemberRealmPermissionOperation::class);
+        $this->writeOneof(12, $var);
 
         return $this;
     }

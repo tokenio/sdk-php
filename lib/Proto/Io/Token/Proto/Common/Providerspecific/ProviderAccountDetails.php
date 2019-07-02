@@ -22,6 +22,7 @@ class ProviderAccountDetails extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type \Io\Token\Proto\Common\Providerspecific\Cma9AccountDetails $cma9_account_details
+     *     @type \Io\Token\Proto\Common\Providerspecific\Polishapi\PolishApiAccountDetails $polish_api_account_details
      * }
      */
     public function __construct($data = NULL) {
@@ -47,6 +48,28 @@ class ProviderAccountDetails extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Providerspecific\Cma9AccountDetails::class);
         $this->writeOneof(1, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.polishapi.PolishApiAccountDetails polish_api_account_details = 2;</code>
+     * @return \Io\Token\Proto\Common\Providerspecific\Polishapi\PolishApiAccountDetails
+     */
+    public function getPolishApiAccountDetails()
+    {
+        return $this->readOneof(2);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.polishapi.PolishApiAccountDetails polish_api_account_details = 2;</code>
+     * @param \Io\Token\Proto\Common\Providerspecific\Polishapi\PolishApiAccountDetails $var
+     * @return $this
+     */
+    public function setPolishApiAccountDetails($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Providerspecific\Polishapi\PolishApiAccountDetails::class);
+        $this->writeOneof(2, $var);
 
         return $this;
     }

@@ -41,9 +41,9 @@ class AccountDetails extends \Google\Protobuf\Internal\Message
      */
     private $metadata;
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.ProviderAccountDetails provider_specific = 5;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.ProviderAccountDetails provider_account_details = 5;</code>
      */
-    private $provider_specific = null;
+    private $provider_account_details = null;
 
     /**
      * Constructor.
@@ -59,7 +59,7 @@ class AccountDetails extends \Google\Protobuf\Internal\Message
      *           Status of account. E.g., "Active/Inactive/Frozen/Dormant"
      *     @type array|\Google\Protobuf\Internal\MapField $metadata
      *           Additional account metadata
-     *     @type \Io\Token\Proto\Common\Providerspecific\ProviderAccountDetails $provider_specific
+     *     @type \Io\Token\Proto\Common\Providerspecific\ProviderAccountDetails $provider_account_details
      * }
      */
     public function __construct($data = NULL) {
@@ -172,23 +172,23 @@ class AccountDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.ProviderAccountDetails provider_specific = 5;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.ProviderAccountDetails provider_account_details = 5;</code>
      * @return \Io\Token\Proto\Common\Providerspecific\ProviderAccountDetails
      */
-    public function getProviderSpecific()
+    public function getProviderAccountDetails()
     {
-        return $this->provider_specific;
+        return $this->provider_account_details;
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.ProviderAccountDetails provider_specific = 5;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.ProviderAccountDetails provider_account_details = 5;</code>
      * @param \Io\Token\Proto\Common\Providerspecific\ProviderAccountDetails $var
      * @return $this
      */
-    public function setProviderSpecific($var)
+    public function setProviderAccountDetails($var)
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Providerspecific\ProviderAccountDetails::class);
-        $this->provider_specific = $var;
+        $this->provider_account_details = $var;
 
         return $this;
     }

@@ -49,6 +49,10 @@ class TransferPayload extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferDestination transfer_destinations = 7;</code>
      */
     private $transfer_destinations;
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferInstructions.Metadata metadata = 8;</code>
+     */
+    private $metadata = null;
 
     /**
      * Constructor.
@@ -67,6 +71,7 @@ class TransferPayload extends \Google\Protobuf\Internal\Message
      *           Optional
      *     @type \Io\Token\Proto\Common\Transferinstructions\TransferDestination[]|\Google\Protobuf\Internal\RepeatedField $transfer_destinations
      *           Transfer destinations, sorted in priority order.
+     *     @type \Io\Token\Proto\Common\Transferinstructions\TransferInstructions\Metadata $metadata
      * }
      */
     public function __construct($data = NULL) {
@@ -222,6 +227,28 @@ class TransferPayload extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Io\Token\Proto\Common\Transferinstructions\TransferDestination::class);
         $this->transfer_destinations = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferInstructions.Metadata metadata = 8;</code>
+     * @return \Io\Token\Proto\Common\Transferinstructions\TransferInstructions\Metadata
+     */
+    public function getMetadata()
+    {
+        return $this->metadata;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferInstructions.Metadata metadata = 8;</code>
+     * @param \Io\Token\Proto\Common\Transferinstructions\TransferInstructions\Metadata $var
+     * @return $this
+     */
+    public function setMetadata($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Transferinstructions\TransferInstructions_Metadata::class);
+        $this->metadata = $var;
 
         return $this;
     }

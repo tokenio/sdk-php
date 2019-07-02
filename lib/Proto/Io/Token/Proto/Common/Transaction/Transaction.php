@@ -67,6 +67,10 @@ class Transaction extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>map<string, string> metadata = 9 [(.io.token.proto.extensions.field.redact) = true];</code>
      */
     private $metadata;
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.ProviderTransactionDetails provider_transaction_details = 10;</code>
+     */
+    private $provider_transaction_details = null;
 
     /**
      * Constructor.
@@ -92,6 +96,7 @@ class Transaction extends \Google\Protobuf\Internal\Message
      *           Creation time
      *     @type array|\Google\Protobuf\Internal\MapField $metadata
      *           Additional fields. Optional.
+     *     @type \Io\Token\Proto\Common\Providerspecific\ProviderTransactionDetails $provider_transaction_details
      * }
      */
     public function __construct($data = NULL) {
@@ -329,6 +334,28 @@ class Transaction extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkMapField($var, \Google\Protobuf\Internal\GPBType::STRING, \Google\Protobuf\Internal\GPBType::STRING);
         $this->metadata = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.ProviderTransactionDetails provider_transaction_details = 10;</code>
+     * @return \Io\Token\Proto\Common\Providerspecific\ProviderTransactionDetails
+     */
+    public function getProviderTransactionDetails()
+    {
+        return $this->provider_transaction_details;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.ProviderTransactionDetails provider_transaction_details = 10;</code>
+     * @param \Io\Token\Proto\Common\Providerspecific\ProviderTransactionDetails $var
+     * @return $this
+     */
+    public function setProviderTransactionDetails($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Providerspecific\ProviderTransactionDetails::class);
+        $this->provider_transaction_details = $var;
 
         return $this;
     }

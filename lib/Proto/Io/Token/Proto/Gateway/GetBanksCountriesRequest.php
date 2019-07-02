@@ -19,6 +19,32 @@ class GetBanksCountriesRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.io.token.proto.common.bank.BankFilter filter = 1;</code>
      */
     private $filter = null;
+    /**
+     * for backwards compatibility with older JS clients TODO(RD-2738) remove
+     *
+     * Generated from protobuf field <code>repeated string ids = 2 [deprecated = true];</code>
+     */
+    private $ids;
+    /**
+     * Generated from protobuf field <code>string search = 3 [deprecated = true];</code>
+     */
+    private $search = '';
+    /**
+     * Generated from protobuf field <code>string country = 4 [deprecated = true];</code>
+     */
+    private $country = '';
+    /**
+     * Generated from protobuf field <code>string provider = 5 [deprecated = true];</code>
+     */
+    private $provider = '';
+    /**
+     * Generated from protobuf field <code>string destination_country = 6 [deprecated = true];</code>
+     */
+    private $destination_country = '';
+    /**
+     * Generated from protobuf field <code>string tpp_id = 7 [deprecated = true];</code>
+     */
+    private $tpp_id = '';
 
     /**
      * Constructor.
@@ -28,6 +54,13 @@ class GetBanksCountriesRequest extends \Google\Protobuf\Internal\Message
      *
      *     @type \Io\Token\Proto\Common\Bank\BankFilter $filter
      *           (Optional) Filter by criteria in bank filter. Results must match all filter criteria.
+     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $ids
+     *           for backwards compatibility with older JS clients TODO(RD-2738) remove
+     *     @type string $search
+     *     @type string $country
+     *     @type string $provider
+     *     @type string $destination_country
+     *     @type string $tpp_id
      * }
      */
     public function __construct($data = NULL) {
@@ -57,6 +90,142 @@ class GetBanksCountriesRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Bank\BankFilter::class);
         $this->filter = $var;
+
+        return $this;
+    }
+
+    /**
+     * for backwards compatibility with older JS clients TODO(RD-2738) remove
+     *
+     * Generated from protobuf field <code>repeated string ids = 2 [deprecated = true];</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getIds()
+    {
+        return $this->ids;
+    }
+
+    /**
+     * for backwards compatibility with older JS clients TODO(RD-2738) remove
+     *
+     * Generated from protobuf field <code>repeated string ids = 2 [deprecated = true];</code>
+     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setIds($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
+        $this->ids = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string search = 3 [deprecated = true];</code>
+     * @return string
+     */
+    public function getSearch()
+    {
+        return $this->search;
+    }
+
+    /**
+     * Generated from protobuf field <code>string search = 3 [deprecated = true];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setSearch($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->search = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string country = 4 [deprecated = true];</code>
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * Generated from protobuf field <code>string country = 4 [deprecated = true];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setCountry($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->country = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string provider = 5 [deprecated = true];</code>
+     * @return string
+     */
+    public function getProvider()
+    {
+        return $this->provider;
+    }
+
+    /**
+     * Generated from protobuf field <code>string provider = 5 [deprecated = true];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setProvider($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->provider = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string destination_country = 6 [deprecated = true];</code>
+     * @return string
+     */
+    public function getDestinationCountry()
+    {
+        return $this->destination_country;
+    }
+
+    /**
+     * Generated from protobuf field <code>string destination_country = 6 [deprecated = true];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setDestinationCountry($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->destination_country = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string tpp_id = 7 [deprecated = true];</code>
+     * @return string
+     */
+    public function getTppId()
+    {
+        return $this->tpp_id;
+    }
+
+    /**
+     * Generated from protobuf field <code>string tpp_id = 7 [deprecated = true];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setTppId($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->tpp_id = $var;
 
         return $this;
     }

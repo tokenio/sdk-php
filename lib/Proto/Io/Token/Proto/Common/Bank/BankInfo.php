@@ -42,6 +42,12 @@ class BankInfo extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>repeated string realm = 4;</code>
      */
     private $realm;
+    /**
+     * (Optional) Label to be displayed if bank supports custom aliases
+     *
+     * Generated from protobuf field <code>string custom_alias_label = 6;</code>
+     */
+    private $custom_alias_label = '';
 
     /**
      * Constructor.
@@ -57,6 +63,8 @@ class BankInfo extends \Google\Protobuf\Internal\Message
      *           OAuth starting URI
      *     @type string[]|\Google\Protobuf\Internal\RepeatedField $realm
      *           (Optional) Realms of the bank
+     *     @type string $custom_alias_label
+     *           (Optional) Label to be displayed if bank supports custom aliases
      * }
      */
     public function __construct($data = NULL) {
@@ -164,6 +172,32 @@ class BankInfo extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
         $this->realm = $arr;
+
+        return $this;
+    }
+
+    /**
+     * (Optional) Label to be displayed if bank supports custom aliases
+     *
+     * Generated from protobuf field <code>string custom_alias_label = 6;</code>
+     * @return string
+     */
+    public function getCustomAliasLabel()
+    {
+        return $this->custom_alias_label;
+    }
+
+    /**
+     * (Optional) Label to be displayed if bank supports custom aliases
+     *
+     * Generated from protobuf field <code>string custom_alias_label = 6;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setCustomAliasLabel($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->custom_alias_label = $var;
 
         return $this;
     }
