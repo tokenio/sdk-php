@@ -5,14 +5,15 @@ namespace Tokenio;
 
 
 use Io\Token\Proto\Common\Token\TokenRequestPayload\TransferBody;
+use Io\Token\Proto\Common\Transferinstructions\TransferDestination;
 use Io\Token\Proto\Common\Transferinstructions\TransferEndpoint;
+use Io\Token\Proto\Common\Transferinstructions\TransferInstructions;
 
 class TransferTokenRequestBuilder extends TokenRequestBuilder
 {
     public function __construct($amount, $currency)
     {
         parent::__construct(null);
-        //parent::this = $this;
         $transferBody = new TransferBody();
         $transferBody->setLifetimeAmount($amount);
         $transferBody->setCurrency($currency);
@@ -35,12 +36,21 @@ class TransferTokenRequestBuilder extends TokenRequestBuilder
     /**
      * Adds a transfer destination to a transfer token request.
      *
-     * @param TransferEndpoint destination
+     * NOTE: Should use TransferDestination. Support for TransferEndpoint will be removed.
+     *
+     * @param TransferDestination destination
      * @return TransferTokenRequestBuilder
      */
     public function addDestination($destination)
     {
-        $this->requestPayload->getTransferBody()->getDestinations()[] = $destination;
+        if ($destination instanceof TransferDestination) {
+            if ($this->requestPayload->getTransferBody()->getInstructions() == null) {
+                $this->requestPayload->getTransferBody()->setInstructions(new TransferInstructions());
+            }
+            $this->requestPayload->getTransferBody()->getInstructions()->getTransferDestinations()[] = $destination;
+        } else {
+            $this->requestPayload->getTransferBody()->getDestinations()[] = $destination;
+        }
         return $this;
     }
 
