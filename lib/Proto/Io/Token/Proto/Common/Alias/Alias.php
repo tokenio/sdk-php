@@ -33,9 +33,15 @@ class Alias extends \Google\Protobuf\Internal\Message
     /**
      * For example, "token"
      *
-     * Generated from protobuf field <code>string realm = 3;</code>
+     * Generated from protobuf field <code>string realm = 3 [deprecated = true];</code>
      */
     private $realm = '';
+    /**
+     * member_id of existing Member
+     *
+     * Generated from protobuf field <code>string realm_id = 4;</code>
+     */
+    private $realm_id = '';
 
     /**
      * Constructor.
@@ -49,6 +55,8 @@ class Alias extends \Google\Protobuf\Internal\Message
      *           For example, "sandy&#64;example.com"
      *     @type string $realm
      *           For example, "token"
+     *     @type string $realm_id
+     *           member_id of existing Member
      * }
      */
     public function __construct($data = NULL) {
@@ -111,7 +119,7 @@ class Alias extends \Google\Protobuf\Internal\Message
     /**
      * For example, "token"
      *
-     * Generated from protobuf field <code>string realm = 3;</code>
+     * Generated from protobuf field <code>string realm = 3 [deprecated = true];</code>
      * @return string
      */
     public function getRealm()
@@ -122,7 +130,7 @@ class Alias extends \Google\Protobuf\Internal\Message
     /**
      * For example, "token"
      *
-     * Generated from protobuf field <code>string realm = 3;</code>
+     * Generated from protobuf field <code>string realm = 3 [deprecated = true];</code>
      * @param string $var
      * @return $this
      */
@@ -130,6 +138,32 @@ class Alias extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->realm = $var;
+
+        return $this;
+    }
+
+    /**
+     * member_id of existing Member
+     *
+     * Generated from protobuf field <code>string realm_id = 4;</code>
+     * @return string
+     */
+    public function getRealmId()
+    {
+        return $this->realm_id;
+    }
+
+    /**
+     * member_id of existing Member
+     *
+     * Generated from protobuf field <code>string realm_id = 4;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setRealmId($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->realm_id = $var;
 
         return $this;
     }

@@ -81,6 +81,18 @@ class Member extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>bool is_verified_partner = 11;</code>
      */
     private $is_verified_partner = false;
+    /**
+     * realm owner member id
+     *
+     * Generated from protobuf field <code>string realm_id = 12;</code>
+     */
+    private $realm_id = '';
+    /**
+     * realm permissions assigned; Used to verify MemberOperations that this member can perform as realm owner.
+     *
+     * Generated from protobuf field <code>repeated .io.token.proto.common.member.RealmPermission realm_permissions = 13;</code>
+     */
+    private $realm_permissions;
 
     /**
      * Constructor.
@@ -110,6 +122,10 @@ class Member extends \Google\Protobuf\Internal\Message
      *           affiliated partner id
      *     @type bool $is_verified_partner
      *           indicates if member is verified partner
+     *     @type string $realm_id
+     *           realm owner member id
+     *     @type int[]|\Google\Protobuf\Internal\RepeatedField $realm_permissions
+     *           realm permissions assigned; Used to verify MemberOperations that this member can perform as realm owner.
      * }
      */
     public function __construct($data = NULL) {
@@ -399,6 +415,58 @@ class Member extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkBool($var);
         $this->is_verified_partner = $var;
+
+        return $this;
+    }
+
+    /**
+     * realm owner member id
+     *
+     * Generated from protobuf field <code>string realm_id = 12;</code>
+     * @return string
+     */
+    public function getRealmId()
+    {
+        return $this->realm_id;
+    }
+
+    /**
+     * realm owner member id
+     *
+     * Generated from protobuf field <code>string realm_id = 12;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setRealmId($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->realm_id = $var;
+
+        return $this;
+    }
+
+    /**
+     * realm permissions assigned; Used to verify MemberOperations that this member can perform as realm owner.
+     *
+     * Generated from protobuf field <code>repeated .io.token.proto.common.member.RealmPermission realm_permissions = 13;</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getRealmPermissions()
+    {
+        return $this->realm_permissions;
+    }
+
+    /**
+     * realm permissions assigned; Used to verify MemberOperations that this member can perform as realm owner.
+     *
+     * Generated from protobuf field <code>repeated .io.token.proto.common.member.RealmPermission realm_permissions = 13;</code>
+     * @param int[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setRealmPermissions($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::ENUM, \Io\Token\Proto\Common\Member\RealmPermission::class);
+        $this->realm_permissions = $arr;
 
         return $this;
     }

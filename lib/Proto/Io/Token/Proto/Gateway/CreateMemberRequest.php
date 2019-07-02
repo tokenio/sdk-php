@@ -33,6 +33,10 @@ class CreateMemberRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string partner_id = 4;</code>
      */
     private $partner_id = '';
+    /**
+     * Generated from protobuf field <code>string realm_id = 5;</code>
+     */
+    private $realm_id = '';
 
     /**
      * Constructor.
@@ -46,6 +50,7 @@ class CreateMemberRequest extends \Google\Protobuf\Internal\Message
      *     @type string $token_request_id
      *           Optional token request ID, if set the member will be claimed by the TPP initiating the token request.
      *     @type string $partner_id
+     *     @type string $realm_id
      * }
      */
     public function __construct($data = NULL) {
@@ -145,6 +150,28 @@ class CreateMemberRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->partner_id = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string realm_id = 5;</code>
+     * @return string
+     */
+    public function getRealmId()
+    {
+        return $this->realm_id;
+    }
+
+    /**
+     * Generated from protobuf field <code>string realm_id = 5;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setRealmId($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->realm_id = $var;
 
         return $this;
     }

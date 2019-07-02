@@ -27,6 +27,15 @@ class CreateTokenRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string token_request_id = 3;</code>
      */
     private $token_request_id = '';
+    /**
+     * Only useful for HTTP requests
+     * specifying type=access in an HTTP request will call CreateAccessToken instead of this endpoint
+     * specifying type=transfer in an HTTP request will call CreateTransferToken instead of this endpoint
+     * TODO(RD-2738) remove this
+     *
+     * Generated from protobuf field <code>string type = 4 [deprecated = true];</code>
+     */
+    private $type = '';
 
     /**
      * Constructor.
@@ -38,6 +47,11 @@ class CreateTokenRequest extends \Google\Protobuf\Internal\Message
      *     @type \Io\Token\Proto\Common\Security\Signature[]|\Google\Protobuf\Internal\RepeatedField $signatures
      *     @type string $token_request_id
      *           optional ID of the token request
+     *     @type string $type
+     *           Only useful for HTTP requests
+     *           specifying type=access in an HTTP request will call CreateAccessToken instead of this endpoint
+     *           specifying type=transfer in an HTTP request will call CreateTransferToken instead of this endpoint
+     *           TODO(RD-2738) remove this
      * }
      */
     public function __construct($data = NULL) {
@@ -111,6 +125,38 @@ class CreateTokenRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->token_request_id = $var;
+
+        return $this;
+    }
+
+    /**
+     * Only useful for HTTP requests
+     * specifying type=access in an HTTP request will call CreateAccessToken instead of this endpoint
+     * specifying type=transfer in an HTTP request will call CreateTransferToken instead of this endpoint
+     * TODO(RD-2738) remove this
+     *
+     * Generated from protobuf field <code>string type = 4 [deprecated = true];</code>
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Only useful for HTTP requests
+     * specifying type=access in an HTTP request will call CreateAccessToken instead of this endpoint
+     * specifying type=transfer in an HTTP request will call CreateTransferToken instead of this endpoint
+     * TODO(RD-2738) remove this
+     *
+     * Generated from protobuf field <code>string type = 4 [deprecated = true];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setType($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->type = $var;
 
         return $this;
     }

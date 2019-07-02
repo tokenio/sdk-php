@@ -31,6 +31,16 @@ class GetTransfersRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.io.token.proto.gateway.GetTransfersRequest.TransferFilter filter = 3;</code>
      */
     private $filter = null;
+    /**
+     * for backwards compatibility with older JS clients TODO(RD-2738) remove
+     *
+     * Generated from protobuf field <code>string offset = 4 [deprecated = true];</code>
+     */
+    private $offset = '';
+    /**
+     * Generated from protobuf field <code>int32 limit = 5 [deprecated = true];</code>
+     */
+    private $limit = 0;
 
     /**
      * Constructor.
@@ -44,6 +54,9 @@ class GetTransfersRequest extends \Google\Protobuf\Internal\Message
      *           Optional paging settings
      *     @type \Io\Token\Proto\Gateway\GetTransfersRequest\TransferFilter $filter
      *           Filter to restrict query
+     *     @type string $offset
+     *           for backwards compatibility with older JS clients TODO(RD-2738) remove
+     *     @type int $limit
      * }
      */
     public function __construct($data = NULL) {
@@ -125,6 +138,54 @@ class GetTransfersRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Gateway\GetTransfersRequest_TransferFilter::class);
         $this->filter = $var;
+
+        return $this;
+    }
+
+    /**
+     * for backwards compatibility with older JS clients TODO(RD-2738) remove
+     *
+     * Generated from protobuf field <code>string offset = 4 [deprecated = true];</code>
+     * @return string
+     */
+    public function getOffset()
+    {
+        return $this->offset;
+    }
+
+    /**
+     * for backwards compatibility with older JS clients TODO(RD-2738) remove
+     *
+     * Generated from protobuf field <code>string offset = 4 [deprecated = true];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setOffset($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->offset = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>int32 limit = 5 [deprecated = true];</code>
+     * @return int
+     */
+    public function getLimit()
+    {
+        return $this->limit;
+    }
+
+    /**
+     * Generated from protobuf field <code>int32 limit = 5 [deprecated = true];</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setLimit($var)
+    {
+        GPBUtil::checkInt32($var);
+        $this->limit = $var;
 
         return $this;
     }

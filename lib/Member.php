@@ -23,12 +23,11 @@ use Io\Token\Proto\Common\Security\Key;
 use Io\Token\Proto\Common\Security\Signature;
 use Io\Token\Proto\Common\Token\Token;
 use Io\Token\Proto\Common\Token\TokenOperationResult;
-use Io\Token\Proto\Common\Token\TokenPayload;
 use Io\Token\Proto\Common\Transaction\Balance;
 use Io\Token\Proto\Common\Transaction\Transaction;
 use Io\Token\Proto\Common\Transfer\Transfer;
 use Io\Token\Proto\Common\Transfer\TransferPayload;
-use Io\Token\Proto\Common\Transferinstructions\TransferEndpoint;
+use Io\Token\Proto\Common\Transferinstructions\TransferDestination;
 use Io\Token\Proto\Gateway\GetTokensRequest\Type;
 use Tokenio\Exception\InvalidRealmException;
 use Tokenio\Rpc\Client;
@@ -396,11 +395,13 @@ class Member implements RepresentableInterface
     /**
      * Redeems a transfer token.
      *
+     * NOTE: destination should have type TransferDestination. Support for TransferEndpoint will be removed.
+     *
      * @param Token $token the transfer token
      * @param double $amount the amount to transfer
      * @param string $currency the currency
      * @param string $description the description of the transfer
-     * @param TransferEndpoint $destination the transfer instruction destination
+     * @param TransferDestination $destination the transfer instruction destination
      * @param string $refId the reference id of the transfer
      * @return Transfer
      */
@@ -411,7 +412,11 @@ class Member implements RepresentableInterface
         $payload->setDescription($token->getPayload()->getDescription());
 
         if ($destination != null) {
-            $payload->setDestinations(array($destination));
+            if ($destination instanceof TransferDestination) {
+                $payload->setTransferDestinations(array($destination));
+            } else {
+                $payload->setDestinations(array($destination));
+            }
         }
 
         if ($amount != null) {

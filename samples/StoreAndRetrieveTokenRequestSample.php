@@ -4,6 +4,7 @@ namespace Io\Token\Samples;
 
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Token\TokenRequestPayload;
+use Io\Token\Proto\Common\Transferinstructions\TransferDestination;
 use Tokenio\Member;
 use Tokenio\TokenClient;
 use Tokenio\TokenRequest;
@@ -21,6 +22,10 @@ final class StoreAndRetrieveTokenRequestSample
     {
         $alias = new Alias();
         $alias->setValue("payer-alias@token.io")->setType(Alias\Type::EMAIL);
+        $sepaDestination = new TransferDestination\Sepa();
+        $sepaDestination->setBic("XUIWC2489")->setIban("DE89370400440532013000");
+        $destination = new TransferDestination();
+        $destination->setSepa($sepaDestination);
         $tokenRequest = TokenRequest::transferTokenRequestBuilder(100, "EUR")
                             ->setToMemberId($payee->getMemberId())
                             ->setDescription("Book purchase")
@@ -28,6 +33,7 @@ final class StoreAndRetrieveTokenRequestSample
                             ->setFromAlias($alias)
                             ->setBankId("iron")
                             ->setCsrfToken(Strings::generateNonce())
+                            ->addDestination($destination)
                             ->build();
 
         return $payee->storeTokenRequest($tokenRequest);

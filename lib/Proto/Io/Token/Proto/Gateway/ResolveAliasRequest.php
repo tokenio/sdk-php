@@ -19,6 +19,24 @@ class ResolveAliasRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.io.token.proto.common.alias.Alias alias = 1;</code>
      */
     private $alias = null;
+    /**
+     * for backwards compatibility with older JS clients TODO(RD-2738) remove
+     *
+     * Generated from protobuf field <code>.io.token.proto.common.alias.Alias.Type type = 2 [deprecated = true];</code>
+     */
+    private $type = 0;
+    /**
+     * For example, "sandy&#64;example.com"
+     *
+     * Generated from protobuf field <code>string value = 3 [deprecated = true, (.io.token.proto.extensions.field.redact) = true];</code>
+     */
+    private $value = '';
+    /**
+     * For example, "token"
+     *
+     * Generated from protobuf field <code>string realm = 4 [deprecated = true];</code>
+     */
+    private $realm = '';
 
     /**
      * Constructor.
@@ -28,6 +46,12 @@ class ResolveAliasRequest extends \Google\Protobuf\Internal\Message
      *
      *     @type \Io\Token\Proto\Common\Alias\Alias $alias
      *           alias to resolve
+     *     @type int $type
+     *           for backwards compatibility with older JS clients TODO(RD-2738) remove
+     *     @type string $value
+     *           For example, "sandy&#64;example.com"
+     *     @type string $realm
+     *           For example, "token"
      * }
      */
     public function __construct($data = NULL) {
@@ -57,6 +81,84 @@ class ResolveAliasRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Alias\Alias::class);
         $this->alias = $var;
+
+        return $this;
+    }
+
+    /**
+     * for backwards compatibility with older JS clients TODO(RD-2738) remove
+     *
+     * Generated from protobuf field <code>.io.token.proto.common.alias.Alias.Type type = 2 [deprecated = true];</code>
+     * @return int
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * for backwards compatibility with older JS clients TODO(RD-2738) remove
+     *
+     * Generated from protobuf field <code>.io.token.proto.common.alias.Alias.Type type = 2 [deprecated = true];</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setType($var)
+    {
+        GPBUtil::checkEnum($var, \Io\Token\Proto\Common\Alias\Alias_Type::class);
+        $this->type = $var;
+
+        return $this;
+    }
+
+    /**
+     * For example, "sandy&#64;example.com"
+     *
+     * Generated from protobuf field <code>string value = 3 [deprecated = true, (.io.token.proto.extensions.field.redact) = true];</code>
+     * @return string
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
+     * For example, "sandy&#64;example.com"
+     *
+     * Generated from protobuf field <code>string value = 3 [deprecated = true, (.io.token.proto.extensions.field.redact) = true];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setValue($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->value = $var;
+
+        return $this;
+    }
+
+    /**
+     * For example, "token"
+     *
+     * Generated from protobuf field <code>string realm = 4 [deprecated = true];</code>
+     * @return string
+     */
+    public function getRealm()
+    {
+        return $this->realm;
+    }
+
+    /**
+     * For example, "token"
+     *
+     * Generated from protobuf field <code>string realm = 4 [deprecated = true];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setRealm($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->realm = $var;
 
         return $this;
     }

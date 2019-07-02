@@ -67,6 +67,12 @@ class GetBanksRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string tpp_id = 8 [deprecated = true];</code>
      */
     private $tpp_id = '';
+    /**
+     * DEPRECATED. (Optional) Filter for banks that support sending to the destination country.
+     *
+     * Generated from protobuf field <code>string destination_country = 10 [deprecated = true];</code>
+     */
+    private $destination_country = '';
 
     /**
      * Constructor.
@@ -92,6 +98,8 @@ class GetBanksRequest extends \Google\Protobuf\Internal\Message
      *           DEPRECATED. (Optional) If specified, return banks whose 'provider' matches the provider (case-insensitive)
      *     @type string $tpp_id
      *           DEPRECATED. (Optional) If specified, return banks which are integrated with the TPP
+     *     @type string $destination_country
+     *           DEPRECATED. (Optional) Filter for banks that support sending to the destination country.
      * }
      */
     public function __construct($data = NULL) {
@@ -329,6 +337,32 @@ class GetBanksRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->tpp_id = $var;
+
+        return $this;
+    }
+
+    /**
+     * DEPRECATED. (Optional) Filter for banks that support sending to the destination country.
+     *
+     * Generated from protobuf field <code>string destination_country = 10 [deprecated = true];</code>
+     * @return string
+     */
+    public function getDestinationCountry()
+    {
+        return $this->destination_country;
+    }
+
+    /**
+     * DEPRECATED. (Optional) Filter for banks that support sending to the destination country.
+     *
+     * Generated from protobuf field <code>string destination_country = 10 [deprecated = true];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setDestinationCountry($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->destination_country = $var;
 
         return $this;
     }

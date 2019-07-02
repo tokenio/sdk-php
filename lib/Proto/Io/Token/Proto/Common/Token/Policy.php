@@ -22,6 +22,7 @@ class Policy extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type \Io\Token\Proto\Common\Token\Policy\SingleSignature $single_signature
+     *     @type \Io\Token\Proto\Common\Token\Policy\AllSignatures $all_signatures
      * }
      */
     public function __construct($data = NULL) {
@@ -47,6 +48,28 @@ class Policy extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\Policy_SingleSignature::class);
         $this->writeOneof(1, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.token.Policy.AllSignatures all_signatures = 2;</code>
+     * @return \Io\Token\Proto\Common\Token\Policy\AllSignatures
+     */
+    public function getAllSignatures()
+    {
+        return $this->readOneof(2);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.token.Policy.AllSignatures all_signatures = 2;</code>
+     * @param \Io\Token\Proto\Common\Token\Policy\AllSignatures $var
+     * @return $this
+     */
+    public function setAllSignatures($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\Policy_AllSignatures::class);
+        $this->writeOneof(2, $var);
 
         return $this;
     }

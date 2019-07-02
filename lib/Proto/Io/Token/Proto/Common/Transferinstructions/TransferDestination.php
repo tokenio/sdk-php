@@ -35,6 +35,7 @@ class TransferDestination extends \Google\Protobuf\Internal\Message
      *     @type \Io\Token\Proto\Common\Transferinstructions\TransferDestination\ExpressElixir $express_elixir
      *     @type \Io\Token\Proto\Common\Transferinstructions\TransferDestination\BlueCash $blue_cash
      *     @type \Io\Token\Proto\Common\Transferinstructions\TransferDestination\Sorbnet $sorbnet
+     *     @type \Io\Token\Proto\Common\Transferinstructions\TransferDestination\Custom $custom
      *     @type \Io\Token\Proto\Common\Transferinstructions\CustomerData $customer_data
      * }
      */
@@ -259,6 +260,28 @@ class TransferDestination extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Transferinstructions\TransferDestination_Sorbnet::class);
         $this->writeOneof(10, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferDestination.Custom custom = 12;</code>
+     * @return \Io\Token\Proto\Common\Transferinstructions\TransferDestination\Custom
+     */
+    public function getCustom()
+    {
+        return $this->readOneof(12);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferDestination.Custom custom = 12;</code>
+     * @param \Io\Token\Proto\Common\Transferinstructions\TransferDestination\Custom $var
+     * @return $this
+     */
+    public function setCustom($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Transferinstructions\TransferDestination_Custom::class);
+        $this->writeOneof(12, $var);
 
         return $this;
     }

@@ -70,11 +70,23 @@ class Bank extends \Google\Protobuf\Internal\Message
      */
     private $supports_receive_payment = false;
     /**
+     * Connection allows for retrieving balances
+     *
+     * Generated from protobuf field <code>bool supports_balance = 16;</code>
+     */
+    private $supports_balance = false;
+    /**
      * Connection only supports immediate redemption of transfers
      *
-     * Generated from protobuf field <code>bool requires_legacy_transfer = 14;</code>
+     * Generated from protobuf field <code>bool requires_legacy_transfer = 14 [deprecated = true];</code>
      */
     private $requires_legacy_transfer = false;
+    /**
+     * Connection only supports immediate redemption of transfers
+     *
+     * Generated from protobuf field <code>bool requires_one_step_payment = 17;</code>
+     */
+    private $requires_one_step_payment = false;
     /**
      * Provider of the bank, e.g. Yodlee, FinApi, Token
      *
@@ -118,7 +130,11 @@ class Bank extends \Google\Protobuf\Internal\Message
      *           Connection allows for payment initiation
      *     @type bool $supports_receive_payment
      *           Connection allows for receiving payments
+     *     @type bool $supports_balance
+     *           Connection allows for retrieving balances
      *     @type bool $requires_legacy_transfer
+     *           Connection only supports immediate redemption of transfers
+     *     @type bool $requires_one_step_payment
      *           Connection only supports immediate redemption of transfers
      *     @type string $provider
      *           Provider of the bank, e.g. Yodlee, FinApi, Token
@@ -386,9 +402,35 @@ class Bank extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Connection allows for retrieving balances
+     *
+     * Generated from protobuf field <code>bool supports_balance = 16;</code>
+     * @return bool
+     */
+    public function getSupportsBalance()
+    {
+        return $this->supports_balance;
+    }
+
+    /**
+     * Connection allows for retrieving balances
+     *
+     * Generated from protobuf field <code>bool supports_balance = 16;</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setSupportsBalance($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->supports_balance = $var;
+
+        return $this;
+    }
+
+    /**
      * Connection only supports immediate redemption of transfers
      *
-     * Generated from protobuf field <code>bool requires_legacy_transfer = 14;</code>
+     * Generated from protobuf field <code>bool requires_legacy_transfer = 14 [deprecated = true];</code>
      * @return bool
      */
     public function getRequiresLegacyTransfer()
@@ -399,7 +441,7 @@ class Bank extends \Google\Protobuf\Internal\Message
     /**
      * Connection only supports immediate redemption of transfers
      *
-     * Generated from protobuf field <code>bool requires_legacy_transfer = 14;</code>
+     * Generated from protobuf field <code>bool requires_legacy_transfer = 14 [deprecated = true];</code>
      * @param bool $var
      * @return $this
      */
@@ -407,6 +449,32 @@ class Bank extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkBool($var);
         $this->requires_legacy_transfer = $var;
+
+        return $this;
+    }
+
+    /**
+     * Connection only supports immediate redemption of transfers
+     *
+     * Generated from protobuf field <code>bool requires_one_step_payment = 17;</code>
+     * @return bool
+     */
+    public function getRequiresOneStepPayment()
+    {
+        return $this->requires_one_step_payment;
+    }
+
+    /**
+     * Connection only supports immediate redemption of transfers
+     *
+     * Generated from protobuf field <code>bool requires_one_step_payment = 17;</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setRequiresOneStepPayment($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->requires_one_step_payment = $var;
 
         return $this;
     }

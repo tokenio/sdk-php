@@ -44,9 +44,9 @@ class Metadata extends \Google\Protobuf\Internal\Message
      */
     private $delivery_address = null;
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferInstructions.Metadata.ProviderSpecificMetadata provider_metadata = 6;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.ProviderTransferMetadata provider_transfer_metadata = 6;</code>
      */
-    private $provider_metadata = null;
+    private $provider_transfer_metadata = null;
 
     /**
      * Constructor.
@@ -64,7 +64,7 @@ class Metadata extends \Google\Protobuf\Internal\Message
      *           Optional Unique merchant customer identifier
      *     @type \Io\Token\Proto\Common\Address\Address $delivery_address
      *           Optional delivery address
-     *     @type \Io\Token\Proto\Common\Transferinstructions\TransferInstructions\Metadata\ProviderSpecificMetadata $provider_metadata
+     *     @type \Io\Token\Proto\Common\Providerspecific\ProviderTransferMetadata $provider_transfer_metadata
      * }
      */
     public function __construct($data = NULL) {
@@ -203,23 +203,23 @@ class Metadata extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferInstructions.Metadata.ProviderSpecificMetadata provider_metadata = 6;</code>
-     * @return \Io\Token\Proto\Common\Transferinstructions\TransferInstructions\Metadata\ProviderSpecificMetadata
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.ProviderTransferMetadata provider_transfer_metadata = 6;</code>
+     * @return \Io\Token\Proto\Common\Providerspecific\ProviderTransferMetadata
      */
-    public function getProviderMetadata()
+    public function getProviderTransferMetadata()
     {
-        return $this->provider_metadata;
+        return $this->provider_transfer_metadata;
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferInstructions.Metadata.ProviderSpecificMetadata provider_metadata = 6;</code>
-     * @param \Io\Token\Proto\Common\Transferinstructions\TransferInstructions\Metadata\ProviderSpecificMetadata $var
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.ProviderTransferMetadata provider_transfer_metadata = 6;</code>
+     * @param \Io\Token\Proto\Common\Providerspecific\ProviderTransferMetadata $var
      * @return $this
      */
-    public function setProviderMetadata($var)
+    public function setProviderTransferMetadata($var)
     {
-        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Transferinstructions\TransferInstructions_Metadata_ProviderSpecificMetadata::class);
-        $this->provider_metadata = $var;
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Providerspecific\ProviderTransferMetadata::class);
+        $this->provider_transfer_metadata = $var;
 
         return $this;
     }

@@ -25,9 +25,13 @@ class MemberAliasOperation extends \Google\Protobuf\Internal\Message
     /**
      * Realm of alias to add/remove
      *
-     * Generated from protobuf field <code>string realm = 2;</code>
+     * Generated from protobuf field <code>string realm = 2 [deprecated = true];</code>
      */
     private $realm = '';
+    /**
+     * Generated from protobuf field <code>string realm_id = 3;</code>
+     */
+    private $realm_id = '';
 
     /**
      * Constructor.
@@ -40,6 +44,7 @@ class MemberAliasOperation extends \Google\Protobuf\Internal\Message
      *           https://developer.token.io/sdk/esdoc/class/src/Util.js~Util.html#static-method-hashAndSerializeAlias
      *     @type string $realm
      *           Realm of alias to add/remove
+     *     @type string $realm_id
      * }
      */
     public function __construct($data = NULL) {
@@ -78,7 +83,7 @@ class MemberAliasOperation extends \Google\Protobuf\Internal\Message
     /**
      * Realm of alias to add/remove
      *
-     * Generated from protobuf field <code>string realm = 2;</code>
+     * Generated from protobuf field <code>string realm = 2 [deprecated = true];</code>
      * @return string
      */
     public function getRealm()
@@ -89,7 +94,7 @@ class MemberAliasOperation extends \Google\Protobuf\Internal\Message
     /**
      * Realm of alias to add/remove
      *
-     * Generated from protobuf field <code>string realm = 2;</code>
+     * Generated from protobuf field <code>string realm = 2 [deprecated = true];</code>
      * @param string $var
      * @return $this
      */
@@ -97,6 +102,28 @@ class MemberAliasOperation extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->realm = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string realm_id = 3;</code>
+     * @return string
+     */
+    public function getRealmId()
+    {
+        return $this->realm_id;
+    }
+
+    /**
+     * Generated from protobuf field <code>string realm_id = 3;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setRealmId($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->realm_id = $var;
 
         return $this;
     }
