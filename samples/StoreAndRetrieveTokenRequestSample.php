@@ -23,7 +23,7 @@ final class StoreAndRetrieveTokenRequestSample
         $alias = new Alias();
         $alias->setValue("payer-alias@token.io")->setType(Alias\Type::EMAIL);
         $sepaDestination = new TransferDestination\Sepa();
-        $sepaDestination->setBic("XUIWC2489")->setIban("DE89 3704 0044 0532 0130 00");
+        $sepaDestination->setBic("XUIWC2489")->setIban("DE89370400440532013000");
         $destination = new TransferDestination();
         $destination->setSepa($sepaDestination);
         $tokenRequest = TokenRequest::transferTokenRequestBuilder(100, "EUR")
