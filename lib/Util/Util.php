@@ -4,6 +4,7 @@ namespace Tokenio\Util;
 
 use Google\Protobuf\Internal\Message;
 use Grpc\UnaryCall;
+use http\Exception\RuntimeException;
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Member\Member;
 use Io\Token\Proto\Common\Member\MemberAddKeyOperation;
@@ -162,14 +163,10 @@ abstract class Util
      */
     public static function normalizeAlias($rawAlias)
     {
-        switch ($rawAlias->getType()) {
-            case Alias\Type::EMAIL:
-            case Alias\Type::DOMAIN:
-                return $rawAlias->setValue(strtolower(trim($rawAlias->getValue())));
-
-            default:
-                return $rawAlias;
+        if ($rawAlias->getType() == Alias\Type::EIDAS) {
+            return $rawAlias;
         }
+        return $rawAlias->setValue(strtolower(trim($rawAlias->getValue())));
     }
 
     /**
