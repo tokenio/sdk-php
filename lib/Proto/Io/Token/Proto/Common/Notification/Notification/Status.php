@@ -14,11 +14,13 @@ class Status
      */
     const INVALID = 0;
     /**
+     * Actions of the member are pending
+     *
      * Generated from protobuf enum <code>PENDING = 1;</code>
      */
     const PENDING = 1;
     /**
-     * Generated from protobuf enum <code>DELIVERED = 2;</code>
+     * Generated from protobuf enum <code>DELIVERED = 2 [deprecated = true];</code>
      */
     const DELIVERED = 2;
     /**
@@ -28,11 +30,23 @@ class Status
      */
     const COMPLETED = 3;
     /**
-     * the notification has been invalidated
+     * The notification has been invalidated
      *
      * Generated from protobuf enum <code>INVALIDATED = 4;</code>
      */
     const INVALIDATED = 4;
+    /**
+     * No action required for the member
+     *
+     * Generated from protobuf enum <code>NO_ACTION_REQUIRED = 5;</code>
+     */
+    const NO_ACTION_REQUIRED = 5;
+    /**
+     * The member has declined the notification
+     *
+     * Generated from protobuf enum <code>DECLINED = 6;</code>
+     */
+    const DECLINED = 6;
 }
 
 // Adding a class alias for backwards compatibility with the previous class name.

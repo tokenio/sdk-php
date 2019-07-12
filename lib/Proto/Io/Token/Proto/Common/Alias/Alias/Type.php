@@ -56,6 +56,12 @@ class Type
      * Generated from protobuf enum <code>CUSTOM = 7;</code>
      */
     const CUSTOM = 7;
+    /**
+     * The unique PSD2 auth number of the company that provides eIDAS certificate
+     *
+     * Generated from protobuf enum <code>EIDAS = 8;</code>
+     */
+    const EIDAS = 8;
 }
 
 // Adding a class alias for backwards compatibility with the previous class name.

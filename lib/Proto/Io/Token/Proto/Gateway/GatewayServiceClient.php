@@ -334,6 +334,20 @@ class GatewayServiceClient extends \Grpc\BaseStub {
     }
 
     /**
+     * Verify an eidas
+     * @param \Io\Token\Proto\Gateway\VerifyEidasRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function VerifyEidas(\Io\Token\Proto\Gateway\VerifyEidasRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/VerifyEidas',
+        $argument,
+        ['\Io\Token\Proto\Gateway\VerifyEidasResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * Get member ID of "normal consumer" recovery agent.
      * https://developer.token.io/sdk/#recovery
      * @param \Io\Token\Proto\Gateway\GetDefaultAgentRequest $argument input argument
@@ -649,6 +663,20 @@ class GatewayServiceClient extends \Grpc\BaseStub {
         return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/InvalidateNotification',
         $argument,
         ['\Io\Token\Proto\Gateway\InvalidateNotificationResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * update notification status
+     * @param \Io\Token\Proto\Gateway\UpdateNotificationStatusRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function UpdateNotificationStatus(\Io\Token\Proto\Gateway\UpdateNotificationStatusRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/UpdateNotificationStatus',
+        $argument,
+        ['\Io\Token\Proto\Gateway\UpdateNotificationStatusResponse', 'decode'],
         $metadata, $options);
     }
 
