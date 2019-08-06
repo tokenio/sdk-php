@@ -1,6 +1,6 @@
 <?php
 
-namespace Tokenio\Rpc;
+namespace Io\Token\Rpc;
 
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Alias\VerificationStatus;
@@ -31,12 +31,12 @@ use Io\Token\Proto\Gateway\RetrieveTokenRequestRequest;
 use Io\Token\Proto\Gateway\RetrieveTokenRequestResponse;
 use Io\Token\Proto\Gateway\UpdateMemberRequest;
 use Io\Token\Proto\Gateway\UpdateMemberResponse;
-use Tokenio\Exception\VerificationException;
-use Tokenio\TokenRequestResult;
-use Tokenio\Security\CryptoEngineInterface;
-use Tokenio\Security\SignerInterface;
-use Tokenio\Util\Strings;
-use Tokenio\Util\Util;
+use Io\Token\Exception\VerificationException;
+use Io\Token\TokenRequestResult;
+use Io\Token\Security\CryptoEngineInterface;
+use Io\Token\Security\SignerInterface;
+use Io\Token\Util\Strings;
+use Io\Token\Util\Util;
 
 class UnauthenticatedClient
 {

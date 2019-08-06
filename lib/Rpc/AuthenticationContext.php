@@ -1,6 +1,6 @@
 <?php
 
-namespace Tokenio\Rpc;
+namespace Io\Token\Rpc;
 
 use Io\Token\Proto\Common\Security\Key\Level;
 

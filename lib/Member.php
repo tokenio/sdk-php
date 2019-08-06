@@ -1,6 +1,6 @@
 <?php
 
-namespace Tokenio;
+namespace Io\Token;
 
 use Google\Protobuf\Internal\RepeatedField;
 use Io\Token\Proto\Common\Address\Address;
@@ -31,10 +31,10 @@ use Io\Token\Proto\Common\Transfer\Transfer;
 use Io\Token\Proto\Common\Transfer\TransferPayload;
 use Io\Token\Proto\Common\Transferinstructions\TransferEndpoint;
 use Io\Token\Proto\Gateway\GetTokensRequest\Type;
-use Tokenio\Exception\InvalidRealmException;
-use Tokenio\Rpc\Client;
-use Tokenio\Util\Strings;
-use Tokenio\Util\Util;
+use Io\Token\Exception\InvalidRealmException;
+use Io\Token\Rpc\Client;
+use Io\Token\Util\Strings;
+use Io\Token\Util\Util;
 
 class Member implements RepresentableInterface
 {

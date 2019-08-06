@@ -1,6 +1,6 @@
 <?php
 
-namespace Tokenio\Util;
+namespace Io\Token\Util;
 
 class Base58
 {

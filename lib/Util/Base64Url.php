@@ -1,6 +1,6 @@
 <?php
 
-namespace Tokenio\Util;
+namespace Io\Token\Util;
 
 /**
  * Encode and decode data into Base64 Url Safe.

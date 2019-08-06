@@ -1,9 +1,8 @@
 <?php
 
-namespace Tokenio;
+namespace Io\Token;
 
 use Io\Token\Proto\Common\Security\Signature;
-use Tokenio\Exception;
 
 class TokenRequestCallbackParameters
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Tokenio\Security;
+namespace Io\Token\Security;
 
 use Google\Protobuf\Internal\Message;
-use Tokenio\Exception\CryptographicException;
-use Tokenio\Util\Base64Url;
-use Tokenio\Util\Util;
+use Io\Token\Exception\CryptographicException;
+use Io\Token\Util\Base64Url;
+use Io\Token\Util\Util;
 
 class Ed25519Verifier implements VerifierInterface
 {

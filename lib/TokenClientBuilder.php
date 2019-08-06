@@ -1,15 +1,15 @@
 <?php
 
-namespace Tokenio;
+namespace Io\Token;
 
-use Tokenio\Rpc\RpcChannelFactory;
-use Tokenio\RuntimeException;
-use Tokenio\Security\CryptoEngineFactoryInterface;
-use Tokenio\Security\KeyStoreInterface;
-use Tokenio\Security\TokenCryptoEngineFactory;
-use Tokenio\TokenClient;
-use Tokenio\TokenIO;
-use Tokenio\Util\Strings;
+use Io\Token\Rpc\RpcChannelFactory;
+use Io\Token\RuntimeException;
+use Io\Token\Security\CryptoEngineFactoryInterface;
+use Io\Token\Security\KeyStoreInterface;
+use Io\Token\Security\TokenCryptoEngineFactory;
+use Io\Token\TokenClient;
+use Io\Token\TokenIO;
+use Io\Token\Util\Strings;
 
 class TokenClientBuilder
 {

@@ -1,14 +1,14 @@
 <?php
 /** @noinspection PhpOptionalBeforeRequiredParametersInspection */
 
-namespace Tokenio\Rpc\Interceptor;
+namespace Io\Token\Rpc\Interceptor;
 
 use Google\Protobuf\Internal\Message;
 use Grpc\Interceptor;
 use Io\Token\Proto\Gateway\GrpcAuthPayload;
-use Tokenio\Rpc\AuthenticationContext;
-use Tokenio\Security\CryptoEngineInterface;
-use Tokenio\Util\Strings;
+use Io\Token\Rpc\AuthenticationContext;
+use Io\Token\Security\CryptoEngineInterface;
+use Io\Token\Util\Strings;
 
 class ClientAuthenticatorInterceptor extends Interceptor
 {
