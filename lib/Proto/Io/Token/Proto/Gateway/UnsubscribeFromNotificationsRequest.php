@@ -31,7 +31,7 @@ class UnsubscribeFromNotificationsRequest extends \Google\Protobuf\Internal\Mess
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Gateway\Gateway::initOnce();
+        \Io\Token\GPBMetadata\Gateway\Gateway::initOnce();
         parent::__construct($data);
     }
 

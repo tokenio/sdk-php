@@ -121,7 +121,7 @@ class Bank extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Bankinfo::initOnce();
+        \Io\Token\GPBMetadata\Bankinfo::initOnce();
         parent::__construct($data);
     }
 

@@ -5,9 +5,9 @@ namespace Test\Tokenio;
 use Io\Token\Proto\Common\Blob\Blob\AccessMode;
 use Io\Token\Proto\Common\Blob\Blob\Payload;
 use PHPUnit\Framework\TestCase;
-use Tokenio\Member;
-use Tokenio\Util\Strings;
-use Tokenio\Util\Util;
+use Io\Token\Member;
+use Io\Token\Util\Strings;
+use Io\Token\Util\Util;
 
 class BlobTest extends TestCase
 {

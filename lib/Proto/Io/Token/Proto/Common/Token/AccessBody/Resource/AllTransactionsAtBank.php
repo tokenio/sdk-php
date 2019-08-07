@@ -31,7 +31,7 @@ class AllTransactionsAtBank extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Token::initOnce();
+        \Io\Token\GPBMetadata\Token::initOnce();
         parent::__construct($data);
     }
 

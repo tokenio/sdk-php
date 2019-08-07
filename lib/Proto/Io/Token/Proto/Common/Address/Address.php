@@ -184,7 +184,7 @@ class Address extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Address::initOnce();
+        \Io\Token\GPBMetadata\Address::initOnce();
         parent::__construct($data);
     }
 

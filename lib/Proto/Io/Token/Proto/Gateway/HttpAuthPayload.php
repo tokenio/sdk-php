@@ -75,7 +75,7 @@ class HttpAuthPayload extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Gateway\Auth::initOnce();
+        \Io\Token\GPBMetadata\Gateway\Auth::initOnce();
         parent::__construct($data);
     }
 

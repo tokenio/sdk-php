@@ -7,8 +7,8 @@ use Io\Token\Proto\Common\Member\MemberRecoveryOperation\Authorization;
 use Io\Token\Proto\Common\Member\RecoveryRule;
 use Io\Token\Proto\Common\Security\Key\Level;
 use PHPUnit\Framework\TestCase;
-use Tokenio\Security\TokenCryptoEngine;
-use Tokenio\Security\UnsecuredFileSystemKeyStore;
+use Io\Token\Security\TokenCryptoEngine;
+use Io\Token\Security\UnsecuredFileSystemKeyStore;
 
 class MemberRegistrationTest extends TestCase
 {

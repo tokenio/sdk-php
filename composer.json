@@ -35,7 +35,7 @@
       "Test\\": "tests/",
       "Io\\Token\\": "lib/",
       "Google\\": "lib/Proto/Google",
-      "GPBMetadata\\": "lib/Proto/GPBMetadata",
+      "Io\\Token\\GPBMetadata\\": "lib/Proto/GPBMetadata",
       "Io\\": "lib/Proto/Io/"
     }
   },

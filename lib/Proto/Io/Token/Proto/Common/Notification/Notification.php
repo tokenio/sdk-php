@@ -54,7 +54,7 @@ class Notification extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Notification::initOnce();
+        \Io\Token\GPBMetadata\Notification::initOnce();
         parent::__construct($data);
     }
 

@@ -5,11 +5,11 @@ namespace Test\Tokenio;
 use Io\Token\Proto\Common\Security\Key\Level;
 use Io\Token\Proto\Common\Token\Token;
 use PHPUnit\Framework\TestCase;
-use Tokenio\AccessTokenBuilder;
-use Tokenio\TokenRequest;
-use Tokenio\Member;
-use Tokenio\Util\Strings;
-use Tokenio\Util\Util;
+use Io\Token\AccessTokenBuilder;
+use Io\Token\TokenRequest;
+use Io\Token\Member;
+use Io\Token\Util\Strings;
+use Io\Token\Util\Util;
 
 class AccessTokenTest extends TestCase
 {
@@ -17,7 +17,7 @@ class AccessTokenTest extends TestCase
     const TOKEN_LOOKUP_POLL_FREQUENCY_MICRO = 1500000;
     const MICROS_IN_SEC = 1000000;
 
-    /** @var \Tokenio\TokenClient */
+    /** @var \Io\Token\TokenClient */
     protected $tokenIO;
     /** @var Member $member1 */
     private $member1;
@@ -76,7 +76,7 @@ class AccessTokenTest extends TestCase
             ->forAddress($address->getId())
             ->build());
 
-        $this->expectException('Tokenio\Exception\StatusRuntimeException');
+        $this->expectException('Io\Token\Exception\StatusRuntimeException');
 
         $member->createAccessToken(AccessTokenBuilder::createWithAlias($member->getFirstAlias())
             ->forAddress($address->getId())

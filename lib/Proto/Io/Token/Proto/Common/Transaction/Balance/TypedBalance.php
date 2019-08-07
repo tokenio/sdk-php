@@ -38,7 +38,7 @@ class TypedBalance extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Transaction::initOnce();
+        \Io\Token\GPBMetadata\Transaction::initOnce();
         parent::__construct($data);
     }
 

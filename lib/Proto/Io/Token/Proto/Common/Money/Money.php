@@ -39,7 +39,7 @@ class Money extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Money::initOnce();
+        \Io\Token\GPBMetadata\Money::initOnce();
         parent::__construct($data);
     }
 

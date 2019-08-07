@@ -49,7 +49,7 @@ class Subscriber extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Subscriber::initOnce();
+        \Io\Token\GPBMetadata\Subscriber::initOnce();
         parent::__construct($data);
     }
 

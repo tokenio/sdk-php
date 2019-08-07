@@ -6,13 +6,13 @@ use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Security\Key\Level;
 use PHPUnit\Framework\TestCase;
 use Test\Tokenio\TestUtil;
-use Tokenio\Exception\CryptographicException;
-use Tokenio\Security\CryptoEngineInterface;
-use Tokenio\Security\Ed25519Verifier;
-use Tokenio\Security\TokenCryptoEngine;
-use Tokenio\Security\UnsecuredFileSystemKeyStore;
-use Tokenio\Util\Base64Url;
-use Tokenio\Util\Strings;
+use Io\Token\Exception\CryptographicException;
+use Io\Token\Security\CryptoEngineInterface;
+use Io\Token\Security\Ed25519Verifier;
+use Io\Token\Security\TokenCryptoEngine;
+use Io\Token\Security\UnsecuredFileSystemKeyStore;
+use Io\Token\Util\Base64Url;
+use Io\Token\Util\Strings;
 
 class CryptoEngineTest extends TestCase
 {

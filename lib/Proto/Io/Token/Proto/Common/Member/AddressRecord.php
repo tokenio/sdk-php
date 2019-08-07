@@ -57,7 +57,7 @@ class AddressRecord extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Member::initOnce();
+        \Io\Token\GPBMetadata\Member::initOnce();
         parent::__construct($data);
     }
 

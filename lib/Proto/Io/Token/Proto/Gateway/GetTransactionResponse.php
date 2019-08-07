@@ -33,7 +33,7 @@ class GetTransactionResponse extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Gateway\Gateway::initOnce();
+        \Io\Token\GPBMetadata\Gateway\Gateway::initOnce();
         parent::__construct($data);
     }
 

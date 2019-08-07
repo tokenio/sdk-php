@@ -7,8 +7,8 @@ use Io\Token\Proto\Common\Token\AccessBody;
 use Io\Token\Proto\Common\Token\TokenMember;
 use Io\Token\Proto\Common\Token\TokenPayload;
 use PHPUnit\Framework\TestCase;
-use Tokenio\Util\Base58;
-use Tokenio\Util\Util;
+use Io\Token\Util\Base58;
+use Io\Token\Util\Util;
 
 class UtilTest extends TestCase
 {

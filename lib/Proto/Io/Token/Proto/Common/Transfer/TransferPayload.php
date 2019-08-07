@@ -65,7 +65,7 @@ class TransferPayload extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Transfer::initOnce();
+        \Io\Token\GPBMetadata\Transfer::initOnce();
         parent::__construct($data);
     }
 

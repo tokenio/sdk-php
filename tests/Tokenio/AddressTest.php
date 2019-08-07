@@ -4,8 +4,8 @@ namespace Test\Tokenio;
 
 use Io\Token\Proto\Common\Member\AddressRecord;
 use PHPUnit\Framework\TestCase;
-use Tokenio\Member;
-use Tokenio\Util\Strings;
+use Io\Token\Member;
+use Io\Token\Util\Strings;
 
 class AddressTest extends TestCase
 {
@@ -70,7 +70,7 @@ class AddressTest extends TestCase
     public function testGetAddress_NotFound()
     {
         $fakeAddressId = Strings::generateNonce();
-        $this->expectException('Tokenio\Exception\StatusRuntimeException');
+        $this->expectException('Io\Token\Exception\StatusRuntimeException');
         $nonExistingAddress = $this->member->getAddress($fakeAddressId . 'adadasss');
         $this->assertEmpty($nonExistingAddress);
     }

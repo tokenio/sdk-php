@@ -34,7 +34,7 @@
  * Defines Message, the parent class extended by all protocol message classes.
  */
 
-namespace Tokenio\Proto;
+namespace Io\Token\Io\Token\Io\Token\Io\Token\Io\Token\Io\Token\Io\Token\Io\Token\Io\Token\Io\Token\Tokenio\Proto;
 
 use Google\Protobuf\Descriptor;
 use Google\Protobuf\Internal\CodedInputStream;

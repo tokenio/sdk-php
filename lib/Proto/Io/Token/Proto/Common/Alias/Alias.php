@@ -52,7 +52,7 @@ class Alias extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Alias::initOnce();
+        \Io\Token\GPBMetadata\Alias::initOnce();
         parent::__construct($data);
     }
 
