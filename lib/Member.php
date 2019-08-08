@@ -441,6 +441,8 @@ class Member implements RepresentableInterface
 
         if ($refId != null) {
             $payload->setRefId($refId);
+        } else if ($token->getPayload()->getRefId() != null) {
+            $payload->setRefId($token->getPayload()->getRefId());
         } else {
             $payload->setRefId(Strings::generateNonce());
         }
