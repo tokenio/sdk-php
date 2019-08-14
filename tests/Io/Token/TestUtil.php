@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Tokenio;
+namespace Test\Io\Token;
 
 use Google\Protobuf\Internal\RepeatedField;
 use Io\Token\Proto\Common\Address\Address;

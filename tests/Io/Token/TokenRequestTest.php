@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Tokenio;
+namespace Test\Io\Token;
 
 use Io\Token\Proto\Common\Token\AccessBody;
 use Io\Token\Proto\Common\Token\TokenMember;
@@ -13,7 +13,7 @@ class TokenRequestTest extends TestCase
 {
     const TOKEN_URL = 'https://token.io';
 
-    /** @var \Tokenio\TokenClient */
+    /** @var \Io\Token\TokenClient */
     protected $tokenIO;
     /** @var Member $member */
     private $member;

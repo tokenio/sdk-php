@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Tokenio;
+namespace Test\Io\Token;
 
 use Io\Token\Proto\Common\Member\MemberRecoveryOperation;
 use Io\Token\Proto\Common\Member\MemberRecoveryOperation\Authorization;
@@ -12,7 +12,7 @@ use Io\Token\Security\UnsecuredFileSystemKeyStore;
 
 class MemberRegistrationTest extends TestCase
 {
-    /** @var \Tokenio\TokenClient */
+    /** @var \Io\Token\TokenClient */
     protected $tokenIO;
 
     protected function setUp()

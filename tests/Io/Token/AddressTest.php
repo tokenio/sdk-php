@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Tokenio;
+namespace Test\Io\Token;
 
 use Io\Token\Proto\Common\Member\AddressRecord;
 use PHPUnit\Framework\TestCase;
@@ -9,7 +9,7 @@ use Io\Token\Util\Strings;
 
 class AddressTest extends TestCase
 {
-    /** @var \Tokenio\TokenClient */
+    /** @var \Io\Token\TokenClient */
     protected $tokenIO;
     /** @var Member $member */
     private $member;
