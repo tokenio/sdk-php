@@ -1,18 +1,18 @@
 <?php
 
-namespace Test\Tokenio;
+namespace Test\Io\Token;
 
 use Io\Token\Proto\Common\Member\MemberRecoveryOperation;
 use Io\Token\Proto\Common\Member\MemberRecoveryOperation\Authorization;
 use Io\Token\Proto\Common\Member\RecoveryRule;
 use Io\Token\Proto\Common\Security\Key\Level;
 use PHPUnit\Framework\TestCase;
-use Tokenio\Security\TokenCryptoEngine;
-use Tokenio\Security\UnsecuredFileSystemKeyStore;
+use Io\Token\Security\TokenCryptoEngine;
+use Io\Token\Security\UnsecuredFileSystemKeyStore;
 
 class MemberRegistrationTest extends TestCase
 {
-    /** @var \Tokenio\TokenClient */
+    /** @var \Io\Token\TokenClient */
     protected $tokenIO;
 
     protected function setUp()

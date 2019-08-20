@@ -49,7 +49,7 @@ class Attachment extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Blob::initOnce();
+        \Io\Token\GPBMetadata\Blob::initOnce();
         parent::__construct($data);
     }
 

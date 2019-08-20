@@ -63,7 +63,7 @@ class Metadata extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Transferinstructions::initOnce();
+        \Io\Token\GPBMetadata\Transferinstructions::initOnce();
         parent::__construct($data);
     }
 

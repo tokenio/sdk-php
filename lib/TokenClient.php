@@ -1,6 +1,6 @@
 <?php
 
-namespace Tokenio;
+namespace Io\Token;
 
 use Grpc\Channel;
 use Io\Token\Proto\Common\Alias\Alias;
@@ -10,12 +10,12 @@ use Io\Token\Proto\Common\Security\Key;
 use Io\Token\Proto\Common\Token\TokenRequest;
 use Io\Token\Proto\Common\Token\TokenRequestStatePayload;
 use Io\Token\Proto\Gateway\GetBanksResponse;
-use Tokenio\Exception\InvalidStateException;
-use Tokenio\Exception\VerificationException;
-use Tokenio\Rpc\ClientFactory;
-use Tokenio\Security\CryptoEngineFactoryInterface;
-use Tokenio\Security\CryptoEngineInterface;
-use Tokenio\Util\Util;
+use Io\Token\Exception\InvalidStateException;
+use Io\Token\Exception\VerificationException;
+use Io\Token\Rpc\ClientFactory;
+use Io\Token\Security\CryptoEngineFactoryInterface;
+use Io\Token\Security\CryptoEngineInterface;
+use Io\Token\Util\Util;
 
 class TokenClient
 {

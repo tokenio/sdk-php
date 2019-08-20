@@ -1,19 +1,19 @@
 <?php
 
-namespace Test\Tokenio;
+namespace Test\Io\Token;
 
 use Io\Token\Proto\Common\Token\AccessBody;
 use Io\Token\Proto\Common\Token\TokenMember;
 use Io\Token\Proto\Common\Token\TokenPayload;
 use PHPUnit\Framework\TestCase;
-use Tokenio\TokenRequest;
-use Tokenio\Member;
+use Io\Token\TokenRequest;
+use Io\Token\Member;
 
 class TokenRequestTest extends TestCase
 {
     const TOKEN_URL = 'https://token.io';
 
-    /** @var \Tokenio\TokenClient */
+    /** @var \Io\Token\TokenClient */
     protected $tokenIO;
     /** @var Member $member */
     private $member;
@@ -79,7 +79,7 @@ class TokenRequestTest extends TestCase
 
     public function testAddAndGetTokenRequest_NotFound()
     {
-        $this->expectException('Tokenio\Exception\StatusRuntimeException');
+        $this->expectException('Io\Token\Exception\StatusRuntimeException');
         $token1 = $this->tokenIO->retrieveTokenRequest('bogus');
         $token2 = $this->tokenIO->retrieveTokenRequest($this->member->getMemberId());
 
@@ -95,7 +95,7 @@ class TokenRequestTest extends TestCase
 
         $storedRequest = TokenRequest::builder($payload)->build();
 
-        $this->expectException('Tokenio\Exception\StatusRuntimeException');
+        $this->expectException('Io\Token\Exception\StatusRuntimeException');
         $this->member->storeTokenRequest($storedRequest);
 
     }

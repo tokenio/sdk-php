@@ -33,7 +33,7 @@ class Cma9Address extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Providerspecific::initOnce();
+        \Io\Token\GPBMetadata\Providerspecific::initOnce();
         parent::__construct($data);
     }
 

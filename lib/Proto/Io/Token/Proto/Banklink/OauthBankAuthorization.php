@@ -39,7 +39,7 @@ class OauthBankAuthorization extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Banklink::initOnce();
+        \Io\Token\GPBMetadata\Banklink::initOnce();
         parent::__construct($data);
     }
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace Tokenio;
+namespace Io\Token;
 
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Token\AccessBody;
 use Io\Token\Proto\Common\Token\TokenMember;
 use Io\Token\Proto\Common\Token\TokenPayload;
-use Tokenio\Exception\IllegalArgumentException;
-use Tokenio\Util\Strings;
+use Io\Token\Exception\IllegalArgumentException;
+use Io\Token\Util\Strings;
 
 class AccessTokenBuilder
 {

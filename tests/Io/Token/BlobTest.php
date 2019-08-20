@@ -1,20 +1,20 @@
 <?php
 
-namespace Test\Tokenio;
+namespace Test\Io\Token;
 
 use Io\Token\Proto\Common\Blob\Blob\AccessMode;
 use Io\Token\Proto\Common\Blob\Blob\Payload;
 use PHPUnit\Framework\TestCase;
-use Tokenio\Member;
-use Tokenio\Util\Strings;
-use Tokenio\Util\Util;
+use Io\Token\Member;
+use Io\Token\Util\Strings;
+use Io\Token\Util\Util;
 
 class BlobTest extends TestCase
 {
     const FILENAME = 'file.json';
     const FILETYPE = 'application/json';
 
-    /** @var \Tokenio\TokenClient */
+    /** @var \Io\Token\TokenClient */
     protected $tokenIO;
     /** @var Member $member */
     private $member;

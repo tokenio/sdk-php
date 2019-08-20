@@ -1,13 +1,13 @@
 <?php
 
-namespace Test\Tokenio;
+namespace Test\Io\Token;
 use PHPUnit\Framework\TestCase;
-use Tokenio\Member;
+use Io\Token\Member;
 
 class BankInfoTest extends TestCase
 {
 
-    /** @var \Tokenio\TokenClient */
+    /** @var \Io\Token\TokenClient */
     protected $tokenIO;
     /** @var Member $member */
     private $member;

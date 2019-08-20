@@ -33,7 +33,7 @@ class Selector extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Extensions\Service::initOnce();
+        \Io\Token\GPBMetadata\Extensions\Service::initOnce();
         parent::__construct($data);
     }
 

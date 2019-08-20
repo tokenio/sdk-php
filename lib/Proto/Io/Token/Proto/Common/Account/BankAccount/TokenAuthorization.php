@@ -30,7 +30,7 @@ class TokenAuthorization extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Account::initOnce();
+        \Io\Token\GPBMetadata\Account::initOnce();
         parent::__construct($data);
     }
 

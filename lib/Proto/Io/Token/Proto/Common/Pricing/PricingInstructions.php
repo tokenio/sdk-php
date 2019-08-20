@@ -33,7 +33,7 @@ class PricingInstructions extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Pricing::initOnce();
+        \Io\Token\GPBMetadata\Pricing::initOnce();
         parent::__construct($data);
     }
 

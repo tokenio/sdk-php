@@ -1,6 +1,6 @@
 <?php
 
-namespace Tokenio\Rpc;
+namespace Io\Token\Rpc;
 
 use Google\Protobuf\Internal\MapField;
 use Google\Protobuf\Internal\RepeatedField;
@@ -110,11 +110,11 @@ use Io\Token\Proto\Gateway\UpdateMemberRequest;
 use Io\Token\Proto\Gateway\UpdateMemberResponse;
 use Io\Token\Proto\Gateway\VerifyAliasRequest;
 use Io\Token\Proto\Gateway\VerifyAliasResponse;
-use Tokenio\Exception;
-use Tokenio\Security\CryptoEngineInterface;
-use Tokenio\PagedList;
-use Tokenio\Util\Strings;
-use Tokenio\Util\Util;
+use Io\Token\Exception;
+use Io\Token\Security\CryptoEngineInterface;
+use Io\Token\PagedList;
+use Io\Token\Util\Strings;
+use Io\Token\Util\Util;
 
 class Client
 {

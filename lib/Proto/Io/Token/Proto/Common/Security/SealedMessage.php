@@ -40,7 +40,7 @@ class SealedMessage extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Security::initOnce();
+        \Io\Token\GPBMetadata\Security::initOnce();
         parent::__construct($data);
     }
 

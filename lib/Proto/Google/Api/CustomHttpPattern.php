@@ -41,7 +41,7 @@ class CustomHttpPattern extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Google\Api\Http::initOnce();
+        \Io\Token\GPBMetadata\Google\Api\Http::initOnce();
         parent::__construct($data);
     }
 

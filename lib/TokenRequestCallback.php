@@ -1,6 +1,6 @@
 <?php
 
-namespace Tokenio;
+namespace Io\Token;
 
 /**
  * Represents callback in Token Request Flow. Contains tokenID and state.

@@ -1,15 +1,15 @@
 <?php
 
-namespace Test\Tokenio;
+namespace Test\Io\Token;
 
 use Io\Token\Proto\Common\Member\TrustedBeneficiary;
 use PHPUnit\Framework\TestCase;
-use Tokenio\Member;
+use Io\Token\Member;
 
 class TrustedBenificiaryTest extends TestCase
 {
 
-    /** @var \Tokenio\TokenClient */
+    /** @var \Io\Token\TokenClient */
     protected $tokenIO;
     /** @var Member $member1 */
     private $member1;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tokenio;
+namespace Io\Token;
 
 use Io\Token\Proto\Common\Account\BankAccount;
 use Io\Token\Proto\Common\Alias\Alias;
@@ -12,8 +12,8 @@ use Io\Token\Proto\Common\Token\TokenPayload;
 use Io\Token\Proto\Common\Token\TransferBody;
 use Io\Token\Proto\Common\Transferinstructions\TransferEndpoint;
 use Io\Token\Proto\Common\Transferinstructions\TransferInstructions;
-use Tokenio\Exception\IllegalArgumentException;
-use Tokenio\Util\Strings;
+use Io\Token\Exception\IllegalArgumentException;
+use Io\Token\Util\Strings;
 
 class TransferTokenBuilder
 {

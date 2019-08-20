@@ -71,6 +71,17 @@ def generate_protos_cmd(path_to_protos, out_dir)
     result
 end
 
+
+def fix_namespaces(out_dir)
+    Dir.glob("#{out_dir}/**/*") do |file_name|
+        if(!File.directory?(file_name))
+            file_contents = File.read(file_name);
+            new_contents = file_contents.gsub("GPBMetadata", "Io\\Token\\GPBMetadata")
+            File.open(file_name, "w") {|file| file.puts new_contents }
+        end
+    end
+end
+
 # Fetch the protos.
 fetch_protos();
 
@@ -81,9 +92,10 @@ system("rm -rf #{dir}/GPBMetadata");
 system("rm -rf #{dir}/Io");
 system("mkdir #{dir}");
 
-gencommand = generate_protos_cmd("common", dir) +
-             generate_protos_cmd("common/google/api", dir) +
-             generate_protos_cmd("extensions", dir) +
-             generate_protos_cmd("external/gateway", dir);
+gencommand = generate_protos_cmd("common", dir)+
+ generate_protos_cmd("common/google/api", dir) +
+ generate_protos_cmd("extensions", dir) +
+ generate_protos_cmd("external/gateway", dir);
 
 system(gencommand);
+fix_namespaces(dir);

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tokenio\Exception;
+namespace Io\Token\Exception;
 
 class VerificationException extends \Exception
 {

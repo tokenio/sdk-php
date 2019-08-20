@@ -1,7 +1,7 @@
 <?php
 /** @noinspection PhpOptionalBeforeRequiredParametersInspection */
 
-namespace Tokenio\Rpc\Interceptor;
+namespace Io\Token\Rpc\Interceptor;
 
 use Grpc\Interceptor;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tokenio\Security;
+namespace Io\Token\Security;
 
 interface CryptoEngineFactoryInterface
 {

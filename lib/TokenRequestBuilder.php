@@ -1,6 +1,6 @@
 <?php
 
-namespace Tokenio;
+namespace Io\Token;
 
 use Io\Token\Proto\Common\Token\TokenPayload;
 

@@ -1,15 +1,15 @@
 <?php
 
-namespace Test\Tokenio;
+namespace Test\Io\Token;
 
 use Google\Protobuf\Internal\RepeatedField;
 use Io\Token\Proto\Common\Address\Address;
 use Io\Token\Proto\Common\Alias\Alias;
-use Tokenio\TokenClientBuilder;
-use Tokenio\TokenCluster;
-use Tokenio\TokenEnvironment;
-use Tokenio\Security\UnsecuredFileSystemKeyStore;
-use Tokenio\Util\Strings;
+use Io\Token\TokenClientBuilder;
+use Io\Token\TokenCluster;
+use Io\Token\TokenEnvironment;
+use Io\Token\Security\UnsecuredFileSystemKeyStore;
+use Io\Token\Util\Strings;
 
 abstract class TestUtil
 {

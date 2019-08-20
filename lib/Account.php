@@ -1,11 +1,11 @@
 <?php
 
-namespace Tokenio;
+namespace Io\Token;
 
 use Io\Token\Proto\Common\Money\Money;
 use Io\Token\Proto\Common\Transaction\Balance;
 use Io\Token\Proto\Common\Transaction\Transaction;
-use Tokenio\Rpc\Client;
+use Io\Token\Rpc\Client;
 
 class Account
 {

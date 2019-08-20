@@ -1,6 +1,6 @@
 <?php
 
-namespace Tokenio\Util;
+namespace Io\Token\Util;
 
 use Google\Protobuf\Internal\Message;
 use Grpc\UnaryCall;
@@ -15,9 +15,9 @@ use Io\Token\Proto\Common\Member\RecoveryRule;
 use Io\Token\Proto\Common\Security\Key;
 use Io\Token\Proto\Common\Security\Signature;
 use Io\Token\Proto\Common\Token\TokenRequestStatePayload;
-use Tokenio\Exception;
-use Tokenio\Exception\CryptoKeyNotFoundException;
-use Tokenio\Security\Ed25519Verifier;
+use Io\Token\Exception;
+use Io\Token\Exception\CryptoKeyNotFoundException;
+use Io\Token\Security\Ed25519Verifier;
 
 abstract class Util
 {
