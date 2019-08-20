@@ -5,7 +5,7 @@ namespace Test\Tokenio\Security;
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Security\Key\Level;
 use PHPUnit\Framework\TestCase;
-use Test\Tokenio\TestUtil;
+use Test\Io\Token\TestUtil;
 use Io\Token\Exception\CryptographicException;
 use Io\Token\Security\CryptoEngineInterface;
 use Io\Token\Security\Ed25519Verifier;
