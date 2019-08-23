@@ -9,7 +9,6 @@ $iterator = Finder::create()
     ->exclude('Proto')
     ->in('./lib');
 
-echo "@@@@ " . __DIR__.'/generated';
 return new Sami($iterator, array(
     'build_dir' => __DIR__.'/generated'
 ));
