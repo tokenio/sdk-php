@@ -2,6 +2,7 @@
 
 namespace Tokenio;
 
+use Composer\Factory;
 use Tokenio\Rpc\RpcChannelFactory;
 use Tokenio\RuntimeException;
 use Tokenio\Security\CryptoEngineFactoryInterface;
@@ -154,9 +155,10 @@ class TokenClientBuilder
      */
     public function build()
     {
+        $composerJson = json_decode(file_get_contents(Factory::getComposerFile()), true);
         $metadata = array(
             TokenInfo::TOKEN_SDK => [TokenInfo::TOKEN_SDK_VALUE],
-            TokenInfo::TOKEN_SDK_VERSION => [TokenInfo::TOKEN_SDK_VERSION_VALUE],
+            TokenInfo::TOKEN_SDK_VERSION => [$composerJson['version']],
             TokenInfo::TOKEN_DEV_KEY => [$this->devKey]
         );
 
