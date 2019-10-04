@@ -21,9 +21,11 @@ use Io\Token\Proto\Common\Member\RecoveryRule;
 use Io\Token\Proto\Common\Money\Money;
 use Io\Token\Proto\Common\Security\Key;
 use Io\Token\Proto\Common\Security\Signature;
+use Io\Token\Proto\Common\Submission\StandingOrderSubmission;
 use Io\Token\Proto\Common\Token\Token;
 use Io\Token\Proto\Common\Token\TokenOperationResult;
 use Io\Token\Proto\Common\Transaction\Balance;
+use Io\Token\Proto\Common\Transaction\StandingOrder;
 use Io\Token\Proto\Common\Transaction\Transaction;
 use Io\Token\Proto\Common\Transfer\Transfer;
 use Io\Token\Proto\Common\Transfer\TransferPayload;
@@ -204,6 +206,7 @@ class Member implements RepresentableInterface
      * @param string $transactionId ID of the transaction
      * @param int $keyLevel key level
      * @return Transaction
+     * @throws Exception\StepUpRequiredException
      */
     public function getTransaction($accountId, $transactionId, $keyLevel)
     {
@@ -218,10 +221,40 @@ class Member implements RepresentableInterface
      * @param int $limit max number of records to return
      * @param int $keyLevel key level
      * @return PagedList paged list of transaction records
+     * @throws Exception\StepUpRequiredException
      */
     public function getTransactions($accountId, $offset, $limit, $keyLevel)
     {
         return $this->client->getTransactions($accountId, $offset, $limit, $keyLevel);
+    }
+
+    /**
+     * Look up an existing standing order and return the response.
+     *
+     * @param string $accountId the account id
+     * @param string $standingOrderId the standing order id
+     * @param int $keyLevel the key level
+     * @return StandingOrder
+     * @throws Exception\RequestException
+     */
+    public function getStandingOrder($accountId, $standingOrderId, $keyLevel)
+    {
+        return $this->client->getStandingOrder($accountId, $standingOrderId, $keyLevel);
+    }
+
+    /**
+     * Look up standing orders and return response.
+     *
+     * @param string $accountId the account id
+     * @param string $offset the offset
+     * @param int $limit the limit
+     * @param int $keyLevel the key level
+     * @return PagedList list of standing orders
+     * @throws Exception\RequestException
+     */
+    public function getStandingOrders($accountId, $offset, $limit, $keyLevel)
+    {
+        return $this->client->getStandingOrders($accountId, $offset, $limit, $keyLevel);
     }
 
     /**
@@ -368,6 +401,29 @@ class Member implements RepresentableInterface
     }
 
     /**
+     * Looks up an existing Token standing order submission.
+     *
+     * @param string $submissionId submission id
+     * @return StandingOrderSubmission record
+     */
+    public function getStandingOrderSubmission($submissionId)
+    {
+        return $this->client->getStandingOrderSubmission($submissionId);
+    }
+
+    /**
+     * Looks up a list of existing standing order submissions.
+     *
+     * @param string $offset optional offset to start at
+     * @param int $limit max number of records to return
+     * @return PagedList containing standing order records
+     */
+    public function getStandingOrderSubmissions($limit, $offset = null)
+    {
+        return $this->client->getStandingOrderSubmissions($limit, $offset);
+    }
+
+    /**
      * Cancels the token by signing it. The signature is persisted along
      * with the token.
      *
@@ -448,6 +504,17 @@ class Member implements RepresentableInterface
         }
 
         return $this->client->createTransfer($payload);
+    }
+
+    /**
+     * Redeems a standing order token
+     *
+     * @param string $tokenId ID of token to redeem
+     * @return StandingOrderSubmission
+     */
+    public function redeemStandingOrderToken($tokenId)
+    {
+        return $this->client->createStandingOrder($tokenId);
     }
 
     /**

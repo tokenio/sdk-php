@@ -65,4 +65,17 @@ class TransferTokenRequestBuilder extends TokenRequestBuilder
         $this->requestPayload->getTransferBody()->setAmount($chargeAmount);
         return $this;
     }
+
+    /**
+     * Sets the execution date of the transfer. Used for future-dated payments.
+     * Uses ISO 8601 format: YYYY-MM-DD.
+     *
+     * @param string $executionDate execution date
+     * @return TransferTokenRequestBuilder
+     */
+    public function setExecutionDate($executionDate)
+    {
+        $this->requestPayload->getTransferBody()->setExecutionDate($executionDate);
+        return $this;
+    }
 }
