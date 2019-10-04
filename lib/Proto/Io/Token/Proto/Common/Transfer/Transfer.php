@@ -57,6 +57,12 @@ class Transfer extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.io.token.proto.common.transfer.Transfer.Method method = 8;</code>
      */
     private $method = 0;
+    /**
+     * Execution date. Same as the value on the transfer token payload.
+     *
+     * Generated from protobuf field <code>string execution_date = 9;</code>
+     */
+    private $execution_date = '';
 
     /**
      * Constructor.
@@ -77,6 +83,8 @@ class Transfer extends \Google\Protobuf\Internal\Message
      *           Currency Ledger order id.
      *     @type int $method
      *           Instant (currency ledger) or default
+     *     @type string $execution_date
+     *           Execution date. Same as the value on the transfer token payload.
      * }
      */
     public function __construct($data = NULL) {
@@ -276,6 +284,32 @@ class Transfer extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkEnum($var, \Io\Token\Proto\Common\Transfer\Transfer_Method::class);
         $this->method = $var;
+
+        return $this;
+    }
+
+    /**
+     * Execution date. Same as the value on the transfer token payload.
+     *
+     * Generated from protobuf field <code>string execution_date = 9;</code>
+     * @return string
+     */
+    public function getExecutionDate()
+    {
+        return $this->execution_date;
+    }
+
+    /**
+     * Execution date. Same as the value on the transfer token payload.
+     *
+     * Generated from protobuf field <code>string execution_date = 9;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setExecutionDate($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->execution_date = $var;
 
         return $this;
     }

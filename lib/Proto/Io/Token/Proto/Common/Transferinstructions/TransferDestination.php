@@ -36,6 +36,10 @@ class TransferDestination extends \Google\Protobuf\Internal\Message
      *     @type \Io\Token\Proto\Common\Transferinstructions\TransferDestination\BlueCash $blue_cash
      *     @type \Io\Token\Proto\Common\Transferinstructions\TransferDestination\Sorbnet $sorbnet
      *     @type \Io\Token\Proto\Common\Transferinstructions\TransferDestination\Custom $custom
+     *     @type \Io\Token\Proto\Common\Transferinstructions\TransferDestination\Chaps $chaps
+     *     @type \Io\Token\Proto\Common\Transferinstructions\TransferDestination\Bacs $bacs
+     *     @type \Io\Token\Proto\Common\Transferinstructions\TransferDestination\Target2 $target2
+     *     @type \Io\Token\Proto\Common\Transferinstructions\TransferDestination\Hsvp $hsvp
      *     @type \Io\Token\Proto\Common\Transferinstructions\CustomerData $customer_data
      * }
      */
@@ -282,6 +286,94 @@ class TransferDestination extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Transferinstructions\TransferDestination_Custom::class);
         $this->writeOneof(12, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferDestination.Chaps chaps = 13;</code>
+     * @return \Io\Token\Proto\Common\Transferinstructions\TransferDestination\Chaps
+     */
+    public function getChaps()
+    {
+        return $this->readOneof(13);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferDestination.Chaps chaps = 13;</code>
+     * @param \Io\Token\Proto\Common\Transferinstructions\TransferDestination\Chaps $var
+     * @return $this
+     */
+    public function setChaps($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Transferinstructions\TransferDestination_Chaps::class);
+        $this->writeOneof(13, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferDestination.Bacs bacs = 14;</code>
+     * @return \Io\Token\Proto\Common\Transferinstructions\TransferDestination\Bacs
+     */
+    public function getBacs()
+    {
+        return $this->readOneof(14);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferDestination.Bacs bacs = 14;</code>
+     * @param \Io\Token\Proto\Common\Transferinstructions\TransferDestination\Bacs $var
+     * @return $this
+     */
+    public function setBacs($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Transferinstructions\TransferDestination_Bacs::class);
+        $this->writeOneof(14, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferDestination.Target2 target2 = 15;</code>
+     * @return \Io\Token\Proto\Common\Transferinstructions\TransferDestination\Target2
+     */
+    public function getTarget2()
+    {
+        return $this->readOneof(15);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferDestination.Target2 target2 = 15;</code>
+     * @param \Io\Token\Proto\Common\Transferinstructions\TransferDestination\Target2 $var
+     * @return $this
+     */
+    public function setTarget2($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Transferinstructions\TransferDestination_Target2::class);
+        $this->writeOneof(15, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferDestination.Hsvp hsvp = 16;</code>
+     * @return \Io\Token\Proto\Common\Transferinstructions\TransferDestination\Hsvp
+     */
+    public function getHsvp()
+    {
+        return $this->readOneof(16);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferDestination.Hsvp hsvp = 16;</code>
+     * @param \Io\Token\Proto\Common\Transferinstructions\TransferDestination\Hsvp $var
+     * @return $this
+     */
+    public function setHsvp($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Transferinstructions\TransferDestination_Hsvp::class);
+        $this->writeOneof(16, $var);
 
         return $this;
     }

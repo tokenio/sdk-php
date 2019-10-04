@@ -49,6 +49,14 @@ class BankFilter extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string search = 6;</code>
      */
     private $search = '';
+    /**
+     * (Optional) Filter for banks that support or don't support certain features. See Bank for the feature keys we support.
+     * Set "true" for banks that support the feature or "false" for banks that don't support the feature.
+     * e.g. ["supports_linking_uri": "true"] means only banks who supports the linking uri feature.
+     *
+     * Generated from protobuf field <code>map<string, string> requires_bank_features = 7;</code>
+     */
+    private $requires_bank_features;
 
     /**
      * Constructor.
@@ -68,6 +76,10 @@ class BankFilter extends \Google\Protobuf\Internal\Message
      *           (Optional) Filter for banks whose 'id' matches any one of the given ids (case-insensitive). Can be at most 1000.
      *     @type string $search
      *           (Optional) Filter for banks whose 'name' or 'identifier' contains the given search string (case-insensitive)
+     *     @type array|\Google\Protobuf\Internal\MapField $requires_bank_features
+     *           (Optional) Filter for banks that support or don't support certain features. See Bank for the feature keys we support.
+     *           Set "true" for banks that support the feature or "false" for banks that don't support the feature.
+     *           e.g. ["supports_linking_uri": "true"] means only banks who supports the linking uri feature.
      * }
      */
     public function __construct($data = NULL) {
@@ -227,6 +239,36 @@ class BankFilter extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->search = $var;
+
+        return $this;
+    }
+
+    /**
+     * (Optional) Filter for banks that support or don't support certain features. See Bank for the feature keys we support.
+     * Set "true" for banks that support the feature or "false" for banks that don't support the feature.
+     * e.g. ["supports_linking_uri": "true"] means only banks who supports the linking uri feature.
+     *
+     * Generated from protobuf field <code>map<string, string> requires_bank_features = 7;</code>
+     * @return \Google\Protobuf\Internal\MapField
+     */
+    public function getRequiresBankFeatures()
+    {
+        return $this->requires_bank_features;
+    }
+
+    /**
+     * (Optional) Filter for banks that support or don't support certain features. See Bank for the feature keys we support.
+     * Set "true" for banks that support the feature or "false" for banks that don't support the feature.
+     * e.g. ["supports_linking_uri": "true"] means only banks who supports the linking uri feature.
+     *
+     * Generated from protobuf field <code>map<string, string> requires_bank_features = 7;</code>
+     * @param array|\Google\Protobuf\Internal\MapField $var
+     * @return $this
+     */
+    public function setRequiresBankFeatures($var)
+    {
+        $arr = GPBUtil::checkMapField($var, \Google\Protobuf\Internal\GPBType::STRING, \Google\Protobuf\Internal\GPBType::STRING);
+        $this->requires_bank_features = $arr;
 
         return $this;
     }

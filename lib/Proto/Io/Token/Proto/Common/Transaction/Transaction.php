@@ -14,7 +14,7 @@ use Google\Protobuf\Internal\GPBUtil;
 class Transaction extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Transaction ID
+     * Transaction ID.
      *
      * Generated from protobuf field <code>string id = 1;</code>
      */
@@ -79,7 +79,7 @@ class Transaction extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type string $id
-     *           Transaction ID
+     *           Transaction ID.
      *     @type int $type
      *           Debit or credit
      *     @type int $status
@@ -105,7 +105,7 @@ class Transaction extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Transaction ID
+     * Transaction ID.
      *
      * Generated from protobuf field <code>string id = 1;</code>
      * @return string
@@ -116,7 +116,7 @@ class Transaction extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Transaction ID
+     * Transaction ID.
      *
      * Generated from protobuf field <code>string id = 1;</code>
      * @param string $var

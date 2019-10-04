@@ -53,6 +53,10 @@ class TransferPayload extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferInstructions.Metadata metadata = 8;</code>
      */
     private $metadata = null;
+    /**
+     * Generated from protobuf field <code>bool confirm_funds = 9;</code>
+     */
+    private $confirm_funds = false;
 
     /**
      * Constructor.
@@ -72,6 +76,7 @@ class TransferPayload extends \Google\Protobuf\Internal\Message
      *     @type \Io\Token\Proto\Common\Transferinstructions\TransferDestination[]|\Google\Protobuf\Internal\RepeatedField $transfer_destinations
      *           Transfer destinations, sorted in priority order.
      *     @type \Io\Token\Proto\Common\Transferinstructions\TransferInstructions\Metadata $metadata
+     *     @type bool $confirm_funds
      * }
      */
     public function __construct($data = NULL) {
@@ -249,6 +254,28 @@ class TransferPayload extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Transferinstructions\TransferInstructions_Metadata::class);
         $this->metadata = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool confirm_funds = 9;</code>
+     * @return bool
+     */
+    public function getConfirmFunds()
+    {
+        return $this->confirm_funds;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool confirm_funds = 9;</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setConfirmFunds($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->confirm_funds = $var;
 
         return $this;
     }

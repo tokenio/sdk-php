@@ -22,6 +22,8 @@ class ProviderTransactionDetails extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type \Io\Token\Proto\Common\Providerspecific\Polishapi\PolishApiTransactionDetails $polish_api_transaction_details
+     *     @type \Io\Token\Proto\Common\Providerspecific\Nextgenpsd2\NextGenPsd2TransactionDetails $next_gen_psd2_transaction_details
+     *     @type \Io\Token\Proto\Common\Providerspecific\Stet\StetTransactionDetails $stet_transaction_details
      * }
      */
     public function __construct($data = NULL) {
@@ -47,6 +49,50 @@ class ProviderTransactionDetails extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Providerspecific\Polishapi\PolishApiTransactionDetails::class);
         $this->writeOneof(1, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.nextgenpsd2.NextGenPsd2TransactionDetails next_gen_psd2_transaction_details = 3;</code>
+     * @return \Io\Token\Proto\Common\Providerspecific\Nextgenpsd2\NextGenPsd2TransactionDetails
+     */
+    public function getNextGenPsd2TransactionDetails()
+    {
+        return $this->readOneof(3);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.nextgenpsd2.NextGenPsd2TransactionDetails next_gen_psd2_transaction_details = 3;</code>
+     * @param \Io\Token\Proto\Common\Providerspecific\Nextgenpsd2\NextGenPsd2TransactionDetails $var
+     * @return $this
+     */
+    public function setNextGenPsd2TransactionDetails($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Providerspecific\Nextgenpsd2\NextGenPsd2TransactionDetails::class);
+        $this->writeOneof(3, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.stet.StetTransactionDetails stet_transaction_details = 4;</code>
+     * @return \Io\Token\Proto\Common\Providerspecific\Stet\StetTransactionDetails
+     */
+    public function getStetTransactionDetails()
+    {
+        return $this->readOneof(4);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.stet.StetTransactionDetails stet_transaction_details = 4;</code>
+     * @param \Io\Token\Proto\Common\Providerspecific\Stet\StetTransactionDetails $var
+     * @return $this
+     */
+    public function setStetTransactionDetails($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Providerspecific\Stet\StetTransactionDetails::class);
+        $this->writeOneof(4, $var);
 
         return $this;
     }

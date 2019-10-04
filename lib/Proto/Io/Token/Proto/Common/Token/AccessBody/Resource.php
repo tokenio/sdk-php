@@ -24,6 +24,7 @@ class Resource extends \Google\Protobuf\Internal\Message
      *     @type \Io\Token\Proto\Common\Token\AccessBody\Resource\Account $account
      *           access to account data
      *     @type \Io\Token\Proto\Common\Token\AccessBody\Resource\AccountTransactions $transactions
+     *     @type \Io\Token\Proto\Common\Token\AccessBody\Resource\AccountStandingOrders $standing_orders
      *     @type \Io\Token\Proto\Common\Token\AccessBody\Resource\AccountBalance $balance
      *     @type \Io\Token\Proto\Common\Token\AccessBody\Resource\TransferDestinations $transfer_destinations
      *     @type \Io\Token\Proto\Common\Token\AccessBody\Resource\FundsConfirmation $funds_confirmation
@@ -90,6 +91,28 @@ class Resource extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\AccessBody_Resource_AccountTransactions::class);
         $this->writeOneof(7, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AccountStandingOrders standing_orders = 16;</code>
+     * @return \Io\Token\Proto\Common\Token\AccessBody\Resource\AccountStandingOrders
+     */
+    public function getStandingOrders()
+    {
+        return $this->readOneof(16);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.token.AccessBody.Resource.AccountStandingOrders standing_orders = 16;</code>
+     * @param \Io\Token\Proto\Common\Token\AccessBody\Resource\AccountStandingOrders $var
+     * @return $this
+     */
+    public function setStandingOrders($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\AccessBody_Resource_AccountStandingOrders::class);
+        $this->writeOneof(16, $var);
 
         return $this;
     }

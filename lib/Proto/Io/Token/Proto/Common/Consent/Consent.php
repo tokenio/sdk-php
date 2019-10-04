@@ -53,6 +53,8 @@ class Consent extends \Google\Protobuf\Internal\Message
      *     @type string $member_id
      *     @type \Io\Token\Proto\Common\Consent\Consent\InformationAccess $information_access
      *     @type \Io\Token\Proto\Common\Consent\Consent\Payment $payment
+     *     @type \Io\Token\Proto\Common\Consent\Consent\StandingOrder $standing_order
+     *     @type \Io\Token\Proto\Common\Consent\Consent\BulkPayment $bulk_payment
      *     @type string $initiator_id
      *           ID of the member requesting consent (e.g. merchant)
      *     @type string $initiator_ref_id
@@ -174,6 +176,50 @@ class Consent extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Consent\Consent_Payment::class);
         $this->writeOneof(6, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.consent.Consent.StandingOrder standing_order = 9;</code>
+     * @return \Io\Token\Proto\Common\Consent\Consent\StandingOrder
+     */
+    public function getStandingOrder()
+    {
+        return $this->readOneof(9);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.consent.Consent.StandingOrder standing_order = 9;</code>
+     * @param \Io\Token\Proto\Common\Consent\Consent\StandingOrder $var
+     * @return $this
+     */
+    public function setStandingOrder($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Consent\Consent_StandingOrder::class);
+        $this->writeOneof(9, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.consent.Consent.BulkPayment bulk_payment = 10;</code>
+     * @return \Io\Token\Proto\Common\Consent\Consent\BulkPayment
+     */
+    public function getBulkPayment()
+    {
+        return $this->readOneof(10);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.consent.Consent.BulkPayment bulk_payment = 10;</code>
+     * @param \Io\Token\Proto\Common\Consent\Consent\BulkPayment $var
+     * @return $this
+     */
+    public function setBulkPayment($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Consent\Consent_BulkPayment::class);
+        $this->writeOneof(10, $var);
 
         return $this;
     }

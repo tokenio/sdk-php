@@ -818,6 +818,34 @@ class GatewayServiceClient extends \Grpc\BaseStub {
     }
 
     /**
+     * get information about a particular standing order
+     * @param \Io\Token\Proto\Gateway\GetStandingOrderRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetStandingOrder(\Io\Token\Proto\Gateway\GetStandingOrderRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetStandingOrder',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetStandingOrderResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * get information about several standing orders
+     * @param \Io\Token\Proto\Gateway\GetStandingOrdersRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetStandingOrders(\Io\Token\Proto\Gateway\GetStandingOrdersRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetStandingOrders',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetStandingOrdersResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * @param \Io\Token\Proto\Gateway\ApplyScaRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -1030,6 +1058,19 @@ class GatewayServiceClient extends \Grpc\BaseStub {
         return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/UpdateTokenRequest',
         $argument,
         ['\Io\Token\Proto\Gateway\UpdateTokenRequestResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Io\Token\Proto\Gateway\SetTokenRequestTransferDestinationsRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function SetTokenRequestTransferDestinations(\Io\Token\Proto\Gateway\SetTokenRequestTransferDestinationsRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/SetTokenRequestTransferDestinations',
+        $argument,
+        ['\Io\Token\Proto\Gateway\SetTokenRequestTransferDestinationsResponse', 'decode'],
         $metadata, $options);
     }
 
@@ -1257,6 +1298,34 @@ class GatewayServiceClient extends \Grpc\BaseStub {
     }
 
     /**
+     * Redeem a standing order token, creating a standing order submission.
+     * @param \Io\Token\Proto\Gateway\CreateStandingOrderRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function CreateStandingOrder(\Io\Token\Proto\Gateway\CreateStandingOrderRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/CreateStandingOrder',
+        $argument,
+        ['\Io\Token\Proto\Gateway\CreateStandingOrderResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * Redeem a bulk transfer token, creating a bulk transfer submission.
+     * @param \Io\Token\Proto\Gateway\CreateBulkTransferRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function CreateBulkTransfer(\Io\Token\Proto\Gateway\CreateBulkTransferRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/CreateBulkTransfer',
+        $argument,
+        ['\Io\Token\Proto\Gateway\CreateBulkTransferResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * Get information about one transfer.
      * https://developer.token.io/sdk/#get-transfers
      * @param \Io\Token\Proto\Gateway\GetTransferRequest $argument input argument
@@ -1272,8 +1341,36 @@ class GatewayServiceClient extends \Grpc\BaseStub {
     }
 
     /**
-     * Get a list of the auth'd member's transfers.
-     * https://developer.token.io/sdk/#get-transfers
+     * Get information about one standing order submission
+     * @param \Io\Token\Proto\Gateway\GetStandingOrderSubmissionRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetStandingOrderSubmission(\Io\Token\Proto\Gateway\GetStandingOrderSubmissionRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetStandingOrderSubmission',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetStandingOrderSubmissionResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * Get information about one bulk transfer
+     * @param \Io\Token\Proto\Gateway\GetBulkTransferRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetBulkTransfer(\Io\Token\Proto\Gateway\GetBulkTransferRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetBulkTransfer',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetBulkTransferResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * Get a list of the auth'd member's submissions.
+     * https://developer.token.io/sdk/#get-submissions
      * @param \Io\Token\Proto\Gateway\GetTransfersRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -1283,6 +1380,20 @@ class GatewayServiceClient extends \Grpc\BaseStub {
         return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetTransfers',
         $argument,
         ['\Io\Token\Proto\Gateway\GetTransfersResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * Get a list of the auth'd member's recurring submissions.
+     * @param \Io\Token\Proto\Gateway\GetStandingOrderSubmissionsRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetStandingOrderSubmissions(\Io\Token\Proto\Gateway\GetStandingOrderSubmissionsRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetStandingOrderSubmissions',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetStandingOrderSubmissionsResponse', 'decode'],
         $metadata, $options);
     }
 

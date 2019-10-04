@@ -82,7 +82,7 @@ class TransactionStatus
      */
     const FAILURE_INVALID_QUOTE = 13;
     /**
-     * the transaction has failed to complete within alotted time
+     * the transaction has failed to complete within allotted time
      *
      * Generated from protobuf enum <code>FAILURE_EXPIRED = 14;</code>
      */

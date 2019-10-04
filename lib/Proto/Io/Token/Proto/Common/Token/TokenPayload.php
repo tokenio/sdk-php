@@ -117,6 +117,8 @@ class TokenPayload extends \Google\Protobuf\Internal\Message
      *           Optional
      *     @type \Io\Token\Proto\Common\Token\TransferBody $transfer
      *     @type \Io\Token\Proto\Common\Token\AccessBody $access
+     *     @type \Io\Token\Proto\Common\Token\StandingOrderBody $standing_order
+     *     @type \Io\Token\Proto\Common\Token\BulkTransferBody $bulk_transfer
      *     @type int|string $endorse_until_ms
      *           Optional, can be endorsed until this time
      *     @type \Io\Token\Proto\Common\Token\ActingAs $acting_as
@@ -384,6 +386,50 @@ class TokenPayload extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\AccessBody::class);
         $this->writeOneof(10, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.token.StandingOrderBody standing_order = 16;</code>
+     * @return \Io\Token\Proto\Common\Token\StandingOrderBody
+     */
+    public function getStandingOrder()
+    {
+        return $this->readOneof(16);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.token.StandingOrderBody standing_order = 16;</code>
+     * @param \Io\Token\Proto\Common\Token\StandingOrderBody $var
+     * @return $this
+     */
+    public function setStandingOrder($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\StandingOrderBody::class);
+        $this->writeOneof(16, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.token.BulkTransferBody bulk_transfer = 17;</code>
+     * @return \Io\Token\Proto\Common\Token\BulkTransferBody
+     */
+    public function getBulkTransfer()
+    {
+        return $this->readOneof(17);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.token.BulkTransferBody bulk_transfer = 17;</code>
+     * @param \Io\Token\Proto\Common\Token\BulkTransferBody $var
+     * @return $this
+     */
+    public function setBulkTransfer($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\BulkTransferBody::class);
+        $this->writeOneof(17, $var);
 
         return $this;
     }

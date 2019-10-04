@@ -48,6 +48,12 @@ class BankInfo extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string custom_alias_label = 6;</code>
      */
     private $custom_alias_label = '';
+    /**
+     * Alias type for users to login with in web app, PHONE, EMAIL, CUSTOM
+     *
+     * Generated from protobuf field <code>repeated .io.token.proto.common.alias.Alias.Type alias_types = 7;</code>
+     */
+    private $alias_types;
 
     /**
      * Constructor.
@@ -65,6 +71,8 @@ class BankInfo extends \Google\Protobuf\Internal\Message
      *           (Optional) Realms of the bank
      *     @type string $custom_alias_label
      *           (Optional) Label to be displayed if bank supports custom aliases
+     *     @type int[]|\Google\Protobuf\Internal\RepeatedField $alias_types
+     *           Alias type for users to login with in web app, PHONE, EMAIL, CUSTOM
      * }
      */
     public function __construct($data = NULL) {
@@ -198,6 +206,32 @@ class BankInfo extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->custom_alias_label = $var;
+
+        return $this;
+    }
+
+    /**
+     * Alias type for users to login with in web app, PHONE, EMAIL, CUSTOM
+     *
+     * Generated from protobuf field <code>repeated .io.token.proto.common.alias.Alias.Type alias_types = 7;</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getAliasTypes()
+    {
+        return $this->alias_types;
+    }
+
+    /**
+     * Alias type for users to login with in web app, PHONE, EMAIL, CUSTOM
+     *
+     * Generated from protobuf field <code>repeated .io.token.proto.common.alias.Alias.Type alias_types = 7;</code>
+     * @param int[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setAliasTypes($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::ENUM, \Io\Token\Proto\Common\Alias\Alias\Type::class);
+        $this->alias_types = $arr;
 
         return $this;
     }

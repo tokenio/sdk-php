@@ -14,7 +14,7 @@ use Google\Protobuf\Internal\GPBUtil;
 class AccessBody extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>repeated .io.token.proto.common.token.TokenRequestPayload.AccessBody.ResourceType type = 1;</code>
+     * Generated from protobuf field <code>repeated .io.token.proto.common.token.TokenRequestPayload.AccessBody.ResourceType type = 1 [deprecated = true];</code>
      */
     private $type;
     /**
@@ -23,6 +23,7 @@ class AccessBody extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>repeated string resource_types = 2 [deprecated = true];</code>
      */
     private $resource_types;
+    protected $resource_list;
 
     /**
      * Constructor.
@@ -33,6 +34,8 @@ class AccessBody extends \Google\Protobuf\Internal\Message
      *     @type int[]|\Google\Protobuf\Internal\RepeatedField $type
      *     @type string[]|\Google\Protobuf\Internal\RepeatedField $resource_types
      *          ToDo: Remove once the issue (https://github.com/protocolbuffers/protobuf/issues/6045) is resolved.
+     *     @type \Io\Token\Proto\Common\Token\TokenRequestPayload\AccessBody\ResourceTypeList $resource_type_list
+     *     @type \Io\Token\Proto\Common\Token\TokenRequestPayload\AccessBody\AccountResourceList $account_resource_list
      * }
      */
     public function __construct($data = NULL) {
@@ -41,7 +44,7 @@ class AccessBody extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>repeated .io.token.proto.common.token.TokenRequestPayload.AccessBody.ResourceType type = 1;</code>
+     * Generated from protobuf field <code>repeated .io.token.proto.common.token.TokenRequestPayload.AccessBody.ResourceType type = 1 [deprecated = true];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getType()
@@ -50,7 +53,7 @@ class AccessBody extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>repeated .io.token.proto.common.token.TokenRequestPayload.AccessBody.ResourceType type = 1;</code>
+     * Generated from protobuf field <code>repeated .io.token.proto.common.token.TokenRequestPayload.AccessBody.ResourceType type = 1 [deprecated = true];</code>
      * @param int[]|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
@@ -86,6 +89,58 @@ class AccessBody extends \Google\Protobuf\Internal\Message
         $this->resource_types = $arr;
 
         return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.token.TokenRequestPayload.AccessBody.ResourceTypeList resource_type_list = 3;</code>
+     * @return \Io\Token\Proto\Common\Token\TokenRequestPayload\AccessBody\ResourceTypeList
+     */
+    public function getResourceTypeList()
+    {
+        return $this->readOneof(3);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.token.TokenRequestPayload.AccessBody.ResourceTypeList resource_type_list = 3;</code>
+     * @param \Io\Token\Proto\Common\Token\TokenRequestPayload\AccessBody\ResourceTypeList $var
+     * @return $this
+     */
+    public function setResourceTypeList($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\TokenRequestPayload_AccessBody_ResourceTypeList::class);
+        $this->writeOneof(3, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.token.TokenRequestPayload.AccessBody.AccountResourceList account_resource_list = 4;</code>
+     * @return \Io\Token\Proto\Common\Token\TokenRequestPayload\AccessBody\AccountResourceList
+     */
+    public function getAccountResourceList()
+    {
+        return $this->readOneof(4);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.token.TokenRequestPayload.AccessBody.AccountResourceList account_resource_list = 4;</code>
+     * @param \Io\Token\Proto\Common\Token\TokenRequestPayload\AccessBody\AccountResourceList $var
+     * @return $this
+     */
+    public function setAccountResourceList($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\TokenRequestPayload_AccessBody_AccountResourceList::class);
+        $this->writeOneof(4, $var);
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getResourceList()
+    {
+        return $this->whichOneof("resource_list");
     }
 
 }

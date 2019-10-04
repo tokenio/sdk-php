@@ -22,9 +22,7 @@ class TokenMember extends \Google\Protobuf\Internal\Message
      */
     private $id = '';
     /**
-     * TODO(PR-1161): Rename this when we no longer require backwards compatibility with usernames
-     *
-     * Generated from protobuf field <code>string username = 2;</code>
+     * Generated from protobuf field <code>string username = 2 [deprecated = true];</code>
      */
     private $username = '';
     /**
@@ -43,7 +41,6 @@ class TokenMember extends \Google\Protobuf\Internal\Message
      *     @type string $id
      *           optional member ID
      *     @type string $username
-     *           TODO(PR-1161): Rename this when we no longer require backwards compatibility with usernames
      *     @type \Io\Token\Proto\Common\Alias\Alias $alias
      *           optional alias, such as an email address
      * }
@@ -80,9 +77,7 @@ class TokenMember extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * TODO(PR-1161): Rename this when we no longer require backwards compatibility with usernames
-     *
-     * Generated from protobuf field <code>string username = 2;</code>
+     * Generated from protobuf field <code>string username = 2 [deprecated = true];</code>
      * @return string
      */
     public function getUsername()
@@ -91,9 +86,7 @@ class TokenMember extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * TODO(PR-1161): Rename this when we no longer require backwards compatibility with usernames
-     *
-     * Generated from protobuf field <code>string username = 2;</code>
+     * Generated from protobuf field <code>string username = 2 [deprecated = true];</code>
      * @param string $var
      * @return $this
      */

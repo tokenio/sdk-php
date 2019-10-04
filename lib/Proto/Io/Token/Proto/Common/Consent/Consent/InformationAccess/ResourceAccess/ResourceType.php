@@ -33,6 +33,10 @@ class ResourceType
      * Generated from protobuf enum <code>FUNDS_CONFIRMATIONS = 5;</code>
      */
     const FUNDS_CONFIRMATIONS = 5;
+    /**
+     * Generated from protobuf enum <code>STANDING_ORDERS = 6;</code>
+     */
+    const STANDING_ORDERS = 6;
 }
 
 // Adding a class alias for backwards compatibility with the previous class name.

@@ -16,30 +16,44 @@ use Google\Protobuf\Internal\GPBUtil;
 class NotificationContent extends \Google\Protobuf\Internal\Message
 {
     /**
+     * Notification type
+     *
      * Generated from protobuf field <code>string type = 1;</code>
      */
     private $type = '';
     /**
+     * Optional notification message title
+     *
      * Generated from protobuf field <code>string title = 2;</code>
      */
     private $title = '';
     /**
+     * Optional notification message body
+     *
      * Generated from protobuf field <code>string body = 3;</code>
      */
     private $body = '';
     /**
+     * Notification payload
+     *
      * Generated from protobuf field <code>string payload = 4;</code>
      */
     private $payload = '';
     /**
+     * Time of creation
+     *
      * Generated from protobuf field <code>int64 created_at_ms = 5;</code>
      */
     private $created_at_ms = 0;
     /**
+     * Notification message localization key
+     *
      * Generated from protobuf field <code>string loc_key = 6;</code>
      */
     private $loc_key = '';
     /**
+     * Notification message localization arguments
+     *
      * Generated from protobuf field <code>repeated string loc_args = 7;</code>
      */
     private $loc_args;
@@ -51,12 +65,19 @@ class NotificationContent extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type string $type
+     *           Notification type
      *     @type string $title
+     *           Optional notification message title
      *     @type string $body
+     *           Optional notification message body
      *     @type string $payload
+     *           Notification payload
      *     @type int|string $created_at_ms
+     *           Time of creation
      *     @type string $loc_key
+     *           Notification message localization key
      *     @type string[]|\Google\Protobuf\Internal\RepeatedField $loc_args
+     *           Notification message localization arguments
      * }
      */
     public function __construct($data = NULL) {
@@ -65,6 +86,8 @@ class NotificationContent extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Notification type
+     *
      * Generated from protobuf field <code>string type = 1;</code>
      * @return string
      */
@@ -74,6 +97,8 @@ class NotificationContent extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Notification type
+     *
      * Generated from protobuf field <code>string type = 1;</code>
      * @param string $var
      * @return $this
@@ -87,6 +112,8 @@ class NotificationContent extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Optional notification message title
+     *
      * Generated from protobuf field <code>string title = 2;</code>
      * @return string
      */
@@ -96,6 +123,8 @@ class NotificationContent extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Optional notification message title
+     *
      * Generated from protobuf field <code>string title = 2;</code>
      * @param string $var
      * @return $this
@@ -109,6 +138,8 @@ class NotificationContent extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Optional notification message body
+     *
      * Generated from protobuf field <code>string body = 3;</code>
      * @return string
      */
@@ -118,6 +149,8 @@ class NotificationContent extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Optional notification message body
+     *
      * Generated from protobuf field <code>string body = 3;</code>
      * @param string $var
      * @return $this
@@ -131,6 +164,8 @@ class NotificationContent extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Notification payload
+     *
      * Generated from protobuf field <code>string payload = 4;</code>
      * @return string
      */
@@ -140,6 +175,8 @@ class NotificationContent extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Notification payload
+     *
      * Generated from protobuf field <code>string payload = 4;</code>
      * @param string $var
      * @return $this
@@ -153,6 +190,8 @@ class NotificationContent extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Time of creation
+     *
      * Generated from protobuf field <code>int64 created_at_ms = 5;</code>
      * @return int|string
      */
@@ -162,6 +201,8 @@ class NotificationContent extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Time of creation
+     *
      * Generated from protobuf field <code>int64 created_at_ms = 5;</code>
      * @param int|string $var
      * @return $this
@@ -175,6 +216,8 @@ class NotificationContent extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Notification message localization key
+     *
      * Generated from protobuf field <code>string loc_key = 6;</code>
      * @return string
      */
@@ -184,6 +227,8 @@ class NotificationContent extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Notification message localization key
+     *
      * Generated from protobuf field <code>string loc_key = 6;</code>
      * @param string $var
      * @return $this
@@ -197,6 +242,8 @@ class NotificationContent extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Notification message localization arguments
+     *
      * Generated from protobuf field <code>repeated string loc_args = 7;</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
@@ -206,6 +253,8 @@ class NotificationContent extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Notification message localization arguments
+     *
      * Generated from protobuf field <code>repeated string loc_args = 7;</code>
      * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this

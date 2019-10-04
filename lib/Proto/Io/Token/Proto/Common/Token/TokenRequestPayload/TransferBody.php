@@ -39,6 +39,20 @@ class TransferBody extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferInstructions instructions = 5;</code>
      */
     private $instructions = null;
+    /**
+     * Optional. ISO 8601: YYYY-MM-DD or YYYYMMDD.
+     *
+     * Generated from protobuf field <code>string execution_date = 6;</code>
+     */
+    private $execution_date = '';
+    /**
+     * Generated from protobuf field <code>bool confirm_funds = 7;</code>
+     */
+    private $confirm_funds = false;
+    /**
+     * Generated from protobuf field <code>string set_transfer_destinations_url = 8;</code>
+     */
+    private $set_transfer_destinations_url = '';
 
     /**
      * Constructor.
@@ -54,6 +68,10 @@ class TransferBody extends \Google\Protobuf\Internal\Message
      *     @type string $lifetime_amount
      *           Optional: Token total lifetime amount. Double.
      *     @type \Io\Token\Proto\Common\Transferinstructions\TransferInstructions $instructions
+     *     @type string $execution_date
+     *           Optional. ISO 8601: YYYY-MM-DD or YYYYMMDD.
+     *     @type bool $confirm_funds
+     *     @type string $set_transfer_destinations_url
      * }
      */
     public function __construct($data = NULL) {
@@ -179,6 +197,76 @@ class TransferBody extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Transferinstructions\TransferInstructions::class);
         $this->instructions = $var;
+
+        return $this;
+    }
+
+    /**
+     * Optional. ISO 8601: YYYY-MM-DD or YYYYMMDD.
+     *
+     * Generated from protobuf field <code>string execution_date = 6;</code>
+     * @return string
+     */
+    public function getExecutionDate()
+    {
+        return $this->execution_date;
+    }
+
+    /**
+     * Optional. ISO 8601: YYYY-MM-DD or YYYYMMDD.
+     *
+     * Generated from protobuf field <code>string execution_date = 6;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setExecutionDate($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->execution_date = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool confirm_funds = 7;</code>
+     * @return bool
+     */
+    public function getConfirmFunds()
+    {
+        return $this->confirm_funds;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool confirm_funds = 7;</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setConfirmFunds($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->confirm_funds = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string set_transfer_destinations_url = 8;</code>
+     * @return string
+     */
+    public function getSetTransferDestinationsUrl()
+    {
+        return $this->set_transfer_destinations_url;
+    }
+
+    /**
+     * Generated from protobuf field <code>string set_transfer_destinations_url = 8;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setSetTransferDestinationsUrl($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->set_transfer_destinations_url = $var;
 
         return $this;
     }
