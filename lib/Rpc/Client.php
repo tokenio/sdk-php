@@ -29,6 +29,8 @@ use Io\Token\Proto\Common\Token\Token;
 use Io\Token\Proto\Common\Token\TokenMember;
 use Io\Token\Proto\Common\Token\TokenOperationResult;
 use Io\Token\Proto\Common\Token\TokenPayload;
+use Io\Token\Proto\Common\Token\TokenRequestOptions;
+use Io\Token\Proto\Common\Token\TokenRequestPayload;
 use Io\Token\Proto\Common\Token\TokenRequestStatePayload;
 use Io\Token\Proto\Common\Transaction\Balance;
 use Io\Token\Proto\Common\Transaction\RequestStatus;
@@ -525,24 +527,18 @@ class Client
     }
 
     /**
-     * Stores a transfer token request.
+     * Stores a token request.
      *
-     * @param TokenPayload $payload transfer token payload
-     * @param MapField $options map of options
-     * @param string $userRefId (optional) user ref id
-     * @param string $customizationId (optional) customization id
+     * @param TokenRequestPayload $payload immutable token request fields
+     * @param TokenRequestOptions $options mutable token request fields
      * @return string id to reference token request
      */
-    public function storeTokenRequest($payload, $options, $userRefId = '', $customizationId = '',
-                                      $tokenRequestPayload = null, $tokenRequestOptions = null)
+    public function storeTokenRequest($payload, $options)
     {
         $request = new StoreTokenRequestRequest();
-        $request->setPayload($payload)
-            ->setOptions($options)
-            ->setUserRefId($userRefId)
-            ->setCustomizationId($customizationId)
-            ->setRequestPayload($tokenRequestPayload)
-            ->setRequestOptions($tokenRequestOptions);
+        $request
+            ->setRequestPayload($payload)
+            ->setRequestOptions($options);
 
         /** @var StoreTokenRequestResponse $response */
         $response = Util::executeAndHandleCall($this->gateway->StoreTokenRequest($request));

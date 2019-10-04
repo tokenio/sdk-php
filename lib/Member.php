@@ -359,16 +359,12 @@ class Member implements RepresentableInterface
     /**
      * Stores a token request. This can be retrieved later by the token request id.
      *
-     * @param \Tokenio\TokenRequest $tokenRequest token request
+     * @param TokenRequest $tokenRequest token request
      * @return string token request id
      */
     public function storeTokenRequest($tokenRequest)
     {
         return $this->client->storeTokenRequest(
-            $tokenRequest->getTokenPayload(),
-            $tokenRequest->getOptions(),
-            $tokenRequest->getUserRefId(),
-            $tokenRequest->getCustomizationId(),
             $tokenRequest->getTokenRequestPayload(),
             $tokenRequest->getTokenRequestOptions());
     }

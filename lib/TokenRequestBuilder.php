@@ -5,6 +5,7 @@ namespace Tokenio;
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Token\ActingAs;
 use Io\Token\Proto\Common\Token\TokenMember;
+use Io\Token\Proto\Common\Token\TokenRequestOptions;
 use Io\Token\Proto\Common\Token\TokenRequestPayload;
 use Tokenio\Util\Util;
 
