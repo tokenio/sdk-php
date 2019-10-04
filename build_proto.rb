@@ -36,8 +36,7 @@ def fetch_protos()
     system("mkdir -p protos/common")
     file = download("io/token/proto", "tokenio-proto", "common", TOKEN_PROTOS_VER)
     puts("unzipping #{file}")
-    system("unzip -d protos/common -o #{file} '*.proto'")
-    system("unzip -d protos/common -o #{file} 'google/api/*.proto'")
+    system("unzip -d protos/common -o #{file} '**.proto'")
     system("rm -f #{file}");
 
     file = download("io/token/rpc", "tokenio-rpc", "proto", RPC_PROTOS_VER)
@@ -46,12 +45,9 @@ def fetch_protos()
 end
 
 #
-# Generates Objective-C code for the protos.
+# Generates PHP code for the protos.
 #
-def generate_protos_cmd(path_to_protos, out_dir)
-    # Base directory where the .proto files are.
-    src = "./protos"
-
+def generate_protos_cmd(src, path_to_protos, out_dir)
     #Provide path to gRPC extension
     protoc_dir = "./tools/" + ((RUBY_PLATFORM.include?"linux") ? "linux_x64" : "macosx_x64");
     protoc = "#{protoc_dir}/protoc"
@@ -82,9 +78,18 @@ system("rm -rf #{dir}/GPBMetadata");
 system("rm -rf #{dir}/Io");
 system("mkdir #{dir}");
 
-gencommand = generate_protos_cmd("common", dir) +
-             generate_protos_cmd("common/google/api", dir) +
-             generate_protos_cmd("extensions", dir) +
-             generate_protos_cmd("external/gateway", dir);
+Dir.chdir("./protos");
+protoDirs = Dir["common/**/"]
+protoDirs = protoDirs.select do |elem| !elem.start_with?("common/google") end # ignore generated files
+Dir.chdir("..");
+
+gencommand = generate_protos_cmd("./protos", "common/google/api", dir) +
+             generate_protos_cmd("./protos", "extensions", dir) +
+             generate_protos_cmd("./protos", "external/gateway", dir);
+
+for protoDir in protoDirs
+    # remove trailing /
+    gencommand = gencommand + generate_protos_cmd("./protos", protoDir[0..protoDir.length-2], dir);
+end
 
 system(gencommand);
