@@ -3,10 +3,8 @@
 
 namespace Io\Token\Samples;
 
-use Io\Token\Proto\Common\Account\BankAccount;
 use Io\Token\Proto\Common\Transfer\Transfer;
 use Io\Token\Proto\Common\Transferinstructions\TransferDestination;
-use Io\Token\Proto\Common\Transferinstructions\TransferEndpoint;
 use Tokenio\Member;
 use Tokenio\Util\Strings;
 

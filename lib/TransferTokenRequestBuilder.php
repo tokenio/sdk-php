@@ -6,7 +6,6 @@ namespace Tokenio;
 
 use Io\Token\Proto\Common\Token\TokenRequestPayload\TransferBody;
 use Io\Token\Proto\Common\Transferinstructions\TransferDestination;
-use Io\Token\Proto\Common\Transferinstructions\TransferEndpoint;
 use Io\Token\Proto\Common\Transferinstructions\TransferInstructions;
 
 class TransferTokenRequestBuilder extends TokenRequestBuilder

@@ -7,6 +7,7 @@ use Grpc\Channel;
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Member\CreateMemberType;
 use Io\Token\Proto\Common\Member\MemberRecoveryOperation;
+use Io\Token\Proto\Common\Member\MemberRecoveryOperation\Authorization;
 use Io\Token\Proto\Common\Security\Key;
 use Io\Token\Proto\Common\Token\TokenRequest;
 use Io\Token\Proto\Common\Token\TokenRequestStatePayload;
@@ -17,7 +18,6 @@ use Tokenio\Rpc\ClientFactory;
 use Tokenio\Security\CryptoEngineFactoryInterface;
 use Tokenio\Security\CryptoEngineInterface;
 use Tokenio\Util\Util;
-use Io\Token\Proto\Common\Member\MemberRecoveryOperation\Authorization;
 
 class TokenClient
 {

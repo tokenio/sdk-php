@@ -4,8 +4,6 @@
 namespace Io\Token\Samples;
 
 
-use Io\Token\Proto\Common\Member\Member;
-
 class GetTokensSample
 {
 

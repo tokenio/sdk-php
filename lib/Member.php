@@ -3,14 +3,11 @@
 namespace Tokenio;
 
 use Google\Protobuf\Internal\RepeatedField;
-use Io\Token\Proto\Common\Address\Address;
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Bank\BankInfo;
-use Io\Token\Proto\Common\Blob\Attachment;
 use Io\Token\Proto\Common\Blob\Blob;
 use Io\Token\Proto\Common\Blob\Blob\AccessMode;
 use Io\Token\Proto\Common\Blob\Blob\Payload;
-use Io\Token\Proto\Common\Member\AddressRecord;
 use Io\Token\Proto\Common\Member\MemberAliasOperation;
 use Io\Token\Proto\Common\Member\MemberOperation;
 use Io\Token\Proto\Common\Member\MemberRecoveryOperation\Authorization;
