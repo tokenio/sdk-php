@@ -11,7 +11,7 @@ class AccessTokenRequestBuilder extends TokenRequestBuilder
 {
     public function __construct($resources)
     {
-        parent::__construct(null);
+        parent::__construct();
         $enumMap = Util::reflectEnum("Io\Token\Proto\Common\Token\TokenRequestPayload\AccessBody\ResourceType");
 
         $accessBody = new TokenRequestPayload\AccessBody();

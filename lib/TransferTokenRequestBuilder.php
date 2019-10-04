@@ -12,7 +12,7 @@ class TransferTokenRequestBuilder extends TokenRequestBuilder
 {
     public function __construct($amount, $currency)
     {
-        parent::__construct(null);
+        parent::__construct();
         $transferBody = new TransferBody();
         $transferBody->setLifetimeAmount($amount);
         $transferBody->setCurrency($currency);

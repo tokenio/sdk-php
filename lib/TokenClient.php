@@ -9,6 +9,7 @@ use Io\Token\Proto\Common\Member\CreateMemberType;
 use Io\Token\Proto\Common\Member\MemberRecoveryOperation;
 use Io\Token\Proto\Common\Member\MemberRecoveryOperation\Authorization;
 use Io\Token\Proto\Common\Security\Key;
+use Io\Token\Proto\Common\Token\TokenMember;
 use Io\Token\Proto\Common\Token\TokenRequest;
 use Io\Token\Proto\Common\Token\TokenRequestStatePayload;
 use Io\Token\Proto\Gateway\GetBanksResponse;
@@ -61,28 +62,16 @@ class TokenClient
     }
 
     /**
-     * Checks if a given alias already exists.
+     * Resolves an alias to a TokenMember object, containing member ID and the alias
+     * with the correct type
      *
-     * @param Alias $alias to check
-     * @return bool {@code true} if alias exists, {@code false} otherwise
+     * @param Alias $alias to resolved
+     * @return TokenMember resolved alias and member ID
      */
     public function resolveAlias($alias)
     {
         $client = ClientFactory::unauthenticated($this->channel);
-        return $client->aliasExists($alias);
-    }
-
-    /**
-     * @deprecated
-     * Use resolveAlias($alias) instead of this.
-     *
-     * @param Alias $alias to check
-     * @return bool {@code true} if alias exists, {@code false} otherwise
-     */
-    public function isAliasExists($alias)
-    {
-        $client = ClientFactory::unauthenticated($this->channel);
-        return $client->aliasExists($alias);
+        return $client->resolveAlias($alias);
     }
 
     /**
