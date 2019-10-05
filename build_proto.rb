@@ -24,7 +24,7 @@ def fetch_protos()
         file
     end
 
-    system("rm protos/common/*.proto")
+    system("rm protos/common/**.proto")
     system("rm -rf protos/external")
 
     system("mkdir -p protos/external")
