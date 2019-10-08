@@ -33,6 +33,20 @@ class GetTransactionsRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>int32 limit = 4;</code>
      */
     private $limit = 0;
+    /**
+     * Optional lower bound for a transaction's booking date as returned by the bank, in the format 'YYYY-MM-DD' (e.g. '2016-01-01').
+     * If specified, then only transactions whose bank booking date is equal to or later than the given date will be regarded.
+     *
+     * Generated from protobuf field <code>string start_date = 5;</code>
+     */
+    private $start_date = '';
+    /**
+     * Optional upper bound for a transaction's booking date as returned by the bank (= original booking date), in the format 'YYYY-MM-DD' (e.g. '2016-01-01').
+     * If specified, then only transactions whose bank booking date is equal to or earlier than the given date will be regarded.
+     *
+     * Generated from protobuf field <code>string end_date = 6;</code>
+     */
+    private $end_date = '';
 
     /**
      * Constructor.
@@ -46,6 +60,12 @@ class GetTransactionsRequest extends \Google\Protobuf\Internal\Message
      *     @type string $offset
      *           for backwards compatibility with older JS clients TODO(RD-2738) remove
      *     @type int $limit
+     *     @type string $start_date
+     *           Optional lower bound for a transaction's booking date as returned by the bank, in the format 'YYYY-MM-DD' (e.g. '2016-01-01').
+     *           If specified, then only transactions whose bank booking date is equal to or later than the given date will be regarded.
+     *     @type string $end_date
+     *           Optional upper bound for a transaction's booking date as returned by the bank (= original booking date), in the format 'YYYY-MM-DD' (e.g. '2016-01-01').
+     *           If specified, then only transactions whose bank booking date is equal to or earlier than the given date will be regarded.
      * }
      */
     public function __construct($data = NULL) {
@@ -145,6 +165,62 @@ class GetTransactionsRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt32($var);
         $this->limit = $var;
+
+        return $this;
+    }
+
+    /**
+     * Optional lower bound for a transaction's booking date as returned by the bank, in the format 'YYYY-MM-DD' (e.g. '2016-01-01').
+     * If specified, then only transactions whose bank booking date is equal to or later than the given date will be regarded.
+     *
+     * Generated from protobuf field <code>string start_date = 5;</code>
+     * @return string
+     */
+    public function getStartDate()
+    {
+        return $this->start_date;
+    }
+
+    /**
+     * Optional lower bound for a transaction's booking date as returned by the bank, in the format 'YYYY-MM-DD' (e.g. '2016-01-01').
+     * If specified, then only transactions whose bank booking date is equal to or later than the given date will be regarded.
+     *
+     * Generated from protobuf field <code>string start_date = 5;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setStartDate($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->start_date = $var;
+
+        return $this;
+    }
+
+    /**
+     * Optional upper bound for a transaction's booking date as returned by the bank (= original booking date), in the format 'YYYY-MM-DD' (e.g. '2016-01-01').
+     * If specified, then only transactions whose bank booking date is equal to or earlier than the given date will be regarded.
+     *
+     * Generated from protobuf field <code>string end_date = 6;</code>
+     * @return string
+     */
+    public function getEndDate()
+    {
+        return $this->end_date;
+    }
+
+    /**
+     * Optional upper bound for a transaction's booking date as returned by the bank (= original booking date), in the format 'YYYY-MM-DD' (e.g. '2016-01-01').
+     * If specified, then only transactions whose bank booking date is equal to or earlier than the given date will be regarded.
+     *
+     * Generated from protobuf field <code>string end_date = 6;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setEndDate($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->end_date = $var;
 
         return $this;
     }

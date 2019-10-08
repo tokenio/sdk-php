@@ -14,12 +14,6 @@ use Google\Protobuf\Internal\GPBUtil;
 class Metadata extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Purpose of payment
-     *
-     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.PurposeOfPayment transfer_purpose = 1;</code>
-     */
-    private $transfer_purpose = 0;
-    /**
      * Optional payment context
      *
      * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.PaymentContext payment_context = 2;</code>
@@ -47,6 +41,30 @@ class Metadata extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.io.token.proto.common.providerspecific.ProviderTransferMetadata provider_transfer_metadata = 6;</code>
      */
     private $provider_transfer_metadata = null;
+    /**
+     * Optional Foreign Exchange charges bearer.
+     *
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.ChargeBearer chargeBearer = 7;</code>
+     */
+    private $chargeBearer = 0;
+    /**
+     * Ultimate party to which an amount of money is due.
+     *
+     * Generated from protobuf field <code>string ultimate_creditor = 8;</code>
+     */
+    private $ultimate_creditor = '';
+    /**
+     * Ultimate party that owes an amount of money to the (ultimate) creditor.
+     *
+     * Generated from protobuf field <code>string ultimate_debtor = 9;</code>
+     */
+    private $ultimate_debtor = '';
+    /**
+     * Optional purpose code, ISO 20022
+     *
+     * Generated from protobuf field <code>string purpose_code = 10;</code>
+     */
+    private $purpose_code = '';
 
     /**
      * Constructor.
@@ -54,8 +72,6 @@ class Metadata extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type int $transfer_purpose
-     *           Purpose of payment
      *     @type int $payment_context
      *           Optional payment context
      *     @type string $merchant_category_code
@@ -65,37 +81,19 @@ class Metadata extends \Google\Protobuf\Internal\Message
      *     @type \Io\Token\Proto\Common\Address\Address $delivery_address
      *           Optional delivery address
      *     @type \Io\Token\Proto\Common\Providerspecific\ProviderTransferMetadata $provider_transfer_metadata
+     *     @type int $chargeBearer
+     *           Optional Foreign Exchange charges bearer.
+     *     @type string $ultimate_creditor
+     *           Ultimate party to which an amount of money is due.
+     *     @type string $ultimate_debtor
+     *           Ultimate party that owes an amount of money to the (ultimate) creditor.
+     *     @type string $purpose_code
+     *           Optional purpose code, ISO 20022
      * }
      */
     public function __construct($data = NULL) {
         \GPBMetadata\Transferinstructions::initOnce();
         parent::__construct($data);
-    }
-
-    /**
-     * Purpose of payment
-     *
-     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.PurposeOfPayment transfer_purpose = 1;</code>
-     * @return int
-     */
-    public function getTransferPurpose()
-    {
-        return $this->transfer_purpose;
-    }
-
-    /**
-     * Purpose of payment
-     *
-     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.PurposeOfPayment transfer_purpose = 1;</code>
-     * @param int $var
-     * @return $this
-     */
-    public function setTransferPurpose($var)
-    {
-        GPBUtil::checkEnum($var, \Io\Token\Proto\Common\Transferinstructions\PurposeOfPayment::class);
-        $this->transfer_purpose = $var;
-
-        return $this;
     }
 
     /**
@@ -220,6 +218,110 @@ class Metadata extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Providerspecific\ProviderTransferMetadata::class);
         $this->provider_transfer_metadata = $var;
+
+        return $this;
+    }
+
+    /**
+     * Optional Foreign Exchange charges bearer.
+     *
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.ChargeBearer chargeBearer = 7;</code>
+     * @return int
+     */
+    public function getChargeBearer()
+    {
+        return $this->chargeBearer;
+    }
+
+    /**
+     * Optional Foreign Exchange charges bearer.
+     *
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.ChargeBearer chargeBearer = 7;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setChargeBearer($var)
+    {
+        GPBUtil::checkEnum($var, \Io\Token\Proto\Common\Transferinstructions\ChargeBearer::class);
+        $this->chargeBearer = $var;
+
+        return $this;
+    }
+
+    /**
+     * Ultimate party to which an amount of money is due.
+     *
+     * Generated from protobuf field <code>string ultimate_creditor = 8;</code>
+     * @return string
+     */
+    public function getUltimateCreditor()
+    {
+        return $this->ultimate_creditor;
+    }
+
+    /**
+     * Ultimate party to which an amount of money is due.
+     *
+     * Generated from protobuf field <code>string ultimate_creditor = 8;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setUltimateCreditor($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->ultimate_creditor = $var;
+
+        return $this;
+    }
+
+    /**
+     * Ultimate party that owes an amount of money to the (ultimate) creditor.
+     *
+     * Generated from protobuf field <code>string ultimate_debtor = 9;</code>
+     * @return string
+     */
+    public function getUltimateDebtor()
+    {
+        return $this->ultimate_debtor;
+    }
+
+    /**
+     * Ultimate party that owes an amount of money to the (ultimate) creditor.
+     *
+     * Generated from protobuf field <code>string ultimate_debtor = 9;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setUltimateDebtor($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->ultimate_debtor = $var;
+
+        return $this;
+    }
+
+    /**
+     * Optional purpose code, ISO 20022
+     *
+     * Generated from protobuf field <code>string purpose_code = 10;</code>
+     * @return string
+     */
+    public function getPurposeCode()
+    {
+        return $this->purpose_code;
+    }
+
+    /**
+     * Optional purpose code, ISO 20022
+     *
+     * Generated from protobuf field <code>string purpose_code = 10;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setPurposeCode($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->purpose_code = $var;
 
         return $this;
     }

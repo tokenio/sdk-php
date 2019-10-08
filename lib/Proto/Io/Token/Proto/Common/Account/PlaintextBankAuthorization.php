@@ -37,7 +37,7 @@ class PlaintextBankAuthorization extends \Google\Protobuf\Internal\Message
      */
     private $account = null;
     /**
-     * Expiration time
+     * Expiration timestamp in ms
      *
      * Generated from protobuf field <code>int64 expiration_ms = 4;</code>
      */
@@ -56,7 +56,7 @@ class PlaintextBankAuthorization extends \Google\Protobuf\Internal\Message
      *     @type \Io\Token\Proto\Common\Account\BankAccount $account
      *           Account info by some method, e.g., SEPA
      *     @type int|string $expiration_ms
-     *           Expiration time
+     *           Expiration timestamp in ms
      * }
      */
     public function __construct($data = NULL) {
@@ -143,7 +143,7 @@ class PlaintextBankAuthorization extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Expiration time
+     * Expiration timestamp in ms
      *
      * Generated from protobuf field <code>int64 expiration_ms = 4;</code>
      * @return int|string
@@ -154,7 +154,7 @@ class PlaintextBankAuthorization extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Expiration time
+     * Expiration timestamp in ms
      *
      * Generated from protobuf field <code>int64 expiration_ms = 4;</code>
      * @param int|string $var

@@ -6,14 +6,13 @@ namespace Tokenio;
 
 use Io\Token\Proto\Common\Token\TokenRequestPayload\TransferBody;
 use Io\Token\Proto\Common\Transferinstructions\TransferDestination;
-use Io\Token\Proto\Common\Transferinstructions\TransferEndpoint;
 use Io\Token\Proto\Common\Transferinstructions\TransferInstructions;
 
 class TransferTokenRequestBuilder extends TokenRequestBuilder
 {
     public function __construct($amount, $currency)
     {
-        parent::__construct(null);
+        parent::__construct();
         $transferBody = new TransferBody();
         $transferBody->setLifetimeAmount($amount);
         $transferBody->setCurrency($currency);
@@ -63,6 +62,19 @@ class TransferTokenRequestBuilder extends TokenRequestBuilder
     public function setChargeAmount($chargeAmount)
     {
         $this->requestPayload->getTransferBody()->setAmount($chargeAmount);
+        return $this;
+    }
+
+    /**
+     * Sets the execution date of the transfer. Used for future-dated payments.
+     * Uses ISO 8601 format: YYYY-MM-DD.
+     *
+     * @param string $executionDate execution date
+     * @return TransferTokenRequestBuilder
+     */
+    public function setExecutionDate($executionDate)
+    {
+        $this->requestPayload->getTransferBody()->setExecutionDate($executionDate);
         return $this;
     }
 }

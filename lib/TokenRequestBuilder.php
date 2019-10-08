@@ -5,44 +5,19 @@ namespace Tokenio;
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Token\ActingAs;
 use Io\Token\Proto\Common\Token\TokenMember;
-use Io\Token\Proto\Common\Token\TokenPayload;
+use Io\Token\Proto\Common\Token\TokenRequestOptions;
 use Io\Token\Proto\Common\Token\TokenRequestPayload;
-use \Io\Token\Proto\Common\Token\TokenRequestOptions;
 use Tokenio\Util\Util;
 
 class TokenRequestBuilder
 {
-    /**
-     * @deprecated
-     * @var TokenPayload
-     */
-    private $tokenPayload;
-
-    /**
-     * @deprecated
-     * @var string[]
-     */
-    private $options;
-
-    /**
-     * @deprecated
-     * @var string
-     */
-    private $userRefId;
-
-    /**
-     * @deprecated
-     * @var string
-     */
-    private $customizationId;
-
     /**
      * @var TokenRequestPayload
      */
     protected $requestPayload;
 
     /**
-     * @var \Io\Token\Proto\Common\Token\TokenRequestOptions
+     * @var TokenRequestOptions
      */
     protected $requestOptions;
 
@@ -58,12 +33,9 @@ class TokenRequestBuilder
 
     /**
      * TokenRequestBuilder constructor.
-     * @param TokenPayload $tokenPayload
      */
-    public function __construct($tokenPayload)
+    public function __construct()
     {
-        $this->tokenPayload = $tokenPayload;
-        $this->options = array();
         $this->requestPayload = new TokenRequestPayload();
         $this->requestOptions = new TokenRequestOptions();
         $this->requestPayload->setTo(new TokenMember());
@@ -125,7 +97,7 @@ class TokenRequestBuilder
      * @param bool receipt requested flag
      * @return $this
      */
-    public function setReceiptRequest($receiptRequested)
+    public function setReceiptRequested($receiptRequested)
     {
         $this->requestOptions->setReceiptRequested($receiptRequested);
         return $this;
@@ -139,7 +111,6 @@ class TokenRequestBuilder
      */
     public function setUserRefId($userRefId)
     {
-        $this->userRefId = $userRefId;
         $this->requestPayload->setUserRefId($userRefId);
         return $this;
     }
@@ -152,7 +123,6 @@ class TokenRequestBuilder
      */
     public function setCustomizationId($customizationId)
     {
-        $this->customizationId = $customizationId;
         $this->requestPayload->setCustomizationId($customizationId);
         return $this;
     }
@@ -255,29 +225,6 @@ class TokenRequestBuilder
     }
 
     /**
-     * @deprecated
-     * @param string $option
-     * @param string $value
-     * @return $this
-     */
-    public function addOption($option, $value)
-    {
-        $this->options[$option] = $value;
-        return $this;
-    }
-
-    /**
-     * @deprecated
-     * @param array $options
-     * @return $this
-     */
-    public function addAllOptions(array $options)
-    {
-        $this->options = array_merge($this->options, $options);
-        return $this;
-    }
-
-    /**
      * Builds the token payload.
      *
      * @return TokenRequest instance
@@ -289,16 +236,7 @@ class TokenRequestBuilder
             $this->oauthState == null ? "" : $this->oauthState);
 
         $this->requestPayload->setCallbackState($serializeState->serialize());
-        $this->userRefId = "";
 
-        if($this->tokenPayload == null){
-            return TokenRequest::fromProtos($this->requestPayload, $this->requestOptions);
-        }
-
-        return new TokenRequest(
-            $this->tokenPayload,
-            $this->options,
-            $this->userRefId,
-            $this->customizationId);
+        return new TokenRequest($this->requestPayload, $this->requestOptions);
     }
 }

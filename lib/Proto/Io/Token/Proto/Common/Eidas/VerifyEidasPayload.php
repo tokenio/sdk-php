@@ -20,11 +20,11 @@ class VerifyEidasPayload extends \Google\Protobuf\Internal\Message
      */
     private $member_id = '';
     /**
-     * reference ID of the TPP as registered in the open banking directory
+     * eIDAS alias to be verified
      *
-     * Generated from protobuf field <code>string fi_reference_id = 2;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.alias.Alias alias = 2;</code>
      */
-    private $fi_reference_id = '';
+    private $alias = null;
     /**
      * serialized eIDAS certificate
      *
@@ -46,8 +46,8 @@ class VerifyEidasPayload extends \Google\Protobuf\Internal\Message
      *
      *     @type string $member_id
      *           member ID of the TPP
-     *     @type string $fi_reference_id
-     *           reference ID of the TPP as registered in the open banking directory
+     *     @type \Io\Token\Proto\Common\Alias\Alias $alias
+     *           eIDAS alias to be verified
      *     @type string $certificate
      *           serialized eIDAS certificate
      *     @type int $algorithm
@@ -86,27 +86,27 @@ class VerifyEidasPayload extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * reference ID of the TPP as registered in the open banking directory
+     * eIDAS alias to be verified
      *
-     * Generated from protobuf field <code>string fi_reference_id = 2;</code>
-     * @return string
+     * Generated from protobuf field <code>.io.token.proto.common.alias.Alias alias = 2;</code>
+     * @return \Io\Token\Proto\Common\Alias\Alias
      */
-    public function getFiReferenceId()
+    public function getAlias()
     {
-        return $this->fi_reference_id;
+        return $this->alias;
     }
 
     /**
-     * reference ID of the TPP as registered in the open banking directory
+     * eIDAS alias to be verified
      *
-     * Generated from protobuf field <code>string fi_reference_id = 2;</code>
-     * @param string $var
+     * Generated from protobuf field <code>.io.token.proto.common.alias.Alias alias = 2;</code>
+     * @param \Io\Token\Proto\Common\Alias\Alias $var
      * @return $this
      */
-    public function setFiReferenceId($var)
+    public function setAlias($var)
     {
-        GPBUtil::checkString($var, True);
-        $this->fi_reference_id = $var;
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Alias\Alias::class);
+        $this->alias = $var;
 
         return $this;
     }

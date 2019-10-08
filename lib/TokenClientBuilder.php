@@ -8,9 +8,7 @@ use Tokenio\RuntimeException;
 use Tokenio\Security\CryptoEngineFactoryInterface;
 use Tokenio\Security\KeyStoreInterface;
 use Tokenio\Security\TokenCryptoEngineFactory;
-use Tokenio\TokenClient;
 use Tokenio\TokenIO;
-use Tokenio\Util\Strings;
 
 class TokenClientBuilder
 {

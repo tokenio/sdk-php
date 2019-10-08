@@ -21,8 +21,10 @@ class ProviderAccountDetails extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Io\Token\Proto\Common\Providerspecific\Cma9AccountDetails $cma9_account_details
+     *     @type \Io\Token\Proto\Common\Providerspecific\Cma9\Cma9AccountDetails $cma9_account_details
      *     @type \Io\Token\Proto\Common\Providerspecific\Polishapi\PolishApiAccountDetails $polish_api_account_details
+     *     @type \Io\Token\Proto\Common\Providerspecific\Nextgenpsd2\NextGenPsd2AccountDetails $next_gen_psd2_account_details
+     *     @type \Io\Token\Proto\Common\Providerspecific\Stet\StetAccountDetails $stet_account_details
      * }
      */
     public function __construct($data = NULL) {
@@ -31,8 +33,8 @@ class ProviderAccountDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.Cma9AccountDetails cma9_account_details = 1;</code>
-     * @return \Io\Token\Proto\Common\Providerspecific\Cma9AccountDetails
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.cma9.Cma9AccountDetails cma9_account_details = 1;</code>
+     * @return \Io\Token\Proto\Common\Providerspecific\Cma9\Cma9AccountDetails
      */
     public function getCma9AccountDetails()
     {
@@ -40,13 +42,13 @@ class ProviderAccountDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.Cma9AccountDetails cma9_account_details = 1;</code>
-     * @param \Io\Token\Proto\Common\Providerspecific\Cma9AccountDetails $var
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.cma9.Cma9AccountDetails cma9_account_details = 1;</code>
+     * @param \Io\Token\Proto\Common\Providerspecific\Cma9\Cma9AccountDetails $var
      * @return $this
      */
     public function setCma9AccountDetails($var)
     {
-        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Providerspecific\Cma9AccountDetails::class);
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Providerspecific\Cma9\Cma9AccountDetails::class);
         $this->writeOneof(1, $var);
 
         return $this;
@@ -70,6 +72,50 @@ class ProviderAccountDetails extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Providerspecific\Polishapi\PolishApiAccountDetails::class);
         $this->writeOneof(2, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.nextgenpsd2.NextGenPsd2AccountDetails next_gen_psd2_account_details = 3;</code>
+     * @return \Io\Token\Proto\Common\Providerspecific\Nextgenpsd2\NextGenPsd2AccountDetails
+     */
+    public function getNextGenPsd2AccountDetails()
+    {
+        return $this->readOneof(3);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.nextgenpsd2.NextGenPsd2AccountDetails next_gen_psd2_account_details = 3;</code>
+     * @param \Io\Token\Proto\Common\Providerspecific\Nextgenpsd2\NextGenPsd2AccountDetails $var
+     * @return $this
+     */
+    public function setNextGenPsd2AccountDetails($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Providerspecific\Nextgenpsd2\NextGenPsd2AccountDetails::class);
+        $this->writeOneof(3, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.stet.StetAccountDetails stet_account_details = 4;</code>
+     * @return \Io\Token\Proto\Common\Providerspecific\Stet\StetAccountDetails
+     */
+    public function getStetAccountDetails()
+    {
+        return $this->readOneof(4);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.stet.StetAccountDetails stet_account_details = 4;</code>
+     * @param \Io\Token\Proto\Common\Providerspecific\Stet\StetAccountDetails $var
+     * @return $this
+     */
+    public function setStetAccountDetails($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Providerspecific\Stet\StetAccountDetails::class);
+        $this->writeOneof(4, $var);
 
         return $this;
     }

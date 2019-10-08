@@ -22,6 +22,8 @@ class ProviderTransferMetadata extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type \Io\Token\Proto\Common\Providerspecific\Polishapi\PolishApiTransferMetadata $polish_api_transfer_metadata
+     *     @type \Io\Token\Proto\Common\Providerspecific\Nextgenpsd2\NextGenPsd2TransferMetadata $next_gen_psd2_transfer_metadata
+     *     @type \Io\Token\Proto\Common\Providerspecific\Stet\StetTransferMetadata $stet_transfer_metadata
      * }
      */
     public function __construct($data = NULL) {
@@ -47,6 +49,50 @@ class ProviderTransferMetadata extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Providerspecific\Polishapi\PolishApiTransferMetadata::class);
         $this->writeOneof(1, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.nextgenpsd2.NextGenPsd2TransferMetadata next_gen_psd2_transfer_metadata = 2;</code>
+     * @return \Io\Token\Proto\Common\Providerspecific\Nextgenpsd2\NextGenPsd2TransferMetadata
+     */
+    public function getNextGenPsd2TransferMetadata()
+    {
+        return $this->readOneof(2);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.nextgenpsd2.NextGenPsd2TransferMetadata next_gen_psd2_transfer_metadata = 2;</code>
+     * @param \Io\Token\Proto\Common\Providerspecific\Nextgenpsd2\NextGenPsd2TransferMetadata $var
+     * @return $this
+     */
+    public function setNextGenPsd2TransferMetadata($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Providerspecific\Nextgenpsd2\NextGenPsd2TransferMetadata::class);
+        $this->writeOneof(2, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.stet.StetTransferMetadata stet_transfer_metadata = 3;</code>
+     * @return \Io\Token\Proto\Common\Providerspecific\Stet\StetTransferMetadata
+     */
+    public function getStetTransferMetadata()
+    {
+        return $this->readOneof(3);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.stet.StetTransferMetadata stet_transfer_metadata = 3;</code>
+     * @param \Io\Token\Proto\Common\Providerspecific\Stet\StetTransferMetadata $var
+     * @return $this
+     */
+    public function setStetTransferMetadata($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Providerspecific\Stet\StetTransferMetadata::class);
+        $this->writeOneof(3, $var);
 
         return $this;
     }

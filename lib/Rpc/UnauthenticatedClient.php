@@ -14,6 +14,7 @@ use Io\Token\Proto\Common\Member\MemberUpdate;
 use Io\Token\Proto\Common\Security\Key;
 use Io\Token\Proto\Common\Security\Key\Level;
 use Io\Token\Proto\Common\Security\Signature;
+use Io\Token\Proto\Common\Token\TokenMember;
 use Io\Token\Proto\Common\Token\TokenRequest;
 use Io\Token\Proto\Gateway\BeginRecoveryRequest;
 use Io\Token\Proto\Gateway\BeginRecoveryResponse;
@@ -37,9 +38,9 @@ use Io\Token\Proto\Gateway\RetrieveTokenRequestResponse;
 use Io\Token\Proto\Gateway\UpdateMemberRequest;
 use Io\Token\Proto\Gateway\UpdateMemberResponse;
 use Tokenio\Exception\VerificationException;
-use Tokenio\TokenRequestResult;
 use Tokenio\Security\CryptoEngineInterface;
 use Tokenio\Security\SignerInterface;
+use Tokenio\TokenRequestResult;
 use Tokenio\Util\Strings;
 use Tokenio\Util\Util;
 
@@ -61,17 +62,13 @@ class UnauthenticatedClient
     }
 
     /**
-     * Checks if a given alias already exists.
+     * Resolves an alias to a TokenMember object, containing member ID and the alias
+     * with the correct type
      *
-     * @param Alias $alias the alias to check
-     * @return bool {@code true} if alias already exists, {@code false} otherwise
+     * @param Alias $alias to resolved
+     * @return TokenMember resolved alias and member ID
      */
-    public function aliasExists($alias)
-    {
-        return $this->resolveAlias($alias) != null;
-    }
-
-    private function resolveAlias($alias)
+    public function resolveAlias($alias)
     {
         $request = new ResolveAliasRequest();
         $request->setAlias($alias);

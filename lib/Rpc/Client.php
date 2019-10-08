@@ -4,9 +4,6 @@ namespace Tokenio\Rpc;
 
 use Google\Protobuf\Internal\MapField;
 use Google\Protobuf\Internal\RepeatedField;
-use http\Exception\RuntimeException;
-use Io\Token\Proto\Banklink\AccountLinkingStatus;
-use Io\Token\Proto\Banklink\OauthBankAuthorization;
 use Io\Token\Proto\Common\Account\Account;
 use Io\Token\Proto\Common\Address\Address;
 use Io\Token\Proto\Common\Alias\Alias;
@@ -23,18 +20,21 @@ use Io\Token\Proto\Common\Member\MemberUpdate;
 use Io\Token\Proto\Common\Member\Profile;
 use Io\Token\Proto\Common\Member\RecoveryRule;
 use Io\Token\Proto\Common\Member\TrustedBeneficiary;
-use Io\Token\Proto\Common\Money\Money;
 use Io\Token\Proto\Common\Notification\BalanceStepUp;
 use Io\Token\Proto\Common\Security\Key\Level;
 use Io\Token\Proto\Common\Security\SecurityMetadata;
 use Io\Token\Proto\Common\Security\Signature;
+use Io\Token\Proto\Common\Submission\StandingOrderSubmission;
 use Io\Token\Proto\Common\Token\Token;
 use Io\Token\Proto\Common\Token\TokenMember;
 use Io\Token\Proto\Common\Token\TokenOperationResult;
 use Io\Token\Proto\Common\Token\TokenPayload;
+use Io\Token\Proto\Common\Token\TokenRequestOptions;
+use Io\Token\Proto\Common\Token\TokenRequestPayload;
 use Io\Token\Proto\Common\Token\TokenRequestStatePayload;
 use Io\Token\Proto\Common\Transaction\Balance;
 use Io\Token\Proto\Common\Transaction\RequestStatus;
+use Io\Token\Proto\Common\Transaction\StandingOrder;
 use Io\Token\Proto\Common\Transaction\Transaction;
 use Io\Token\Proto\Common\Transfer\Transfer;
 use Io\Token\Proto\Common\Transfer\TransferPayload;
@@ -50,6 +50,8 @@ use Io\Token\Proto\Gateway\CreateBlobRequest;
 use Io\Token\Proto\Gateway\CreateBlobResponse;
 use Io\Token\Proto\Gateway\CreateCustomizationRequest;
 use Io\Token\Proto\Gateway\CreateCustomizationResponse;
+use Io\Token\Proto\Gateway\CreateStandingOrderRequest;
+use Io\Token\Proto\Gateway\CreateStandingOrderResponse;
 use Io\Token\Proto\Gateway\CreateTestBankAccountRequest;
 use Io\Token\Proto\Gateway\CreateTestBankAccountResponse;
 use Io\Token\Proto\Gateway\CreateTransferRequest;
@@ -79,8 +81,6 @@ use Io\Token\Proto\Gateway\GetBankInfoRequest;
 use Io\Token\Proto\Gateway\GetBankInfoResponse;
 use Io\Token\Proto\Gateway\GetBlobRequest;
 use Io\Token\Proto\Gateway\GetBlobResponse;
-use Io\Token\Proto\Gateway\GetDefaultAccountRequest;
-use Io\Token\Proto\Gateway\GetDefaultAccountResponse;
 use Io\Token\Proto\Gateway\GetDefaultAgentRequest;
 use Io\Token\Proto\Gateway\GetDefaultAgentResponse;
 use Io\Token\Proto\Gateway\GetMemberRequest;
@@ -89,6 +89,14 @@ use Io\Token\Proto\Gateway\GetProfilePictureRequest;
 use Io\Token\Proto\Gateway\GetProfilePictureResponse;
 use Io\Token\Proto\Gateway\GetProfileRequest;
 use Io\Token\Proto\Gateway\GetProfileResponse;
+use Io\Token\Proto\Gateway\GetStandingOrderRequest;
+use Io\Token\Proto\Gateway\GetStandingOrderResponse;
+use Io\Token\Proto\Gateway\GetStandingOrdersRequest;
+use Io\Token\Proto\Gateway\GetStandingOrdersResponse;
+use Io\Token\Proto\Gateway\GetStandingOrderSubmissionRequest;
+use Io\Token\Proto\Gateway\GetStandingOrderSubmissionResponse;
+use Io\Token\Proto\Gateway\GetStandingOrderSubmissionsRequest;
+use Io\Token\Proto\Gateway\GetStandingOrderSubmissionsResponse;
 use Io\Token\Proto\Gateway\GetTokenBlobRequest;
 use Io\Token\Proto\Gateway\GetTokenBlobResponse;
 use Io\Token\Proto\Gateway\GetTokenRequest;
@@ -105,8 +113,6 @@ use Io\Token\Proto\Gateway\GetTransfersRequest;
 use Io\Token\Proto\Gateway\GetTransfersResponse;
 use Io\Token\Proto\Gateway\GetTrustedBeneficiariesRequest;
 use Io\Token\Proto\Gateway\GetTrustedBeneficiariesResponse;
-use Io\Token\Proto\Gateway\LinkAccountsOauthRequest;
-use Io\Token\Proto\Gateway\LinkAccountsOauthResponse;
 use Io\Token\Proto\Gateway\Page;
 use Io\Token\Proto\Gateway\RemoveTrustedBeneficiaryRequest;
 use Io\Token\Proto\Gateway\RemoveTrustedBeneficiaryResponse;
@@ -114,7 +120,6 @@ use Io\Token\Proto\Gateway\ResolveTransferDestinationsRequest;
 use Io\Token\Proto\Gateway\ResolveTransferDestinationsResponse;
 use Io\Token\Proto\Gateway\RetryVerificationRequest;
 use Io\Token\Proto\Gateway\RetryVerificationResponse;
-use Io\Token\Proto\Gateway\SetDefaultAccountRequest;
 use Io\Token\Proto\Gateway\SetProfilePictureRequest;
 use Io\Token\Proto\Gateway\SetProfilePictureResponse;
 use Io\Token\Proto\Gateway\SetProfileRequest;
@@ -130,8 +135,8 @@ use Io\Token\Proto\Gateway\UpdateMemberResponse;
 use Io\Token\Proto\Gateway\VerifyAliasRequest;
 use Io\Token\Proto\Gateway\VerifyAliasResponse;
 use Tokenio\Exception;
-use Tokenio\Security\CryptoEngineInterface;
 use Tokenio\PagedList;
+use Tokenio\Security\CryptoEngineInterface;
 use Tokenio\Util\Strings;
 use Tokenio\Util\Util;
 
@@ -388,6 +393,61 @@ class Client
     }
 
     /**
+     * Look up an existing standing order and return the response.
+     *
+     * @param string $accountId the account id
+     * @param string $standingOrderId the standing order id
+     * @param int $keyLevel the key level
+     * @return StandingOrder
+     * @throws Exception\RequestException
+     */
+    public function getStandingOrder($accountId, $standingOrderId, $keyLevel)
+    {
+        $this->setOnBehalfOf();
+        $this->setRequestSignerKeyLevel($keyLevel);
+
+        $request = new GetStandingOrderRequest();
+        $request->setAccountId($accountId)
+            ->setStandingOrderId($standingOrderId);
+
+        /** @var GetStandingOrderResponse $response */
+        $response = Util::executeAndHandleCall($this->gateway->GetStandingOrder($request));
+        if ($response->getStatus() == RequestStatus::SUCCESSFUL_REQUEST) {
+            return $response->getStandingOrder();
+        } else {
+            throw new Exception\RequestException($response->getStatus());
+        }
+    }
+
+    /**
+     * Look up standing orders and return response.
+     *
+     * @param string $accountId the account id
+     * @param string $offset the offset
+     * @param int $limit the limit
+     * @param int $keyLevel the key level
+     * @return PagedList list of standing orders
+     * @throws Exception\RequestException
+     */
+    public function getStandingOrders($accountId, $offset, $limit, $keyLevel)
+    {
+        $this->setOnBehalfOf();
+        $this->setRequestSignerKeyLevel($keyLevel);
+
+        $request = new GetStandingOrdersRequest();
+        $request->setAccountId($accountId);
+        $request->setPage($this->pageBuilder($limit, $offset));
+
+        /** @var GetStandingOrdersResponse $response */
+        $response = Util::executeAndHandleCall($this->gateway->GetStandingOrders($request));
+        if ($response->getStatus() == RequestStatus::SUCCESSFUL_REQUEST) {
+            return new PagedList($response->getStandingOrders(), $response->getOffset());
+        } else {
+            throw new Exception\RequestException($response->getStatus());
+        }
+    }
+
+    /**
      * Looks up a existing token.
      *
      * @param $tokenId string token id
@@ -467,24 +527,18 @@ class Client
     }
 
     /**
-     * Stores a transfer token request.
+     * Stores a token request.
      *
-     * @param TokenPayload $payload transfer token payload
-     * @param MapField $options map of options
-     * @param string $userRefId (optional) user ref id
-     * @param string $customizationId (optional) customization id
+     * @param TokenRequestPayload $payload immutable token request fields
+     * @param TokenRequestOptions $options mutable token request fields
      * @return string id to reference token request
      */
-    public function storeTokenRequest($payload, $options, $userRefId = '', $customizationId = '',
-                                      $tokenRequestPayload = null, $tokenRequestOptions = null)
+    public function storeTokenRequest($payload, $options)
     {
         $request = new StoreTokenRequestRequest();
-        $request->setPayload($payload)
-            ->setOptions($options)
-            ->setUserRefId($userRefId)
-            ->setCustomizationId($customizationId)
-            ->setRequestPayload($tokenRequestPayload)
-            ->setRequestOptions($tokenRequestOptions);
+        $request
+            ->setRequestPayload($payload)
+            ->setRequestOptions($options);
 
         /** @var StoreTokenRequestResponse $response */
         $response = Util::executeAndHandleCall($this->gateway->StoreTokenRequest($request));
@@ -546,6 +600,39 @@ class Client
     }
 
     /**
+     * Looks up an existing Token standing order submission.
+     *
+     * @param string $submissionId submission id
+     * @return StandingOrderSubmission record
+     */
+    public function getStandingOrderSubmission($submissionId)
+    {
+        $request = new GetStandingOrderSubmissionRequest();
+        $request->setSubmissionId($submissionId);
+
+        /** @var GetStandingOrderSubmissionResponse $response */
+        $response = Util::executeAndHandleCall($this->gateway->GetStandingOrderSubmission($request));
+        return $response->getSubmission();
+    }
+
+    /**
+     * Looks up a list of existing standing order submissions.
+     *
+     * @param string $offset optional offset to start at
+     * @param int $limit max number of records to return
+     * @return PagedList containing standing order records
+     */
+    public function getStandingOrderSubmissions($limit, $offset = null)
+    {
+        $request = new GetStandingOrderSubmissionsRequest();
+        $request->setPage($this->pageBuilder($limit, $offset));
+
+        /** @var GetStandingOrderSubmissionsResponse $response */
+        $response = Util::executeAndHandleCall($this->gateway->GetStandingOrderSubmissions($request));
+        return new PagedList($response->getSubmissions(), $response->getOffset());
+    }
+
+    /**
      * Redeems a transfer token.
      *
      * @param TransferPayload $payload the transfer payload
@@ -567,6 +654,22 @@ class Client
         /** @var CreateTransferResponse $response */
         $response = Util::executeAndHandleCall($this->gateway->CreateTransfer($request));
         return $response->getTransfer();
+    }
+
+    /**
+     * Redeems a standing order token.
+     *
+     * @param string $tokenId ID of token to redeem
+     * @return StandingOrderSubmission
+     */
+    public function createStandingOrder($tokenId)
+    {
+        $request = new CreateStandingOrderRequest();
+        $request->setTokenId($tokenId);
+
+        /** @var CreateStandingOrderResponse $response */
+        $response = Util::executeAndHandleCall($this->gateway->CreateStandingOrder($request));
+        return $response->getSubmission();
     }
 
     /**

@@ -3,7 +3,6 @@
 namespace Tokenio;
 
 use Io\Token\Proto\Common\Security\Signature;
-use Tokenio\Exception;
 
 class TokenRequestCallbackParameters
 {

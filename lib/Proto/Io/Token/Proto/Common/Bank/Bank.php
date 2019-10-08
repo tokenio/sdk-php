@@ -34,47 +34,65 @@ class Bank extends \Google\Protobuf\Internal\Message
      */
     private $full_logo_uri = '';
     /**
-     * Works with appless payments
+     * Works with appless payments. Supports BankFilter
      *
      * Generated from protobuf field <code>bool supports_appless = 5;</code>
      */
     private $supports_appless = false;
     /**
-     * Connection supports guest checkout
+     * Connection supports guest checkout. Supports BankFilter
      *
      * Generated from protobuf field <code>bool supports_guest_checkout = 15;</code>
      */
     private $supports_guest_checkout = false;
     /**
-     * Connection allows for retrieval of information
+     * Connection allows for retrieval of information. Supports BankFilter
      *
      * Generated from protobuf field <code>bool supports_information = 7;</code>
      */
     private $supports_information = false;
     /**
-     * Connection requires external authorization for creating transfers
+     * Connection requires external authorization for creating transfers. Supports BankFilter
      *
      * Generated from protobuf field <code>bool requires_external_auth = 8;</code>
      */
     private $requires_external_auth = false;
     /**
-     * Connection allows for payment initiation
+     * Connection allows for payment initiation. Supports BankFilter
      *
      * Generated from protobuf field <code>bool supports_send_payment = 9;</code>
      */
     private $supports_send_payment = false;
     /**
-     * Connection allows for receiving payments
+     * Connection allows for receiving payments. Supports BankFilter
      *
      * Generated from protobuf field <code>bool supports_receive_payment = 10;</code>
      */
     private $supports_receive_payment = false;
     /**
-     * Connection allows for retrieving balances
+     * Connection allows for retrieving balances. Supports BankFilter
      *
      * Generated from protobuf field <code>bool supports_balance = 16;</code>
      */
     private $supports_balance = false;
+    /**
+     * Connection supports scheduled payments. Supports BankFilter
+     *
+     * Generated from protobuf field <code>bool supports_scheduled_payment = 18;</code>
+     */
+    private $supports_scheduled_payment = false;
+    /**
+     * Connection supports standing orders. Supports BankFilter
+     *
+     * Generated from protobuf field <code>bool supports_standing_order = 19;</code>
+     */
+    private $supports_standing_order = false;
+    /**
+     * Connection supports bulk payments. Supports BankFilter
+     *
+     * Generated from protobuf field <code>bool supports_bulk_transfer = 20;</code>
+     */
+    private $supports_bulk_transfer = false;
     /**
      * Connection only supports immediate redemption of transfers
      *
@@ -82,11 +100,17 @@ class Bank extends \Google\Protobuf\Internal\Message
      */
     private $requires_legacy_transfer = false;
     /**
-     * Connection only supports immediate redemption of transfers
+     * Connection only supports immediate redemption of transfers. Supports BankFilter
      *
      * Generated from protobuf field <code>bool requires_one_step_payment = 17;</code>
      */
     private $requires_one_step_payment = false;
+    /**
+     * Connection supports linking with a bank linking URI. Supports BankFilter
+     *
+     * Generated from protobuf field <code>bool supports_linking_uri = 22;</code>
+     */
+    private $supports_linking_uri = false;
     /**
      * Provider of the bank, e.g. Yodlee, FinApi, Token
      *
@@ -105,6 +129,12 @@ class Bank extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string identifier = 13;</code>
      */
     private $identifier = '';
+    /**
+     * A list of Transfer Destination Types, like SEPA, ELIXIR, supported by the bank.
+     *
+     * Generated from protobuf field <code>repeated string supported_transfer_destination_types = 21;</code>
+     */
+    private $supported_transfer_destination_types;
 
     /**
      * Constructor.
@@ -119,29 +149,39 @@ class Bank extends \Google\Protobuf\Internal\Message
      *     @type string $full_logo_uri
      *           Full size bank icon
      *     @type bool $supports_appless
-     *           Works with appless payments
+     *           Works with appless payments. Supports BankFilter
      *     @type bool $supports_guest_checkout
-     *           Connection supports guest checkout
+     *           Connection supports guest checkout. Supports BankFilter
      *     @type bool $supports_information
-     *           Connection allows for retrieval of information
+     *           Connection allows for retrieval of information. Supports BankFilter
      *     @type bool $requires_external_auth
-     *           Connection requires external authorization for creating transfers
+     *           Connection requires external authorization for creating transfers. Supports BankFilter
      *     @type bool $supports_send_payment
-     *           Connection allows for payment initiation
+     *           Connection allows for payment initiation. Supports BankFilter
      *     @type bool $supports_receive_payment
-     *           Connection allows for receiving payments
+     *           Connection allows for receiving payments. Supports BankFilter
      *     @type bool $supports_balance
-     *           Connection allows for retrieving balances
+     *           Connection allows for retrieving balances. Supports BankFilter
+     *     @type bool $supports_scheduled_payment
+     *           Connection supports scheduled payments. Supports BankFilter
+     *     @type bool $supports_standing_order
+     *           Connection supports standing orders. Supports BankFilter
+     *     @type bool $supports_bulk_transfer
+     *           Connection supports bulk payments. Supports BankFilter
      *     @type bool $requires_legacy_transfer
      *           Connection only supports immediate redemption of transfers
      *     @type bool $requires_one_step_payment
-     *           Connection only supports immediate redemption of transfers
+     *           Connection only supports immediate redemption of transfers. Supports BankFilter
+     *     @type bool $supports_linking_uri
+     *           Connection supports linking with a bank linking URI. Supports BankFilter
      *     @type string $provider
      *           Provider of the bank, e.g. Yodlee, FinApi, Token
      *     @type string $country
      *           The ISO 3166-1 alpha-2 two letter country code in upper case.
      *     @type string $identifier
      *           Optional identifier of the bank, not guaranteed to be unique across all banks. BLZ for German banks.
+     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $supported_transfer_destination_types
+     *           A list of Transfer Destination Types, like SEPA, ELIXIR, supported by the bank.
      * }
      */
     public function __construct($data = NULL) {
@@ -246,7 +286,7 @@ class Bank extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Works with appless payments
+     * Works with appless payments. Supports BankFilter
      *
      * Generated from protobuf field <code>bool supports_appless = 5;</code>
      * @return bool
@@ -257,7 +297,7 @@ class Bank extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Works with appless payments
+     * Works with appless payments. Supports BankFilter
      *
      * Generated from protobuf field <code>bool supports_appless = 5;</code>
      * @param bool $var
@@ -272,7 +312,7 @@ class Bank extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Connection supports guest checkout
+     * Connection supports guest checkout. Supports BankFilter
      *
      * Generated from protobuf field <code>bool supports_guest_checkout = 15;</code>
      * @return bool
@@ -283,7 +323,7 @@ class Bank extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Connection supports guest checkout
+     * Connection supports guest checkout. Supports BankFilter
      *
      * Generated from protobuf field <code>bool supports_guest_checkout = 15;</code>
      * @param bool $var
@@ -298,7 +338,7 @@ class Bank extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Connection allows for retrieval of information
+     * Connection allows for retrieval of information. Supports BankFilter
      *
      * Generated from protobuf field <code>bool supports_information = 7;</code>
      * @return bool
@@ -309,7 +349,7 @@ class Bank extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Connection allows for retrieval of information
+     * Connection allows for retrieval of information. Supports BankFilter
      *
      * Generated from protobuf field <code>bool supports_information = 7;</code>
      * @param bool $var
@@ -324,7 +364,7 @@ class Bank extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Connection requires external authorization for creating transfers
+     * Connection requires external authorization for creating transfers. Supports BankFilter
      *
      * Generated from protobuf field <code>bool requires_external_auth = 8;</code>
      * @return bool
@@ -335,7 +375,7 @@ class Bank extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Connection requires external authorization for creating transfers
+     * Connection requires external authorization for creating transfers. Supports BankFilter
      *
      * Generated from protobuf field <code>bool requires_external_auth = 8;</code>
      * @param bool $var
@@ -350,7 +390,7 @@ class Bank extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Connection allows for payment initiation
+     * Connection allows for payment initiation. Supports BankFilter
      *
      * Generated from protobuf field <code>bool supports_send_payment = 9;</code>
      * @return bool
@@ -361,7 +401,7 @@ class Bank extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Connection allows for payment initiation
+     * Connection allows for payment initiation. Supports BankFilter
      *
      * Generated from protobuf field <code>bool supports_send_payment = 9;</code>
      * @param bool $var
@@ -376,7 +416,7 @@ class Bank extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Connection allows for receiving payments
+     * Connection allows for receiving payments. Supports BankFilter
      *
      * Generated from protobuf field <code>bool supports_receive_payment = 10;</code>
      * @return bool
@@ -387,7 +427,7 @@ class Bank extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Connection allows for receiving payments
+     * Connection allows for receiving payments. Supports BankFilter
      *
      * Generated from protobuf field <code>bool supports_receive_payment = 10;</code>
      * @param bool $var
@@ -402,7 +442,7 @@ class Bank extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Connection allows for retrieving balances
+     * Connection allows for retrieving balances. Supports BankFilter
      *
      * Generated from protobuf field <code>bool supports_balance = 16;</code>
      * @return bool
@@ -413,7 +453,7 @@ class Bank extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Connection allows for retrieving balances
+     * Connection allows for retrieving balances. Supports BankFilter
      *
      * Generated from protobuf field <code>bool supports_balance = 16;</code>
      * @param bool $var
@@ -423,6 +463,84 @@ class Bank extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkBool($var);
         $this->supports_balance = $var;
+
+        return $this;
+    }
+
+    /**
+     * Connection supports scheduled payments. Supports BankFilter
+     *
+     * Generated from protobuf field <code>bool supports_scheduled_payment = 18;</code>
+     * @return bool
+     */
+    public function getSupportsScheduledPayment()
+    {
+        return $this->supports_scheduled_payment;
+    }
+
+    /**
+     * Connection supports scheduled payments. Supports BankFilter
+     *
+     * Generated from protobuf field <code>bool supports_scheduled_payment = 18;</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setSupportsScheduledPayment($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->supports_scheduled_payment = $var;
+
+        return $this;
+    }
+
+    /**
+     * Connection supports standing orders. Supports BankFilter
+     *
+     * Generated from protobuf field <code>bool supports_standing_order = 19;</code>
+     * @return bool
+     */
+    public function getSupportsStandingOrder()
+    {
+        return $this->supports_standing_order;
+    }
+
+    /**
+     * Connection supports standing orders. Supports BankFilter
+     *
+     * Generated from protobuf field <code>bool supports_standing_order = 19;</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setSupportsStandingOrder($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->supports_standing_order = $var;
+
+        return $this;
+    }
+
+    /**
+     * Connection supports bulk payments. Supports BankFilter
+     *
+     * Generated from protobuf field <code>bool supports_bulk_transfer = 20;</code>
+     * @return bool
+     */
+    public function getSupportsBulkTransfer()
+    {
+        return $this->supports_bulk_transfer;
+    }
+
+    /**
+     * Connection supports bulk payments. Supports BankFilter
+     *
+     * Generated from protobuf field <code>bool supports_bulk_transfer = 20;</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setSupportsBulkTransfer($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->supports_bulk_transfer = $var;
 
         return $this;
     }
@@ -454,7 +572,7 @@ class Bank extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Connection only supports immediate redemption of transfers
+     * Connection only supports immediate redemption of transfers. Supports BankFilter
      *
      * Generated from protobuf field <code>bool requires_one_step_payment = 17;</code>
      * @return bool
@@ -465,7 +583,7 @@ class Bank extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Connection only supports immediate redemption of transfers
+     * Connection only supports immediate redemption of transfers. Supports BankFilter
      *
      * Generated from protobuf field <code>bool requires_one_step_payment = 17;</code>
      * @param bool $var
@@ -475,6 +593,32 @@ class Bank extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkBool($var);
         $this->requires_one_step_payment = $var;
+
+        return $this;
+    }
+
+    /**
+     * Connection supports linking with a bank linking URI. Supports BankFilter
+     *
+     * Generated from protobuf field <code>bool supports_linking_uri = 22;</code>
+     * @return bool
+     */
+    public function getSupportsLinkingUri()
+    {
+        return $this->supports_linking_uri;
+    }
+
+    /**
+     * Connection supports linking with a bank linking URI. Supports BankFilter
+     *
+     * Generated from protobuf field <code>bool supports_linking_uri = 22;</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setSupportsLinkingUri($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->supports_linking_uri = $var;
 
         return $this;
     }
@@ -553,6 +697,32 @@ class Bank extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->identifier = $var;
+
+        return $this;
+    }
+
+    /**
+     * A list of Transfer Destination Types, like SEPA, ELIXIR, supported by the bank.
+     *
+     * Generated from protobuf field <code>repeated string supported_transfer_destination_types = 21;</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getSupportedTransferDestinationTypes()
+    {
+        return $this->supported_transfer_destination_types;
+    }
+
+    /**
+     * A list of Transfer Destination Types, like SEPA, ELIXIR, supported by the bank.
+     *
+     * Generated from protobuf field <code>repeated string supported_transfer_destination_types = 21;</code>
+     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setSupportedTransferDestinationTypes($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
+        $this->supported_transfer_destination_types = $arr;
 
         return $this;
     }

@@ -3,7 +3,6 @@
 
 namespace Io\Token\Samples;
 
-use Io\Token\Proto\Common\Notification\Notification;
 use Tokenio\Account;
 use Tokenio\Member;
 

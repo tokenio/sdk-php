@@ -4,7 +4,6 @@ namespace Tokenio\Util;
 
 use Google\Protobuf\Internal\Message;
 use Grpc\UnaryCall;
-use http\Exception\RuntimeException;
 use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Member\Member;
 use Io\Token\Proto\Common\Member\MemberAddKeyOperation;

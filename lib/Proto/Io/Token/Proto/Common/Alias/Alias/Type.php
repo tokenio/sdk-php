@@ -21,19 +21,19 @@ class Type
      */
     const UNKNOWN = 1;
     /**
-     * Email address. For example, "sandy&#64;example.com"
+     * Email address. For example, "sandy&#64;example.com".
      *
      * Generated from protobuf enum <code>EMAIL = 2;</code>
      */
     const EMAIL = 2;
     /**
-     * unused
+     * Phone number.
      *
      * Generated from protobuf enum <code>PHONE = 3;</code>
      */
     const PHONE = 3;
     /**
-     * unused
+     * Business web domain. Please contact Token to verify.
      *
      * Generated from protobuf enum <code>DOMAIN = 4;</code>
      */

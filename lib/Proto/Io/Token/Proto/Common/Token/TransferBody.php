@@ -55,6 +55,16 @@ class TransferBody extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.io.token.proto.common.pricing.Pricing pricing = 9 [deprecated = true];</code>
      */
     private $pricing = null;
+    /**
+     * Optional. ISO 8601: YYYY-MM-DD or YYYYMMDD.
+     *
+     * Generated from protobuf field <code>string execution_date = 10;</code>
+     */
+    private $execution_date = '';
+    /**
+     * Generated from protobuf field <code>bool confirm_funds = 11;</code>
+     */
+    private $confirm_funds = false;
 
     /**
      * Constructor.
@@ -76,6 +86,9 @@ class TransferBody extends \Google\Protobuf\Internal\Message
      *           Optional: file / data attachments
      *     @type \Io\Token\Proto\Common\Pricing\Pricing $pricing
      *           Deprecated; unused.
+     *     @type string $execution_date
+     *           Optional. ISO 8601: YYYY-MM-DD or YYYYMMDD.
+     *     @type bool $confirm_funds
      * }
      */
     public function __construct($data = NULL) {
@@ -261,6 +274,54 @@ class TransferBody extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Pricing\Pricing::class);
         $this->pricing = $var;
+
+        return $this;
+    }
+
+    /**
+     * Optional. ISO 8601: YYYY-MM-DD or YYYYMMDD.
+     *
+     * Generated from protobuf field <code>string execution_date = 10;</code>
+     * @return string
+     */
+    public function getExecutionDate()
+    {
+        return $this->execution_date;
+    }
+
+    /**
+     * Optional. ISO 8601: YYYY-MM-DD or YYYYMMDD.
+     *
+     * Generated from protobuf field <code>string execution_date = 10;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setExecutionDate($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->execution_date = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool confirm_funds = 11;</code>
+     * @return bool
+     */
+    public function getConfirmFunds()
+    {
+        return $this->confirm_funds;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool confirm_funds = 11;</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setConfirmFunds($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->confirm_funds = $var;
 
         return $this;
     }
