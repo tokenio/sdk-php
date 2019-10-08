@@ -8,7 +8,8 @@
 
 - Changes the `resolveAlias` method to return a `TokenMember` object containing member ID
 and the full alias with the appropriate type, or null if the alias does not exist.
-> For example, `if (resolveAlias(alias)) { ... }` might be rewritten as `if (!is_null(resolveAlias())) { ... }`.
+> For example, `if (resolveAlias(alias)) { ... }` might be rewritten as
+>`if (!is_null(resolveAlias(alias))) { ... }`.
 
 - Adds support for standing orders and scheduled payments.
 >To indicate that a transfer should be executed on a specific future date, use the
