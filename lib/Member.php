@@ -490,7 +490,7 @@ class Member implements RepresentableInterface
 
         if ($refId != null) {
             $payload->setRefId($refId);
-        } else if ($token->getPayload()->getRefId() != null) {
+        } else if ($amount == null || strval($amount) == $token->getPayload()->getTransfer()->getAmount()) {
             $payload->setRefId($token->getPayload()->getRefId());
         } else {
             $payload->setRefId(Strings::generateNonce());
@@ -500,7 +500,7 @@ class Member implements RepresentableInterface
     }
 
     /**
-     * Redeems a standing order token
+     * Redeems a standing order token.
      *
      * @param string $tokenId ID of token to redeem
      * @return StandingOrderSubmission
