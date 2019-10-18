@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a75315965bcc27556c1a315e9c153fdd",
+    "content-hash": "be0d6e16b80a771d1d2672ec32f3bb0b",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -856,21 +856,21 @@
         },
         {
             "name": "paragonie/sodium_compat",
-            "version": "v1.7.0",
+            "version": "v1.11.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/sodium_compat.git",
-                "reference": "7b73005be3c224f12c47bd75a23ce24b762e47e8"
+                "reference": "275cca125a5c12280f8f31f4c87710547d747645"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/sodium_compat/zipball/7b73005be3c224f12c47bd75a23ce24b762e47e8",
-                "reference": "7b73005be3c224f12c47bd75a23ce24b762e47e8",
+                "url": "https://api.github.com/repos/paragonie/sodium_compat/zipball/275cca125a5c12280f8f31f4c87710547d747645",
+                "reference": "275cca125a5c12280f8f31f4c87710547d747645",
                 "shasum": ""
             },
             "require": {
                 "paragonie/random_compat": ">=1",
-                "php": "^5.2.4|^5.3|^5.4|^5.5|^5.6|^7"
+                "php": "^5.2.4|^5.3|^5.4|^5.5|^5.6|^7|^8"
             },
             "require-dev": {
                 "phpunit/phpunit": "^3|^4|^5"
@@ -934,7 +934,7 @@
                 "secret-key cryptography",
                 "side-channel resistant"
             ],
-            "time": "2018-09-22T03:59:58+00:00"
+            "time": "2019-10-17T19:06:36+00:00"
         },
         {
             "name": "phpcollection/phpcollection",
