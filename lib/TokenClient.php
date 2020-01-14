@@ -96,7 +96,7 @@ class TokenClient
      *     by the creator of the corresponding token request. Only works if memberType == TRANSIENT.
      * @return \Tokenio\Member newly created member
      */
-    public function createMember($alias = null, $memberType = CreateMemberType::PERSONAL)
+    public function createMember($alias = null, $memberType = CreateMemberType::BUSINESS)
     {
         $unauthenticatedClient = ClientFactory::unauthenticated($this->channel);
         $agentId = $unauthenticatedClient->getDefaultAgent();
