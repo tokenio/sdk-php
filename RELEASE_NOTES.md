@@ -1,4 +1,11 @@
-# Release 2.0.0
+# *PHP SDK Release Notes*
+>
+>Updated: 15 January 2020
+>
+
+If you're upgrading to the latest version of the SDK, here's what's new.
+
+# Release 2.0.x
 - Removes backwards compatibility with the old Token Request flow.
 > A TokenRequestBuilder can no longer be constructed directly from a TokenPayload.
 >Please set fields using the setters in `TokenRequestBuilder.php`. 
