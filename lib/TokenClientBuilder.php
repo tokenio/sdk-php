@@ -153,7 +153,13 @@ class TokenClientBuilder
      */
     public function build()
     {
-        $composerJson = json_decode(file_get_contents(Factory::getComposerFile()), true);
+        $composerFilePath = Factory::getComposerFile();
+
+        if($composerFilePath == './composer.json'){
+            $composerFilePath = realpath(__DIR__ . '/..') . '/composer.json';
+        }
+
+        $composerJson = json_decode(file_get_contents($composerFilePath), true);
         $metadata = array(
             TokenInfo::TOKEN_SDK => [TokenInfo::TOKEN_SDK_VALUE],
             TokenInfo::TOKEN_SDK_VERSION => [$composerJson['version']],
