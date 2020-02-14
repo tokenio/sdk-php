@@ -2,6 +2,7 @@
 
 namespace Tokenio;
 
+
 use Composer\Factory;
 use Tokenio\Rpc\RpcChannelFactory;
 use Tokenio\RuntimeException;
@@ -153,12 +154,7 @@ class TokenClientBuilder
      */
     public function build()
     {
-        $composerFilePath = Factory::getComposerFile();
-
-        if($composerFilePath == './composer.json'){
-            $composerFilePath = realpath(__DIR__ . '/..') . '/composer.json';
-        }
-
+        $composerFilePath = realpath(__DIR__ . '/..') . '/composer.json';
         $composerJson = json_decode(file_get_contents($composerFilePath), true);
         $metadata = array(
             TokenInfo::TOKEN_SDK => [TokenInfo::TOKEN_SDK_VALUE],
