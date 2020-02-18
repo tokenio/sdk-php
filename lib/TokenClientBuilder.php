@@ -2,7 +2,6 @@
 
 namespace Tokenio;
 
-
 use Composer\Factory;
 use Tokenio\Rpc\RpcChannelFactory;
 use Tokenio\RuntimeException;
