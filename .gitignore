@@ -6,4 +6,7 @@ keys
 doc/generated
 **/test-keys/
 **/*.proto
+core/**.*.proto
+*/vendor
 !protos/common/google/protobuf/descriptor.proto
+!protos/common/google/protobuf/wrappers.proto
