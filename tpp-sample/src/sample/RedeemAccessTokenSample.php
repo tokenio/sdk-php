@@ -43,22 +43,5 @@ class RedeemAccessTokenSample
         return $transactions->getList();
     }
 
-    /**
-     * @param $grantee Member
-     * @param $tokenId string
-     * @return mixed
-     * @throws \Exception
-     */
-    public static function redeemStandingOrdersAccessToken($grantee, $tokenId)
-    {
-        $customerInitiated =true;
-        $grantor= $grantee->forAccessToken($tokenId, $customerInitiated);
-        $accounts = $grantor->getAccounts();
-
-        $transactions = $accounts[0]->getTransactions(null, 10, Level::STANDARD);
-        $standingOrders = $accounts[0]->getStandingOrders(null, 5, Level::STANDARD);
-        $nextOffset = $standingOrders->getOffset();
-        return $standingOrders->getList();
-    }
 }
 

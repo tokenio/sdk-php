@@ -11,11 +11,15 @@ use Tokenio\Security\KeyStoreInterface;
 use Tokenio\Security\TokenCryptoEngineFactory;
 use Tokenio\TokenCluster;
 use Tokenio\TokenEnvironment;
+use Tokenio\User\Browser\Browserfactory;
 
 class TokenClientBuilder extends \Tokenio\TokenClientBuilder
 {
 
 
+    /**
+     * @var Browserfactory $browserfactory
+     */
     private $browserfactory;
 
     public function __construct()

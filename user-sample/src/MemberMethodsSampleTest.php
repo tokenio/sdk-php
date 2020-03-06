@@ -26,6 +26,7 @@ class MemberMethodsSampleTest extends TestCase
         $cryptoEngine = new TokenCryptoEngine("member-id", $keyStore);
         $member = $tokenClient->createMember(TestUtil::randomAlias());
         MemberMethodsSample::keys($cryptoEngine, $member);
+        $this->assertEquals(5, count($member->getKeys()));
     }
 
     public function testProfiles()

@@ -4,6 +4,7 @@
 namespace Tokenio\Sample\Tpp;
 
 use Io\Token\Proto\Common\Security\Key\Level;
+use Io\Token\Proto\Common\Transaction\TransactionStatus;
 use PHPUnit\Framework\TestCase;
 use Tokenio\Sample\User\CreateTransferTokenSample;
 
@@ -18,6 +19,7 @@ class GetTransfersSampleTest extends TestCase
         $payeeAccount = $payee->createTestBankAccount(1000, "EUR" );
         $token = CreateTransferTokenSample::createTransferToken($payer, $payeeAlias, Level::LOW);
         $transfer = RedeemTransferTokenSample::redeemTransferToken($payee, $payeeAccount->id(), $token->getId());
+        $this->assertEquals(TransactionStatus::SUCCESS,$transfer->getStatus());
         GetTransferSample::getTransfersSample($payee);
     }
 }

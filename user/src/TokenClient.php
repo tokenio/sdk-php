@@ -180,9 +180,9 @@ class TokenClient extends \Tokenio\TokenClient
     public function notifyPaymentRequest($tokenPayload)
     {
         $unauthenticated = ClientFactory::unauthenticated($this->channel);
-        if($tokenPayload->getRefId() === null)
+        if($tokenPayload->getRefId() === null || empty($tokenPayload->getRefId()))
         {
-            $newTokenPayload = $tokenPayload->setRefId(Strings::generateNonce());
+            $tokenPayload = $tokenPayload->setRefId(Strings::generateNonce());
         }
         return $unauthenticated->notifyPaymentRequest($tokenPayload);
     }
@@ -192,7 +192,7 @@ class TokenClient extends \Tokenio\TokenClient
      * @param $keys Key[]
      * @param $deviceMetadata DeviceMetadata
      * @param $receiptContact ReceiptContact
-     * @return Rpc\NotifyResult
+     * @return NotifyResult
      */
     public function notifyCreateAndEndorseToken($tokenrequestId, $keys, $deviceMetadata, $receiptContact)
     {

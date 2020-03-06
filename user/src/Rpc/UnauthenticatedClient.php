@@ -27,6 +27,7 @@ use Io\Token\Proto\Gateway\UpdateTokenRequestRequest;
 use Io\Token\Proto\Gateway\UpdateTokenRequestResponse;
 use Tokenio\TokenRequest;
 use Tokenio\TokenRequest\TokenRequestResult;
+use Tokenio\User\NotifyResult;
 use Tokenio\User\Util\Util;
 
 class UnauthenticatedClient extends \Tokenio\Rpc\UnauthenticatedClient

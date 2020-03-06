@@ -4,6 +4,7 @@ namespace Tokenio\Sample\User;
 
 use Io\Token\Proto\Common\Security\Key\Level;
 use Io\Token\Proto\Common\Token\TokenOperationResult\Status;
+use Io\Token\Proto\Common\Transaction\TransactionStatus;
 use PHPUnit\Framework\TestCase;
 
 class GetTransfersSampleTest extends TestCase
@@ -18,6 +19,7 @@ class GetTransfersSampleTest extends TestCase
         $token = CreateTransferTokenSample::createTransferToken($payer, $payeeAlias, Level::LOW);
         $transfer = RedeemTransferTokenSample::redeemTransferToken($payee, $payeeAccount->id(), $token->getId());
         GetTransfersSample::getTransfersSample($payer);
+        $this->assertTrue(true);
     }
 
     public function testGetTransferTokens()
@@ -30,6 +32,7 @@ class GetTransfersSampleTest extends TestCase
         $token = CreateTransferTokenSample::createTransferToken($payer, $payeeAlias, Level::LOW);
         $transfer = RedeemTransferTokenSample::redeemTransferToken($payee, $payeeAccount->id(), $token->getId());
         GetTransfersSample::getTransferTokensSample($payer);
+        $this->assertTrue(true);
     }
 
     public function testGetTransfer()

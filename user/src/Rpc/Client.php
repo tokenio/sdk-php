@@ -323,10 +323,6 @@ class Client extends \Tokenio\Rpc\Client
     public function createToken($payload, $tokenRequestId, $signatures)
     {
         /* @var $request CreateTokenRequest */
-        printf("\n Payload \n");
-        print_r($payload->serializeToJsonString());
-        printf("\n Signature \n");
-        print_r($signatures[0]->serializeToJsonString());
         $request = new CreateTokenRequest();
         $request->setPayload($payload);
 

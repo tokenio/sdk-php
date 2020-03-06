@@ -14,6 +14,7 @@ use Io\Token\Proto\Common\Token\TransferBody;
 use Io\Token\Proto\Common\Transferinstructions\TransferDestination;
 use Io\Token\Proto\Common\Transferinstructions\TransferEndpoint;
 use Io\Token\Proto\Common\Transferinstructions\TransferInstructions;
+use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Tokenio\Exception\IllegalArgumentException;
 use Tokenio\Util\Strings;
@@ -143,6 +144,9 @@ class TransferTokenBuilder
                 }
             }
         }
+
+        $this->logger = new Logger('Tokenio\User\StandingOrderTokenBuilder');
+        $this->logger->pushHandler(new StreamHandler('php://stdout', Logger::DEBUG));
     }
 
     /**

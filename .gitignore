@@ -10,3 +10,5 @@ core/**.*.proto
 */vendor
 !protos/common/google/protobuf/descriptor.proto
 !protos/common/google/protobuf/wrappers.proto
+!protos/common/openapi_v2.proto
+core/Proto

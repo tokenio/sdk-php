@@ -440,4 +440,5 @@ class Member extends \Tokenio\Member implements RepresentableInterface
     {
         return $this->client->verifyEidas($payload, $signature);
     }
+
 }

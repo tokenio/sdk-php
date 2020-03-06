@@ -63,26 +63,5 @@ class RedeemAccessTokenSampleTest extends TestCase
         $this->assertEquals(5, sizeof($transactions));
     }
 
-    public function testRedeemStandingOrdersAccessToken()
-    {
-        $tokenClient = TestUtil::createClient();
-        $grantor = TestUtil::createUserMember();
 
-        $accountId = $grantor->getAccounts()[0]->id();
-        $granteeAlias = TestUtil::randomAlias();
-        $grantee = $tokenClient->createMember($granteeAlias);
-
-        $payeeAlias = TestUtil::randomAlias();
-        $payee = $tokenClient->createMember($payeeAlias);
-
-        for($i = 0; $i< 10; $i++)
-        {
-            $token = CreateStandingOrderTokenSample::createStandingOrderToken($grantor, $payeeAlias, Level::STANDARD);
-            RedeemStandingOrderTokenSample::redeemStandingOrderToken($payee, $token->getId());
-        }
-
-        $newToken = CreateAndEndorseAccessTokenSample::createStandingOrdersAccessToken($grantor, $accountId, $granteeAlias);
-        $standingOrders = RedeemAccessTokenSample::redeemStandingOrdersAccessToken($grantee, $newToken->getId());
-        $this->assertEquals(5, sizeof($standingOrders));
-    }
 }

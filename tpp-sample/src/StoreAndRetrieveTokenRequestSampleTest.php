@@ -32,18 +32,6 @@ class StoreAndRetrieveTokenRequestSampleTest extends TestCase
     }
 
 
-    /**
-     * @throws \ReflectionException
-     */
-    public function testStoreAndRetrieveAccessToken()
-    {
-        $tokenClient = TestUtil::createClient();
-        $grantee = $tokenClient->createMember(TestUtil::randomAlias());
-        $requestId = StoreAndRetrieveTokenRequestSample::storeAccessTokenRequest($grantee);
-        $request = $tokenClient->retrieveTokenRequest($requestId);
-        $this->assertNotNull($request);
-    }
-
 
     public function testStoreTokenRequestAndSetTransferDestinations()
     {

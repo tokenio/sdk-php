@@ -563,6 +563,7 @@ class Client extends \Tokenio\Rpc\Client
         return $response;
     }
 
+
     /**
      * @return string
      */

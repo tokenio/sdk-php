@@ -41,17 +41,5 @@ class CreateAndEndorseAccessTokenSample
         return $grantor->endorseToken($accessToken, Key\Level::STANDARD)->getToken();
     }
 
-    /**
-     * @param $grantor  Member
-     * @param $accountId string
-     * @param $granteeAlias Alias
-     * @return Token
-     * @throws \Exception
-     */
-    public static function createStandingOrdersAccessToken($grantor, $accountId, $granteeAlias)
-    {
-        $newAccessToken = AccessTokenBuilder::create($granteeAlias)->forAccount($accountId)->forAccountStandingOrders($accountId);
-        $accessToken = $grantor->createAccessToken($newAccessToken);
-        return $grantor->endorseToken($accessToken, Key\Level::STANDARD)->getToken();
-    }
+
 }
