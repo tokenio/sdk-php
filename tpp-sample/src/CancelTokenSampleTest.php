@@ -23,7 +23,7 @@ class CancelTokenSampleTest extends TestCase
         $this->assertEquals(TokenOperationResult\Status::SUCCESS, $result->getStatus());
     }
 
-    public function testCancelTransferTokenByGranteeTest()
+    public function testCancelTransferTokenByGrantee()
     {
         $tokenClient = TestUtil::createClient();
         $grantor = TestUtil::createUserMember();

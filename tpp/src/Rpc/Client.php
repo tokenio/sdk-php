@@ -11,40 +11,24 @@ use Io\Token\Proto\Common\Notification\BalanceStepUp;
 use Io\Token\Proto\Common\Notification\TransactionStepUp;
 use Io\Token\Proto\Common\Security\CustomerTrackingMetadata;
 use Io\Token\Proto\Common\Security\Key;
-use Io\Token\Proto\Common\Security\Key\Level;
 use Io\Token\Proto\Common\Security\SecurityMetadata;
 use Io\Token\Proto\Common\Security\Signature;
-use Io\Token\Proto\Common\Submission\StandingOrderSubmission;
 use Io\Token\Proto\Common\Token\Token;
 use Io\Token\Proto\Common\Token\TokenOperationResult;
 use Io\Token\Proto\Common\Token\TokenRequestOptions;
 use Io\Token\Proto\Common\Token\TokenRequestPayload;
-use Io\Token\Proto\Common\Token\TokenSignature;
-use Io\Token\Proto\Common\Transfer\BulkTransfer;
 use Io\Token\Proto\Common\Transfer\Transfer;
 use Io\Token\Proto\Common\Transfer\TransferPayload;
-use Io\Token\Proto\Common\Transferinstructions\TransferDestination;
 use Io\Token\Proto\Gateway\CancelTokenRequest;
 use Io\Token\Proto\Gateway\CancelTokenResponse;
-use Io\Token\Proto\Gateway\CreateBulkTransferRequest;
-use Io\Token\Proto\Gateway\CreateBulkTransferResponse;
 use Io\Token\Proto\Gateway\CreateCustomizationRequest;
 use Io\Token\Proto\Gateway\CreateCustomizationResponse;
-use Io\Token\Proto\Gateway\CreateStandingOrderRequest;
-use Io\Token\Proto\Gateway\CreateStandingOrderResponse;
 use Io\Token\Proto\Gateway\CreateTransferRequest;
 use Io\Token\Proto\Gateway\CreateTransferResponse;
-use Io\Token\Proto\Gateway\GatewayServiceClient;
 use Io\Token\Proto\Gateway\GetActiveAccessTokenRequest;
 use Io\Token\Proto\Gateway\GetActiveAccessTokenResponse;
 use Io\Token\Proto\Gateway\GetBlobRequest;
 use Io\Token\Proto\Gateway\GetBlobResponse;
-use Io\Token\Proto\Gateway\GetBulkTransferRequest;
-use Io\Token\Proto\Gateway\GetBulkTransferResponse;
-use Io\Token\Proto\Gateway\GetStandingOrderSubmissionRequest;
-use Io\Token\Proto\Gateway\GetStandingOrderSubmissionResponse;
-use Io\Token\Proto\Gateway\GetStandingOrderSubmissionsRequest;
-use Io\Token\Proto\Gateway\GetStandingOrderSubmissionsResponse;
 use Io\Token\Proto\Gateway\GetTokenRequest;
 use Io\Token\Proto\Gateway\GetTokenResponse;
 use Io\Token\Proto\Gateway\GetTokensRequest;
@@ -57,8 +41,6 @@ use Io\Token\Proto\Gateway\SetProfilePictureRequest;
 use Io\Token\Proto\Gateway\SetProfilePictureResponse;
 use Io\Token\Proto\Gateway\SetProfileRequest;
 use Io\Token\Proto\Gateway\SetProfileResponse;
-use Io\Token\Proto\Gateway\SetTokenRequestTransferDestinationsRequest;
-use Io\Token\Proto\Gateway\SetTokenRequestTransferDestinationsResponse;
 use Io\Token\Proto\Gateway\StoreTokenRequestRequest;
 use Io\Token\Proto\Gateway\StoreTokenRequestResponse;
 use Io\Token\Proto\Gateway\TriggerStepUpNotificationRequest;
@@ -67,8 +49,6 @@ use Io\Token\Proto\Gateway\VerifyEidasRequest;
 use Io\Token\Proto\Gateway\VerifyEidasResponse;
 use Tokenio\Exception\StatusRuntimeException;
 use Tokenio\PagedList;
-use Tokenio\Rpc\AuthenticationContext;
-use Tokenio\Rpc\Interceptor\ClientAuthenticatorInterceptor;
 use Tokenio\Security\CryptoEngineInterface;
 use Tokenio\Util\Util;
 
@@ -232,24 +212,6 @@ class Client extends \Tokenio\Rpc\Client
     }
 
     /**
-     * Sets destination accounts for once if it hasn't been set.
-     *
-     * @param $tokenRequestId string token request Id
-     * @param $transferDestinations TransferDestination[] destination accounts
-     * @return SetTokenRequestTransferDestinationsResponse
-     * @throws Exception
-     */
-    public function setTokenRequestTransferDestinations($tokenRequestId, $transferDestinations)
-    {
-        $request = new SetTokenRequestTransferDestinationsRequest();
-        $request->setTokenRequestId($tokenRequestId)->setTransferDestinations($transferDestinations);
-
-        /** @var SetTokenRequestTransferDestinationsResponse $response */
-        $response = Util::executeAndHandleCall(self::gateway(self::authenticationContext())->SetTokenRequestTransferDestinations($request));
-        return $response;
-    }
-
-    /**
      * Creates a new web-app customization.
      *
      * @param $logo Blob\Payload blob payload of the logo
@@ -346,39 +308,6 @@ class Client extends \Tokenio\Rpc\Client
         return $response->getTransfer();
     }
 
-    /**
-     * Looks up an existing bulk transfer.
-     *
-     * @param $bulkTransferId string bulk transfer ID
-     * @return BulkTransfer transfer record
-     * @throws Exception
-     */
-    public function getBulkTransfer($bulkTransferId)
-    {
-        $request = new GetBulkTransferRequest();
-        $request->setBulkTransferId($bulkTransferId);
-
-        /** @var GetBulkTransferResponse $response */
-        $response = Util::executeAndHandleCall(self::gateway(self::authenticationContext())->GetBulkTransfer($request));
-        return $response->getBulkTransfer();
-    }
-
-    /**
-     * Looks up an existing Token standing order submission.
-     *
-     * @param string $submissionId submission id
-     * @return StandingOrderSubmission record
-     * @throws Exception
-     */
-    public function getStandingOrderSubmission($submissionId)
-    {
-        $request = new GetStandingOrderSubmissionRequest();
-        $request->setSubmissionId($submissionId);
-
-        /** @var GetStandingOrderSubmissionResponse $response */
-        $response = Util::executeAndHandleCall(self::gateway(self::authenticationContext())->GetStandingOrderSubmission($request));
-        return $response->getSubmission();
-    }
 
     /**
      * Looks up a list of existing transfers.
@@ -401,24 +330,6 @@ class Client extends \Tokenio\Rpc\Client
         /** @var GetTransfersResponse $response */
         $response = Util::executeAndHandleCall(self::gateway(self::authenticationContext())->GetTransfers($request));
         return new PagedList($response->getTransfers(), $response->getOffset());
-    }
-
-    /**
-     * Looks up a list of existing standing order submissions.
-     *
-     * @param string $offset optional offset to start at
-     * @param int $limit max number of records to return
-     * @return PagedList containing standing order records
-     * @throws Exception
-     */
-    public function getStandingOrderSubmissions($offset = null, $limit)
-    {
-        $request = new GetStandingOrderSubmissionsRequest();
-        $request->setPage($this->pageBuilder($limit, $offset));
-
-        /** @var GetStandingOrderSubmissionsResponse $response */
-        $response = Util::executeAndHandleCall(self::gateway(self::authenticationContext())->GetStandingOrderSubmissions($request));
-        return new PagedList($response->getSubmissions(), $response->getOffset());
     }
 
     /**
@@ -445,41 +356,6 @@ class Client extends \Tokenio\Rpc\Client
         $response = Util::executeAndHandleCall(self::gateway(self::authenticationContext())->CreateTransfer($request));
         return $response->getTransfer();
     }
-
-    /**
-     * Redeems a bulk transfer token.
-     *
-     * @param $tokenId string ID of token to redeem
-     * @return BulkTransfer transfer record
-     * @throws Exception
-     */
-    public function createBulkTransfer($tokenId)
-    {
-        $request = new CreateBulkTransferRequest();
-        $request->setTokenId($tokenId);
-
-        /** @var CreateBulkTransferResponse $response */
-        $response = Util::executeAndHandleCall(self::gateway(self::authenticationContext())->CreateBulkTransfer($request));
-        return $response->getTransfer();
-    }
-
-    /**
-     * Redeems a standing order token.
-     *
-     * @param string $tokenId ID of token to redeem
-     * @return StandingOrderSubmission
-     * @throws Exception
-     */
-    public function createStandingOrder($tokenId)
-    {
-        $request = new CreateStandingOrderRequest();
-        $request->setTokenId($tokenId);
-
-        /** @var CreateStandingOrderResponse $response */
-        $response = Util::executeAndHandleCall(self::gateway(self::authenticationContext())->CreateStandingOrder($request));
-        return $response->getSubmission();
-    }
-
 
     /**
      * Cancels a token.

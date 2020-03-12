@@ -3,10 +3,7 @@
 namespace Tokenio\Rpc;
 
 use Grpc\Channel;
-use Grpc\Interceptor;
-use Grpc\Internal\InterceptorChannel;
 use Io\Token\Proto\Gateway\GatewayServiceClient;
-use Tokenio\Rpc\Interceptor\ClientAuthenticatorInterceptor;
 use Tokenio\Security\CryptoEngineInterface;
 
 abstract class ClientFactory

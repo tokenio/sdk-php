@@ -23,7 +23,7 @@ class CreateTransferTokenSample
     {
         $purchaseId = Strings::generateNonce();
 
-        $builder = $payer->createTransferToken(null,null, 10.0, "EUR")
+        $builder = $payer->createTransferTokenBuilder(null,null, 10.0, "EUR")
             ->setAccountId($payer->getAccounts()[0]->id())
             ->setToAlias($payeeAlias)
             ->setDescription("Book-purchase")
@@ -84,24 +84,5 @@ class CreateTransferTokenSample
         return $transferToken;
     }
 
-    /**
-     * @param $payer Member
-     * @param $payeeAlias Alias
-     * @return Token
-     * @throws \Exception
-     */
-    public static function createTransferTokenScheduled($payer, $payeeAlias)
-    {
-        $purchaseId = Strings::generateNonce();
 
-        $builder = $payer->createTransferTokenBuilder(null, null,
-            10.0, "EUR")->setAccountId($payer->getAccounts()[0]->id())
-            ->setToAlias($payeeAlias)->setDescription("Book purchase")
-                ->setRefId($purchaseId)->setExecutionDate(date('Y-m-d', strtotime('+30 days')));
-
-        $result = $payer->prepareTransferToken($builder);
-
-        $transferToken = $payer->createToken($result->getTokenPayload(), null,Level::STANDARD);
-        return $transferToken;
-    }
 }

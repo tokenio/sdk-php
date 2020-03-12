@@ -16,11 +16,9 @@ use Io\Token\Proto\Common\Member\Profile;
 use Io\Token\Proto\Common\Member\RecoveryRule;
 use Io\Token\Proto\Common\Money\Money;
 use Io\Token\Proto\Common\Security\Key;
-use Io\Token\Proto\Common\Security\SecurityMetadata;
 use Io\Token\Proto\Common\Security\Signature;
 use Io\Token\Proto\Common\Token\TokenPayload;
 use Io\Token\Proto\Common\Transaction\Balance;
-use Io\Token\Proto\Common\Transaction\StandingOrder;
 use Io\Token\Proto\Common\Transaction\Transaction;
 use Tokenio\Exception\InvalidRealmException;
 use Tokenio\Exception\NoAliasesFoundException;
@@ -503,39 +501,6 @@ class Member
     }
 
     /**
-     * Look up an existing standing order and return the response.
-     *
-     * @param string $accountId the account id
-     * @param string $standingOrderId the standing order id
-     * @param int $keyLevel the key level
-     * @return StandingOrder
-     * @throws RequestException
-     * @throws StepUpRequiredException
-     * @throws Exception
-     */
-    public function getStandingOrder($accountId, $standingOrderId, $keyLevel)
-    {
-        return $this->client->getStandingOrder($accountId, $standingOrderId, $keyLevel);
-    }
-
-    /**
-     * Look up standing orders and return response.
-     *
-     * @param string $accountId the account id
-     * @param string $offset the offset
-     * @param int $limit the limit
-     * @param int $keyLevel the key level
-     * @return PagedList list of standing orders
-     * @throws RequestException
-     * @throws StepUpRequiredException
-     * @throws Exception
-     */
-    public function getStandingOrders($accountId, $offset, $limit, $keyLevel)
-    {
-        return $this->client->getStandingOrders($accountId, $offset, $limit, $keyLevel);
-    }
-
-    /**
      * Looks up account balance.
      *
      * @param string $accountId account id
@@ -563,23 +528,6 @@ class Member
     public function getBalances($accountIds, $keyLevel)
     {
         return $this->client->getBalances($accountIds, $keyLevel);
-    }
-
-    /**
-     * Confirm that the given account has sufficient funds to cover the charge.
-     *
-     * @param string accountId account ID
-     * @param double amount charge amount
-     * @param string currency charge currency
-     * @return true if the account has sufficient funds to cover the charge
-     * @throws Exception
-     */
-    public function confirmFunds($accountId, $amount, $currency)
-    {
-        $money = new Money();
-        $money->setCurrency($currency);
-        $money->setValue(strval($amount));
-        return $this->client->confirmFunds($accountId, $money);
     }
 
     /**

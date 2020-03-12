@@ -6,7 +6,6 @@ namespace Tokenio;
 
 use Io\Token\Proto\Common\Providerspecific\ProviderTransferMetadata;
 use Io\Token\Proto\Common\Token\TokenRequestPayload\TransferBody;
-use Io\Token\Proto\Common\Transferinstructions\ChargeBearer;
 use Io\Token\Proto\Common\Transferinstructions\TransferDestination;
 use Io\Token\Proto\Common\Transferinstructions\TransferEndpoint;
 use Io\Token\Proto\Common\Transferinstructions\TransferInstructions;
@@ -86,19 +85,6 @@ class TransferBuilder extends TokenRequestBuilder
     }
 
     /**
-     * Sets the execution date of the transfer. Used for future-dated payments.
-     * Uses ISO 8601 format: YYYY-MM-DD.
-     *
-     * @param string $executionDate execution date
-     * @return TransferBuilder
-     */
-    public function setExecutionDate($executionDate)
-    {
-        $this->requestPayload->getTransferBody()->setExecutionDate($executionDate);
-        return $this;
-    }
-
-    /**
      * Optional. Adds metadata for a specific provider.
      *
      * @param ProviderTransferMetadata $metadata provider-specific metadata
@@ -132,20 +118,6 @@ class TransferBuilder extends TokenRequestBuilder
             $this->requestPayload->getTransferBody()->getInstructions()->setMetadata(new TransferInstructions\Metadata());
         }
         $this->requestPayload->getTransferBody()->getInstructions()->getMetadata()->setChargeBearer($chargeBearer);
-        return $this;
-    }
-
-    /**
-     * Optional. In the scenario where TPP wishes to know the user's selection of country and
-     * bank, TPP should provide this url so that Token can make a call with relevant
-     * information as parameters. TPP can use that information to set transfer destination.
-     *
-     * @param string $url
-     * @return TransferBuilder
-     */
-    public function setSetTransferDestinationsUrl($url)
-    {
-        $this->requestPayload->getTransferBody()->setSetTransferDestinationsUrl($url);
         return $this;
     }
 
@@ -206,15 +178,4 @@ class TransferBuilder extends TokenRequestBuilder
         return $this;
     }
 
-    /**
-     * Optional. Sets whether CAF should be attempted before transfer.
-     *
-     * @param boolean $confirmFunds whether to attempt CAF before transfer
-     * @return TransferBuilder
-     */
-    public function setConfirmFunds($confirmFunds)
-    {
-        $this->requestPayload->getTransferBody()->setConfirmFunds($confirmFunds);
-        return $this;
-    }
 }

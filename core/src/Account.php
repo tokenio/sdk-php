@@ -4,9 +4,7 @@ namespace Tokenio;
 
 use Io\Token\Proto\Common\Account\AccountDetails;
 use Io\Token\Proto\Common\Account\AccountFeatures;
-use Io\Token\Proto\Common\Money\Money;
 use Io\Token\Proto\Common\Transaction\Balance;
-use Io\Token\Proto\Common\Transaction\StandingOrder;
 use Io\Token\Proto\Common\Transaction\Transaction;
 use Tokenio\Rpc\Client;
 
@@ -159,32 +157,6 @@ class Account
     public function getTransactions($offset, $limit, $level, $startDate = null, $endDate = null)
     {
         return $this->client->getTransactions($this->account->getId(), $offset, $limit, $level, $startDate, $endDate);
-    }
-
-    /**
-     * Looks up an existing standing order for a given account.
-     *
-     * @param string $standingOrderId ID of the standing order
-     * @param int $keyLevel key level
-     * @return StandingOrder
-     */
-    public function getStandingOrder($standingOrderId, $keyLevel) {
-        return $this->client->getStandingOrder($this->account->getId(), $standingOrderId, $keyLevel);
-    }
-
-    /**
-     * Looks up standing orders for a given account.
-     *
-     * @param string $offset optional offset to start at
-     * @param int $limit max number of records to return
-     * @param int $keyLevel key level
-     * @return PagedList
-     */
-    public function getStandingOrders(
-            $offset = null,
-            $limit = null,
-            $keyLevel = null) {
-        return $this->client->getStandingOrders($this->account->getId(), $offset, $limit, $keyLevel);
     }
 
     /**

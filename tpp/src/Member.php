@@ -7,17 +7,14 @@ use Io\Token\Proto\Common\Blob\Blob\AccessMode;
 use Io\Token\Proto\Common\Blob\Blob\Payload;
 use Io\Token\Proto\Common\Eidas\VerifyEidasPayload;
 use Io\Token\Proto\Common\Member\Profile;
-use Io\Token\Proto\Common\Submission\StandingOrderSubmission;
 use Io\Token\Proto\Common\Token\Token;
 use Io\Token\Proto\Common\Token\TokenOperationResult;
 use Io\Token\Proto\Common\Money\Money;
-use Io\Token\Proto\Common\Transfer\BulkTransfer;
 use Io\Token\Proto\Common\Transfer\Transfer;
 use Io\Token\Proto\Common\Transfer\TransferPayload;
 use Io\Token\Proto\Common\Transferinstructions\TransferDestination;
 use Io\Token\Proto\Common\Transferinstructions\TransferEndpoint;
 use Io\Token\Proto\Gateway\GetTokensRequest\Type;
-use Io\Token\Proto\Gateway\SetTokenRequestTransferDestinationsResponse;
 use Io\Token\Proto\Gateway\VerifyEidasResponse;
 use Tokenio\TokenRequest;
 use Tokenio\PagedList;
@@ -215,31 +212,6 @@ class Member extends \Tokenio\Member implements RepresentableInterface
 
 
     /**
-     * @param $tokenId string ID of token to redeem
-     * @return BulkTransfer record
-     * @throws \Exception
-     */
-
-    public function redeemBulkTransferToken($tokenId)
-    {
-        return $this->client->createBulkTransfer($tokenId);
-    }
-
-
-    /**
-     * Redeems a standing order token.
-     *
-     * @param string $tokenId ID of token to redeem
-     * @return StandingOrderSubmission
-     * @throws \Exception
-     */
-    public function redeemStandingOrderToken($tokenId)
-    {
-        return $this->client->createStandingOrder($tokenId);
-    }
-
-
-    /**
      * Stores a token request. This can be retrieved later by the token request id.
      *
      * @param TokenRequest $tokenRequest token request
@@ -252,19 +224,6 @@ class Member extends \Tokenio\Member implements RepresentableInterface
             $tokenRequest->getTokenRequestPayload(),
             $tokenRequest->getTokenRequestOptions());
     }
-
-
-    /**
-     * @param $tokenRequestId string token request id
-     * @param $transferDestinations TransferDestination[] destination account
-     * @return SetTokenRequestTransferDestinationsResponse
-     * @throws \Exception
-     */
-    public function setTokenRequestTransferDestinations($tokenRequestId, $transferDestinations)
-    {
-        return $this->client->setTokenRequestTransferDestinations($tokenRequestId, $transferDestinations);
-    }
-
 
     /**
      * Creates a new web-app customization.
@@ -294,29 +253,6 @@ class Member extends \Tokenio\Member implements RepresentableInterface
         return $this->client->getTransfer($transferId);
     }
 
-
-    /**
-     * @param $bulkTransferId string bulk transfer id.
-     * @return BulkTransfer bulk transfer record.
-     * @throws \Exception
-     */
-    public function getBulkTransfer($bulkTransferId)
-    {
-        return $this->client->getBulkTransfer($bulkTransferId);
-    }
-
-    /**
-     * Looks up an existing Token standing order submission.
-     *
-     * @param string $submissionId submission id
-     * @return StandingOrderSubmission record
-     * @throws \Exception
-     */
-    public function getStandingOrderSubmission($submissionId)
-    {
-        return $this->client->getStandingOrderSubmission($submissionId);
-    }
-
     /**
      * Looks up a list of existing transfers.
      *
@@ -329,19 +265,6 @@ class Member extends \Tokenio\Member implements RepresentableInterface
     public function getTransfers($offset = null, $limit, $tokenId = null)
     {
         return $this->client->getTransfers($offset, $limit, $tokenId);
-    }
-
-    /**
-     * Looks up a list of existing standing order submissions.
-     *
-     * @param string $offset optional offset to start at
-     * @param int $limit max number of records to return
-     * @return PagedList containing standing order records
-     * @throws \Exception
-     */
-    public function getStandingOrderSubmissions($offset = null, $limit)
-    {
-        return $this->client->getStandingOrderSubmissions( $offset, $limit);
     }
 
     /**

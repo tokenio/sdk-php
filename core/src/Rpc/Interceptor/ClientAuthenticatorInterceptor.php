@@ -4,12 +4,10 @@ namespace Tokenio\Rpc\Interceptor;
 
 use Google\Protobuf\Internal\Message;
 use Grpc\Interceptor;
-use Io\Token\Proto\Common\Security\CustomerTrackingMetadata;
 use Io\Token\Proto\Gateway\GrpcAuthPayload;
 use Tokenio\Rpc\AuthenticationContext;
 use Tokenio\Security\CryptoEngineInterface;
 use Tokenio\Util\Strings;
-use Tokenio\Util\Util;
 
 class ClientAuthenticatorInterceptor extends Interceptor
 {

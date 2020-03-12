@@ -4,7 +4,6 @@
 namespace Tokenio\Sample\Tpp;
 
 use Io\Token\Proto\Common\Token\Token;
-use Io\Token\Proto\Common\Transaction\TransactionStatus;
 use Io\Token\Proto\Common\Transfer\Transfer;
 use Tokenio\Tpp\Member;
 

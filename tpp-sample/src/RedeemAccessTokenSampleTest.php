@@ -4,12 +4,10 @@
 namespace Tokenio\Sample\Tpp;
 
 use Exception;
-use Io\Token\Proto\Common\Money\Money;
 use Io\Token\Proto\Common\Security\Key\Level;
 use Io\Token\Proto\Common\Token\Token;
 use PHPUnit\Framework\TestCase;
 use Tokenio\Sample\User\CreateAndEndorseAccessTokenSample;
-use Tokenio\Sample\User\CreateStandingOrderTokenSample;
 use Tokenio\Sample\User\CreateTransferTokenSample;
 use Tokenio\Tpp\TokenClient;
 use Tokenio\User\Member;

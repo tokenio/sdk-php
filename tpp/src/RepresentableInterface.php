@@ -3,13 +3,9 @@
 namespace Tokenio\Tpp;
 
 use Io\Token\Proto\Common\Security\Key;
-use Io\Token\Proto\Common\Security\Key\Level;
-use Io\Token\Proto\Common\Token\AccessBody\Resource\TransferDestinations;
 use Io\Token\Proto\Common\Transaction\Balance;
-use Io\Token\Proto\Common\Transaction\StandingOrder;
 use Io\Token\Proto\Common\Transaction\Transaction;
 use Io\Token\Proto\Common\Transferinstructions\TransferDestination;
-use PhpParser\Node\Expr\List_;
 use Tokenio\PagedList;
 
 /**
@@ -66,35 +62,18 @@ interface RepresentableInterface
      * @param $accountId string
      * @param $offset string
      * @param $limit int
-     * @param $keyLevel Key\Level
+     * @param $keyLevel int
      * @param $startDate string
      * @param $endDate string
      * @return PagedList
      */
     function getTransactions(
         $accountId,
-        $offset = null,
+        $offset,
         $limit,
         $keyLevel,
         $startDate = null,
         $endDate = null);
-
-    /**
-     * @param $accountId string
-     * @param $standingOrderId string
-     * @param $keyLevel Key\Level
-     * @return StandingOrder record
-     */
-    function getStandingOrder($accountId, $standingOrderId, $keyLevel);
-
-    /**
-     * @param $accountId string
-     * @param $offset string
-     * @param $limit int
-     * @param $keyLevel Key\Level
-     * @return PagedList of standing order records.
-     */
-    function getStandingOrders($accountId, $offset = null, $limit, $keyLevel);
 
     /**
      * @var $accountId string
@@ -102,11 +81,4 @@ interface RepresentableInterface
      */
     function resolveTransferDestinations($accountId);
 
-    /**
-     * @var $accountId string
-     * @var $amount double
-     * @var $currency string
-     * @return boolean
-     */
-    function confirmFunds($accountId, $amount, $currency);
 }

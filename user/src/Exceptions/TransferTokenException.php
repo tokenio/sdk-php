@@ -10,7 +10,7 @@ class TransferTokenException extends \RuntimeException
     private $status;
 
     /**
-     * @param $status TransferTokenStatus
+     * @param $status int
      */
     public function __construct($status)
     {

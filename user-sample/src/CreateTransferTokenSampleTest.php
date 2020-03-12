@@ -37,13 +37,4 @@ class CreateTransferTokenSampleTest extends TestCase
         $this->assertNotNull($token);
     }
 
-    public function testCreatePaymentTokenScheduled()
-    {
-        $tokenClient = TestUtil::createClient();
-        $payer = TestUtil::createMemberAndLinkAccounts($tokenClient);
-        $payeeAlias = TestUtil::randomAlias();
-        $payee = $tokenClient->createMember($payeeAlias);
-        $token = CreateTransferTokenSample::createTransferTokenScheduled($payer, $payeeAlias);
-        $this->assertNotNull($token);
-    }
 }

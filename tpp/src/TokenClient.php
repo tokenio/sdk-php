@@ -7,17 +7,12 @@ use Io\Token\Proto\Common\Alias\Alias;
 use Io\Token\Proto\Common\Member\CreateMemberType;
 use Io\Token\Proto\Common\Member\MemberRecoveryOperation;
 use Io\Token\Proto\Common\Security\Key;
-use Io\Token\Proto\Common\Token\TokenRequestStatePayload;
 use Tokenio\Security\CryptoEngineFactoryInterface;
 use Tokenio\Security\CryptoEngineInterface;
 use Tokenio\TokenCluster;
 use Tokenio\TokenRequest;
 use Tokenio\TokenRequest\TokenRequestState;
-use Tokenio\Tpp\Exception\InvalidStateException;
 use Tokenio\Tpp\Rpc\ClientFactory;
-use Tokenio\Tpp\TokenRequest\TokenRequestCallback;
-use Tokenio\Tpp\TokenRequest\TokenRequestCallbackParameters;
-use Tokenio\Tpp\TokenRequest\TokenRequestTransferDestinationsCallbackParameters;
 use Tokenio\Tpp\Util\Util;
 
 class TokenClient extends \Tokenio\TokenClient
@@ -163,81 +158,6 @@ class TokenClient extends \Tokenio\TokenClient
             $this->tokenCluster->getWebUrl(),
             $requestId,
             Util::urlEncode($tokenRequestState->serialize()));
-    }
-
-    /**
-     * Parse the token request callback URL to extract the state and the token ID. Check the
-     * CSRF token against the initial request and verify the signature.
-     *
-     * @param $callbackUrl string token request callback url
-     * @param $csrfToken string csrfToken
-     * @return TokenRequestCallback object containing the token id and the original state
-     * @throws \Tokenio\Exception\CryptoKeyNotFoundException
-     * @throws \Tokenio\Exception\CryptographicException
-     */
-    public function parseTokenRequestCallbackUrl($callbackUrl, $csrfToken = "")
-    {
-        $parts = parse_url($callbackUrl);
-        parse_str($parts['query'], $query);
-        return self::parseTokenRequestCallbackParams($query, $csrfToken);
-    }
-
-    /**
-     * Parse the Set Transfer Destinations Url callback parameters to extract state,
-     * region and supported . Check the CSRF token against the initial request and verify
-     * the signature.
-     *
-     * @param $url string token request callback url
-     * @return TokenRequestCallbackParameters object containing the token id and the original state
-     * @throws \Exception
-     */
-    public function parseSetTransferDestinationsUrl($url)
-    {
-        $parts = parse_url($url);
-        $tempString = str_replace("supportedTransferDestinationType","supportedTransferDestinationType[]",$parts['query']);
-        parse_str($tempString, $parameters);
-        return self::parseSetTransferDestinationsUrlParams($parameters);
-    }
-
-    /**
-     * Parse the token request callback parameters to extract the state and the token ID. Check the
-     * CSRF token against the initial request and verify the signature.
-     *
-     * @param $callbackParams string[]
-     * @param $csrfToken string CSRF token.
-     * @return TokenRequestCallback
-     * @throws \Tokenio\Exception\CryptoKeyNotFoundException
-     * @throws \Tokenio\Exception\CryptographicException
-     * @throws \Exception
-     */
-    public function parseTokenRequestCallbackParams($callbackParams, $csrfToken)
-    {
-        $unauthenticated = ClientFactory::unauthenticated($this->channel);
-        $tokenMember = $unauthenticated->getTokenMember();
-        $params = TokenRequestCallbackParameters::create($callbackParams);
-        $state = TokenRequest\TokenRequestState::parse($params->getSerializedState());
-        if($state->getCsrfTokenHash()!== Util::hashString($csrfToken))
-        {
-            throw new InvalidStateException($csrfToken);
-        }
-
-        $payload = new TokenRequestStatePayload();
-        $payload->setTokenId($params->getTokenId());
-        $payload->setState(Util::urlEncode($params->getSerializedState()));
-        Util::verifySignature($tokenMember, $payload, $params->getSignature());
-        return new TokenRequestCallback($params->getTokenId(), $state->getInnerState());
-    }
-
-    /**
-     * Parse the Set Transfer Destinations Url callback parameters to extract country,
-     * bank and supported payments.
-     * @param $urlParams string url parameters
-     * @return TokenRequestTransferDestinationsCallbackParameters object containing region.
-     * @throws \Exception
-     */
-    public function parseSetTransferDestinationsUrlParams($urlParams)
-    {
-        return TokenRequestTransferDestinationsCallbackParameters::create($urlParams);
     }
 
     /**

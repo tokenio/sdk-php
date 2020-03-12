@@ -7,8 +7,6 @@ use Io\Token\Proto\Common\Money\Money;
 use Io\Token\Proto\Common\Security\Key\Level;
 use Tokenio\Tpp\Member;
 
-;
-
 class RedeemAccessTokenSample
 {
     /**

@@ -25,13 +25,9 @@ use Io\Token\Proto\Common\Security\CustomerTrackingMetadata;
 use Io\Token\Proto\Common\Security\Key\Level;
 use Io\Token\Proto\Common\Security\Signature;
 use Io\Token\Proto\Common\Token\TokenPayload;
-use Io\Token\Proto\Common\Token\TokenSignature;
 use Io\Token\Proto\Common\Transaction\Balance;
 use Io\Token\Proto\Common\Transaction\RequestStatus;
-use Io\Token\Proto\Common\Transaction\StandingOrder;
 use Io\Token\Proto\Common\Transaction\Transaction;
-use Io\Token\Proto\Gateway\ConfirmFundsRequest;
-use Io\Token\Proto\Gateway\ConfirmFundsResponse;
 use Io\Token\Proto\Gateway\CreateTestBankAccountRequest;
 use Io\Token\Proto\Gateway\CreateTestBankAccountResponse;
 use Io\Token\Proto\Gateway\DeleteMemberRequest;
@@ -56,10 +52,6 @@ use Io\Token\Proto\Gateway\GetProfilePictureRequest;
 use Io\Token\Proto\Gateway\GetProfilePictureResponse;
 use Io\Token\Proto\Gateway\GetProfileRequest;
 use Io\Token\Proto\Gateway\GetProfileResponse;
-use Io\Token\Proto\Gateway\GetStandingOrderRequest;
-use Io\Token\Proto\Gateway\GetStandingOrderResponse;
-use Io\Token\Proto\Gateway\GetStandingOrdersRequest;
-use Io\Token\Proto\Gateway\GetStandingOrdersResponse;
 use Io\Token\Proto\Gateway\GetTransactionRequest;
 use Io\Token\Proto\Gateway\GetTransactionResponse;
 use Io\Token\Proto\Gateway\GetTransactionsRequest;
@@ -432,85 +424,6 @@ class Client
         } else {
             throw new Exception\RequestException($response->getStatus());
         }
-    }
-
-    /**
-     * Look up an existing standing order and return the response.
-     *
-     * @param string $accountId the account id
-     * @param string $standingOrderId the standing order id
-     * @param int $keyLevel the key level
-     * @return StandingOrder
-     * @throws Exception\RequestException
-     * @throws Exception\StepUpRequiredException
-     * @throws \Exception
-     */
-    public function getStandingOrder($accountId, $standingOrderId, $keyLevel)
-    {
-        $request = new GetStandingOrderRequest();
-        $request->setAccountId($accountId)
-            ->setStandingOrderId($standingOrderId);
-
-        /** @var GetStandingOrderResponse $response */
-        $response = Util::executeAndHandleCall(self::gateway($this->authenticateOnBehalfOf($keyLevel))
-            ->GetStandingOrder($request));
-        if ($response->getStatus() == RequestStatus::SUCCESSFUL_REQUEST) {
-            return $response->getStandingOrder();
-        } elseif ($response->getStatus() == RequestStatus::MORE_SIGNATURES_NEEDED) {
-            throw new Exception\StepUpRequiredException("Standing order step up required.");
-        } else {
-            throw new Exception\RequestException($response->getStatus());
-        }
-    }
-
-    /**
-     * Look up standing orders and return response.
-     *
-     * @param string $accountId the account id
-     * @param string $offset the offset
-     * @param int $limit the limit
-     * @param int $keyLevel the key level
-     * @return PagedList list of standing orders
-     * @throws Exception\RequestException
-     * @throws Exception\StepUpRequiredException
-     * @throws \Exception
-     */
-    public function getStandingOrders($accountId, $offset, $limit, $keyLevel)
-    {
-        $request = new GetStandingOrdersRequest();
-        $request->setAccountId($accountId);
-        $request->setPage($this->pageBuilder($limit, $offset));
-
-        /** @var GetStandingOrdersResponse $response */
-        $response = Util::executeAndHandleCall(self::gateway($this->authenticateOnBehalfOf($keyLevel))
-            ->GetStandingOrders($request));
-        if ($response->getStatus() == RequestStatus::SUCCESSFUL_REQUEST) {
-            return new PagedList($response->getStandingOrders(), $response->getOffset());
-        } elseif ($response->getStatus() == RequestStatus::MORE_SIGNATURES_NEEDED) {
-            throw new Exception\StepUpRequiredException("Standing order step up required.");
-        } else {
-            throw new Exception\RequestException($response->getStatus());
-        }
-    }
-
-    /**
-     * Confirm that the given account has sufficient funds to cover the charge.
-     *
-     * @param $accountId account ID
-     * @param Money $amount charge amount
-     * @return true if the account has sufficient funds to cover the charge
-     * @throws \Exception
-     */
-    public function confirmFunds($accountId, $amount)
-    {
-        $request = new ConfirmFundsRequest();
-        $request->setAccountId($accountId);
-        $request->setAmount($amount);
-
-        /** @var ConfirmFundsResponse $response */
-        $response = Util::executeAndHandleCall(self::gateway($this->authenticateOnBehalfOf())
-            ->ConfirmFunds($request));
-        return $response->getFundsAvailable();
     }
 
     /**

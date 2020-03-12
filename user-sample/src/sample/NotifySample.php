@@ -1,7 +1,6 @@
 <?php
 namespace Tokenio\Sample\User;
 
-use Io\Token\Proto\Common\Notification\NotifyStatus;
 use Io\Token\Proto\Common\Token\TokenMember;
 use Io\Token\Proto\Common\Token\TransferBody;
 use Tokenio\User\TokenClient;

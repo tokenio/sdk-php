@@ -72,7 +72,6 @@ class TransferTokenBuilder
             $newTransferBody->setLifetimeAmount($transferBody->getLifetimeAmount())
                 ->setCurrency($transferBody->getCurrency())
                 ->setAmount($transferBody->getAmount())
-                ->setConfirmFunds($transferBody->getConfirmFunds())
                 ->setInstructions($transferBody->getInstructions() !== null
                     ? $transferBody->getInstructions()
                     : $newTransferInstructions->setDestinations($transferBody->getDestinations()));
@@ -93,14 +92,6 @@ class TransferTokenBuilder
                 $this->payload->setActingAs($tokenRequest->getRequestPayload()->getActingAs());
             }
 
-            $executionDate = $tokenRequest->getRequestPayload()
-                ->getTransferBody()
-                ->getExecutionDate();
-
-            if($executionDate !== null && !empty($executionDate))
-            {
-                $this->setExecutionDate($executionDate);
-            }
             $this->tokenRequestId = $tokenRequest->getId();
         }
         else
@@ -337,22 +328,10 @@ class TransferTokenBuilder
         return $this;
     }
 
-    public function setExecutionDate($executionDate)
-    {
-        $this->payload->getTransfer()->setExecutionDate($executionDate);
-        return $this;
-    }
-
     public function setProviderTransferMetadata($metadata)
     {
         $this->payload->getTransfer()->getInstructions()->getMetadata()
             ->setProviderTransferMetadata($metadata);
-        return $this;
-    }
-
-    public function setConfirmFunds($confirmFunds)
-    {
-        $this->payload->getTransfer()->setConfirmFunds($confirmFunds);
         return $this;
     }
 
