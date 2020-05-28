@@ -94,7 +94,7 @@ class TransactionStatus
      */
     const FAILURE_GENERIC = 5;
     /**
-     * legacy transfers only: the transaction has been sent but has not been acknowledged by the bank
+     * the transaction has been sent but has not been acknowledged by the bank
      *
      * Generated from protobuf enum <code>SENT = 16;</code>
      */

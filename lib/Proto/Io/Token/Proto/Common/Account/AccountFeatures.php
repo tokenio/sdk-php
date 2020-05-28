@@ -16,9 +16,9 @@ use Google\Protobuf\Internal\GPBUtil;
 class AccountFeatures extends \Google\Protobuf\Internal\Message
 {
     /**
-     * **DEPRECATED** can both send and receive payments
+     * use supports_send_payment and supports_receive_payment instead
      *
-     * Generated from protobuf field <code>bool supports_payment = 1;</code>
+     * Generated from protobuf field <code>bool supports_payment = 1 [deprecated = true];</code>
      */
     private $supports_payment = false;
     /**
@@ -28,7 +28,7 @@ class AccountFeatures extends \Google\Protobuf\Internal\Message
      */
     private $supports_information = false;
     /**
-     * Generated from protobuf field <code>bool requires_external_auth = 3;</code>
+     * Generated from protobuf field <code>bool requires_external_auth = 3 [deprecated = true];</code>
      */
     private $requires_external_auth = false;
     /**
@@ -51,7 +51,7 @@ class AccountFeatures extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type bool $supports_payment
-     *           **DEPRECATED** can both send and receive payments
+     *           use supports_send_payment and supports_receive_payment instead
      *     @type bool $supports_information
      *           can get info, e.g., get balance
      *     @type bool $requires_external_auth
@@ -67,9 +67,9 @@ class AccountFeatures extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * **DEPRECATED** can both send and receive payments
+     * use supports_send_payment and supports_receive_payment instead
      *
-     * Generated from protobuf field <code>bool supports_payment = 1;</code>
+     * Generated from protobuf field <code>bool supports_payment = 1 [deprecated = true];</code>
      * @return bool
      */
     public function getSupportsPayment()
@@ -78,9 +78,9 @@ class AccountFeatures extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * **DEPRECATED** can both send and receive payments
+     * use supports_send_payment and supports_receive_payment instead
      *
-     * Generated from protobuf field <code>bool supports_payment = 1;</code>
+     * Generated from protobuf field <code>bool supports_payment = 1 [deprecated = true];</code>
      * @param bool $var
      * @return $this
      */
@@ -119,7 +119,7 @@ class AccountFeatures extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>bool requires_external_auth = 3;</code>
+     * Generated from protobuf field <code>bool requires_external_auth = 3 [deprecated = true];</code>
      * @return bool
      */
     public function getRequiresExternalAuth()
@@ -128,7 +128,7 @@ class AccountFeatures extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>bool requires_external_auth = 3;</code>
+     * Generated from protobuf field <code>bool requires_external_auth = 3 [deprecated = true];</code>
      * @param bool $var
      * @return $this
      */

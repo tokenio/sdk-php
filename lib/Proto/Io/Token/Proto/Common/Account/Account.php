@@ -48,13 +48,13 @@ class Account extends \Google\Protobuf\Internal\Message
     /**
      * timestamp of the last time the balance/transaction cache was updated for that account
      *
-     * Generated from protobuf field <code>int64 last_cache_update_ms = 7;</code>
+     * Generated from protobuf field <code>int64 last_cache_update_ms = 7 [deprecated = true];</code>
      */
     private $last_cache_update_ms = 0;
     /**
      * timestamp of the next scheduled time to update the balance/transaction cache for that account
      *
-     * Generated from protobuf field <code>int64 next_cache_update_ms = 8;</code>
+     * Generated from protobuf field <code>int64 next_cache_update_ms = 8 [deprecated = true];</code>
      */
     private $next_cache_update_ms = 0;
     /**
@@ -226,7 +226,7 @@ class Account extends \Google\Protobuf\Internal\Message
     /**
      * timestamp of the last time the balance/transaction cache was updated for that account
      *
-     * Generated from protobuf field <code>int64 last_cache_update_ms = 7;</code>
+     * Generated from protobuf field <code>int64 last_cache_update_ms = 7 [deprecated = true];</code>
      * @return int|string
      */
     public function getLastCacheUpdateMs()
@@ -237,7 +237,7 @@ class Account extends \Google\Protobuf\Internal\Message
     /**
      * timestamp of the last time the balance/transaction cache was updated for that account
      *
-     * Generated from protobuf field <code>int64 last_cache_update_ms = 7;</code>
+     * Generated from protobuf field <code>int64 last_cache_update_ms = 7 [deprecated = true];</code>
      * @param int|string $var
      * @return $this
      */
@@ -252,7 +252,7 @@ class Account extends \Google\Protobuf\Internal\Message
     /**
      * timestamp of the next scheduled time to update the balance/transaction cache for that account
      *
-     * Generated from protobuf field <code>int64 next_cache_update_ms = 8;</code>
+     * Generated from protobuf field <code>int64 next_cache_update_ms = 8 [deprecated = true];</code>
      * @return int|string
      */
     public function getNextCacheUpdateMs()
@@ -263,7 +263,7 @@ class Account extends \Google\Protobuf\Internal\Message
     /**
      * timestamp of the next scheduled time to update the balance/transaction cache for that account
      *
-     * Generated from protobuf field <code>int64 next_cache_update_ms = 8;</code>
+     * Generated from protobuf field <code>int64 next_cache_update_ms = 8 [deprecated = true];</code>
      * @param int|string $var
      * @return $this
      */

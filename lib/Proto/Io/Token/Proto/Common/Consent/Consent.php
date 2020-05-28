@@ -39,6 +39,22 @@ class Consent extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string initiator_ref_id = 8;</code>
      */
     private $initiator_ref_id = '';
+    /**
+     * Optional description
+     *
+     * Generated from protobuf field <code>string description = 11;</code>
+     */
+    private $description = '';
+    /**
+     * Generated from protobuf field <code>int64 created_at_ms = 12;</code>
+     */
+    private $created_at_ms = 0;
+    /**
+     * Optional for transfer consents.
+     *
+     * Generated from protobuf field <code>int64 expires_at_ms = 13;</code>
+     */
+    private $expires_at_ms = 0;
     protected $type;
 
     /**
@@ -59,6 +75,11 @@ class Consent extends \Google\Protobuf\Internal\Message
      *           ID of the member requesting consent (e.g. merchant)
      *     @type string $initiator_ref_id
      *           Reference ID set by the member requesting consent
+     *     @type string $description
+     *           Optional description
+     *     @type int|string $created_at_ms
+     *     @type int|string $expires_at_ms
+     *           Optional for transfer consents.
      * }
      */
     public function __construct($data = NULL) {
@@ -272,6 +293,80 @@ class Consent extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->initiator_ref_id = $var;
+
+        return $this;
+    }
+
+    /**
+     * Optional description
+     *
+     * Generated from protobuf field <code>string description = 11;</code>
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Optional description
+     *
+     * Generated from protobuf field <code>string description = 11;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setDescription($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->description = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>int64 created_at_ms = 12;</code>
+     * @return int|string
+     */
+    public function getCreatedAtMs()
+    {
+        return $this->created_at_ms;
+    }
+
+    /**
+     * Generated from protobuf field <code>int64 created_at_ms = 12;</code>
+     * @param int|string $var
+     * @return $this
+     */
+    public function setCreatedAtMs($var)
+    {
+        GPBUtil::checkInt64($var);
+        $this->created_at_ms = $var;
+
+        return $this;
+    }
+
+    /**
+     * Optional for transfer consents.
+     *
+     * Generated from protobuf field <code>int64 expires_at_ms = 13;</code>
+     * @return int|string
+     */
+    public function getExpiresAtMs()
+    {
+        return $this->expires_at_ms;
+    }
+
+    /**
+     * Optional for transfer consents.
+     *
+     * Generated from protobuf field <code>int64 expires_at_ms = 13;</code>
+     * @param int|string $var
+     * @return $this
+     */
+    public function setExpiresAtMs($var)
+    {
+        GPBUtil::checkInt64($var);
+        $this->expires_at_ms = $var;
 
         return $this;
     }

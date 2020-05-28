@@ -20,6 +20,10 @@ class GatewayServiceClient extends \Grpc\BaseStub {
     }
 
     /**
+     * //////////////////////////////////////////////////////////////////////////////////////////////////
+     * Member registration, key and alias management.
+     *
+     *
      * Create a member. Mints a member ID; newly-created member does not yet
      * have keys, alias, or anything other than an ID.
      * Used by createMember, https://developer.token.io/sdk/#create-a-member
@@ -33,6 +37,31 @@ class GatewayServiceClient extends \Grpc\BaseStub {
         return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/CreateMember',
         $argument,
         ['\Io\Token\Proto\Gateway\CreateMemberResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * Creates a business member under realm of a bank with an EIDAS alias (with value equal to the
+     * authNumber from the certificate) and a public key taken from the certificate.
+     * Then onboards it with the provided certificate.
+     * A successful onboarding includes verifying the member and the alias and adding permissions
+     * based on the certificate.
+     * The call is idempotent, so if a member under this realm and with the same verified alias
+     * already exists, it returns an ID of the existing member, an ID of the registered eidas key and
+     * an ID of the verification for this certificate. If you wish to submit another certificate
+     * for an existing member, please use VerifyEidas call instead.
+     * Note, that the call is asynchronous and the newly created member might not be onboarded at the
+     * time the call returns. You can check the verification status using GetEidasVerificationStatus
+     * call with the verification_id returned by this call.
+     * @param \Io\Token\Proto\Gateway\RegisterWithEidasRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function RegisterWithEidas(\Io\Token\Proto\Gateway\RegisterWithEidasRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/RegisterWithEidas',
+        $argument,
+        ['\Io\Token\Proto\Gateway\RegisterWithEidasResponse', 'decode'],
         $metadata, $options);
     }
 
@@ -259,19 +288,6 @@ class GatewayServiceClient extends \Grpc\BaseStub {
     }
 
     /**
-     * @param \Io\Token\Proto\Gateway\VerifyAffiliateRequest $argument input argument
-     * @param array $metadata metadata
-     * @param array $options call options
-     */
-    public function VerifyAffiliate(\Io\Token\Proto\Gateway\VerifyAffiliateRequest $argument,
-      $metadata = [], $options = []) {
-        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/VerifyAffiliate',
-        $argument,
-        ['\Io\Token\Proto\Gateway\VerifyAffiliateResponse', 'decode'],
-        $metadata, $options);
-    }
-
-    /**
      * @param \Io\Token\Proto\Gateway\SetAppCallbackUrlRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -344,6 +360,46 @@ class GatewayServiceClient extends \Grpc\BaseStub {
         return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/VerifyEidas',
         $argument,
         ['\Io\Token\Proto\Gateway\VerifyEidasResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Io\Token\Proto\Gateway\GetEidasVerificationStatusRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetEidasVerificationStatus(\Io\Token\Proto\Gateway\GetEidasVerificationStatusRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetEidasVerificationStatus',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetEidasVerificationStatusResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Io\Token\Proto\Gateway\GetEidasCertificateStatusRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function getEidasCertificateStatus(\Io\Token\Proto\Gateway\GetEidasCertificateStatusRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/getEidasCertificateStatus',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetEidasCertificateStatusResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * Recover an eidas-verified member
+     * @param \Io\Token\Proto\Gateway\RecoverEidasRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function RecoverEidasMember(\Io\Token\Proto\Gateway\RecoverEidasRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/RecoverEidasMember',
+        $argument,
+        ['\Io\Token\Proto\Gateway\RecoverEidasResponse', 'decode'],
         $metadata, $options);
     }
 
@@ -1276,6 +1332,34 @@ class GatewayServiceClient extends \Grpc\BaseStub {
     }
 
     /**
+     * Stores a linking request
+     * @param \Io\Token\Proto\Gateway\StoreLinkingRequestRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function StoreLinkingRequest(\Io\Token\Proto\Gateway\StoreLinkingRequestRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/StoreLinkingRequest',
+        $argument,
+        ['\Io\Token\Proto\Gateway\StoreLinkingRequestResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * Gets a linking request
+     * @param \Io\Token\Proto\Gateway\GetLinkingRequestRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetLinkingRequest(\Io\Token\Proto\Gateway\GetLinkingRequestRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetLinkingRequest',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetLinkingRequestResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * //////////////////////////////////////////////////////////////////////////////////////////////////
      * Token Transfers.
      *
@@ -1446,47 +1530,109 @@ class GatewayServiceClient extends \Grpc\BaseStub {
     }
 
     /**
+     * @param \Io\Token\Proto\Gateway\GetBankAuthUrlRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetBankAuthUrl(\Io\Token\Proto\Gateway\GetBankAuthUrlRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetBankAuthUrl',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetBankAuthUrlResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Io\Token\Proto\Gateway\GetDirectBankAuthUrlRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetDirectBankAuthUrl(\Io\Token\Proto\Gateway\GetDirectBankAuthUrlRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetDirectBankAuthUrl',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetDirectBankAuthUrlResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * //////////////////////////////////////////////////////////////////////////////////////////////////
-     * Keychain management.
+     * TSP only endpoints
      *
-     * Create a keychain with a name.
-     * @param \Io\Token\Proto\Gateway\CreateKeychainRequest $argument input argument
+     * @param \Io\Token\Proto\Gateway\OnBankAuthCallbackRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
      */
-    public function CreateKeychain(\Io\Token\Proto\Gateway\CreateKeychainRequest $argument,
+    public function OnBankAuthCallback(\Io\Token\Proto\Gateway\OnBankAuthCallbackRequest $argument,
       $metadata = [], $options = []) {
-        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/CreateKeychain',
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/OnBankAuthCallback',
         $argument,
-        ['\Io\Token\Proto\Gateway\CreateKeychainResponse', 'decode'],
+        ['\Io\Token\Proto\Gateway\OnBankAuthCallbackResponse', 'decode'],
         $metadata, $options);
     }
 
     /**
-     * Update a keychain's info.
-     * @param \Io\Token\Proto\Gateway\UpdateKeychainInfoRequest $argument input argument
+     * @param \Io\Token\Proto\Gateway\GetExternalMetadataRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
      */
-    public function UpdateKeychainInfo(\Io\Token\Proto\Gateway\UpdateKeychainInfoRequest $argument,
+    public function GetExternalMetadata(\Io\Token\Proto\Gateway\GetExternalMetadataRequest $argument,
       $metadata = [], $options = []) {
-        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/UpdateKeychainInfo',
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetExternalMetadata',
         $argument,
-        ['\Io\Token\Proto\Gateway\UpdateKeychainInfoResponse', 'decode'],
+        ['\Io\Token\Proto\Gateway\GetExternalMetadataResponse', 'decode'],
         $metadata, $options);
     }
 
     /**
-     * Get all the keychains of a member.
-     * @param \Io\Token\Proto\Gateway\GetKeychainsRequest $argument input argument
+     * @param \Io\Token\Proto\Gateway\StoreBankConfigRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
      */
-    public function GetKeychains(\Io\Token\Proto\Gateway\GetKeychainsRequest $argument,
+    public function StoreBankConfig(\Io\Token\Proto\Gateway\StoreBankConfigRequest $argument,
       $metadata = [], $options = []) {
-        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetKeychains',
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/StoreBankConfig',
         $argument,
-        ['\Io\Token\Proto\Gateway\GetKeychainsResponse', 'decode'],
+        ['\Io\Token\Proto\Gateway\StoreBankConfigResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Io\Token\Proto\Gateway\GetBankConfigRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetBankConfig(\Io\Token\Proto\Gateway\GetBankConfigRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetBankConfig',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetBankConfigResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Io\Token\Proto\Gateway\GetBankConfigsRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetBankConfigs(\Io\Token\Proto\Gateway\GetBankConfigsRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetBankConfigs',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetBankConfigsResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Io\Token\Proto\Gateway\DeleteBankConfigRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function DeleteBankConfig(\Io\Token\Proto\Gateway\DeleteBankConfigRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/DeleteBankConfig',
+        $argument,
+        ['\Io\Token\Proto\Gateway\DeleteBankConfigResponse', 'decode'],
         $metadata, $options);
     }
 
@@ -1561,6 +1707,227 @@ class GatewayServiceClient extends \Grpc\BaseStub {
         return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetAvailabilityReport',
         $argument,
         ['\Io\Token\Proto\Gateway\GetAvailabilityReportResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Io\Token\Proto\Gateway\GetTppAccessReportRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetTppAccessReport(\Io\Token\Proto\Gateway\GetTppAccessReportRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetTppAccessReport',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetTppAccessReportResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * //////////////////////////////////////////////////////////////////////////////////////////////////
+     * Reports (portal requests).
+     *
+     * Get TPP requests report.
+     * @param \Io\Token\Proto\Gateway\GetTppRequestsReportRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetTppRequestsReport(\Io\Token\Proto\Gateway\GetTppRequestsReportRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetTppRequestsReport',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetTppRequestsReportResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Io\Token\Proto\Gateway\GetBankDowntimeReportRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetBankDowntimeReport(\Io\Token\Proto\Gateway\GetBankDowntimeReportRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetBankDowntimeReport',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetBankDowntimeReportResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Io\Token\Proto\Gateway\GetBankStatusRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetBankStatus(\Io\Token\Proto\Gateway\GetBankStatusRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetBankStatus',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetBankStatusResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Io\Token\Proto\Gateway\GetBanksStatusRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetBanksStatus(\Io\Token\Proto\Gateway\GetBanksStatusRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetBanksStatus',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetBanksStatusResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * //////////////////////////////////////////////////////////////////////////////////////////////////
+     * RESTful Bank API
+     *
+     * @param \Io\Token\Proto\Gateway\CreateBankUserRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function CreateBankUser(\Io\Token\Proto\Gateway\CreateBankUserRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/CreateBankUser',
+        $argument,
+        ['\Io\Token\Proto\Gateway\CreateBankUserResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Io\Token\Proto\Gateway\DeleteBankUserRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function DeleteBankUser(\Io\Token\Proto\Gateway\DeleteBankUserRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/DeleteBankUser',
+        $argument,
+        ['\Io\Token\Proto\Gateway\DeleteBankUserResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Io\Token\Proto\Gateway\RetrieveConsentRequestRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function RetrieveConsentRequest(\Io\Token\Proto\Gateway\RetrieveConsentRequestRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/RetrieveConsentRequest',
+        $argument,
+        ['\Io\Token\Proto\Gateway\RetrieveConsentRequestResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Io\Token\Proto\Gateway\CreateConsentRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function CreateConsent(\Io\Token\Proto\Gateway\CreateConsentRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/CreateConsent',
+        $argument,
+        ['\Io\Token\Proto\Gateway\CreateConsentResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Io\Token\Proto\Gateway\CancelConsentRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function CancelConsent(\Io\Token\Proto\Gateway\CancelConsentRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/CancelConsent',
+        $argument,
+        ['\Io\Token\Proto\Gateway\CancelConsentResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Io\Token\Proto\Gateway\GetActiveAccessConsentsRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetActiveAccessConsents(\Io\Token\Proto\Gateway\GetActiveAccessConsentsRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetActiveAccessConsents',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetActiveAccessConsentsResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * //////////////////////////////////////////////////////////////////////////////////////////////////
+     * Partner endpoints
+     *
+     * @param \Io\Token\Proto\Gateway\EnableMemberRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function EnableMember(\Io\Token\Proto\Gateway\EnableMemberRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/EnableMember',
+        $argument,
+        ['\Io\Token\Proto\Gateway\EnableMemberResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Io\Token\Proto\Gateway\DisableMemberRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function DisableMember(\Io\Token\Proto\Gateway\DisableMemberRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/DisableMember',
+        $argument,
+        ['\Io\Token\Proto\Gateway\DisableMemberResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * //////////////////////////////////////////////////////////////////////////////////////////////////
+     * Webhook endpoints
+     *
+     * @param \Io\Token\Proto\Gateway\SetWebhookConfigRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function SetWebhookConfig(\Io\Token\Proto\Gateway\SetWebhookConfigRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/SetWebhookConfig',
+        $argument,
+        ['\Io\Token\Proto\Gateway\SetWebhookConfigResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Io\Token\Proto\Gateway\GetWebhookConfigRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetWebhookConfig(\Io\Token\Proto\Gateway\GetWebhookConfigRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetWebhookConfig',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetWebhookConfigResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Io\Token\Proto\Gateway\DeleteWebhookConfigRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function DeleteWebhookConfig(\Io\Token\Proto\Gateway\DeleteWebhookConfigRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/DeleteWebhookConfig',
+        $argument,
+        ['\Io\Token\Proto\Gateway\DeleteWebhookConfigResponse', 'decode'],
         $metadata, $options);
     }
 

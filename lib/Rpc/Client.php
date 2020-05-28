@@ -38,6 +38,7 @@ use Io\Token\Proto\Common\Transaction\StandingOrder;
 use Io\Token\Proto\Common\Transaction\Transaction;
 use Io\Token\Proto\Common\Transfer\Transfer;
 use Io\Token\Proto\Common\Transfer\TransferPayload;
+use Io\Token\Proto\Common\Webhook\Webhook\Config;
 use Io\Token\Proto\Gateway\AddAddressRequest;
 use Io\Token\Proto\Gateway\AddAddressResponse;
 use Io\Token\Proto\Gateway\AddTrustedBeneficiaryRequest;
@@ -58,6 +59,8 @@ use Io\Token\Proto\Gateway\CreateTransferRequest;
 use Io\Token\Proto\Gateway\CreateTransferResponse;
 use Io\Token\Proto\Gateway\DeleteAddressRequest;
 use Io\Token\Proto\Gateway\DeleteMemberRequest;
+use Io\Token\Proto\Gateway\DeleteWebhookConfigRequest;
+use Io\Token\Proto\Gateway\DeleteWebhookConfigResponse;
 use Io\Token\Proto\Gateway\EndorseTokenRequest;
 use Io\Token\Proto\Gateway\EndorseTokenResponse;
 use Io\Token\Proto\Gateway\GatewayServiceClient;
@@ -113,6 +116,8 @@ use Io\Token\Proto\Gateway\GetTransfersRequest;
 use Io\Token\Proto\Gateway\GetTransfersResponse;
 use Io\Token\Proto\Gateway\GetTrustedBeneficiariesRequest;
 use Io\Token\Proto\Gateway\GetTrustedBeneficiariesResponse;
+use Io\Token\Proto\Gateway\GetWebhookConfigRequest;
+use Io\Token\Proto\Gateway\GetWebhookConfigResponse;
 use Io\Token\Proto\Gateway\Page;
 use Io\Token\Proto\Gateway\RemoveTrustedBeneficiaryRequest;
 use Io\Token\Proto\Gateway\RemoveTrustedBeneficiaryResponse;
@@ -124,6 +129,8 @@ use Io\Token\Proto\Gateway\SetProfilePictureRequest;
 use Io\Token\Proto\Gateway\SetProfilePictureResponse;
 use Io\Token\Proto\Gateway\SetProfileRequest;
 use Io\Token\Proto\Gateway\SetProfileResponse;
+use Io\Token\Proto\Gateway\SetWebhookConfigRequest;
+use Io\Token\Proto\Gateway\SetWebhookConfigResponse;
 use Io\Token\Proto\Gateway\SignTokenRequestStateRequest;
 use Io\Token\Proto\Gateway\SignTokenRequestStateResponse;
 use Io\Token\Proto\Gateway\StoreTokenRequestRequest;
@@ -1200,6 +1207,50 @@ class Client
         /** @var CreateCustomizationResponse $response */
         $response = Util::executeAndHandleCall($this->gateway->CreateCustomization($request));
         return $response->getCustomizationId();
+    }
+
+    /**
+     * Sets a webhook config.
+     *
+     * @param Config $$config the webhook config
+     * @return bool that completes when request handled
+     */
+    public function SetWebhookConfig($config)
+    {
+        $request = new SetWebhookConfigRequest();
+        $request->setConfig($config);
+
+        /** @var SetWebhookConfigResponse $response */
+        $response = Util::executeAndHandleCall($this->gateway->SetWebhookConfig($request));
+        return $response !== null;
+    }
+
+    /**
+     * Gets the webhook config.
+     *
+     * @return Config the webhook config
+     */
+    public function GetWebhookConfig()
+    {
+        $request = new GetWebhookConfigRequest();
+
+        /** @var GetWebhookConfigResponse $response */
+        $response = Util::executeAndHandleCall($this->gateway->GetWebhookConfig($request));
+        return $response->getConfig();
+    }
+
+    /**
+     * Deletes the webhook config.
+     *
+     * @return bool that completes when request handled
+     */
+    public function DeleteWebhookConfig()
+    {
+        $request = new DeleteWebhookConfigRequest();
+
+        /** @var DeleteWebhookConfigResponse $response */
+        $response = Util::executeAndHandleCall($this->gateway->DeleteWebhookConfig($request));
+        return $response !== null;
     }
 
     public function setTrackingMetaData($trackingMetaData)

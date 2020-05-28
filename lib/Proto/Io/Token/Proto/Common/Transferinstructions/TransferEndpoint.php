@@ -27,6 +27,10 @@ class TransferEndpoint extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.CustomerData customer_data = 2;</code>
      */
     private $customer_data = null;
+    /**
+     * Generated from protobuf field <code>string bank_id = 3;</code>
+     */
+    private $bank_id = '';
 
     /**
      * Constructor.
@@ -38,6 +42,7 @@ class TransferEndpoint extends \Google\Protobuf\Internal\Message
      *           Account identifier, e.g., SWIFT transfer info
      *     @type \Io\Token\Proto\Common\Transferinstructions\CustomerData $customer_data
      *           Customer data: name and address
+     *     @type string $bank_id
      * }
      */
     public function __construct($data = NULL) {
@@ -93,6 +98,28 @@ class TransferEndpoint extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Transferinstructions\CustomerData::class);
         $this->customer_data = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string bank_id = 3;</code>
+     * @return string
+     */
+    public function getBankId()
+    {
+        return $this->bank_id;
+    }
+
+    /**
+     * Generated from protobuf field <code>string bank_id = 3;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setBankId($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->bank_id = $var;
 
         return $this;
     }

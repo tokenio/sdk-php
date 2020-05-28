@@ -57,6 +57,10 @@ class PerformanceSummary extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>int64 request_count = 11;</code>
      */
     private $request_count = 0;
+    /**
+     * Generated from protobuf field <code>string tpp_id = 12;</code>
+     */
+    private $tpp_id = '';
 
     /**
      * Constructor.
@@ -75,6 +79,7 @@ class PerformanceSummary extends \Google\Protobuf\Internal\Message
      *     @type float $error_rate
      *     @type int|string $error_count
      *     @type int|string $request_count
+     *     @type string $tpp_id
      * }
      */
     public function __construct($data = NULL) {
@@ -320,6 +325,28 @@ class PerformanceSummary extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt64($var);
         $this->request_count = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string tpp_id = 12;</code>
+     * @return string
+     */
+    public function getTppId()
+    {
+        return $this->tpp_id;
+    }
+
+    /**
+     * Generated from protobuf field <code>string tpp_id = 12;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setTppId($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->tpp_id = $var;
 
         return $this;
     }

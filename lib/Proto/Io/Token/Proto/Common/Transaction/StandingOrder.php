@@ -47,6 +47,12 @@ class StandingOrder extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.io.token.proto.common.providerspecific.ProviderStandingOrderDetails provider_standing_order_details = 6;</code>
      */
     private $provider_standing_order_details = null;
+    /**
+     * ISO 20022: DAIL, WEEK, TOWK, MNTH, TOMN, QUTR, SEMI, YEAR
+     *
+     * Generated from protobuf field <code>string frequency = 7;</code>
+     */
+    private $frequency = '';
 
     /**
      * Constructor.
@@ -64,6 +70,8 @@ class StandingOrder extends \Google\Protobuf\Internal\Message
      *     @type int|string $created_at_ms
      *           CreationTime
      *     @type \Io\Token\Proto\Common\Providerspecific\ProviderStandingOrderDetails $provider_standing_order_details
+     *     @type string $frequency
+     *           ISO 20022: DAIL, WEEK, TOWK, MNTH, TOMN, QUTR, SEMI, YEAR
      * }
      */
     public function __construct($data = NULL) {
@@ -215,6 +223,32 @@ class StandingOrder extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Providerspecific\ProviderStandingOrderDetails::class);
         $this->provider_standing_order_details = $var;
+
+        return $this;
+    }
+
+    /**
+     * ISO 20022: DAIL, WEEK, TOWK, MNTH, TOMN, QUTR, SEMI, YEAR
+     *
+     * Generated from protobuf field <code>string frequency = 7;</code>
+     * @return string
+     */
+    public function getFrequency()
+    {
+        return $this->frequency;
+    }
+
+    /**
+     * ISO 20022: DAIL, WEEK, TOWK, MNTH, TOMN, QUTR, SEMI, YEAR
+     *
+     * Generated from protobuf field <code>string frequency = 7;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setFrequency($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->frequency = $var;
 
         return $this;
     }

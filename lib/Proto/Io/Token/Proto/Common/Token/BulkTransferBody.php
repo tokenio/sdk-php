@@ -24,6 +24,8 @@ class BulkTransferBody extends \Google\Protobuf\Internal\Message
      */
     private $total_amount = '';
     /**
+     * Optional. Set to bypass Token bank selection UI.
+     *
      * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferEndpoint source = 3;</code>
      */
     private $source = null;
@@ -38,6 +40,7 @@ class BulkTransferBody extends \Google\Protobuf\Internal\Message
      *     @type string $total_amount
      *           Total amount irrespective of currency. Used for redundancy check.
      *     @type \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint $source
+     *           Optional. Set to bypass Token bank selection UI.
      * }
      */
     public function __construct($data = NULL) {
@@ -94,6 +97,8 @@ class BulkTransferBody extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Optional. Set to bypass Token bank selection UI.
+     *
      * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferEndpoint source = 3;</code>
      * @return \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint
      */
@@ -103,6 +108,8 @@ class BulkTransferBody extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Optional. Set to bypass Token bank selection UI.
+     *
      * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferEndpoint source = 3;</code>
      * @param \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint $var
      * @return $this

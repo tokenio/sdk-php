@@ -44,7 +44,7 @@ class Cma9StandingOrderDetails extends \Google\Protobuf\Internal\Message
      */
     private $final_payment_date_time = '';
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.cma9.Cma9Account creditor_account = 8;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.cma9.CashAccount creditor_account = 8;</code>
      */
     private $creditor_account = null;
 
@@ -61,7 +61,7 @@ class Cma9StandingOrderDetails extends \Google\Protobuf\Internal\Message
      *     @type string $next_payment_date_time
      *     @type \Io\Token\Proto\Common\Money\Money $final_payment
      *     @type string $final_payment_date_time
-     *     @type \Io\Token\Proto\Common\Providerspecific\Cma9\Cma9Account $creditor_account
+     *     @type \Io\Token\Proto\Common\Providerspecific\Cma9\CashAccount $creditor_account
      * }
      */
     public function __construct($data = NULL) {
@@ -224,8 +224,8 @@ class Cma9StandingOrderDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.cma9.Cma9Account creditor_account = 8;</code>
-     * @return \Io\Token\Proto\Common\Providerspecific\Cma9\Cma9Account
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.cma9.CashAccount creditor_account = 8;</code>
+     * @return \Io\Token\Proto\Common\Providerspecific\Cma9\CashAccount
      */
     public function getCreditorAccount()
     {
@@ -233,13 +233,13 @@ class Cma9StandingOrderDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.cma9.Cma9Account creditor_account = 8;</code>
-     * @param \Io\Token\Proto\Common\Providerspecific\Cma9\Cma9Account $var
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.cma9.CashAccount creditor_account = 8;</code>
+     * @param \Io\Token\Proto\Common\Providerspecific\Cma9\CashAccount $var
      * @return $this
      */
     public function setCreditorAccount($var)
     {
-        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Providerspecific\Cma9\Cma9Account::class);
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Providerspecific\Cma9\CashAccount::class);
         $this->creditor_account = $var;
 
         return $this;

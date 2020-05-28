@@ -24,6 +24,7 @@ class ProviderTransferMetadata extends \Google\Protobuf\Internal\Message
      *     @type \Io\Token\Proto\Common\Providerspecific\Polishapi\PolishApiTransferMetadata $polish_api_transfer_metadata
      *     @type \Io\Token\Proto\Common\Providerspecific\Nextgenpsd2\NextGenPsd2TransferMetadata $next_gen_psd2_transfer_metadata
      *     @type \Io\Token\Proto\Common\Providerspecific\Stet\StetTransferMetadata $stet_transfer_metadata
+     *     @type \Io\Token\Proto\Common\Providerspecific\Cma9\Cma9TransferMetadata $cma9_transfer_metadata
      * }
      */
     public function __construct($data = NULL) {
@@ -93,6 +94,28 @@ class ProviderTransferMetadata extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Providerspecific\Stet\StetTransferMetadata::class);
         $this->writeOneof(3, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.cma9.Cma9TransferMetadata cma9_transfer_metadata = 4;</code>
+     * @return \Io\Token\Proto\Common\Providerspecific\Cma9\Cma9TransferMetadata
+     */
+    public function getCma9TransferMetadata()
+    {
+        return $this->readOneof(4);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.cma9.Cma9TransferMetadata cma9_transfer_metadata = 4;</code>
+     * @param \Io\Token\Proto\Common\Providerspecific\Cma9\Cma9TransferMetadata $var
+     * @return $this
+     */
+    public function setCma9TransferMetadata($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Providerspecific\Cma9\Cma9TransferMetadata::class);
+        $this->writeOneof(4, $var);
 
         return $this;
     }

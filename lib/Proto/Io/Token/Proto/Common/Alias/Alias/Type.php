@@ -39,9 +39,7 @@ class Type
      */
     const DOMAIN = 4;
     /**
-     * deprecated
-     *
-     * Generated from protobuf enum <code>USERNAME = 5;</code>
+     * Generated from protobuf enum <code>USERNAME = 5 [deprecated = true];</code>
      */
     const USERNAME = 5;
     /**

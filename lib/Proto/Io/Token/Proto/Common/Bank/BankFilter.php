@@ -16,7 +16,7 @@ class BankFilter extends \Google\Protobuf\Internal\Message
     /**
      * (Optional) Filter for banks whose 'provider' matches the provider (case-insensitive)
      *
-     * Generated from protobuf field <code>string provider = 1;</code>
+     * Generated from protobuf field <code>string provider = 1 [deprecated = true];</code>
      */
     private $provider = '';
     /**
@@ -50,13 +50,21 @@ class BankFilter extends \Google\Protobuf\Internal\Message
      */
     private $search = '';
     /**
-     * (Optional) Filter for banks that support or don't support certain features. See Bank for the feature keys we support.
-     * Set "true" for banks that support the feature or "false" for banks that don't support the feature.
-     * e.g. ["supports_linking_uri": "true"] means only banks who supports the linking uri feature.
+     * (Optional) Filter for banks whose bank code matches the given value (BLZ for German banks only)
      *
-     * Generated from protobuf field <code>map<string, string> requires_bank_features = 7;</code>
+     * Generated from protobuf field <code>string bank_code = 9;</code>
      */
-    private $requires_bank_features;
+    private $bank_code = '';
+    /**
+     * (Optional) Filter for banks whose 'provider' matches the providers (case-insensitive)
+     *
+     * Generated from protobuf field <code>repeated string providers = 10;</code>
+     */
+    private $providers;
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.bank.BankFilter.BankFeatures bank_features = 8;</code>
+     */
+    private $bank_features = null;
 
     /**
      * Constructor.
@@ -76,10 +84,11 @@ class BankFilter extends \Google\Protobuf\Internal\Message
      *           (Optional) Filter for banks whose 'id' matches any one of the given ids (case-insensitive). Can be at most 1000.
      *     @type string $search
      *           (Optional) Filter for banks whose 'name' or 'identifier' contains the given search string (case-insensitive)
-     *     @type array|\Google\Protobuf\Internal\MapField $requires_bank_features
-     *           (Optional) Filter for banks that support or don't support certain features. See Bank for the feature keys we support.
-     *           Set "true" for banks that support the feature or "false" for banks that don't support the feature.
-     *           e.g. ["supports_linking_uri": "true"] means only banks who supports the linking uri feature.
+     *     @type string $bank_code
+     *           (Optional) Filter for banks whose bank code matches the given value (BLZ for German banks only)
+     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $providers
+     *           (Optional) Filter for banks whose 'provider' matches the providers (case-insensitive)
+     *     @type \Io\Token\Proto\Common\Bank\BankFilter\BankFeatures $bank_features
      * }
      */
     public function __construct($data = NULL) {
@@ -90,7 +99,7 @@ class BankFilter extends \Google\Protobuf\Internal\Message
     /**
      * (Optional) Filter for banks whose 'provider' matches the provider (case-insensitive)
      *
-     * Generated from protobuf field <code>string provider = 1;</code>
+     * Generated from protobuf field <code>string provider = 1 [deprecated = true];</code>
      * @return string
      */
     public function getProvider()
@@ -101,7 +110,7 @@ class BankFilter extends \Google\Protobuf\Internal\Message
     /**
      * (Optional) Filter for banks whose 'provider' matches the provider (case-insensitive)
      *
-     * Generated from protobuf field <code>string provider = 1;</code>
+     * Generated from protobuf field <code>string provider = 1 [deprecated = true];</code>
      * @param string $var
      * @return $this
      */
@@ -244,31 +253,75 @@ class BankFilter extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * (Optional) Filter for banks that support or don't support certain features. See Bank for the feature keys we support.
-     * Set "true" for banks that support the feature or "false" for banks that don't support the feature.
-     * e.g. ["supports_linking_uri": "true"] means only banks who supports the linking uri feature.
+     * (Optional) Filter for banks whose bank code matches the given value (BLZ for German banks only)
      *
-     * Generated from protobuf field <code>map<string, string> requires_bank_features = 7;</code>
-     * @return \Google\Protobuf\Internal\MapField
+     * Generated from protobuf field <code>string bank_code = 9;</code>
+     * @return string
      */
-    public function getRequiresBankFeatures()
+    public function getBankCode()
     {
-        return $this->requires_bank_features;
+        return $this->bank_code;
     }
 
     /**
-     * (Optional) Filter for banks that support or don't support certain features. See Bank for the feature keys we support.
-     * Set "true" for banks that support the feature or "false" for banks that don't support the feature.
-     * e.g. ["supports_linking_uri": "true"] means only banks who supports the linking uri feature.
+     * (Optional) Filter for banks whose bank code matches the given value (BLZ for German banks only)
      *
-     * Generated from protobuf field <code>map<string, string> requires_bank_features = 7;</code>
-     * @param array|\Google\Protobuf\Internal\MapField $var
+     * Generated from protobuf field <code>string bank_code = 9;</code>
+     * @param string $var
      * @return $this
      */
-    public function setRequiresBankFeatures($var)
+    public function setBankCode($var)
     {
-        $arr = GPBUtil::checkMapField($var, \Google\Protobuf\Internal\GPBType::STRING, \Google\Protobuf\Internal\GPBType::STRING);
-        $this->requires_bank_features = $arr;
+        GPBUtil::checkString($var, True);
+        $this->bank_code = $var;
+
+        return $this;
+    }
+
+    /**
+     * (Optional) Filter for banks whose 'provider' matches the providers (case-insensitive)
+     *
+     * Generated from protobuf field <code>repeated string providers = 10;</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getProviders()
+    {
+        return $this->providers;
+    }
+
+    /**
+     * (Optional) Filter for banks whose 'provider' matches the providers (case-insensitive)
+     *
+     * Generated from protobuf field <code>repeated string providers = 10;</code>
+     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setProviders($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
+        $this->providers = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.bank.BankFilter.BankFeatures bank_features = 8;</code>
+     * @return \Io\Token\Proto\Common\Bank\BankFilter\BankFeatures
+     */
+    public function getBankFeatures()
+    {
+        return $this->bank_features;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.bank.BankFilter.BankFeatures bank_features = 8;</code>
+     * @param \Io\Token\Proto\Common\Bank\BankFilter\BankFeatures $var
+     * @return $this
+     */
+    public function setBankFeatures($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Bank\BankFilter_BankFeatures::class);
+        $this->bank_features = $var;
 
         return $this;
     }

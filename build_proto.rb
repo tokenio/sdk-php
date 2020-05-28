@@ -1,8 +1,8 @@
 #
 # Fetches specified proto files from the artifact repository.
 #
-TOKEN_PROTOS_VER = "1.3.9"
-RPC_PROTOS_VER = "1.2.0"
+TOKEN_PROTOS_VER = "1.11.6"
+RPC_PROTOS_VER = "1.0.1"
 
 require 'open-uri'
 require 'fileutils'
@@ -26,6 +26,7 @@ def fetch_protos()
 
     system("rm protos/common/**.proto")
     system("rm -rf protos/external")
+    system("rm -rf protos/extensions")
 
     system("mkdir -p protos/external")
     file = download("io/token/proto", "tokenio-proto", "external", TOKEN_PROTOS_VER)
@@ -39,7 +40,8 @@ def fetch_protos()
     system("unzip -d protos/common -o #{file} '**.proto'")
     system("rm -f #{file}");
 
-    file = download("io/token/rpc", "tokenio-rpc", "proto", RPC_PROTOS_VER)
+    system("mkdir -p protos/extensions")
+    file = download("io/token/proto/extensions", "tokenio-proto", "extensions", RPC_PROTOS_VER)
     system("unzip -d protos/ -o #{file} '*.proto'")
     system("rm -f #{file}");
 end
@@ -52,7 +54,7 @@ def generate_protos_cmd(src, path_to_protos, out_dir)
     protoc_dir = "./tools/" + ((RUBY_PLATFORM.include?"linux") ? "linux_x64" : "macosx_x64");
     protoc = "#{protoc_dir}/protoc"
     plugin = "#{protoc_dir}/grpc_php_plugin"
-    
+
     result = <<-CMD
        mkdir -p #{out_dir}
        #{protoc} \
@@ -84,6 +86,10 @@ protoDirs = protoDirs.select do |elem| !elem.start_with?("common/google") end # 
 Dir.chdir("..");
 
 gencommand = generate_protos_cmd("./protos", "common/google/api", dir) +
+             generate_protos_cmd("./protos", "common/provider", dir) +
+             generate_protos_cmd("./protos", "common/tsp", dir) +
+             generate_protos_cmd("./protos", "common/grpcbridge/swagger", dir) +
+             generate_protos_cmd("./protos", "common/google/api", dir) +
              generate_protos_cmd("./protos", "extensions", dir) +
              generate_protos_cmd("./protos", "external/gateway", dir);
 
