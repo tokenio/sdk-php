@@ -7,3 +7,4 @@ doc/generated
 **/test-keys/
 **/*.proto
 !protos/common/google/protobuf/descriptor.proto
+!protos/common/google/protobuf/wrappers.proto
