@@ -42,6 +42,7 @@ class BankAccount extends \Google\Protobuf\Internal\Message
      *     @type \Io\Token\Proto\Common\Account\BankAccount\FasterPayments $faster_payments
      *     @type \Io\Token\Proto\Common\Account\BankAccount\Custom $custom
      *     @type \Io\Token\Proto\Common\Account\BankAccount\Guest $guest
+     *           use TransferEndpoint::bank_id instead
      *     @type \Io\Token\Proto\Common\Account\BankAccount\Iban $iban
      *     @type \Io\Token\Proto\Common\Account\BankAccount\Domestic $domestic
      *     @type array|\Google\Protobuf\Internal\MapField $metadata
@@ -230,7 +231,9 @@ class BankAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.Guest guest = 11;</code>
+     * use TransferEndpoint::bank_id instead
+     *
+     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.Guest guest = 11 [deprecated = true];</code>
      * @return \Io\Token\Proto\Common\Account\BankAccount\Guest
      */
     public function getGuest()
@@ -239,7 +242,9 @@ class BankAccount extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.Guest guest = 11;</code>
+     * use TransferEndpoint::bank_id instead
+     *
+     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount.Guest guest = 11 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Account\BankAccount\Guest $var
      * @return $this
      */

@@ -17,6 +17,10 @@ class GetAuthRequestPayloadResponse extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.io.token.proto.common.token.TokenPayload payload = 1;</code>
      */
     private $payload = null;
+    /**
+     * Generated from protobuf field <code>string callback_url = 2;</code>
+     */
+    private $callback_url = '';
 
     /**
      * Constructor.
@@ -25,6 +29,7 @@ class GetAuthRequestPayloadResponse extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type \Io\Token\Proto\Common\Token\TokenPayload $payload
+     *     @type string $callback_url
      * }
      */
     public function __construct($data = NULL) {
@@ -50,6 +55,28 @@ class GetAuthRequestPayloadResponse extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\TokenPayload::class);
         $this->payload = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string callback_url = 2;</code>
+     * @return string
+     */
+    public function getCallbackUrl()
+    {
+        return $this->callback_url;
+    }
+
+    /**
+     * Generated from protobuf field <code>string callback_url = 2;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setCallbackUrl($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->callback_url = $var;
 
         return $this;
     }

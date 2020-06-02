@@ -51,6 +51,12 @@ class TokenRequestPayload extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string ref_id = 11;</code>
      */
     private $ref_id = '';
+    /**
+     * Optional
+     *
+     * Generated from protobuf field <code>int64 token_expiration = 14;</code>
+     */
+    private $token_expiration = 0;
     protected $request_body;
 
     /**
@@ -73,6 +79,8 @@ class TokenRequestPayload extends \Google\Protobuf\Internal\Message
      *     @type string $destination_country
      *     @type string $ref_id
      *           ref ID that will be transferred to the token payload
+     *     @type int|string $token_expiration
+     *           Optional
      * }
      */
     public function __construct($data = NULL) {
@@ -366,6 +374,32 @@ class TokenRequestPayload extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->ref_id = $var;
+
+        return $this;
+    }
+
+    /**
+     * Optional
+     *
+     * Generated from protobuf field <code>int64 token_expiration = 14;</code>
+     * @return int|string
+     */
+    public function getTokenExpiration()
+    {
+        return $this->token_expiration;
+    }
+
+    /**
+     * Optional
+     *
+     * Generated from protobuf field <code>int64 token_expiration = 14;</code>
+     * @param int|string $var
+     * @return $this
+     */
+    public function setTokenExpiration($var)
+    {
+        GPBUtil::checkInt64($var);
+        $this->token_expiration = $var;
 
         return $this;
     }

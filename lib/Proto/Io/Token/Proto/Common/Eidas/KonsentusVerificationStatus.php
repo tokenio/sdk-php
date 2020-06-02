@@ -6,7 +6,8 @@ namespace Io\Token\Proto\Common\Eidas;
 
 /**
  * When a TPP verifies an eIDAS alias by providing a certificate (and all preconditions are met on
- * our side) the verification may succeed or fail on the Konsentus side in two different ways
+ * our side) the verification may succeed or fail on the verification service side in two different
+ * ways: certificate is invalid or an error response from the service
  *
  * Protobuf type <code>io.token.proto.common.eidas.KonsentusVerificationStatus</code>
  */
@@ -32,5 +33,17 @@ class KonsentusVerificationStatus
      * Generated from protobuf enum <code>FAILURE_ERROR_RESPONSE = 3;</code>
      */
     const FAILURE_ERROR_RESPONSE = 3;
+    /**
+     * an error happened during the verification process
+     *
+     * Generated from protobuf enum <code>FAILURE_ERROR = 4;</code>
+     */
+    const FAILURE_ERROR = 4;
+    /**
+     * certificate validation has not finished yet, use getEidasVerificationStatus() to get the result later
+     *
+     * Generated from protobuf enum <code>IN_PROGRESS = 5;</code>
+     */
+    const IN_PROGRESS = 5;
 }
 

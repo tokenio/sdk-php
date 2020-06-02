@@ -14,13 +14,21 @@ use Google\Protobuf\Internal\GPBUtil;
 class VerifyEidasResponse extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.eidas.KonsentusVerificationStatus status = 1;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.eidas.KonsentusVerificationStatus status = 1 [deprecated = true];</code>
      */
     private $status = 0;
     /**
      * Generated from protobuf field <code>string status_details = 2;</code>
      */
     private $status_details = '';
+    /**
+     * Generated from protobuf field <code>string verification_id = 3;</code>
+     */
+    private $verification_id = '';
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.eidas.EidasVerificationStatus eidas_status = 4;</code>
+     */
+    private $eidas_status = 0;
 
     /**
      * Constructor.
@@ -30,6 +38,8 @@ class VerifyEidasResponse extends \Google\Protobuf\Internal\Message
      *
      *     @type int $status
      *     @type string $status_details
+     *     @type string $verification_id
+     *     @type int $eidas_status
      * }
      */
     public function __construct($data = NULL) {
@@ -38,7 +48,7 @@ class VerifyEidasResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.eidas.KonsentusVerificationStatus status = 1;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.eidas.KonsentusVerificationStatus status = 1 [deprecated = true];</code>
      * @return int
      */
     public function getStatus()
@@ -47,7 +57,7 @@ class VerifyEidasResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.eidas.KonsentusVerificationStatus status = 1;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.eidas.KonsentusVerificationStatus status = 1 [deprecated = true];</code>
      * @param int $var
      * @return $this
      */
@@ -77,6 +87,50 @@ class VerifyEidasResponse extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->status_details = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string verification_id = 3;</code>
+     * @return string
+     */
+    public function getVerificationId()
+    {
+        return $this->verification_id;
+    }
+
+    /**
+     * Generated from protobuf field <code>string verification_id = 3;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setVerificationId($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->verification_id = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.eidas.EidasVerificationStatus eidas_status = 4;</code>
+     * @return int
+     */
+    public function getEidasStatus()
+    {
+        return $this->eidas_status;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.eidas.EidasVerificationStatus eidas_status = 4;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setEidasStatus($var)
+    {
+        GPBUtil::checkEnum($var, \Io\Token\Proto\Common\Eidas\EidasVerificationStatus::class);
+        $this->eidas_status = $var;
 
         return $this;
     }

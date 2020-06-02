@@ -20,24 +20,6 @@ class TokenRequest extends \Google\Protobuf\Internal\Message
      */
     private $id = '';
     /**
-     * deprecated fields
-     *
-     * Generated from protobuf field <code>.io.token.proto.common.token.TokenPayload payload = 2 [deprecated = true];</code>
-     */
-    private $payload = null;
-    /**
-     * Generated from protobuf field <code>map<string, string> options = 3 [deprecated = true, (.io.token.proto.extensions.field.redact) = true];</code>
-     */
-    private $options;
-    /**
-     * Generated from protobuf field <code>string user_ref_id = 4 [deprecated = true];</code>
-     */
-    private $user_ref_id = '';
-    /**
-     * Generated from protobuf field <code>string customization_id = 5 [deprecated = true];</code>
-     */
-    private $customization_id = '';
-    /**
      * immutable properties
      *
      * Generated from protobuf field <code>.io.token.proto.common.token.TokenRequestPayload request_payload = 6;</code>
@@ -58,11 +40,6 @@ class TokenRequest extends \Google\Protobuf\Internal\Message
      *
      *     @type string $id
      *           request id
-     *     @type \Io\Token\Proto\Common\Token\TokenPayload $payload
-     *           deprecated fields
-     *     @type array|\Google\Protobuf\Internal\MapField $options
-     *     @type string $user_ref_id
-     *     @type string $customization_id
      *     @type \Io\Token\Proto\Common\Token\TokenRequestPayload $request_payload
      *           immutable properties
      *     @type \Io\Token\Proto\Common\Token\TokenRequestOptions $request_options
@@ -96,98 +73,6 @@ class TokenRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->id = $var;
-
-        return $this;
-    }
-
-    /**
-     * deprecated fields
-     *
-     * Generated from protobuf field <code>.io.token.proto.common.token.TokenPayload payload = 2 [deprecated = true];</code>
-     * @return \Io\Token\Proto\Common\Token\TokenPayload
-     */
-    public function getPayload()
-    {
-        return $this->payload;
-    }
-
-    /**
-     * deprecated fields
-     *
-     * Generated from protobuf field <code>.io.token.proto.common.token.TokenPayload payload = 2 [deprecated = true];</code>
-     * @param \Io\Token\Proto\Common\Token\TokenPayload $var
-     * @return $this
-     */
-    public function setPayload($var)
-    {
-        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\TokenPayload::class);
-        $this->payload = $var;
-
-        return $this;
-    }
-
-    /**
-     * Generated from protobuf field <code>map<string, string> options = 3 [deprecated = true, (.io.token.proto.extensions.field.redact) = true];</code>
-     * @return \Google\Protobuf\Internal\MapField
-     */
-    public function getOptions()
-    {
-        return $this->options;
-    }
-
-    /**
-     * Generated from protobuf field <code>map<string, string> options = 3 [deprecated = true, (.io.token.proto.extensions.field.redact) = true];</code>
-     * @param array|\Google\Protobuf\Internal\MapField $var
-     * @return $this
-     */
-    public function setOptions($var)
-    {
-        $arr = GPBUtil::checkMapField($var, \Google\Protobuf\Internal\GPBType::STRING, \Google\Protobuf\Internal\GPBType::STRING);
-        $this->options = $arr;
-
-        return $this;
-    }
-
-    /**
-     * Generated from protobuf field <code>string user_ref_id = 4 [deprecated = true];</code>
-     * @return string
-     */
-    public function getUserRefId()
-    {
-        return $this->user_ref_id;
-    }
-
-    /**
-     * Generated from protobuf field <code>string user_ref_id = 4 [deprecated = true];</code>
-     * @param string $var
-     * @return $this
-     */
-    public function setUserRefId($var)
-    {
-        GPBUtil::checkString($var, True);
-        $this->user_ref_id = $var;
-
-        return $this;
-    }
-
-    /**
-     * Generated from protobuf field <code>string customization_id = 5 [deprecated = true];</code>
-     * @return string
-     */
-    public function getCustomizationId()
-    {
-        return $this->customization_id;
-    }
-
-    /**
-     * Generated from protobuf field <code>string customization_id = 5 [deprecated = true];</code>
-     * @param string $var
-     * @return $this
-     */
-    public function setCustomizationId($var)
-    {
-        GPBUtil::checkString($var, True);
-        $this->customization_id = $var;
 
         return $this;
     }

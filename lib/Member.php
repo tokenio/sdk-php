@@ -27,6 +27,7 @@ use Io\Token\Proto\Common\Transaction\Transaction;
 use Io\Token\Proto\Common\Transfer\Transfer;
 use Io\Token\Proto\Common\Transfer\TransferPayload;
 use Io\Token\Proto\Common\Transferinstructions\TransferDestination;
+use Io\Token\Proto\Common\Webhook\Webhook\Config;
 use Io\Token\Proto\Gateway\GetTokensRequest\Type;
 use Tokenio\Exception\InvalidRealmException;
 use Tokenio\Rpc\Client;
@@ -807,5 +808,36 @@ class Member implements RepresentableInterface
     public function resolveTransferDestinations($accountId)
     {
         return $this->client->resolveTransferDestinations($accountId);
+    }
+
+    /**
+     * Sets a webhook config.
+     *
+     * @param Config $$config the webhook config
+     * @return bool that completes when request handled
+     */
+    public function SetWebhookConfig($config)
+    {
+        return $this->client->SetWebhookConfig($config);
+    }
+
+    /**
+     * Gets the webhook config.
+     *
+     * @return Config the webhook config
+     */
+    public function GetWebhookConfig()
+    {
+        return $this->client->GetWebhookConfig();
+    }
+
+    /**
+     * Deletes the webhook config.
+     *
+     * @return bool that completes when request handled
+     */
+    public function DeleteWebhookConfig()
+    {
+        return $this->client->DeleteWebhookConfig();
     }
 }

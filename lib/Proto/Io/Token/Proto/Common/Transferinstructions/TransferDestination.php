@@ -40,6 +40,7 @@ class TransferDestination extends \Google\Protobuf\Internal\Message
      *     @type \Io\Token\Proto\Common\Transferinstructions\TransferDestination\Bacs $bacs
      *     @type \Io\Token\Proto\Common\Transferinstructions\TransferDestination\Target2 $target2
      *     @type \Io\Token\Proto\Common\Transferinstructions\TransferDestination\Hsvp $hsvp
+     *     @type \Io\Token\Proto\Common\Transferinstructions\TransferDestination\EuDomesticNonEuro $eu_domestic_non_euro
      *     @type \Io\Token\Proto\Common\Transferinstructions\CustomerData $customer_data
      * }
      */
@@ -374,6 +375,28 @@ class TransferDestination extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Transferinstructions\TransferDestination_Hsvp::class);
         $this->writeOneof(16, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferDestination.EuDomesticNonEuro eu_domestic_non_euro = 17;</code>
+     * @return \Io\Token\Proto\Common\Transferinstructions\TransferDestination\EuDomesticNonEuro
+     */
+    public function getEuDomesticNonEuro()
+    {
+        return $this->readOneof(17);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferDestination.EuDomesticNonEuro eu_domestic_non_euro = 17;</code>
+     * @param \Io\Token\Proto\Common\Transferinstructions\TransferDestination\EuDomesticNonEuro $var
+     * @return $this
+     */
+    public function setEuDomesticNonEuro($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Transferinstructions\TransferDestination_EuDomesticNonEuro::class);
+        $this->writeOneof(17, $var);
 
         return $this;
     }

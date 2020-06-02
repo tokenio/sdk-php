@@ -14,27 +14,27 @@ use Google\Protobuf\Internal\GPBUtil;
 class Metadata extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Optional payment context
+     * use cma9.Cma9TransferMetadata instead
      *
-     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.PaymentContext payment_context = 2;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.PaymentContext payment_context = 2 [deprecated = true];</code>
      */
     private $payment_context = 0;
     /**
-     * Optional ISO 18245 Merchant Category Code (MCC)
+     * use cma9.Cma9TransferMetadata instead
      *
-     * Generated from protobuf field <code>string merchant_category_code = 3;</code>
+     * Generated from protobuf field <code>string merchant_category_code = 3 [deprecated = true];</code>
      */
     private $merchant_category_code = '';
     /**
-     * Optional Unique merchant customer identifier
+     * use cma9.Cma9TransferMetadata instead
      *
-     * Generated from protobuf field <code>string merchant_customer_id = 4;</code>
+     * Generated from protobuf field <code>string merchant_customer_id = 4 [deprecated = true];</code>
      */
     private $merchant_customer_id = '';
     /**
-     * Optional delivery address
+     * use cma9.Cma9TransferMetadata instead
      *
-     * Generated from protobuf field <code>.io.token.proto.common.address.Address delivery_address = 5;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.address.Address delivery_address = 5 [deprecated = true];</code>
      */
     private $delivery_address = null;
     /**
@@ -73,13 +73,13 @@ class Metadata extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type int $payment_context
-     *           Optional payment context
+     *           use cma9.Cma9TransferMetadata instead
      *     @type string $merchant_category_code
-     *           Optional ISO 18245 Merchant Category Code (MCC)
+     *           use cma9.Cma9TransferMetadata instead
      *     @type string $merchant_customer_id
-     *           Optional Unique merchant customer identifier
+     *           use cma9.Cma9TransferMetadata instead
      *     @type \Io\Token\Proto\Common\Address\Address $delivery_address
-     *           Optional delivery address
+     *           use cma9.Cma9TransferMetadata instead
      *     @type \Io\Token\Proto\Common\Providerspecific\ProviderTransferMetadata $provider_transfer_metadata
      *     @type int $chargeBearer
      *           Optional Foreign Exchange charges bearer.
@@ -97,9 +97,9 @@ class Metadata extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Optional payment context
+     * use cma9.Cma9TransferMetadata instead
      *
-     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.PaymentContext payment_context = 2;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.PaymentContext payment_context = 2 [deprecated = true];</code>
      * @return int
      */
     public function getPaymentContext()
@@ -108,9 +108,9 @@ class Metadata extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Optional payment context
+     * use cma9.Cma9TransferMetadata instead
      *
-     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.PaymentContext payment_context = 2;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.PaymentContext payment_context = 2 [deprecated = true];</code>
      * @param int $var
      * @return $this
      */
@@ -123,9 +123,9 @@ class Metadata extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Optional ISO 18245 Merchant Category Code (MCC)
+     * use cma9.Cma9TransferMetadata instead
      *
-     * Generated from protobuf field <code>string merchant_category_code = 3;</code>
+     * Generated from protobuf field <code>string merchant_category_code = 3 [deprecated = true];</code>
      * @return string
      */
     public function getMerchantCategoryCode()
@@ -134,9 +134,9 @@ class Metadata extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Optional ISO 18245 Merchant Category Code (MCC)
+     * use cma9.Cma9TransferMetadata instead
      *
-     * Generated from protobuf field <code>string merchant_category_code = 3;</code>
+     * Generated from protobuf field <code>string merchant_category_code = 3 [deprecated = true];</code>
      * @param string $var
      * @return $this
      */
@@ -149,9 +149,9 @@ class Metadata extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Optional Unique merchant customer identifier
+     * use cma9.Cma9TransferMetadata instead
      *
-     * Generated from protobuf field <code>string merchant_customer_id = 4;</code>
+     * Generated from protobuf field <code>string merchant_customer_id = 4 [deprecated = true];</code>
      * @return string
      */
     public function getMerchantCustomerId()
@@ -160,9 +160,9 @@ class Metadata extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Optional Unique merchant customer identifier
+     * use cma9.Cma9TransferMetadata instead
      *
-     * Generated from protobuf field <code>string merchant_customer_id = 4;</code>
+     * Generated from protobuf field <code>string merchant_customer_id = 4 [deprecated = true];</code>
      * @param string $var
      * @return $this
      */
@@ -175,9 +175,9 @@ class Metadata extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Optional delivery address
+     * use cma9.Cma9TransferMetadata instead
      *
-     * Generated from protobuf field <code>.io.token.proto.common.address.Address delivery_address = 5;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.address.Address delivery_address = 5 [deprecated = true];</code>
      * @return \Io\Token\Proto\Common\Address\Address
      */
     public function getDeliveryAddress()
@@ -186,9 +186,9 @@ class Metadata extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Optional delivery address
+     * use cma9.Cma9TransferMetadata instead
      *
-     * Generated from protobuf field <code>.io.token.proto.common.address.Address delivery_address = 5;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.address.Address delivery_address = 5 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Address\Address $var
      * @return $this
      */

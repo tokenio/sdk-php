@@ -73,6 +73,12 @@ class GetBanksRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string destination_country = 10 [deprecated = true];</code>
      */
     private $destination_country = '';
+    /**
+     * DEPRECATED. (Optional) Filter for banks whose 'provider' matches the providers (case-insensitive)
+     *
+     * Generated from protobuf field <code>repeated string providers = 11 [deprecated = true];</code>
+     */
+    private $providers;
 
     /**
      * Constructor.
@@ -100,6 +106,8 @@ class GetBanksRequest extends \Google\Protobuf\Internal\Message
      *           DEPRECATED. (Optional) If specified, return banks which are integrated with the TPP
      *     @type string $destination_country
      *           DEPRECATED. (Optional) Filter for banks that support sending to the destination country.
+     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $providers
+     *           DEPRECATED. (Optional) Filter for banks whose 'provider' matches the providers (case-insensitive)
      * }
      */
     public function __construct($data = NULL) {
@@ -363,6 +371,32 @@ class GetBanksRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->destination_country = $var;
+
+        return $this;
+    }
+
+    /**
+     * DEPRECATED. (Optional) Filter for banks whose 'provider' matches the providers (case-insensitive)
+     *
+     * Generated from protobuf field <code>repeated string providers = 11 [deprecated = true];</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getProviders()
+    {
+        return $this->providers;
+    }
+
+    /**
+     * DEPRECATED. (Optional) Filter for banks whose 'provider' matches the providers (case-insensitive)
+     *
+     * Generated from protobuf field <code>repeated string providers = 11 [deprecated = true];</code>
+     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setProviders($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
+        $this->providers = $arr;
 
         return $this;
     }

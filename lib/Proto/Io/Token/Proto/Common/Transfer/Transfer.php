@@ -63,6 +63,12 @@ class Transfer extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string execution_date = 9;</code>
      */
     private $execution_date = '';
+    /**
+     * Optional; Contains iban and holder name
+     *
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferEndpoint source = 10;</code>
+     */
+    private $source = null;
 
     /**
      * Constructor.
@@ -85,6 +91,8 @@ class Transfer extends \Google\Protobuf\Internal\Message
      *           Instant (currency ledger) or default
      *     @type string $execution_date
      *           Execution date. Same as the value on the transfer token payload.
+     *     @type \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint $source
+     *           Optional; Contains iban and holder name
      * }
      */
     public function __construct($data = NULL) {
@@ -310,6 +318,32 @@ class Transfer extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->execution_date = $var;
+
+        return $this;
+    }
+
+    /**
+     * Optional; Contains iban and holder name
+     *
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferEndpoint source = 10;</code>
+     * @return \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint
+     */
+    public function getSource()
+    {
+        return $this->source;
+    }
+
+    /**
+     * Optional; Contains iban and holder name
+     *
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferEndpoint source = 10;</code>
+     * @param \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint $var
+     * @return $this
+     */
+    public function setSource($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint::class);
+        $this->source = $var;
 
         return $this;
     }

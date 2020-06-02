@@ -19,6 +19,12 @@ class CreateStandingOrderResponse extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.io.token.proto.common.submission.StandingOrderSubmission submission = 1;</code>
      */
     private $submission = null;
+    /**
+     * Optional: used when transfer status is PENDING_EXTERNAL_AUTHORIZATION
+     *
+     * Generated from protobuf field <code>.io.token.proto.common.token.ExternalAuthorizationDetails authorization_details = 2;</code>
+     */
+    private $authorization_details = null;
 
     /**
      * Constructor.
@@ -28,6 +34,8 @@ class CreateStandingOrderResponse extends \Google\Protobuf\Internal\Message
      *
      *     @type \Io\Token\Proto\Common\Submission\StandingOrderSubmission $submission
      *           Resulting standing order submission
+     *     @type \Io\Token\Proto\Common\Token\ExternalAuthorizationDetails $authorization_details
+     *           Optional: used when transfer status is PENDING_EXTERNAL_AUTHORIZATION
      * }
      */
     public function __construct($data = NULL) {
@@ -57,6 +65,32 @@ class CreateStandingOrderResponse extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Submission\StandingOrderSubmission::class);
         $this->submission = $var;
+
+        return $this;
+    }
+
+    /**
+     * Optional: used when transfer status is PENDING_EXTERNAL_AUTHORIZATION
+     *
+     * Generated from protobuf field <code>.io.token.proto.common.token.ExternalAuthorizationDetails authorization_details = 2;</code>
+     * @return \Io\Token\Proto\Common\Token\ExternalAuthorizationDetails
+     */
+    public function getAuthorizationDetails()
+    {
+        return $this->authorization_details;
+    }
+
+    /**
+     * Optional: used when transfer status is PENDING_EXTERNAL_AUTHORIZATION
+     *
+     * Generated from protobuf field <code>.io.token.proto.common.token.ExternalAuthorizationDetails authorization_details = 2;</code>
+     * @param \Io\Token\Proto\Common\Token\ExternalAuthorizationDetails $var
+     * @return $this
+     */
+    public function setAuthorizationDetails($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\ExternalAuthorizationDetails::class);
+        $this->authorization_details = $var;
 
         return $this;
     }

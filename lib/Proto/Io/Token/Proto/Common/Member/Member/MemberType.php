@@ -14,21 +14,51 @@ class MemberType
      */
     const INVALID_MEMBER_TYPE = 0;
     /**
+     * Bank's customer, end user; should be under bank’s realm
+     *
      * Generated from protobuf enum <code>PERSONAL = 1;</code>
      */
     const PERSONAL = 1;
     /**
-     * Generated from protobuf enum <code>BUSINESS_UNVERIFIED = 2;</code>
+     * Generated from protobuf enum <code>BUSINESS_UNVERIFIED = 2 [deprecated = true];</code>
      */
     const BUSINESS_UNVERIFIED = 2;
     /**
-     * Generated from protobuf enum <code>BUSINESS_VERIFIED = 3;</code>
+     * Generated from protobuf enum <code>BUSINESS_VERIFIED = 3 [deprecated = true];</code>
      */
     const BUSINESS_VERIFIED = 3;
     /**
      * Generated from protobuf enum <code>TRANSIENT = 4;</code>
      */
     const TRANSIENT = 4;
+    /**
+     * a customer of Token; Token is the regulated TPP in this case
+     *
+     * Generated from protobuf enum <code>BUSINESS = 5;</code>
+     */
+    const BUSINESS = 5;
+    /**
+     * a customer of Token but uses its own licence; Token is a TSP for the business in this case
+     *
+     * Generated from protobuf enum <code>LICENSED_TPP = 6;</code>
+     */
+    const LICENSED_TPP = 6;
+    /**
+     * a regulated party using its own licence to connect to a specific Token managed bank under the provisions of the regulation(s); Token is a TSP to the bank in this case
+     *
+     * Generated from protobuf enum <code>DIRECT_BANK_TPP = 7;</code>
+     */
+    const DIRECT_BANK_TPP = 7;
+    /**
+     * Generated from protobuf enum <code>BANK = 8;</code>
+     */
+    const BANK = 8;
+    /**
+     * a single member that represents Token realm
+     *
+     * Generated from protobuf enum <code>TOKEN = 9;</code>
+     */
+    const TOKEN = 9;
 }
 
 // Adding a class alias for backwards compatibility with the previous class name.

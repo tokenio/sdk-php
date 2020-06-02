@@ -21,6 +21,10 @@ class GetTokenRequestResultResponse extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.io.token.proto.common.security.Signature signature = 2;</code>
      */
     private $signature = null;
+    /**
+     * Generated from protobuf field <code>string transfer_id = 3;</code>
+     */
+    private $transfer_id = '';
 
     /**
      * Constructor.
@@ -30,6 +34,7 @@ class GetTokenRequestResultResponse extends \Google\Protobuf\Internal\Message
      *
      *     @type string $token_id
      *     @type \Io\Token\Proto\Common\Security\Signature $signature
+     *     @type string $transfer_id
      * }
      */
     public function __construct($data = NULL) {
@@ -77,6 +82,28 @@ class GetTokenRequestResultResponse extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Security\Signature::class);
         $this->signature = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string transfer_id = 3;</code>
+     * @return string
+     */
+    public function getTransferId()
+    {
+        return $this->transfer_id;
+    }
+
+    /**
+     * Generated from protobuf field <code>string transfer_id = 3;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setTransferId($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->transfer_id = $var;
 
         return $this;
     }

@@ -29,6 +29,12 @@ class Status
      * Generated from protobuf enum <code>FAILED = 4;</code>
      */
     const FAILED = 4;
+    /**
+     * unable to retrieve updated status from the bank
+     *
+     * Generated from protobuf enum <code>UNKNOWN = 5;</code>
+     */
+    const UNKNOWN = 5;
 }
 
 // Adding a class alias for backwards compatibility with the previous class name.

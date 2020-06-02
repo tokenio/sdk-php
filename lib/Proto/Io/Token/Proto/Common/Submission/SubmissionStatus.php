@@ -42,7 +42,7 @@ class SubmissionStatus
      */
     const FAILED = 4;
     /**
-     * Submitted by Token; unable to retrieve status from bank.
+     * Submission acknowledged by the bank, but unable retrieve further status.
      *
      * Generated from protobuf enum <code>INITIATED = 5;</code>
      */
@@ -51,5 +51,17 @@ class SubmissionStatus
      * Generated from protobuf enum <code>CANCELED = 6;</code>
      */
     const CANCELED = 6;
+    /**
+     * Sent to the bank but not acknowledged by the bank.
+     *
+     * Generated from protobuf enum <code>SENT = 7;</code>
+     */
+    const SENT = 7;
+    /**
+     * Requires authorization by the user to complete
+     *
+     * Generated from protobuf enum <code>PENDING_EXTERNAL_AUTHORIZATION = 8;</code>
+     */
+    const PENDING_EXTERNAL_AUTHORIZATION = 8;
 }
 

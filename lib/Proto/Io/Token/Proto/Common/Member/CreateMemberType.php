@@ -25,5 +25,9 @@ class CreateMemberType
      * Generated from protobuf enum <code>TRANSIENT = 3;</code>
      */
     const TRANSIENT = 3;
+    /**
+     * Generated from protobuf enum <code>LICENSED_TPP = 4;</code>
+     */
+    const LICENSED_TPP = 4;
 }
 
