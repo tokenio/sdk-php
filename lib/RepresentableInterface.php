@@ -4,6 +4,7 @@ namespace Tokenio;
 
 use Io\Token\Proto\Common\Transaction\Balance;
 use Io\Token\Proto\Common\Transaction\Transaction;
+use Io\Token\Proto\Common\Transferinstructions\TransferDestination;
 
 /**
  * Represents the part of a token member that can be accessed through an access token.
@@ -54,4 +55,12 @@ interface RepresentableInterface
      * @return Transaction
      */
     public function getTransaction($accountId, $transactionId, $keyLevel);
+
+    /**
+     * Resolves transfer destinations for the given account id.
+     *
+     * @param $accountId
+     * @return RepeatedField transfer destinations
+     */
+    public function resolveTransferDestinations($accountId);
 }

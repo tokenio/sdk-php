@@ -1294,7 +1294,7 @@ class Client
         $response = Util::executeAndHandleCall($this->gateway->ResolveTransferDestinations($request));
 
         /** @var ResolveTransferDestinationsResponse $response*/
-        return $response->getDestinations();
+        return $response->getTransferDestinations();
     }
 
     private function createTestBankAuth($balance)
