@@ -2,6 +2,7 @@
 
 namespace Tokenio;
 
+use Google\Protobuf\Internal\RepeatedField;
 use Io\Token\Proto\Common\Money\Money;
 use Io\Token\Proto\Common\Transaction\Balance;
 use Io\Token\Proto\Common\Transaction\Transaction;
@@ -143,6 +144,17 @@ class Account
     public function getTransactions($offset, $limit, $level)
     {
         return $this->client->getTransactions($this->account->getId(), $offset, $limit, $level);
+    }
+
+    /**
+     * Resolves transfer destinations for the given account id.
+     *
+     * @param $accountId
+     * @return RepeatedField transfer destinations
+     */
+    public function resolveTransferDestinations($accountId)
+    {
+        return $this->client->resolveTransferDestinations($accountId);
     }
 
     /**
