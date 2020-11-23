@@ -803,7 +803,7 @@ class Member implements RepresentableInterface
      * Resolves transfer destinations for the given account id.
      *
      * @param $accountId
-     * @return RepeatedField transfer endpoints
+     * @return RepeatedField transfer destinations
      */
     public function resolveTransferDestinations($accountId)
     {
