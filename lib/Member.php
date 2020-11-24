@@ -802,18 +802,19 @@ class Member implements RepresentableInterface
     /**
      * Resolves transfer destinations for the given account id.
      *
-     * @param $accountId
+     * @param string $accountId account id
+     * @param keyLevel $keyLevel key level
      * @return RepeatedField transfer destinations
      */
-    public function resolveTransferDestinations($accountId)
+    public function resolveTransferDestinations($accountId, $keyLevel)
     {
-        return $this->client->resolveTransferDestinations($accountId);
+        return $this->client->resolveTransferDestinations($accountId, $keyLevel);
     }
 
     /**
      * Sets a webhook config.
      *
-     * @param Config $$config the webhook config
+     * @param Config $config the webhook config
      * @return bool that completes when request handled
      */
     public function SetWebhookConfig($config)

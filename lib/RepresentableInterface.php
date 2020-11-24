@@ -59,8 +59,9 @@ interface RepresentableInterface
     /**
      * Resolves transfer destinations for the given account id.
      *
-     * @param $accountId
+     * @param string $accountId
+     * @param int $keyLevel key level
      * @return RepeatedField transfer destinations
      */
-    public function resolveTransferDestinations($accountId);
+    public function resolveTransferDestinations($accountId, $keyLevel);
 }

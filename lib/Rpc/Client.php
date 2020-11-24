@@ -1287,8 +1287,11 @@ class Client
         return $response->getStatus();
     }
 
-    public function resolveTransferDestinations($accountId)
+    public function resolveTransferDestinations($accountId, $keyLevel)
     {
+        $this->setOnBehalfOf();
+        $this->setRequestSignerKeyLevel($keyLevel);
+
         $request = new ResolveTransferDestinationsRequest();
         $request->setAccountId($accountId);
         $response = Util::executeAndHandleCall($this->gateway->ResolveTransferDestinations($request));
