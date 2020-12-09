@@ -14,7 +14,9 @@ use Google\Protobuf\Internal\GPBUtil;
 class BankAccountInfo extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>string bic_or_swift = 1;</code>
+     * use AccountDetails.bic field instead
+     *
+     * Generated from protobuf field <code>string bic_or_swift = 1 [deprecated = true];</code>
      */
     private $bic_or_swift = '';
     /**
@@ -33,6 +35,7 @@ class BankAccountInfo extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type string $bic_or_swift
+     *           use AccountDetails.bic field instead
      *     @type string $name
      *     @type string[]|\Google\Protobuf\Internal\RepeatedField $address
      * }
@@ -43,7 +46,9 @@ class BankAccountInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string bic_or_swift = 1;</code>
+     * use AccountDetails.bic field instead
+     *
+     * Generated from protobuf field <code>string bic_or_swift = 1 [deprecated = true];</code>
      * @return string
      */
     public function getBicOrSwift()
@@ -52,7 +57,9 @@ class BankAccountInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string bic_or_swift = 1;</code>
+     * use AccountDetails.bic field instead
+     *
+     * Generated from protobuf field <code>string bic_or_swift = 1 [deprecated = true];</code>
      * @param string $var
      * @return $this
      */

@@ -9,7 +9,7 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * See field definitions at https://openbanking.atlassian.net/wiki/spaces/DZ/pages/641959800/Standing+Orders+v3.0.
+ * See field definitions at https://openbankinguk.github.io/read-write-api-site3/v3.1.6/resources-and-data-models/aisp/standing-orders.html
  *
  * Generated from protobuf message <code>io.token.proto.common.providerspecific.cma9.Cma9StandingOrderDetails</code>
  */
@@ -20,25 +20,25 @@ class Cma9StandingOrderDetails extends \Google\Protobuf\Internal\Message
      */
     private $frequency = '';
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.money.Money first_payment = 2;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.money.Money first_payment_amount = 2;</code>
      */
-    private $first_payment = null;
+    private $first_payment_amount = null;
     /**
      * Generated from protobuf field <code>string first_payment_date_time = 3;</code>
      */
     private $first_payment_date_time = '';
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.money.Money next_payment = 4;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.money.Money next_payment_amount = 4;</code>
      */
-    private $next_payment = null;
+    private $next_payment_amount = null;
     /**
      * Generated from protobuf field <code>string next_payment_date_time = 5;</code>
      */
     private $next_payment_date_time = '';
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.money.Money final_payment = 6;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.money.Money final_payment_amount = 6;</code>
      */
-    private $final_payment = null;
+    private $final_payment_amount = null;
     /**
      * Generated from protobuf field <code>string final_payment_date_time = 7;</code>
      */
@@ -47,6 +47,14 @@ class Cma9StandingOrderDetails extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.io.token.proto.common.providerspecific.cma9.CashAccount creditor_account = 8;</code>
      */
     private $creditor_account = null;
+    /**
+     * Generated from protobuf field <code>string reference = 9;</code>
+     */
+    private $reference = '';
+    /**
+     * Generated from protobuf field <code>int32 number_of_payments = 10;</code>
+     */
+    private $number_of_payments = 0;
 
     /**
      * Constructor.
@@ -55,13 +63,15 @@ class Cma9StandingOrderDetails extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type string $frequency
-     *     @type \Io\Token\Proto\Common\Money\Money $first_payment
+     *     @type \Io\Token\Proto\Common\Money\Money $first_payment_amount
      *     @type string $first_payment_date_time
-     *     @type \Io\Token\Proto\Common\Money\Money $next_payment
+     *     @type \Io\Token\Proto\Common\Money\Money $next_payment_amount
      *     @type string $next_payment_date_time
-     *     @type \Io\Token\Proto\Common\Money\Money $final_payment
+     *     @type \Io\Token\Proto\Common\Money\Money $final_payment_amount
      *     @type string $final_payment_date_time
      *     @type \Io\Token\Proto\Common\Providerspecific\Cma9\CashAccount $creditor_account
+     *     @type string $reference
+     *     @type int $number_of_payments
      * }
      */
     public function __construct($data = NULL) {
@@ -92,23 +102,23 @@ class Cma9StandingOrderDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.money.Money first_payment = 2;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.money.Money first_payment_amount = 2;</code>
      * @return \Io\Token\Proto\Common\Money\Money
      */
-    public function getFirstPayment()
+    public function getFirstPaymentAmount()
     {
-        return $this->first_payment;
+        return $this->first_payment_amount;
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.money.Money first_payment = 2;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.money.Money first_payment_amount = 2;</code>
      * @param \Io\Token\Proto\Common\Money\Money $var
      * @return $this
      */
-    public function setFirstPayment($var)
+    public function setFirstPaymentAmount($var)
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Money\Money::class);
-        $this->first_payment = $var;
+        $this->first_payment_amount = $var;
 
         return $this;
     }
@@ -136,23 +146,23 @@ class Cma9StandingOrderDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.money.Money next_payment = 4;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.money.Money next_payment_amount = 4;</code>
      * @return \Io\Token\Proto\Common\Money\Money
      */
-    public function getNextPayment()
+    public function getNextPaymentAmount()
     {
-        return $this->next_payment;
+        return $this->next_payment_amount;
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.money.Money next_payment = 4;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.money.Money next_payment_amount = 4;</code>
      * @param \Io\Token\Proto\Common\Money\Money $var
      * @return $this
      */
-    public function setNextPayment($var)
+    public function setNextPaymentAmount($var)
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Money\Money::class);
-        $this->next_payment = $var;
+        $this->next_payment_amount = $var;
 
         return $this;
     }
@@ -180,23 +190,23 @@ class Cma9StandingOrderDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.money.Money final_payment = 6;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.money.Money final_payment_amount = 6;</code>
      * @return \Io\Token\Proto\Common\Money\Money
      */
-    public function getFinalPayment()
+    public function getFinalPaymentAmount()
     {
-        return $this->final_payment;
+        return $this->final_payment_amount;
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.money.Money final_payment = 6;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.money.Money final_payment_amount = 6;</code>
      * @param \Io\Token\Proto\Common\Money\Money $var
      * @return $this
      */
-    public function setFinalPayment($var)
+    public function setFinalPaymentAmount($var)
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Money\Money::class);
-        $this->final_payment = $var;
+        $this->final_payment_amount = $var;
 
         return $this;
     }
@@ -241,6 +251,50 @@ class Cma9StandingOrderDetails extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Providerspecific\Cma9\CashAccount::class);
         $this->creditor_account = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string reference = 9;</code>
+     * @return string
+     */
+    public function getReference()
+    {
+        return $this->reference;
+    }
+
+    /**
+     * Generated from protobuf field <code>string reference = 9;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setReference($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->reference = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>int32 number_of_payments = 10;</code>
+     * @return int
+     */
+    public function getNumberOfPayments()
+    {
+        return $this->number_of_payments;
+    }
+
+    /**
+     * Generated from protobuf field <code>int32 number_of_payments = 10;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setNumberOfPayments($var)
+    {
+        GPBUtil::checkInt32($var);
+        $this->number_of_payments = $var;
 
         return $this;
     }

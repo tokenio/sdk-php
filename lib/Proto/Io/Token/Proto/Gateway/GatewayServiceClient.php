@@ -301,6 +301,45 @@ class GatewayServiceClient extends \Grpc\BaseStub {
     }
 
     /**
+     * @param \Io\Token\Proto\Gateway\GetRedirectUrlsRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetRedirectUrls(\Io\Token\Proto\Gateway\GetRedirectUrlsRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetRedirectUrls',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetRedirectUrlsResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Io\Token\Proto\Gateway\AddRedirectUrlsRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function AddRedirectUrls(\Io\Token\Proto\Gateway\AddRedirectUrlsRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/AddRedirectUrls',
+        $argument,
+        ['\Io\Token\Proto\Gateway\AddRedirectUrlsResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Io\Token\Proto\Gateway\RemoveRedirectUrlsRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function RemoveRedirectUrls(\Io\Token\Proto\Gateway\RemoveRedirectUrlsRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/RemoveRedirectUrls',
+        $argument,
+        ['\Io\Token\Proto\Gateway\RemoveRedirectUrlsResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * //////////////////////////////////////////////////////////////////////////////////////////////////
      * Member account recovery
      *
@@ -479,51 +518,6 @@ class GatewayServiceClient extends \Grpc\BaseStub {
         return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/DeleteAddress',
         $argument,
         ['\Io\Token\Proto\Gateway\DeleteAddressResponse', 'decode'],
-        $metadata, $options);
-    }
-
-    /**
-     * Add a trusted beneficiary
-     * https://developer.token.io/sdk/#trusted-beneficiary
-     * @param \Io\Token\Proto\Gateway\AddTrustedBeneficiaryRequest $argument input argument
-     * @param array $metadata metadata
-     * @param array $options call options
-     */
-    public function AddTrustedBeneficiary(\Io\Token\Proto\Gateway\AddTrustedBeneficiaryRequest $argument,
-      $metadata = [], $options = []) {
-        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/AddTrustedBeneficiary',
-        $argument,
-        ['\Io\Token\Proto\Gateway\AddTrustedBeneficiaryResponse', 'decode'],
-        $metadata, $options);
-    }
-
-    /**
-     * Remove a trusted beneficiary
-     * https://developer.token.io/sdk/#trusted-beneficiary
-     * @param \Io\Token\Proto\Gateway\RemoveTrustedBeneficiaryRequest $argument input argument
-     * @param array $metadata metadata
-     * @param array $options call options
-     */
-    public function RemoveTrustedBeneficiary(\Io\Token\Proto\Gateway\RemoveTrustedBeneficiaryRequest $argument,
-      $metadata = [], $options = []) {
-        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/RemoveTrustedBeneficiary',
-        $argument,
-        ['\Io\Token\Proto\Gateway\RemoveTrustedBeneficiaryResponse', 'decode'],
-        $metadata, $options);
-    }
-
-    /**
-     * Get all trusted beneficiaries
-     * https://developer.token.io/sdk/#trusted-beneficiary
-     * @param \Io\Token\Proto\Gateway\GetTrustedBeneficiariesRequest $argument input argument
-     * @param array $metadata metadata
-     * @param array $options call options
-     */
-    public function GetTrustedBeneficiaries(\Io\Token\Proto\Gateway\GetTrustedBeneficiariesRequest $argument,
-      $metadata = [], $options = []) {
-        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetTrustedBeneficiaries',
-        $argument,
-        ['\Io\Token\Proto\Gateway\GetTrustedBeneficiariesResponse', 'decode'],
         $metadata, $options);
     }
 
@@ -1318,6 +1312,20 @@ class GatewayServiceClient extends \Grpc\BaseStub {
     }
 
     /**
+     * Initiates authorization process with the bank
+     * @param \Io\Token\Proto\Gateway\InitiateBankAuthorizationRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function InitiateBankAuthorization(\Io\Token\Proto\Gateway\InitiateBankAuthorizationRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/InitiateBankAuthorization',
+        $argument,
+        ['\Io\Token\Proto\Gateway\InitiateBankAuthorizationResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * Gets a payload to sign
      * @param \Io\Token\Proto\Gateway\GetAuthRequestPayloadRequest $argument input argument
      * @param array $metadata metadata
@@ -1724,6 +1732,19 @@ class GatewayServiceClient extends \Grpc\BaseStub {
     }
 
     /**
+     * @param \Io\Token\Proto\Gateway\GetServiceHealthRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetServiceHealth(\Io\Token\Proto\Gateway\GetServiceHealthRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetServiceHealth',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetServiceHealthResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * //////////////////////////////////////////////////////////////////////////////////////////////////
      * Reports (portal requests).
      *
@@ -1861,6 +1882,19 @@ class GatewayServiceClient extends \Grpc\BaseStub {
     }
 
     /**
+     * @param \Io\Token\Proto\Gateway\GetAccessConsentsRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetAccessConsents(\Io\Token\Proto\Gateway\GetAccessConsentsRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetAccessConsents',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetAccessConsentsResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * //////////////////////////////////////////////////////////////////////////////////////////////////
      * Partner endpoints
      *
@@ -1886,6 +1920,32 @@ class GatewayServiceClient extends \Grpc\BaseStub {
         return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/DisableMember',
         $argument,
         ['\Io\Token\Proto\Gateway\DisableMemberResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Io\Token\Proto\Gateway\GetMembersUnderPartnerRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetMembersUnderPartner(\Io\Token\Proto\Gateway\GetMembersUnderPartnerRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/GetMembersUnderPartner',
+        $argument,
+        ['\Io\Token\Proto\Gateway\GetMembersUnderPartnerResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Io\Token\Proto\Gateway\SetDefaultCustomizationRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function SetDefaultCustomization(\Io\Token\Proto\Gateway\SetDefaultCustomizationRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/io.token.proto.gateway.GatewayService/SetDefaultCustomization',
+        $argument,
+        ['\Io\Token\Proto\Gateway\SetDefaultCustomizationResponse', 'decode'],
         $metadata, $options);
     }
 

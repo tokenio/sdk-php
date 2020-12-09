@@ -42,7 +42,9 @@ class TokenRequestPayload extends \Google\Protobuf\Internal\Message
      */
     private $callback_state = '';
     /**
-     * Generated from protobuf field <code>string destination_country = 10;</code>
+     * use countries
+     *
+     * Generated from protobuf field <code>string destination_country = 10 [deprecated = true];</code>
      */
     private $destination_country = '';
     /**
@@ -57,6 +59,16 @@ class TokenRequestPayload extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>int64 token_expiration = 14;</code>
      */
     private $token_expiration = 0;
+    /**
+     * Generated from protobuf field <code>repeated string countries = 15;</code>
+     */
+    private $countries;
+    /**
+     * credential ID -> value
+     *
+     * Generated from protobuf field <code>map<string, string> credentials = 16;</code>
+     */
+    private $credentials;
     protected $request_body;
 
     /**
@@ -77,10 +89,14 @@ class TokenRequestPayload extends \Google\Protobuf\Internal\Message
      *     @type string $description
      *     @type string $callback_state
      *     @type string $destination_country
+     *           use countries
      *     @type string $ref_id
      *           ref ID that will be transferred to the token payload
      *     @type int|string $token_expiration
      *           Optional
+     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $countries
+     *     @type array|\Google\Protobuf\Internal\MapField $credentials
+     *           credential ID -> value
      * }
      */
     public function __construct($data = NULL) {
@@ -331,7 +347,9 @@ class TokenRequestPayload extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string destination_country = 10;</code>
+     * use countries
+     *
+     * Generated from protobuf field <code>string destination_country = 10 [deprecated = true];</code>
      * @return string
      */
     public function getDestinationCountry()
@@ -340,7 +358,9 @@ class TokenRequestPayload extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string destination_country = 10;</code>
+     * use countries
+     *
+     * Generated from protobuf field <code>string destination_country = 10 [deprecated = true];</code>
      * @param string $var
      * @return $this
      */
@@ -400,6 +420,54 @@ class TokenRequestPayload extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt64($var);
         $this->token_expiration = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated string countries = 15;</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getCountries()
+    {
+        return $this->countries;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated string countries = 15;</code>
+     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setCountries($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
+        $this->countries = $arr;
+
+        return $this;
+    }
+
+    /**
+     * credential ID -> value
+     *
+     * Generated from protobuf field <code>map<string, string> credentials = 16;</code>
+     * @return \Google\Protobuf\Internal\MapField
+     */
+    public function getCredentials()
+    {
+        return $this->credentials;
+    }
+
+    /**
+     * credential ID -> value
+     *
+     * Generated from protobuf field <code>map<string, string> credentials = 16;</code>
+     * @param array|\Google\Protobuf\Internal\MapField $var
+     * @return $this
+     */
+    public function setCredentials($var)
+    {
+        $arr = GPBUtil::checkMapField($var, \Google\Protobuf\Internal\GPBType::STRING, \Google\Protobuf\Internal\GPBType::STRING);
+        $this->credentials = $arr;
 
         return $this;
     }

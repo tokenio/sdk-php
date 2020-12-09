@@ -89,6 +89,12 @@ class TokenPayload extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string initiator_id = 15;</code>
      */
     private $initiator_id = '';
+    /**
+     * authorization metadata as name-value map
+     *
+     * Generated from protobuf field <code>map<string, string> authorization_metadata = 18;</code>
+     */
+    private $authorization_metadata;
     protected $body;
 
     /**
@@ -127,6 +133,8 @@ class TokenPayload extends \Google\Protobuf\Internal\Message
      *           Optional; indicates token request flow
      *     @type string $initiator_id
      *           ID of member who requested token creation
+     *     @type array|\Google\Protobuf\Internal\MapField $authorization_metadata
+     *           authorization metadata as name-value map
      * }
      */
     public function __construct($data = NULL) {
@@ -552,6 +560,32 @@ class TokenPayload extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->initiator_id = $var;
+
+        return $this;
+    }
+
+    /**
+     * authorization metadata as name-value map
+     *
+     * Generated from protobuf field <code>map<string, string> authorization_metadata = 18;</code>
+     * @return \Google\Protobuf\Internal\MapField
+     */
+    public function getAuthorizationMetadata()
+    {
+        return $this->authorization_metadata;
+    }
+
+    /**
+     * authorization metadata as name-value map
+     *
+     * Generated from protobuf field <code>map<string, string> authorization_metadata = 18;</code>
+     * @param array|\Google\Protobuf\Internal\MapField $var
+     * @return $this
+     */
+    public function setAuthorizationMetadata($var)
+    {
+        $arr = GPBUtil::checkMapField($var, \Google\Protobuf\Internal\GPBType::STRING, \Google\Protobuf\Internal\GPBType::STRING);
+        $this->authorization_metadata = $arr;
 
         return $this;
     }

@@ -57,6 +57,10 @@ class UKOpenBankingStandard extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string transport_key_id = 9;</code>
      */
     private $transport_key_id = '';
+    /**
+     * Generated from protobuf field <code>bool is_eidas = 10;</code>
+     */
+    private $is_eidas = false;
 
     /**
      * Constructor.
@@ -77,6 +81,7 @@ class UKOpenBankingStandard extends \Google\Protobuf\Internal\Message
      *           RS256, PS256, etc
      *     @type string $signing_key_id
      *     @type string $transport_key_id
+     *     @type bool $is_eidas
      * }
      */
     public function __construct($data = NULL) {
@@ -294,6 +299,28 @@ class UKOpenBankingStandard extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->transport_key_id = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool is_eidas = 10;</code>
+     * @return bool
+     */
+    public function getIsEidas()
+    {
+        return $this->is_eidas;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool is_eidas = 10;</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setIsEidas($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->is_eidas = $var;
 
         return $this;
     }

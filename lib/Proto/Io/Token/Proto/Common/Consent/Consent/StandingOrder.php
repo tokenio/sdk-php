@@ -33,6 +33,10 @@ class StandingOrder extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>repeated .io.token.proto.common.transferinstructions.TransferDestination transfer_destinations = 4;</code>
      */
     private $transfer_destinations;
+    /**
+     * Generated from protobuf field <code>string remittance_reference = 5 [(.io.token.proto.extensions.field.hash) = true];</code>
+     */
+    private $remittance_reference = '';
 
     /**
      * Constructor.
@@ -46,6 +50,7 @@ class StandingOrder extends \Google\Protobuf\Internal\Message
      *     @type string $frequency
      *           ISO 20022: DAIL, WEEK, TOWK, MNTH, TOMN, QUTR, SEMI, YEAR
      *     @type \Io\Token\Proto\Common\Transferinstructions\TransferDestination[]|\Google\Protobuf\Internal\RepeatedField $transfer_destinations
+     *     @type string $remittance_reference
      * }
      */
     public function __construct($data = NULL) {
@@ -145,6 +150,28 @@ class StandingOrder extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Io\Token\Proto\Common\Transferinstructions\TransferDestination::class);
         $this->transfer_destinations = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string remittance_reference = 5 [(.io.token.proto.extensions.field.hash) = true];</code>
+     * @return string
+     */
+    public function getRemittanceReference()
+    {
+        return $this->remittance_reference;
+    }
+
+    /**
+     * Generated from protobuf field <code>string remittance_reference = 5 [(.io.token.proto.extensions.field.hash) = true];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setRemittanceReference($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->remittance_reference = $var;
 
         return $this;
     }

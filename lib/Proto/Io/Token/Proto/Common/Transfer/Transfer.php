@@ -69,6 +69,10 @@ class Transfer extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferEndpoint source = 10;</code>
      */
     private $source = null;
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.ProviderTransferDetails provider_details = 11;</code>
+     */
+    private $provider_details = null;
 
     /**
      * Constructor.
@@ -93,6 +97,7 @@ class Transfer extends \Google\Protobuf\Internal\Message
      *           Execution date. Same as the value on the transfer token payload.
      *     @type \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint $source
      *           Optional; Contains iban and holder name
+     *     @type \Io\Token\Proto\Common\Providerspecific\ProviderTransferDetails $provider_details
      * }
      */
     public function __construct($data = NULL) {
@@ -344,6 +349,28 @@ class Transfer extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint::class);
         $this->source = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.ProviderTransferDetails provider_details = 11;</code>
+     * @return \Io\Token\Proto\Common\Providerspecific\ProviderTransferDetails
+     */
+    public function getProviderDetails()
+    {
+        return $this->provider_details;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.ProviderTransferDetails provider_details = 11;</code>
+     * @param \Io\Token\Proto\Common\Providerspecific\ProviderTransferDetails $var
+     * @return $this
+     */
+    public function setProviderDetails($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Providerspecific\ProviderTransferDetails::class);
+        $this->provider_details = $var;
 
         return $this;
     }

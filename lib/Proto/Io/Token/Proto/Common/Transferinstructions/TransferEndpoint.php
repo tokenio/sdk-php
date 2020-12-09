@@ -18,7 +18,7 @@ class TransferEndpoint extends \Google\Protobuf\Internal\Message
     /**
      * Account identifier, e.g., SWIFT transfer info
      *
-     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount account = 1;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount account = 1 [deprecated = true];</code>
      */
     private $account = null;
     /**
@@ -31,6 +31,10 @@ class TransferEndpoint extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string bank_id = 3;</code>
      */
     private $bank_id = '';
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.account.AccountIdentifier account_identifier = 4;</code>
+     */
+    private $account_identifier = null;
 
     /**
      * Constructor.
@@ -43,6 +47,7 @@ class TransferEndpoint extends \Google\Protobuf\Internal\Message
      *     @type \Io\Token\Proto\Common\Transferinstructions\CustomerData $customer_data
      *           Customer data: name and address
      *     @type string $bank_id
+     *     @type \Io\Token\Proto\Common\Account\AccountIdentifier $account_identifier
      * }
      */
     public function __construct($data = NULL) {
@@ -53,7 +58,7 @@ class TransferEndpoint extends \Google\Protobuf\Internal\Message
     /**
      * Account identifier, e.g., SWIFT transfer info
      *
-     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount account = 1;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount account = 1 [deprecated = true];</code>
      * @return \Io\Token\Proto\Common\Account\BankAccount
      */
     public function getAccount()
@@ -64,7 +69,7 @@ class TransferEndpoint extends \Google\Protobuf\Internal\Message
     /**
      * Account identifier, e.g., SWIFT transfer info
      *
-     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount account = 1;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount account = 1 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Account\BankAccount $var
      * @return $this
      */
@@ -120,6 +125,28 @@ class TransferEndpoint extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->bank_id = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.account.AccountIdentifier account_identifier = 4;</code>
+     * @return \Io\Token\Proto\Common\Account\AccountIdentifier
+     */
+    public function getAccountIdentifier()
+    {
+        return $this->account_identifier;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.account.AccountIdentifier account_identifier = 4;</code>
+     * @param \Io\Token\Proto\Common\Account\AccountIdentifier $var
+     * @return $this
+     */
+    public function setAccountIdentifier($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Account\AccountIdentifier::class);
+        $this->account_identifier = $var;
 
         return $this;
     }

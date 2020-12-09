@@ -14,7 +14,7 @@ use Google\Protobuf\Internal\GPBUtil;
 class GenericIdentification extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>string identification = 1;</code>
+     * Generated from protobuf field <code>string identification = 1 [(.io.token.proto.extensions.field.redact) = true];</code>
      */
     private $identification = '';
     /**
@@ -43,7 +43,7 @@ class GenericIdentification extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string identification = 1;</code>
+     * Generated from protobuf field <code>string identification = 1 [(.io.token.proto.extensions.field.redact) = true];</code>
      * @return string
      */
     public function getIdentification()
@@ -52,7 +52,7 @@ class GenericIdentification extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string identification = 1;</code>
+     * Generated from protobuf field <code>string identification = 1 [(.io.token.proto.extensions.field.redact) = true];</code>
      * @param string $var
      * @return $this
      */

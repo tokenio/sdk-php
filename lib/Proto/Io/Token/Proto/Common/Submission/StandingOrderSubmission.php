@@ -41,6 +41,10 @@ class StandingOrderSubmission extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.io.token.proto.common.submission.SubmissionStatus status = 6;</code>
      */
     private $status = 0;
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.ProviderStandingOrderSubmissionDetails provider_details = 7;</code>
+     */
+    private $provider_details = null;
 
     /**
      * Constructor.
@@ -56,6 +60,7 @@ class StandingOrderSubmission extends \Google\Protobuf\Internal\Message
      *     @type int|string $created_at_ms
      *     @type \Io\Token\Proto\Common\Token\StandingOrderBody $payload
      *     @type int $status
+     *     @type \Io\Token\Proto\Common\Providerspecific\ProviderStandingOrderSubmissionDetails $provider_details
      * }
      */
     public function __construct($data = NULL) {
@@ -199,6 +204,28 @@ class StandingOrderSubmission extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkEnum($var, \Io\Token\Proto\Common\Submission\SubmissionStatus::class);
         $this->status = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.ProviderStandingOrderSubmissionDetails provider_details = 7;</code>
+     * @return \Io\Token\Proto\Common\Providerspecific\ProviderStandingOrderSubmissionDetails
+     */
+    public function getProviderDetails()
+    {
+        return $this->provider_details;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.ProviderStandingOrderSubmissionDetails provider_details = 7;</code>
+     * @param \Io\Token\Proto\Common\Providerspecific\ProviderStandingOrderSubmissionDetails $var
+     * @return $this
+     */
+    public function setProviderDetails($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Providerspecific\ProviderStandingOrderSubmissionDetails::class);
+        $this->provider_details = $var;
 
         return $this;
     }

@@ -26,7 +26,7 @@ class Cma9TransferMetadata extends \Google\Protobuf\Internal\Message
      */
     private $risk = null;
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.cma9.RemittanceInformation remittance_information = 4;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.cma9.RemittanceInformation remittance_information = 4 [deprecated = true];</code>
      */
     private $remittance_information = null;
 
@@ -114,7 +114,7 @@ class Cma9TransferMetadata extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.cma9.RemittanceInformation remittance_information = 4;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.cma9.RemittanceInformation remittance_information = 4 [deprecated = true];</code>
      * @return \Io\Token\Proto\Common\Providerspecific\Cma9\RemittanceInformation
      */
     public function getRemittanceInformation()
@@ -123,7 +123,7 @@ class Cma9TransferMetadata extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.cma9.RemittanceInformation remittance_information = 4;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.cma9.RemittanceInformation remittance_information = 4 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Providerspecific\Cma9\RemittanceInformation $var
      * @return $this
      */

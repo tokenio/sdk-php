@@ -31,6 +31,10 @@ class CustomerTrackingMetadata extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string device_id = 3;</code>
      */
     private $device_id = '';
+    /**
+     * Generated from protobuf field <code>string user_agent = 4;</code>
+     */
+    private $user_agent = '';
 
     /**
      * Constructor.
@@ -44,6 +48,7 @@ class CustomerTrackingMetadata extends \Google\Protobuf\Internal\Message
      *           Optional. Geographical location of the customer.
      *     @type string $device_id
      *           Optional. Universally Unique Identifier for a device of the customer that identifies either a device or a device dependent application installation.
+     *     @type string $user_agent
      * }
      */
     public function __construct($data = NULL) {
@@ -125,6 +130,28 @@ class CustomerTrackingMetadata extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->device_id = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string user_agent = 4;</code>
+     * @return string
+     */
+    public function getUserAgent()
+    {
+        return $this->user_agent;
+    }
+
+    /**
+     * Generated from protobuf field <code>string user_agent = 4;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setUserAgent($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->user_agent = $var;
 
         return $this;
     }

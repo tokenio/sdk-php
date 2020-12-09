@@ -16,15 +16,15 @@ use Google\Protobuf\Internal\GPBUtil;
 class Profile extends \Google\Protobuf\Internal\Message
 {
     /**
-     * first name
+     * first name; DEPRECATED refer member.profileName
      *
-     * Generated from protobuf field <code>string display_name_first = 1;</code>
+     * Generated from protobuf field <code>string display_name_first = 1 [deprecated = true];</code>
      */
     private $display_name_first = '';
     /**
-     * last name
+     * last name; DEPRECATED refer member.profileName
      *
-     * Generated from protobuf field <code>string display_name_last = 2;</code>
+     * Generated from protobuf field <code>string display_name_last = 2 [deprecated = true];</code>
      */
     private $display_name_last = '';
     /**
@@ -59,9 +59,9 @@ class Profile extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type string $display_name_first
-     *           first name
+     *           first name; DEPRECATED refer member.profileName
      *     @type string $display_name_last
-     *           last name
+     *           last name; DEPRECATED refer member.profileName
      *     @type string $original_picture_id
      *           blob ID. Ignored in set profile request
      *     @type string $small_picture_id
@@ -78,9 +78,9 @@ class Profile extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * first name
+     * first name; DEPRECATED refer member.profileName
      *
-     * Generated from protobuf field <code>string display_name_first = 1;</code>
+     * Generated from protobuf field <code>string display_name_first = 1 [deprecated = true];</code>
      * @return string
      */
     public function getDisplayNameFirst()
@@ -89,9 +89,9 @@ class Profile extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * first name
+     * first name; DEPRECATED refer member.profileName
      *
-     * Generated from protobuf field <code>string display_name_first = 1;</code>
+     * Generated from protobuf field <code>string display_name_first = 1 [deprecated = true];</code>
      * @param string $var
      * @return $this
      */
@@ -104,9 +104,9 @@ class Profile extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * last name
+     * last name; DEPRECATED refer member.profileName
      *
-     * Generated from protobuf field <code>string display_name_last = 2;</code>
+     * Generated from protobuf field <code>string display_name_last = 2 [deprecated = true];</code>
      * @return string
      */
     public function getDisplayNameLast()
@@ -115,9 +115,9 @@ class Profile extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * last name
+     * last name; DEPRECATED refer member.profileName
      *
-     * Generated from protobuf field <code>string display_name_last = 2;</code>
+     * Generated from protobuf field <code>string display_name_last = 2 [deprecated = true];</code>
      * @param string $var
      * @return $this
      */

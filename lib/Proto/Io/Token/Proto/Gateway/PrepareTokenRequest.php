@@ -17,6 +17,10 @@ class PrepareTokenRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.io.token.proto.common.token.TokenPayload payload = 1;</code>
      */
     private $payload = null;
+    /**
+     * Generated from protobuf field <code>string app_callback_url = 2 [deprecated = true];</code>
+     */
+    private $app_callback_url = '';
 
     /**
      * Constructor.
@@ -25,6 +29,7 @@ class PrepareTokenRequest extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type \Io\Token\Proto\Common\Token\TokenPayload $payload
+     *     @type string $app_callback_url
      * }
      */
     public function __construct($data = NULL) {
@@ -50,6 +55,28 @@ class PrepareTokenRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Token\TokenPayload::class);
         $this->payload = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string app_callback_url = 2 [deprecated = true];</code>
+     * @return string
+     */
+    public function getAppCallbackUrl()
+    {
+        return $this->app_callback_url;
+    }
+
+    /**
+     * Generated from protobuf field <code>string app_callback_url = 2 [deprecated = true];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setAppCallbackUrl($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->app_callback_url = $var;
 
         return $this;
     }

@@ -18,13 +18,17 @@ class AccountResource extends \Google\Protobuf\Internal\Message
      */
     private $type = 0;
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount bank_account = 2;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount bank_account = 2 [deprecated = true];</code>
      */
     private $bank_account = null;
     /**
      * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.CustomerData customer_data = 3;</code>
      */
     private $customer_data = null;
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.account.AccountIdentifier account_identifier = 4;</code>
+     */
+    private $account_identifier = null;
 
     /**
      * Constructor.
@@ -35,6 +39,7 @@ class AccountResource extends \Google\Protobuf\Internal\Message
      *     @type int $type
      *     @type \Io\Token\Proto\Common\Account\BankAccount $bank_account
      *     @type \Io\Token\Proto\Common\Transferinstructions\CustomerData $customer_data
+     *     @type \Io\Token\Proto\Common\Account\AccountIdentifier $account_identifier
      * }
      */
     public function __construct($data = NULL) {
@@ -65,7 +70,7 @@ class AccountResource extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount bank_account = 2;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount bank_account = 2 [deprecated = true];</code>
      * @return \Io\Token\Proto\Common\Account\BankAccount
      */
     public function getBankAccount()
@@ -74,7 +79,7 @@ class AccountResource extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount bank_account = 2;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.account.BankAccount bank_account = 2 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Account\BankAccount $var
      * @return $this
      */
@@ -104,6 +109,28 @@ class AccountResource extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Transferinstructions\CustomerData::class);
         $this->customer_data = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.account.AccountIdentifier account_identifier = 4;</code>
+     * @return \Io\Token\Proto\Common\Account\AccountIdentifier
+     */
+    public function getAccountIdentifier()
+    {
+        return $this->account_identifier;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.account.AccountIdentifier account_identifier = 4;</code>
+     * @param \Io\Token\Proto\Common\Account\AccountIdentifier $var
+     * @return $this
+     */
+    public function setAccountIdentifier($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Account\AccountIdentifier::class);
+        $this->account_identifier = $var;
 
         return $this;
     }

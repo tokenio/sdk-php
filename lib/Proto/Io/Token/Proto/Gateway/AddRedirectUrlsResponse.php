@@ -9,9 +9,9 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * Generated from protobuf message <code>io.token.proto.gateway.GetTrustedBeneficiariesRequest</code>
+ * Generated from protobuf message <code>io.token.proto.gateway.AddRedirectUrlsResponse</code>
  */
-class GetTrustedBeneficiariesRequest extends \Google\Protobuf\Internal\Message
+class AddRedirectUrlsResponse extends \Google\Protobuf\Internal\Message
 {
 
     /**

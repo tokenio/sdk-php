@@ -23,6 +23,14 @@ class MemberInfo extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>repeated .io.token.proto.common.alias.Alias aliases = 2;</code>
      */
     private $aliases;
+    /**
+     * Generated from protobuf field <code>string profile_name = 3;</code>
+     */
+    private $profile_name = '';
+    /**
+     * Generated from protobuf field <code>int64 created_at_ms = 4;</code>
+     */
+    private $created_at_ms = 0;
 
     /**
      * Constructor.
@@ -33,6 +41,8 @@ class MemberInfo extends \Google\Protobuf\Internal\Message
      *     @type string $id
      *     @type \Io\Token\Proto\Common\Alias\Alias[]|\Google\Protobuf\Internal\RepeatedField $aliases
      *           verified aliases
+     *     @type string $profile_name
+     *     @type int|string $created_at_ms
      * }
      */
     public function __construct($data = NULL) {
@@ -84,6 +94,50 @@ class MemberInfo extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Io\Token\Proto\Common\Alias\Alias::class);
         $this->aliases = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string profile_name = 3;</code>
+     * @return string
+     */
+    public function getProfileName()
+    {
+        return $this->profile_name;
+    }
+
+    /**
+     * Generated from protobuf field <code>string profile_name = 3;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setProfileName($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->profile_name = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>int64 created_at_ms = 4;</code>
+     * @return int|string
+     */
+    public function getCreatedAtMs()
+    {
+        return $this->created_at_ms;
+    }
+
+    /**
+     * Generated from protobuf field <code>int64 created_at_ms = 4;</code>
+     * @param int|string $var
+     * @return $this
+     */
+    public function setCreatedAtMs($var)
+    {
+        GPBUtil::checkInt64($var);
+        $this->created_at_ms = $var;
 
         return $this;
     }

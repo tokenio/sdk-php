@@ -22,27 +22,27 @@ class PerformanceSummary extends \Google\Protobuf\Internal\Message
      */
     private $tpp_type = 0;
     /**
-     * Generated from protobuf field <code>double p50_latency = 3;</code>
+     * Generated from protobuf field <code>double p50_latency = 3 [deprecated = true];</code>
      */
     private $p50_latency = 0.0;
     /**
-     * Generated from protobuf field <code>double p75_latency = 4;</code>
+     * Generated from protobuf field <code>double p75_latency = 4 [deprecated = true];</code>
      */
     private $p75_latency = 0.0;
     /**
-     * Generated from protobuf field <code>double p90_latency = 5;</code>
+     * Generated from protobuf field <code>double p90_latency = 5 [deprecated = true];</code>
      */
     private $p90_latency = 0.0;
     /**
-     * Generated from protobuf field <code>double p95_latency = 6;</code>
+     * Generated from protobuf field <code>double p95_latency = 6 [deprecated = true];</code>
      */
     private $p95_latency = 0.0;
     /**
-     * Generated from protobuf field <code>double p99_latency = 7;</code>
+     * Generated from protobuf field <code>double p99_latency = 7 [deprecated = true];</code>
      */
     private $p99_latency = 0.0;
     /**
-     * Generated from protobuf field <code>double p999_latency = 8;</code>
+     * Generated from protobuf field <code>double p999_latency = 8 [deprecated = true];</code>
      */
     private $p999_latency = 0.0;
     /**
@@ -61,6 +61,10 @@ class PerformanceSummary extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string tpp_id = 12;</code>
      */
     private $tpp_id = '';
+    /**
+     * Generated from protobuf field <code>double average_latency = 13;</code>
+     */
+    private $average_latency = 0.0;
 
     /**
      * Constructor.
@@ -80,6 +84,7 @@ class PerformanceSummary extends \Google\Protobuf\Internal\Message
      *     @type int|string $error_count
      *     @type int|string $request_count
      *     @type string $tpp_id
+     *     @type float $average_latency
      * }
      */
     public function __construct($data = NULL) {
@@ -132,7 +137,7 @@ class PerformanceSummary extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>double p50_latency = 3;</code>
+     * Generated from protobuf field <code>double p50_latency = 3 [deprecated = true];</code>
      * @return float
      */
     public function getP50Latency()
@@ -141,7 +146,7 @@ class PerformanceSummary extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>double p50_latency = 3;</code>
+     * Generated from protobuf field <code>double p50_latency = 3 [deprecated = true];</code>
      * @param float $var
      * @return $this
      */
@@ -154,7 +159,7 @@ class PerformanceSummary extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>double p75_latency = 4;</code>
+     * Generated from protobuf field <code>double p75_latency = 4 [deprecated = true];</code>
      * @return float
      */
     public function getP75Latency()
@@ -163,7 +168,7 @@ class PerformanceSummary extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>double p75_latency = 4;</code>
+     * Generated from protobuf field <code>double p75_latency = 4 [deprecated = true];</code>
      * @param float $var
      * @return $this
      */
@@ -176,7 +181,7 @@ class PerformanceSummary extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>double p90_latency = 5;</code>
+     * Generated from protobuf field <code>double p90_latency = 5 [deprecated = true];</code>
      * @return float
      */
     public function getP90Latency()
@@ -185,7 +190,7 @@ class PerformanceSummary extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>double p90_latency = 5;</code>
+     * Generated from protobuf field <code>double p90_latency = 5 [deprecated = true];</code>
      * @param float $var
      * @return $this
      */
@@ -198,7 +203,7 @@ class PerformanceSummary extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>double p95_latency = 6;</code>
+     * Generated from protobuf field <code>double p95_latency = 6 [deprecated = true];</code>
      * @return float
      */
     public function getP95Latency()
@@ -207,7 +212,7 @@ class PerformanceSummary extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>double p95_latency = 6;</code>
+     * Generated from protobuf field <code>double p95_latency = 6 [deprecated = true];</code>
      * @param float $var
      * @return $this
      */
@@ -220,7 +225,7 @@ class PerformanceSummary extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>double p99_latency = 7;</code>
+     * Generated from protobuf field <code>double p99_latency = 7 [deprecated = true];</code>
      * @return float
      */
     public function getP99Latency()
@@ -229,7 +234,7 @@ class PerformanceSummary extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>double p99_latency = 7;</code>
+     * Generated from protobuf field <code>double p99_latency = 7 [deprecated = true];</code>
      * @param float $var
      * @return $this
      */
@@ -242,7 +247,7 @@ class PerformanceSummary extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>double p999_latency = 8;</code>
+     * Generated from protobuf field <code>double p999_latency = 8 [deprecated = true];</code>
      * @return float
      */
     public function getP999Latency()
@@ -251,7 +256,7 @@ class PerformanceSummary extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>double p999_latency = 8;</code>
+     * Generated from protobuf field <code>double p999_latency = 8 [deprecated = true];</code>
      * @param float $var
      * @return $this
      */
@@ -347,6 +352,28 @@ class PerformanceSummary extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->tpp_id = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>double average_latency = 13;</code>
+     * @return float
+     */
+    public function getAverageLatency()
+    {
+        return $this->average_latency;
+    }
+
+    /**
+     * Generated from protobuf field <code>double average_latency = 13;</code>
+     * @param float $var
+     * @return $this
+     */
+    public function setAverageLatency($var)
+    {
+        GPBUtil::checkDouble($var);
+        $this->average_latency = $var;
 
         return $this;
     }

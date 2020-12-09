@@ -14,37 +14,63 @@ use Google\Protobuf\Internal\GPBUtil;
 class GetBanksCountriesRequest extends \Google\Protobuf\Internal\Message
 {
     /**
-     * (Optional) Filter by criteria in bank filter. Results must match all filter criteria.
+     * DEPRECATED. Use fields below. (Optional) Filter by criteria in bank filter. Results must match all filter criteria.
      *
-     * Generated from protobuf field <code>.io.token.proto.common.bank.BankFilter filter = 1;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.bank.BankFilter filter = 1 [deprecated = true];</code>
      */
     private $filter = null;
     /**
-     * for backwards compatibility with older JS clients TODO(RD-2738) remove
-     *
-     * Generated from protobuf field <code>repeated string ids = 2 [deprecated = true];</code>
+     * Generated from protobuf field <code>repeated string ids = 2;</code>
      */
     private $ids;
     /**
-     * Generated from protobuf field <code>string search = 3 [deprecated = true];</code>
+     * Generated from protobuf field <code>string search = 3;</code>
      */
     private $search = '';
     /**
+     * Use countries instead
+     *
      * Generated from protobuf field <code>string country = 4 [deprecated = true];</code>
      */
     private $country = '';
     /**
+     * Use providers instead
+     *
      * Generated from protobuf field <code>string provider = 5 [deprecated = true];</code>
      */
     private $provider = '';
     /**
+     * Use countries instead
+     *
      * Generated from protobuf field <code>string destination_country = 6 [deprecated = true];</code>
      */
     private $destination_country = '';
     /**
-     * Generated from protobuf field <code>string tpp_id = 7 [deprecated = true];</code>
+     * Generated from protobuf field <code>string tpp_id = 7;</code>
      */
     private $tpp_id = '';
+    /**
+     * Generated from protobuf field <code>string bank_code = 9;</code>
+     */
+    private $bank_code = '';
+    /**
+     * Generated from protobuf field <code>repeated string countries = 10;</code>
+     */
+    private $countries;
+    /**
+     * Generated from protobuf field <code>repeated string providers = 11;</code>
+     */
+    private $providers;
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.bank.BankFeatures bank_features = 12;</code>
+     */
+    private $bank_features = null;
+    /**
+     * (Optional) If specified with a TSP member_id, return the countries which the member's configured banks are located in.
+     *
+     * Generated from protobuf field <code>string member_id = 13;</code>
+     */
+    private $member_id = '';
 
     /**
      * Constructor.
@@ -53,14 +79,22 @@ class GetBanksCountriesRequest extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type \Io\Token\Proto\Common\Bank\BankFilter $filter
-     *           (Optional) Filter by criteria in bank filter. Results must match all filter criteria.
+     *           DEPRECATED. Use fields below. (Optional) Filter by criteria in bank filter. Results must match all filter criteria.
      *     @type string[]|\Google\Protobuf\Internal\RepeatedField $ids
-     *           for backwards compatibility with older JS clients TODO(RD-2738) remove
      *     @type string $search
      *     @type string $country
+     *           Use countries instead
      *     @type string $provider
+     *           Use providers instead
      *     @type string $destination_country
+     *           Use countries instead
      *     @type string $tpp_id
+     *     @type string $bank_code
+     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $countries
+     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $providers
+     *     @type \Io\Token\Proto\Common\Bank\BankFeatures $bank_features
+     *     @type string $member_id
+     *           (Optional) If specified with a TSP member_id, return the countries which the member's configured banks are located in.
      * }
      */
     public function __construct($data = NULL) {
@@ -69,9 +103,9 @@ class GetBanksCountriesRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * (Optional) Filter by criteria in bank filter. Results must match all filter criteria.
+     * DEPRECATED. Use fields below. (Optional) Filter by criteria in bank filter. Results must match all filter criteria.
      *
-     * Generated from protobuf field <code>.io.token.proto.common.bank.BankFilter filter = 1;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.bank.BankFilter filter = 1 [deprecated = true];</code>
      * @return \Io\Token\Proto\Common\Bank\BankFilter
      */
     public function getFilter()
@@ -80,9 +114,9 @@ class GetBanksCountriesRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * (Optional) Filter by criteria in bank filter. Results must match all filter criteria.
+     * DEPRECATED. Use fields below. (Optional) Filter by criteria in bank filter. Results must match all filter criteria.
      *
-     * Generated from protobuf field <code>.io.token.proto.common.bank.BankFilter filter = 1;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.bank.BankFilter filter = 1 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Bank\BankFilter $var
      * @return $this
      */
@@ -95,9 +129,7 @@ class GetBanksCountriesRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * for backwards compatibility with older JS clients TODO(RD-2738) remove
-     *
-     * Generated from protobuf field <code>repeated string ids = 2 [deprecated = true];</code>
+     * Generated from protobuf field <code>repeated string ids = 2;</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getIds()
@@ -106,9 +138,7 @@ class GetBanksCountriesRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * for backwards compatibility with older JS clients TODO(RD-2738) remove
-     *
-     * Generated from protobuf field <code>repeated string ids = 2 [deprecated = true];</code>
+     * Generated from protobuf field <code>repeated string ids = 2;</code>
      * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
@@ -121,7 +151,7 @@ class GetBanksCountriesRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string search = 3 [deprecated = true];</code>
+     * Generated from protobuf field <code>string search = 3;</code>
      * @return string
      */
     public function getSearch()
@@ -130,7 +160,7 @@ class GetBanksCountriesRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string search = 3 [deprecated = true];</code>
+     * Generated from protobuf field <code>string search = 3;</code>
      * @param string $var
      * @return $this
      */
@@ -143,6 +173,8 @@ class GetBanksCountriesRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Use countries instead
+     *
      * Generated from protobuf field <code>string country = 4 [deprecated = true];</code>
      * @return string
      */
@@ -152,6 +184,8 @@ class GetBanksCountriesRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Use countries instead
+     *
      * Generated from protobuf field <code>string country = 4 [deprecated = true];</code>
      * @param string $var
      * @return $this
@@ -165,6 +199,8 @@ class GetBanksCountriesRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Use providers instead
+     *
      * Generated from protobuf field <code>string provider = 5 [deprecated = true];</code>
      * @return string
      */
@@ -174,6 +210,8 @@ class GetBanksCountriesRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Use providers instead
+     *
      * Generated from protobuf field <code>string provider = 5 [deprecated = true];</code>
      * @param string $var
      * @return $this
@@ -187,6 +225,8 @@ class GetBanksCountriesRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Use countries instead
+     *
      * Generated from protobuf field <code>string destination_country = 6 [deprecated = true];</code>
      * @return string
      */
@@ -196,6 +236,8 @@ class GetBanksCountriesRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Use countries instead
+     *
      * Generated from protobuf field <code>string destination_country = 6 [deprecated = true];</code>
      * @param string $var
      * @return $this
@@ -209,7 +251,7 @@ class GetBanksCountriesRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string tpp_id = 7 [deprecated = true];</code>
+     * Generated from protobuf field <code>string tpp_id = 7;</code>
      * @return string
      */
     public function getTppId()
@@ -218,7 +260,7 @@ class GetBanksCountriesRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string tpp_id = 7 [deprecated = true];</code>
+     * Generated from protobuf field <code>string tpp_id = 7;</code>
      * @param string $var
      * @return $this
      */
@@ -226,6 +268,120 @@ class GetBanksCountriesRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->tpp_id = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string bank_code = 9;</code>
+     * @return string
+     */
+    public function getBankCode()
+    {
+        return $this->bank_code;
+    }
+
+    /**
+     * Generated from protobuf field <code>string bank_code = 9;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setBankCode($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->bank_code = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated string countries = 10;</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getCountries()
+    {
+        return $this->countries;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated string countries = 10;</code>
+     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setCountries($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
+        $this->countries = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated string providers = 11;</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getProviders()
+    {
+        return $this->providers;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated string providers = 11;</code>
+     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setProviders($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
+        $this->providers = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.bank.BankFeatures bank_features = 12;</code>
+     * @return \Io\Token\Proto\Common\Bank\BankFeatures
+     */
+    public function getBankFeatures()
+    {
+        return $this->bank_features;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.bank.BankFeatures bank_features = 12;</code>
+     * @param \Io\Token\Proto\Common\Bank\BankFeatures $var
+     * @return $this
+     */
+    public function setBankFeatures($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Bank\BankFeatures::class);
+        $this->bank_features = $var;
+
+        return $this;
+    }
+
+    /**
+     * (Optional) If specified with a TSP member_id, return the countries which the member's configured banks are located in.
+     *
+     * Generated from protobuf field <code>string member_id = 13;</code>
+     * @return string
+     */
+    public function getMemberId()
+    {
+        return $this->member_id;
+    }
+
+    /**
+     * (Optional) If specified with a TSP member_id, return the countries which the member's configured banks are located in.
+     *
+     * Generated from protobuf field <code>string member_id = 13;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setMemberId($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->member_id = $var;
 
         return $this;
     }

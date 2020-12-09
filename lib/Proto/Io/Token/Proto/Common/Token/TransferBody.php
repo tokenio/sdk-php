@@ -65,6 +65,10 @@ class TransferBody extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>bool confirm_funds = 11;</code>
      */
     private $confirm_funds = false;
+    /**
+     * Generated from protobuf field <code>string remittance_reference = 12 [(.io.token.proto.extensions.field.hash) = true];</code>
+     */
+    private $remittance_reference = '';
 
     /**
      * Constructor.
@@ -89,6 +93,7 @@ class TransferBody extends \Google\Protobuf\Internal\Message
      *     @type string $execution_date
      *           Optional. ISO 8601: YYYY-MM-DD or YYYYMMDD.
      *     @type bool $confirm_funds
+     *     @type string $remittance_reference
      * }
      */
     public function __construct($data = NULL) {
@@ -322,6 +327,28 @@ class TransferBody extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkBool($var);
         $this->confirm_funds = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string remittance_reference = 12 [(.io.token.proto.extensions.field.hash) = true];</code>
+     * @return string
+     */
+    public function getRemittanceReference()
+    {
+        return $this->remittance_reference;
+    }
+
+    /**
+     * Generated from protobuf field <code>string remittance_reference = 12 [(.io.token.proto.extensions.field.hash) = true];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setRemittanceReference($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->remittance_reference = $var;
 
         return $this;
     }

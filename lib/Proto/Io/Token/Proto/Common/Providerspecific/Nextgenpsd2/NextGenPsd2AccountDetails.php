@@ -14,11 +14,15 @@ use Google\Protobuf\Internal\GPBUtil;
 class NextGenPsd2AccountDetails extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>string iban = 1;</code>
+     * use AccountDetails.AccountIdentifier.Iban
+     *
+     * Generated from protobuf field <code>string iban = 1 [deprecated = true];</code>
      */
     private $iban = '';
     /**
-     * Generated from protobuf field <code>string bban = 2;</code>
+     * use AccountDetails.AccountIdentifier.Bban
+     *
+     * Generated from protobuf field <code>string bban = 2 [deprecated = true];</code>
      */
     private $bban = '';
     /**
@@ -40,7 +44,9 @@ class NextGenPsd2AccountDetails extends \Google\Protobuf\Internal\Message
      */
     private $cash_account_type = '';
     /**
-     * Generated from protobuf field <code>string bic = 7;</code>
+     * use AccountDetails.bic field
+     *
+     * Generated from protobuf field <code>string bic = 7 [deprecated = true];</code>
      */
     private $bic = '';
     /**
@@ -52,7 +58,7 @@ class NextGenPsd2AccountDetails extends \Google\Protobuf\Internal\Message
      */
     private $usuage = '';
     /**
-     * Generated from protobuf field <code>string details = 10;</code>
+     * Generated from protobuf field <code>string details = 10 [(.io.token.proto.extensions.field.redact) = true];</code>
      */
     private $details = '';
 
@@ -63,13 +69,16 @@ class NextGenPsd2AccountDetails extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type string $iban
+     *           use AccountDetails.AccountIdentifier.Iban
      *     @type string $bban
+     *           use AccountDetails.AccountIdentifier.Bban
      *     @type string $msisdn
      *     @type string $currency
      *     @type string $product
      *     @type string $cash_account_type
      *           ExternalCashAccountType1Code from ISO 20022.
      *     @type string $bic
+     *           use AccountDetails.bic field
      *     @type string $linked_accounts
      *     @type string $usuage
      *     @type string $details
@@ -81,7 +90,9 @@ class NextGenPsd2AccountDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string iban = 1;</code>
+     * use AccountDetails.AccountIdentifier.Iban
+     *
+     * Generated from protobuf field <code>string iban = 1 [deprecated = true];</code>
      * @return string
      */
     public function getIban()
@@ -90,7 +101,9 @@ class NextGenPsd2AccountDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string iban = 1;</code>
+     * use AccountDetails.AccountIdentifier.Iban
+     *
+     * Generated from protobuf field <code>string iban = 1 [deprecated = true];</code>
      * @param string $var
      * @return $this
      */
@@ -103,7 +116,9 @@ class NextGenPsd2AccountDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string bban = 2;</code>
+     * use AccountDetails.AccountIdentifier.Bban
+     *
+     * Generated from protobuf field <code>string bban = 2 [deprecated = true];</code>
      * @return string
      */
     public function getBban()
@@ -112,7 +127,9 @@ class NextGenPsd2AccountDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string bban = 2;</code>
+     * use AccountDetails.AccountIdentifier.Bban
+     *
+     * Generated from protobuf field <code>string bban = 2 [deprecated = true];</code>
      * @param string $var
      * @return $this
      */
@@ -217,7 +234,9 @@ class NextGenPsd2AccountDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string bic = 7;</code>
+     * use AccountDetails.bic field
+     *
+     * Generated from protobuf field <code>string bic = 7 [deprecated = true];</code>
      * @return string
      */
     public function getBic()
@@ -226,7 +245,9 @@ class NextGenPsd2AccountDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string bic = 7;</code>
+     * use AccountDetails.bic field
+     *
+     * Generated from protobuf field <code>string bic = 7 [deprecated = true];</code>
      * @param string $var
      * @return $this
      */
@@ -283,7 +304,7 @@ class NextGenPsd2AccountDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string details = 10;</code>
+     * Generated from protobuf field <code>string details = 10 [(.io.token.proto.extensions.field.redact) = true];</code>
      * @return string
      */
     public function getDetails()
@@ -292,7 +313,7 @@ class NextGenPsd2AccountDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string details = 10;</code>
+     * Generated from protobuf field <code>string details = 10 [(.io.token.proto.extensions.field.redact) = true];</code>
      * @param string $var
      * @return $this
      */

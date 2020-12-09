@@ -177,6 +177,24 @@ class Bank extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>repeated string countries = 29;</code>
      */
     private $countries;
+    /**
+     * List of fields required for authorization.
+     *
+     * Generated from protobuf field <code>repeated .io.token.proto.common.bank.AuthMetadataField authorization_metadata = 30 [deprecated = true];</code>
+     */
+    private $authorization_metadata;
+    /**
+     * Bank group name if bank is member of one.
+     *
+     * Generated from protobuf field <code>string bank_group = 31;</code>
+     */
+    private $bank_group = '';
+    /**
+     * List of fields required for authorization.
+     *
+     * Generated from protobuf field <code>repeated .io.token.proto.common.providerspecific.CredentialField credential_fields = 32;</code>
+     */
+    private $credential_fields;
 
     /**
      * Constructor.
@@ -238,6 +256,12 @@ class Bank extends \Google\Protobuf\Internal\Message
      *           Optional open banking standard
      *     @type string[]|\Google\Protobuf\Internal\RepeatedField $countries
      *           List of ISO 3166-1 alpha-2 two letter country codes in upper case.
+     *     @type \Io\Token\Proto\Common\Bank\AuthMetadataField[]|\Google\Protobuf\Internal\RepeatedField $authorization_metadata
+     *           List of fields required for authorization.
+     *     @type string $bank_group
+     *           Bank group name if bank is member of one.
+     *     @type \Io\Token\Proto\Common\Providerspecific\CredentialField[]|\Google\Protobuf\Internal\RepeatedField $credential_fields
+     *           List of fields required for authorization.
      * }
      */
     public function __construct($data = NULL) {
@@ -961,6 +985,84 @@ class Bank extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
         $this->countries = $arr;
+
+        return $this;
+    }
+
+    /**
+     * List of fields required for authorization.
+     *
+     * Generated from protobuf field <code>repeated .io.token.proto.common.bank.AuthMetadataField authorization_metadata = 30 [deprecated = true];</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getAuthorizationMetadata()
+    {
+        return $this->authorization_metadata;
+    }
+
+    /**
+     * List of fields required for authorization.
+     *
+     * Generated from protobuf field <code>repeated .io.token.proto.common.bank.AuthMetadataField authorization_metadata = 30 [deprecated = true];</code>
+     * @param \Io\Token\Proto\Common\Bank\AuthMetadataField[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setAuthorizationMetadata($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Io\Token\Proto\Common\Bank\AuthMetadataField::class);
+        $this->authorization_metadata = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Bank group name if bank is member of one.
+     *
+     * Generated from protobuf field <code>string bank_group = 31;</code>
+     * @return string
+     */
+    public function getBankGroup()
+    {
+        return $this->bank_group;
+    }
+
+    /**
+     * Bank group name if bank is member of one.
+     *
+     * Generated from protobuf field <code>string bank_group = 31;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setBankGroup($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->bank_group = $var;
+
+        return $this;
+    }
+
+    /**
+     * List of fields required for authorization.
+     *
+     * Generated from protobuf field <code>repeated .io.token.proto.common.providerspecific.CredentialField credential_fields = 32;</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getCredentialFields()
+    {
+        return $this->credential_fields;
+    }
+
+    /**
+     * List of fields required for authorization.
+     *
+     * Generated from protobuf field <code>repeated .io.token.proto.common.providerspecific.CredentialField credential_fields = 32;</code>
+     * @param \Io\Token\Proto\Common\Providerspecific\CredentialField[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setCredentialFields($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Io\Token\Proto\Common\Providerspecific\CredentialField::class);
+        $this->credential_fields = $arr;
 
         return $this;
     }

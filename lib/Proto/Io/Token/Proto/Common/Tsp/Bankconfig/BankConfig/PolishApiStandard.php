@@ -40,23 +40,27 @@ class PolishApiStandard extends \Google\Protobuf\Internal\Message
      */
     private $x5u = '';
     /**
-     * certificate chain for tpp jws certificate
+     * certificate chain for tpp jws certificate, TODO(PLT-783): remove
      *
-     * Generated from protobuf field <code>string x5c = 7;</code>
+     * Generated from protobuf field <code>string x5c = 7 [deprecated = true];</code>
      */
     private $x5c = '';
     /**
-     * certificate thumbprint
+     * certificate thumbprint, TODO(PLT-783): remove
      *
-     * Generated from protobuf field <code>string x5t = 8;</code>
+     * Generated from protobuf field <code>string x5t = 8 [deprecated = true];</code>
      */
     private $x5t = '';
     /**
-     * key identifier
+     * TODO(PLT-783): remove
      *
-     * Generated from protobuf field <code>string kid = 9;</code>
+     * Generated from protobuf field <code>string kid = 9 [deprecated = true];</code>
      */
     private $kid = '';
+    /**
+     * Generated from protobuf field <code>string tpp_id = 10;</code>
+     */
+    private $tpp_id = '';
 
     /**
      * Constructor.
@@ -72,11 +76,12 @@ class PolishApiStandard extends \Google\Protobuf\Internal\Message
      *     @type string $x5u
      *           url to return the pem format of the tpp certificate
      *     @type string $x5c
-     *           certificate chain for tpp jws certificate
+     *           certificate chain for tpp jws certificate, TODO(PLT-783): remove
      *     @type string $x5t
-     *           certificate thumbprint
+     *           certificate thumbprint, TODO(PLT-783): remove
      *     @type string $kid
-     *           key identifier
+     *           TODO(PLT-783): remove
+     *     @type string $tpp_id
      * }
      */
     public function __construct($data = NULL) {
@@ -221,9 +226,9 @@ class PolishApiStandard extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * certificate chain for tpp jws certificate
+     * certificate chain for tpp jws certificate, TODO(PLT-783): remove
      *
-     * Generated from protobuf field <code>string x5c = 7;</code>
+     * Generated from protobuf field <code>string x5c = 7 [deprecated = true];</code>
      * @return string
      */
     public function getX5C()
@@ -232,9 +237,9 @@ class PolishApiStandard extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * certificate chain for tpp jws certificate
+     * certificate chain for tpp jws certificate, TODO(PLT-783): remove
      *
-     * Generated from protobuf field <code>string x5c = 7;</code>
+     * Generated from protobuf field <code>string x5c = 7 [deprecated = true];</code>
      * @param string $var
      * @return $this
      */
@@ -247,9 +252,9 @@ class PolishApiStandard extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * certificate thumbprint
+     * certificate thumbprint, TODO(PLT-783): remove
      *
-     * Generated from protobuf field <code>string x5t = 8;</code>
+     * Generated from protobuf field <code>string x5t = 8 [deprecated = true];</code>
      * @return string
      */
     public function getX5T()
@@ -258,9 +263,9 @@ class PolishApiStandard extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * certificate thumbprint
+     * certificate thumbprint, TODO(PLT-783): remove
      *
-     * Generated from protobuf field <code>string x5t = 8;</code>
+     * Generated from protobuf field <code>string x5t = 8 [deprecated = true];</code>
      * @param string $var
      * @return $this
      */
@@ -273,9 +278,9 @@ class PolishApiStandard extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * key identifier
+     * TODO(PLT-783): remove
      *
-     * Generated from protobuf field <code>string kid = 9;</code>
+     * Generated from protobuf field <code>string kid = 9 [deprecated = true];</code>
      * @return string
      */
     public function getKid()
@@ -284,9 +289,9 @@ class PolishApiStandard extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * key identifier
+     * TODO(PLT-783): remove
      *
-     * Generated from protobuf field <code>string kid = 9;</code>
+     * Generated from protobuf field <code>string kid = 9 [deprecated = true];</code>
      * @param string $var
      * @return $this
      */
@@ -294,6 +299,28 @@ class PolishApiStandard extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->kid = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string tpp_id = 10;</code>
+     * @return string
+     */
+    public function getTppId()
+    {
+        return $this->tpp_id;
+    }
+
+    /**
+     * Generated from protobuf field <code>string tpp_id = 10;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setTppId($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->tpp_id = $var;
 
         return $this;
     }

@@ -88,6 +88,12 @@ class TransactionStatus
      */
     const FAILURE_EXPIRED = 14;
     /**
+     * the transaction has failed, because bank has declined
+     *
+     * Generated from protobuf enum <code>FAILURE_DECLINED = 18;</code>
+     */
+    const FAILURE_DECLINED = 18;
+    /**
      * the transaction has failed due to other reasons
      *
      * Generated from protobuf enum <code>FAILURE_GENERIC = 5;</code>
@@ -105,5 +111,11 @@ class TransactionStatus
      * Generated from protobuf enum <code>INITIATED = 17;</code>
      */
     const INITIATED = 17;
+    /**
+     * the transaction status is not available
+     *
+     * Generated from protobuf enum <code>STATUS_NOT_AVAILABLE = 19;</code>
+     */
+    const STATUS_NOT_AVAILABLE = 19;
 }
 

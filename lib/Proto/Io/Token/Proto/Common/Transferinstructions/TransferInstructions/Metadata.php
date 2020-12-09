@@ -38,10 +38,6 @@ class Metadata extends \Google\Protobuf\Internal\Message
      */
     private $delivery_address = null;
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.ProviderTransferMetadata provider_transfer_metadata = 6;</code>
-     */
-    private $provider_transfer_metadata = null;
-    /**
      * Optional Foreign Exchange charges bearer.
      *
      * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.ChargeBearer chargeBearer = 7;</code>
@@ -65,6 +61,7 @@ class Metadata extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string purpose_code = 10;</code>
      */
     private $purpose_code = '';
+    protected $provider_metadata;
 
     /**
      * Constructor.
@@ -81,6 +78,7 @@ class Metadata extends \Google\Protobuf\Internal\Message
      *     @type \Io\Token\Proto\Common\Address\Address $delivery_address
      *           use cma9.Cma9TransferMetadata instead
      *     @type \Io\Token\Proto\Common\Providerspecific\ProviderTransferMetadata $provider_transfer_metadata
+     *     @type \Io\Token\Proto\Common\Providerspecific\ProviderStandingOrderMetadata $provider_standing_order_metadata
      *     @type int $chargeBearer
      *           Optional Foreign Exchange charges bearer.
      *     @type string $ultimate_creditor
@@ -206,7 +204,7 @@ class Metadata extends \Google\Protobuf\Internal\Message
      */
     public function getProviderTransferMetadata()
     {
-        return $this->provider_transfer_metadata;
+        return $this->readOneof(6);
     }
 
     /**
@@ -217,7 +215,29 @@ class Metadata extends \Google\Protobuf\Internal\Message
     public function setProviderTransferMetadata($var)
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Providerspecific\ProviderTransferMetadata::class);
-        $this->provider_transfer_metadata = $var;
+        $this->writeOneof(6, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.ProviderStandingOrderMetadata provider_standing_order_metadata = 11;</code>
+     * @return \Io\Token\Proto\Common\Providerspecific\ProviderStandingOrderMetadata
+     */
+    public function getProviderStandingOrderMetadata()
+    {
+        return $this->readOneof(11);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.providerspecific.ProviderStandingOrderMetadata provider_standing_order_metadata = 11;</code>
+     * @param \Io\Token\Proto\Common\Providerspecific\ProviderStandingOrderMetadata $var
+     * @return $this
+     */
+    public function setProviderStandingOrderMetadata($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Providerspecific\ProviderStandingOrderMetadata::class);
+        $this->writeOneof(11, $var);
 
         return $this;
     }
@@ -324,6 +344,14 @@ class Metadata extends \Google\Protobuf\Internal\Message
         $this->purpose_code = $var;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProviderMetadata()
+    {
+        return $this->whichOneof("provider_metadata");
     }
 
 }

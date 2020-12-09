@@ -41,6 +41,8 @@ class TransferDestination extends \Google\Protobuf\Internal\Message
      *     @type \Io\Token\Proto\Common\Transferinstructions\TransferDestination\Target2 $target2
      *     @type \Io\Token\Proto\Common\Transferinstructions\TransferDestination\Hsvp $hsvp
      *     @type \Io\Token\Proto\Common\Transferinstructions\TransferDestination\EuDomesticNonEuro $eu_domestic_non_euro
+     *     @type \Io\Token\Proto\Common\Transferinstructions\TransferDestination\Bankgiro $bankgiro
+     *     @type \Io\Token\Proto\Common\Transferinstructions\TransferDestination\Plusgiro $plusgiro
      *     @type \Io\Token\Proto\Common\Transferinstructions\CustomerData $customer_data
      * }
      */
@@ -397,6 +399,50 @@ class TransferDestination extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Transferinstructions\TransferDestination_EuDomesticNonEuro::class);
         $this->writeOneof(17, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferDestination.Bankgiro bankgiro = 18;</code>
+     * @return \Io\Token\Proto\Common\Transferinstructions\TransferDestination\Bankgiro
+     */
+    public function getBankgiro()
+    {
+        return $this->readOneof(18);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferDestination.Bankgiro bankgiro = 18;</code>
+     * @param \Io\Token\Proto\Common\Transferinstructions\TransferDestination\Bankgiro $var
+     * @return $this
+     */
+    public function setBankgiro($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Transferinstructions\TransferDestination_Bankgiro::class);
+        $this->writeOneof(18, $var);
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferDestination.Plusgiro plusgiro = 19;</code>
+     * @return \Io\Token\Proto\Common\Transferinstructions\TransferDestination\Plusgiro
+     */
+    public function getPlusgiro()
+    {
+        return $this->readOneof(19);
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferDestination.Plusgiro plusgiro = 19;</code>
+     * @param \Io\Token\Proto\Common\Transferinstructions\TransferDestination\Plusgiro $var
+     * @return $this
+     */
+    public function setPlusgiro($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Transferinstructions\TransferDestination_Plusgiro::class);
+        $this->writeOneof(19, $var);
 
         return $this;
     }

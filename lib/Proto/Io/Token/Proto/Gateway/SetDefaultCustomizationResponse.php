@@ -9,9 +9,9 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * Generated from protobuf message <code>io.token.proto.gateway.RemoveTrustedBeneficiaryResponse</code>
+ * Generated from protobuf message <code>io.token.proto.gateway.SetDefaultCustomizationResponse</code>
  */
-class RemoveTrustedBeneficiaryResponse extends \Google\Protobuf\Internal\Message
+class SetDefaultCustomizationResponse extends \Google\Protobuf\Internal\Message
 {
 
     /**

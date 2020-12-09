@@ -14,7 +14,9 @@ use Google\Protobuf\Internal\GPBUtil;
 class AccountIdentification extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>string iban = 1;</code>
+     * use AccountDetails.AccountIdentifier.Iban
+     *
+     * Generated from protobuf field <code>string iban = 1 [deprecated = true, (.io.token.proto.extensions.field.redact) = true];</code>
      */
     private $iban = '';
     /**
@@ -33,6 +35,7 @@ class AccountIdentification extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type string $iban
+     *           use AccountDetails.AccountIdentifier.Iban
      *     @type \Io\Token\Proto\Common\Providerspecific\Stet\GenericIdentification $other
      *     @type string $currency
      * }
@@ -43,7 +46,9 @@ class AccountIdentification extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string iban = 1;</code>
+     * use AccountDetails.AccountIdentifier.Iban
+     *
+     * Generated from protobuf field <code>string iban = 1 [deprecated = true, (.io.token.proto.extensions.field.redact) = true];</code>
      * @return string
      */
     public function getIban()
@@ -52,7 +57,9 @@ class AccountIdentification extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string iban = 1;</code>
+     * use AccountDetails.AccountIdentifier.Iban
+     *
+     * Generated from protobuf field <code>string iban = 1 [deprecated = true, (.io.token.proto.extensions.field.redact) = true];</code>
      * @param string $var
      * @return $this
      */
