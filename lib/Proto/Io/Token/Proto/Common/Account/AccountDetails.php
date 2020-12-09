@@ -44,6 +44,20 @@ class AccountDetails extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.io.token.proto.common.providerspecific.ProviderAccountDetails provider_account_details = 5;</code>
      */
     private $provider_account_details = null;
+    /**
+     * Generated from protobuf field <code>string bic = 6;</code>
+     */
+    private $bic = '';
+    /**
+     * Generated from protobuf field <code>repeated .io.token.proto.common.account.AccountIdentifier account_identifiers = 7;</code>
+     */
+    private $account_identifiers;
+    /**
+     * Name of the legal account owner. If there is more than one owner, then several names might be noted here.
+     *
+     * Generated from protobuf field <code>string account_holder_name = 8 [(.io.token.proto.extensions.field.redact) = true];</code>
+     */
+    private $account_holder_name = '';
 
     /**
      * Constructor.
@@ -60,6 +74,10 @@ class AccountDetails extends \Google\Protobuf\Internal\Message
      *     @type array|\Google\Protobuf\Internal\MapField $metadata
      *           Additional account metadata
      *     @type \Io\Token\Proto\Common\Providerspecific\ProviderAccountDetails $provider_account_details
+     *     @type string $bic
+     *     @type \Io\Token\Proto\Common\Account\AccountIdentifier[]|\Google\Protobuf\Internal\RepeatedField $account_identifiers
+     *     @type string $account_holder_name
+     *           Name of the legal account owner. If there is more than one owner, then several names might be noted here.
      * }
      */
     public function __construct($data = NULL) {
@@ -189,6 +207,76 @@ class AccountDetails extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Providerspecific\ProviderAccountDetails::class);
         $this->provider_account_details = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string bic = 6;</code>
+     * @return string
+     */
+    public function getBic()
+    {
+        return $this->bic;
+    }
+
+    /**
+     * Generated from protobuf field <code>string bic = 6;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setBic($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->bic = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated .io.token.proto.common.account.AccountIdentifier account_identifiers = 7;</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getAccountIdentifiers()
+    {
+        return $this->account_identifiers;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated .io.token.proto.common.account.AccountIdentifier account_identifiers = 7;</code>
+     * @param \Io\Token\Proto\Common\Account\AccountIdentifier[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setAccountIdentifiers($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Io\Token\Proto\Common\Account\AccountIdentifier::class);
+        $this->account_identifiers = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Name of the legal account owner. If there is more than one owner, then several names might be noted here.
+     *
+     * Generated from protobuf field <code>string account_holder_name = 8 [(.io.token.proto.extensions.field.redact) = true];</code>
+     * @return string
+     */
+    public function getAccountHolderName()
+    {
+        return $this->account_holder_name;
+    }
+
+    /**
+     * Name of the legal account owner. If there is more than one owner, then several names might be noted here.
+     *
+     * Generated from protobuf field <code>string account_holder_name = 8 [(.io.token.proto.extensions.field.redact) = true];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setAccountHolderName($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->account_holder_name = $var;
 
         return $this;
     }

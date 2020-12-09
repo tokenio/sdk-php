@@ -26,15 +26,15 @@ class BankFilter extends \Google\Protobuf\Internal\Message
      */
     private $tpp_id = '';
     /**
-     * (Optional) Filter for banks that support sending to the destination country
+     * DEPRECATED. Use countries instead. Filter for banks that support sending to the destination country;
      *
-     * Generated from protobuf field <code>string destination_country = 3;</code>
+     * Generated from protobuf field <code>string destination_country = 3 [deprecated = true];</code>
      */
     private $destination_country = '';
     /**
-     * (Optional) Filter for banks whose 'country' matches the given ISO 3166-1 alpha-2 country code (case-insensitive)
+     * DEPRECATED. Use countries instead. Filter for banks whose 'country' matches the given ISO 3166-1 alpha-2 country code (case-insensitive)
      *
-     * Generated from protobuf field <code>string country = 4;</code>
+     * Generated from protobuf field <code>string country = 4 [deprecated = true];</code>
      */
     private $country = '';
     /**
@@ -62,7 +62,13 @@ class BankFilter extends \Google\Protobuf\Internal\Message
      */
     private $providers;
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.bank.BankFilter.BankFeatures bank_features = 8;</code>
+     * (Optional) Filter for banks whose 'country' matches the given ISO 3166-1 alpha-2 country code (case-insensitive)
+     *
+     * Generated from protobuf field <code>repeated string countries = 11;</code>
+     */
+    private $countries;
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.bank.BankFeatures bank_features = 8;</code>
      */
     private $bank_features = null;
 
@@ -77,9 +83,9 @@ class BankFilter extends \Google\Protobuf\Internal\Message
      *     @type string $tpp_id
      *           (Optional) Filter for banks which are integrated with the TPP
      *     @type string $destination_country
-     *           (Optional) Filter for banks that support sending to the destination country
+     *           DEPRECATED. Use countries instead. Filter for banks that support sending to the destination country;
      *     @type string $country
-     *           (Optional) Filter for banks whose 'country' matches the given ISO 3166-1 alpha-2 country code (case-insensitive)
+     *           DEPRECATED. Use countries instead. Filter for banks whose 'country' matches the given ISO 3166-1 alpha-2 country code (case-insensitive)
      *     @type string[]|\Google\Protobuf\Internal\RepeatedField $ids
      *           (Optional) Filter for banks whose 'id' matches any one of the given ids (case-insensitive). Can be at most 1000.
      *     @type string $search
@@ -88,7 +94,9 @@ class BankFilter extends \Google\Protobuf\Internal\Message
      *           (Optional) Filter for banks whose bank code matches the given value (BLZ for German banks only)
      *     @type string[]|\Google\Protobuf\Internal\RepeatedField $providers
      *           (Optional) Filter for banks whose 'provider' matches the providers (case-insensitive)
-     *     @type \Io\Token\Proto\Common\Bank\BankFilter\BankFeatures $bank_features
+     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $countries
+     *           (Optional) Filter for banks whose 'country' matches the given ISO 3166-1 alpha-2 country code (case-insensitive)
+     *     @type \Io\Token\Proto\Common\Bank\BankFeatures $bank_features
      * }
      */
     public function __construct($data = NULL) {
@@ -149,9 +157,9 @@ class BankFilter extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * (Optional) Filter for banks that support sending to the destination country
+     * DEPRECATED. Use countries instead. Filter for banks that support sending to the destination country;
      *
-     * Generated from protobuf field <code>string destination_country = 3;</code>
+     * Generated from protobuf field <code>string destination_country = 3 [deprecated = true];</code>
      * @return string
      */
     public function getDestinationCountry()
@@ -160,9 +168,9 @@ class BankFilter extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * (Optional) Filter for banks that support sending to the destination country
+     * DEPRECATED. Use countries instead. Filter for banks that support sending to the destination country;
      *
-     * Generated from protobuf field <code>string destination_country = 3;</code>
+     * Generated from protobuf field <code>string destination_country = 3 [deprecated = true];</code>
      * @param string $var
      * @return $this
      */
@@ -175,9 +183,9 @@ class BankFilter extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * (Optional) Filter for banks whose 'country' matches the given ISO 3166-1 alpha-2 country code (case-insensitive)
+     * DEPRECATED. Use countries instead. Filter for banks whose 'country' matches the given ISO 3166-1 alpha-2 country code (case-insensitive)
      *
-     * Generated from protobuf field <code>string country = 4;</code>
+     * Generated from protobuf field <code>string country = 4 [deprecated = true];</code>
      * @return string
      */
     public function getCountry()
@@ -186,9 +194,9 @@ class BankFilter extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * (Optional) Filter for banks whose 'country' matches the given ISO 3166-1 alpha-2 country code (case-insensitive)
+     * DEPRECATED. Use countries instead. Filter for banks whose 'country' matches the given ISO 3166-1 alpha-2 country code (case-insensitive)
      *
-     * Generated from protobuf field <code>string country = 4;</code>
+     * Generated from protobuf field <code>string country = 4 [deprecated = true];</code>
      * @param string $var
      * @return $this
      */
@@ -305,8 +313,34 @@ class BankFilter extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.bank.BankFilter.BankFeatures bank_features = 8;</code>
-     * @return \Io\Token\Proto\Common\Bank\BankFilter\BankFeatures
+     * (Optional) Filter for banks whose 'country' matches the given ISO 3166-1 alpha-2 country code (case-insensitive)
+     *
+     * Generated from protobuf field <code>repeated string countries = 11;</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getCountries()
+    {
+        return $this->countries;
+    }
+
+    /**
+     * (Optional) Filter for banks whose 'country' matches the given ISO 3166-1 alpha-2 country code (case-insensitive)
+     *
+     * Generated from protobuf field <code>repeated string countries = 11;</code>
+     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setCountries($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
+        $this->countries = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.bank.BankFeatures bank_features = 8;</code>
+     * @return \Io\Token\Proto\Common\Bank\BankFeatures
      */
     public function getBankFeatures()
     {
@@ -314,13 +348,13 @@ class BankFilter extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.bank.BankFilter.BankFeatures bank_features = 8;</code>
-     * @param \Io\Token\Proto\Common\Bank\BankFilter\BankFeatures $var
+     * Generated from protobuf field <code>.io.token.proto.common.bank.BankFeatures bank_features = 8;</code>
+     * @param \Io\Token\Proto\Common\Bank\BankFeatures $var
      * @return $this
      */
     public function setBankFeatures($var)
     {
-        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Bank\BankFilter_BankFeatures::class);
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Bank\BankFeatures::class);
         $this->bank_features = $var;
 
         return $this;

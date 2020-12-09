@@ -52,6 +52,10 @@ class StandingOrderBody extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string currency = 6;</code>
      */
     private $currency = '';
+    /**
+     * Generated from protobuf field <code>string remittance_reference = 7 [(.io.token.proto.extensions.field.hash) = true];</code>
+     */
+    private $remittance_reference = '';
 
     /**
      * Constructor.
@@ -71,6 +75,7 @@ class StandingOrderBody extends \Google\Protobuf\Internal\Message
      *           Amount of each individual payment
      *     @type string $currency
      *           ISO 4217, 3 letter currency code such as "USD" or "EUR".
+     *     @type string $remittance_reference
      * }
      */
     public function __construct($data = NULL) {
@@ -230,6 +235,28 @@ class StandingOrderBody extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->currency = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string remittance_reference = 7 [(.io.token.proto.extensions.field.hash) = true];</code>
+     * @return string
+     */
+    public function getRemittanceReference()
+    {
+        return $this->remittance_reference;
+    }
+
+    /**
+     * Generated from protobuf field <code>string remittance_reference = 7 [(.io.token.proto.extensions.field.hash) = true];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setRemittanceReference($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->remittance_reference = $var;
 
         return $this;
     }

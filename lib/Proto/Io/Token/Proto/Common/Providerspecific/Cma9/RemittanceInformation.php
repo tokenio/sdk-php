@@ -17,6 +17,10 @@ class RemittanceInformation extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string reference = 1 [(.io.token.proto.extensions.field.hash) = true];</code>
      */
     private $reference = '';
+    /**
+     * Generated from protobuf field <code>string reference_hash = 2;</code>
+     */
+    private $reference_hash = '';
 
     /**
      * Constructor.
@@ -25,6 +29,7 @@ class RemittanceInformation extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type string $reference
+     *     @type string $reference_hash
      * }
      */
     public function __construct($data = NULL) {
@@ -50,6 +55,28 @@ class RemittanceInformation extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->reference = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string reference_hash = 2;</code>
+     * @return string
+     */
+    public function getReferenceHash()
+    {
+        return $this->reference_hash;
+    }
+
+    /**
+     * Generated from protobuf field <code>string reference_hash = 2;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setReferenceHash($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->reference_hash = $var;
 
         return $this;
     }

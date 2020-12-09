@@ -34,11 +34,11 @@ class GetTokensRequest extends \Google\Protobuf\Internal\Message
     /**
      * for backwards compatibility with older JS clients TODO(RD-2738) remove
      *
-     * Generated from protobuf field <code>string offset = 4;</code>
+     * Generated from protobuf field <code>string offset = 4 [deprecated = true];</code>
      */
     private $offset = '';
     /**
-     * Generated from protobuf field <code>int32 limit = 5;</code>
+     * Generated from protobuf field <code>int32 limit = 5 [deprecated = true];</code>
      */
     private $limit = 0;
 
@@ -145,7 +145,7 @@ class GetTokensRequest extends \Google\Protobuf\Internal\Message
     /**
      * for backwards compatibility with older JS clients TODO(RD-2738) remove
      *
-     * Generated from protobuf field <code>string offset = 4;</code>
+     * Generated from protobuf field <code>string offset = 4 [deprecated = true];</code>
      * @return string
      */
     public function getOffset()
@@ -156,7 +156,7 @@ class GetTokensRequest extends \Google\Protobuf\Internal\Message
     /**
      * for backwards compatibility with older JS clients TODO(RD-2738) remove
      *
-     * Generated from protobuf field <code>string offset = 4;</code>
+     * Generated from protobuf field <code>string offset = 4 [deprecated = true];</code>
      * @param string $var
      * @return $this
      */
@@ -169,7 +169,7 @@ class GetTokensRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int32 limit = 5;</code>
+     * Generated from protobuf field <code>int32 limit = 5 [deprecated = true];</code>
      * @return int
      */
     public function getLimit()
@@ -178,7 +178,7 @@ class GetTokensRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int32 limit = 5;</code>
+     * Generated from protobuf field <code>int32 limit = 5 [deprecated = true];</code>
      * @param int $var
      * @return $this
      */

@@ -44,7 +44,7 @@ class NextGenPsd2TransactionDetails extends \Google\Protobuf\Internal\Message
      */
     private $currency_exchange;
     /**
-     * Generated from protobuf field <code>string creditor_name = 8;</code>
+     * Generated from protobuf field <code>string creditor_name = 8 [(.io.token.proto.extensions.field.redact) = true];</code>
      */
     private $creditor_name = '';
     /**
@@ -52,11 +52,11 @@ class NextGenPsd2TransactionDetails extends \Google\Protobuf\Internal\Message
      */
     private $creditor_account = null;
     /**
-     * Generated from protobuf field <code>string ultimate_creditor = 10;</code>
+     * Generated from protobuf field <code>string ultimate_creditor = 10 [(.io.token.proto.extensions.field.redact) = true];</code>
      */
     private $ultimate_creditor = '';
     /**
-     * Generated from protobuf field <code>string debtor_name = 11;</code>
+     * Generated from protobuf field <code>string debtor_name = 11 [(.io.token.proto.extensions.field.redact) = true];</code>
      */
     private $debtor_name = '';
     /**
@@ -64,7 +64,7 @@ class NextGenPsd2TransactionDetails extends \Google\Protobuf\Internal\Message
      */
     private $debtor_account = null;
     /**
-     * Generated from protobuf field <code>string ultimate_debtor = 13;</code>
+     * Generated from protobuf field <code>string ultimate_debtor = 13 [(.io.token.proto.extensions.field.redact) = true];</code>
      */
     private $ultimate_debtor = '';
     /**
@@ -288,7 +288,7 @@ class NextGenPsd2TransactionDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string creditor_name = 8;</code>
+     * Generated from protobuf field <code>string creditor_name = 8 [(.io.token.proto.extensions.field.redact) = true];</code>
      * @return string
      */
     public function getCreditorName()
@@ -297,7 +297,7 @@ class NextGenPsd2TransactionDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string creditor_name = 8;</code>
+     * Generated from protobuf field <code>string creditor_name = 8 [(.io.token.proto.extensions.field.redact) = true];</code>
      * @param string $var
      * @return $this
      */
@@ -332,7 +332,7 @@ class NextGenPsd2TransactionDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string ultimate_creditor = 10;</code>
+     * Generated from protobuf field <code>string ultimate_creditor = 10 [(.io.token.proto.extensions.field.redact) = true];</code>
      * @return string
      */
     public function getUltimateCreditor()
@@ -341,7 +341,7 @@ class NextGenPsd2TransactionDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string ultimate_creditor = 10;</code>
+     * Generated from protobuf field <code>string ultimate_creditor = 10 [(.io.token.proto.extensions.field.redact) = true];</code>
      * @param string $var
      * @return $this
      */
@@ -354,7 +354,7 @@ class NextGenPsd2TransactionDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string debtor_name = 11;</code>
+     * Generated from protobuf field <code>string debtor_name = 11 [(.io.token.proto.extensions.field.redact) = true];</code>
      * @return string
      */
     public function getDebtorName()
@@ -363,7 +363,7 @@ class NextGenPsd2TransactionDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string debtor_name = 11;</code>
+     * Generated from protobuf field <code>string debtor_name = 11 [(.io.token.proto.extensions.field.redact) = true];</code>
      * @param string $var
      * @return $this
      */
@@ -398,7 +398,7 @@ class NextGenPsd2TransactionDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string ultimate_debtor = 13;</code>
+     * Generated from protobuf field <code>string ultimate_debtor = 13 [(.io.token.proto.extensions.field.redact) = true];</code>
      * @return string
      */
     public function getUltimateDebtor()
@@ -407,7 +407,7 @@ class NextGenPsd2TransactionDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string ultimate_debtor = 13;</code>
+     * Generated from protobuf field <code>string ultimate_debtor = 13 [(.io.token.proto.extensions.field.redact) = true];</code>
      * @param string $var
      * @return $this
      */

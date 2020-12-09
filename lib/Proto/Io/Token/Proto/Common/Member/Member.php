@@ -93,6 +93,12 @@ class Member extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>repeated .io.token.proto.common.member.RealmPermission realm_permissions = 13;</code>
      */
     private $realm_permissions;
+    /**
+     * expired public keys
+     *
+     * Generated from protobuf field <code>repeated .io.token.proto.common.security.Key expiredKeys = 14;</code>
+     */
+    private $expiredKeys;
 
     /**
      * Constructor.
@@ -126,6 +132,8 @@ class Member extends \Google\Protobuf\Internal\Message
      *           realm owner member id
      *     @type int[]|\Google\Protobuf\Internal\RepeatedField $realm_permissions
      *           realm permissions assigned; Used to verify MemberOperations that this member can perform as realm owner.
+     *     @type \Io\Token\Proto\Common\Security\Key[]|\Google\Protobuf\Internal\RepeatedField $expiredKeys
+     *           expired public keys
      * }
      */
     public function __construct($data = NULL) {
@@ -467,6 +475,32 @@ class Member extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::ENUM, \Io\Token\Proto\Common\Member\RealmPermission::class);
         $this->realm_permissions = $arr;
+
+        return $this;
+    }
+
+    /**
+     * expired public keys
+     *
+     * Generated from protobuf field <code>repeated .io.token.proto.common.security.Key expiredKeys = 14;</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getExpiredKeys()
+    {
+        return $this->expiredKeys;
+    }
+
+    /**
+     * expired public keys
+     *
+     * Generated from protobuf field <code>repeated .io.token.proto.common.security.Key expiredKeys = 14;</code>
+     * @param \Io\Token\Proto\Common\Security\Key[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setExpiredKeys($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Io\Token\Proto\Common\Security\Key::class);
+        $this->expiredKeys = $arr;
 
         return $this;
     }

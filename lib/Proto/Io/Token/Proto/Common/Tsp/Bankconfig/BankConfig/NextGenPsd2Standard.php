@@ -46,11 +46,15 @@ class NextGenPsd2Standard extends \Google\Protobuf\Internal\Message
      */
     private $jwt_signing_algorithm = '';
     /**
-     * Generated from protobuf field <code>string qseal_certificate = 9;</code>
+     * TODO(PLT-783): remove
+     *
+     * Generated from protobuf field <code>string qseal_certificate = 9 [deprecated = true];</code>
      */
     private $qseal_certificate = '';
     /**
-     * Generated from protobuf field <code>string qwac_certificate = 10;</code>
+     * TODO(PLT-783): remove
+     *
+     * Generated from protobuf field <code>string qwac_certificate = 10 [deprecated = true];</code>
      */
     private $qwac_certificate = '';
     /**
@@ -77,7 +81,9 @@ class NextGenPsd2Standard extends \Google\Protobuf\Internal\Message
      *     @type string $jwt_signing_key_id
      *     @type string $jwt_signing_algorithm
      *     @type string $qseal_certificate
+     *           TODO(PLT-783): remove
      *     @type string $qwac_certificate
+     *           TODO(PLT-783): remove
      *     @type string $signing_key_id
      *     @type string $transport_key_id
      * }
@@ -264,7 +270,9 @@ class NextGenPsd2Standard extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string qseal_certificate = 9;</code>
+     * TODO(PLT-783): remove
+     *
+     * Generated from protobuf field <code>string qseal_certificate = 9 [deprecated = true];</code>
      * @return string
      */
     public function getQsealCertificate()
@@ -273,7 +281,9 @@ class NextGenPsd2Standard extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string qseal_certificate = 9;</code>
+     * TODO(PLT-783): remove
+     *
+     * Generated from protobuf field <code>string qseal_certificate = 9 [deprecated = true];</code>
      * @param string $var
      * @return $this
      */
@@ -286,7 +296,9 @@ class NextGenPsd2Standard extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string qwac_certificate = 10;</code>
+     * TODO(PLT-783): remove
+     *
+     * Generated from protobuf field <code>string qwac_certificate = 10 [deprecated = true];</code>
      * @return string
      */
     public function getQwacCertificate()
@@ -295,7 +307,9 @@ class NextGenPsd2Standard extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string qwac_certificate = 10;</code>
+     * TODO(PLT-783): remove
+     *
+     * Generated from protobuf field <code>string qwac_certificate = 10 [deprecated = true];</code>
      * @param string $var
      * @return $this
      */

@@ -14,9 +14,9 @@ use Google\Protobuf\Internal\GPBUtil;
 class GetBanksRequest extends \Google\Protobuf\Internal\Message
 {
     /**
-     * (Optional) Filter by criteria in bank filter. Results must match all filter criteria.
+     * DEPRECATED. Use fields below. (Optional) Filter by criteria in bank filter. Results must match all filter criteria.
      *
-     * Generated from protobuf field <code>.io.token.proto.common.bank.BankFilter filter = 9;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.bank.BankFilter filter = 9 [deprecated = true];</code>
      */
     private $filter = null;
     /**
@@ -38,47 +38,67 @@ class GetBanksRequest extends \Google\Protobuf\Internal\Message
      */
     private $sort = '';
     /**
-     * DEPRECATED
+     * (Optional) If specified with a TSP member_id, return the banks which the member is configured with.
+     *
+     * Generated from protobuf field <code>string member_id = 15;</code>
+     */
+    private $member_id = '';
+    /**
+     * DEPRECATED. Use countries instead. If specified, return banks whose 'country' matches the given ISO 3166-1 alpha-2 country code (case-insensitive)
      *
      * Generated from protobuf field <code>string country = 3 [deprecated = true];</code>
      */
     private $country = '';
     /**
-     * DEPRECATED. If specified, return banks whose 'id' matches any one of the given ids (case-insensitive). Can be at most 1000.
+     * If specified, return banks whose 'id' matches any one of the given ids (case-insensitive). Can be at most 1000.
      *
-     * Generated from protobuf field <code>repeated string ids = 1 [deprecated = true];</code>
+     * Generated from protobuf field <code>repeated string ids = 1;</code>
      */
     private $ids;
     /**
-     * DEPRECATED. If specified, return banks whose 'name' or 'identifier' contains the given search string (case-insensitive)
+     * If specified, return banks whose 'name' or 'identifier' contains the given search string (case-insensitive)
      *
-     * Generated from protobuf field <code>string search = 2 [deprecated = true];</code>
+     * Generated from protobuf field <code>string search = 2;</code>
      */
     private $search = '';
     /**
-     * DEPRECATED. (Optional) If specified, return banks whose 'provider' matches the provider (case-insensitive)
+     * DEPRECATED. Use providers instead. (Optional) If specified, return banks whose 'provider' matches the provider (case-insensitive)
      *
      * Generated from protobuf field <code>string provider = 7 [deprecated = true];</code>
      */
     private $provider = '';
     /**
-     * DEPRECATED. (Optional) If specified, return banks which are integrated with the TPP
+     * (Optional) If specified, return banks which are integrated with the TPP
      *
-     * Generated from protobuf field <code>string tpp_id = 8 [deprecated = true];</code>
+     * Generated from protobuf field <code>string tpp_id = 8;</code>
      */
     private $tpp_id = '';
     /**
-     * DEPRECATED. (Optional) Filter for banks that support sending to the destination country.
+     * DEPRECATED. Use countries instead. (Optional) Filter for banks that support sending to the destination country.
      *
      * Generated from protobuf field <code>string destination_country = 10 [deprecated = true];</code>
      */
     private $destination_country = '';
     /**
-     * DEPRECATED. (Optional) Filter for banks whose 'provider' matches the providers (case-insensitive)
+     * (Optional) Filter for banks whose 'provider' matches the providers (case-insensitive)
      *
-     * Generated from protobuf field <code>repeated string providers = 11 [deprecated = true];</code>
+     * Generated from protobuf field <code>repeated string providers = 11;</code>
      */
     private $providers;
+    /**
+     * (Optional) Filter for banks whose bank code matches the given value (BLZ for German banks only)
+     *
+     * Generated from protobuf field <code>string bank_code = 12;</code>
+     */
+    private $bank_code = '';
+    /**
+     * Generated from protobuf field <code>repeated string countries = 13;</code>
+     */
+    private $countries;
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.bank.BankFeatures bank_features = 14;</code>
+     */
+    private $bank_features = null;
 
     /**
      * Constructor.
@@ -87,27 +107,33 @@ class GetBanksRequest extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type \Io\Token\Proto\Common\Bank\BankFilter $filter
-     *           (Optional) Filter by criteria in bank filter. Results must match all filter criteria.
+     *           DEPRECATED. Use fields below. (Optional) Filter by criteria in bank filter. Results must match all filter criteria.
      *     @type int $page
      *           Paging
      *     @type int $per_page
      *           Maximum number of records per page. Can be at most 200. Defaults to 200 if not specified.
      *     @type string $sort
      *           The key to sort the results. Could be one of: name, provider and country. Defaults to name if not specified.
+     *     @type string $member_id
+     *           (Optional) If specified with a TSP member_id, return the banks which the member is configured with.
      *     @type string $country
-     *           DEPRECATED
+     *           DEPRECATED. Use countries instead. If specified, return banks whose 'country' matches the given ISO 3166-1 alpha-2 country code (case-insensitive)
      *     @type string[]|\Google\Protobuf\Internal\RepeatedField $ids
-     *           DEPRECATED. If specified, return banks whose 'id' matches any one of the given ids (case-insensitive). Can be at most 1000.
+     *           If specified, return banks whose 'id' matches any one of the given ids (case-insensitive). Can be at most 1000.
      *     @type string $search
-     *           DEPRECATED. If specified, return banks whose 'name' or 'identifier' contains the given search string (case-insensitive)
+     *           If specified, return banks whose 'name' or 'identifier' contains the given search string (case-insensitive)
      *     @type string $provider
-     *           DEPRECATED. (Optional) If specified, return banks whose 'provider' matches the provider (case-insensitive)
+     *           DEPRECATED. Use providers instead. (Optional) If specified, return banks whose 'provider' matches the provider (case-insensitive)
      *     @type string $tpp_id
-     *           DEPRECATED. (Optional) If specified, return banks which are integrated with the TPP
+     *           (Optional) If specified, return banks which are integrated with the TPP
      *     @type string $destination_country
-     *           DEPRECATED. (Optional) Filter for banks that support sending to the destination country.
+     *           DEPRECATED. Use countries instead. (Optional) Filter for banks that support sending to the destination country.
      *     @type string[]|\Google\Protobuf\Internal\RepeatedField $providers
-     *           DEPRECATED. (Optional) Filter for banks whose 'provider' matches the providers (case-insensitive)
+     *           (Optional) Filter for banks whose 'provider' matches the providers (case-insensitive)
+     *     @type string $bank_code
+     *           (Optional) Filter for banks whose bank code matches the given value (BLZ for German banks only)
+     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $countries
+     *     @type \Io\Token\Proto\Common\Bank\BankFeatures $bank_features
      * }
      */
     public function __construct($data = NULL) {
@@ -116,9 +142,9 @@ class GetBanksRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * (Optional) Filter by criteria in bank filter. Results must match all filter criteria.
+     * DEPRECATED. Use fields below. (Optional) Filter by criteria in bank filter. Results must match all filter criteria.
      *
-     * Generated from protobuf field <code>.io.token.proto.common.bank.BankFilter filter = 9;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.bank.BankFilter filter = 9 [deprecated = true];</code>
      * @return \Io\Token\Proto\Common\Bank\BankFilter
      */
     public function getFilter()
@@ -127,9 +153,9 @@ class GetBanksRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * (Optional) Filter by criteria in bank filter. Results must match all filter criteria.
+     * DEPRECATED. Use fields below. (Optional) Filter by criteria in bank filter. Results must match all filter criteria.
      *
-     * Generated from protobuf field <code>.io.token.proto.common.bank.BankFilter filter = 9;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.bank.BankFilter filter = 9 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Bank\BankFilter $var
      * @return $this
      */
@@ -220,7 +246,33 @@ class GetBanksRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * DEPRECATED
+     * (Optional) If specified with a TSP member_id, return the banks which the member is configured with.
+     *
+     * Generated from protobuf field <code>string member_id = 15;</code>
+     * @return string
+     */
+    public function getMemberId()
+    {
+        return $this->member_id;
+    }
+
+    /**
+     * (Optional) If specified with a TSP member_id, return the banks which the member is configured with.
+     *
+     * Generated from protobuf field <code>string member_id = 15;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setMemberId($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->member_id = $var;
+
+        return $this;
+    }
+
+    /**
+     * DEPRECATED. Use countries instead. If specified, return banks whose 'country' matches the given ISO 3166-1 alpha-2 country code (case-insensitive)
      *
      * Generated from protobuf field <code>string country = 3 [deprecated = true];</code>
      * @return string
@@ -231,7 +283,7 @@ class GetBanksRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * DEPRECATED
+     * DEPRECATED. Use countries instead. If specified, return banks whose 'country' matches the given ISO 3166-1 alpha-2 country code (case-insensitive)
      *
      * Generated from protobuf field <code>string country = 3 [deprecated = true];</code>
      * @param string $var
@@ -246,9 +298,9 @@ class GetBanksRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * DEPRECATED. If specified, return banks whose 'id' matches any one of the given ids (case-insensitive). Can be at most 1000.
+     * If specified, return banks whose 'id' matches any one of the given ids (case-insensitive). Can be at most 1000.
      *
-     * Generated from protobuf field <code>repeated string ids = 1 [deprecated = true];</code>
+     * Generated from protobuf field <code>repeated string ids = 1;</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getIds()
@@ -257,9 +309,9 @@ class GetBanksRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * DEPRECATED. If specified, return banks whose 'id' matches any one of the given ids (case-insensitive). Can be at most 1000.
+     * If specified, return banks whose 'id' matches any one of the given ids (case-insensitive). Can be at most 1000.
      *
-     * Generated from protobuf field <code>repeated string ids = 1 [deprecated = true];</code>
+     * Generated from protobuf field <code>repeated string ids = 1;</code>
      * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
@@ -272,9 +324,9 @@ class GetBanksRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * DEPRECATED. If specified, return banks whose 'name' or 'identifier' contains the given search string (case-insensitive)
+     * If specified, return banks whose 'name' or 'identifier' contains the given search string (case-insensitive)
      *
-     * Generated from protobuf field <code>string search = 2 [deprecated = true];</code>
+     * Generated from protobuf field <code>string search = 2;</code>
      * @return string
      */
     public function getSearch()
@@ -283,9 +335,9 @@ class GetBanksRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * DEPRECATED. If specified, return banks whose 'name' or 'identifier' contains the given search string (case-insensitive)
+     * If specified, return banks whose 'name' or 'identifier' contains the given search string (case-insensitive)
      *
-     * Generated from protobuf field <code>string search = 2 [deprecated = true];</code>
+     * Generated from protobuf field <code>string search = 2;</code>
      * @param string $var
      * @return $this
      */
@@ -298,7 +350,7 @@ class GetBanksRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * DEPRECATED. (Optional) If specified, return banks whose 'provider' matches the provider (case-insensitive)
+     * DEPRECATED. Use providers instead. (Optional) If specified, return banks whose 'provider' matches the provider (case-insensitive)
      *
      * Generated from protobuf field <code>string provider = 7 [deprecated = true];</code>
      * @return string
@@ -309,7 +361,7 @@ class GetBanksRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * DEPRECATED. (Optional) If specified, return banks whose 'provider' matches the provider (case-insensitive)
+     * DEPRECATED. Use providers instead. (Optional) If specified, return banks whose 'provider' matches the provider (case-insensitive)
      *
      * Generated from protobuf field <code>string provider = 7 [deprecated = true];</code>
      * @param string $var
@@ -324,9 +376,9 @@ class GetBanksRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * DEPRECATED. (Optional) If specified, return banks which are integrated with the TPP
+     * (Optional) If specified, return banks which are integrated with the TPP
      *
-     * Generated from protobuf field <code>string tpp_id = 8 [deprecated = true];</code>
+     * Generated from protobuf field <code>string tpp_id = 8;</code>
      * @return string
      */
     public function getTppId()
@@ -335,9 +387,9 @@ class GetBanksRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * DEPRECATED. (Optional) If specified, return banks which are integrated with the TPP
+     * (Optional) If specified, return banks which are integrated with the TPP
      *
-     * Generated from protobuf field <code>string tpp_id = 8 [deprecated = true];</code>
+     * Generated from protobuf field <code>string tpp_id = 8;</code>
      * @param string $var
      * @return $this
      */
@@ -350,7 +402,7 @@ class GetBanksRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * DEPRECATED. (Optional) Filter for banks that support sending to the destination country.
+     * DEPRECATED. Use countries instead. (Optional) Filter for banks that support sending to the destination country.
      *
      * Generated from protobuf field <code>string destination_country = 10 [deprecated = true];</code>
      * @return string
@@ -361,7 +413,7 @@ class GetBanksRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * DEPRECATED. (Optional) Filter for banks that support sending to the destination country.
+     * DEPRECATED. Use countries instead. (Optional) Filter for banks that support sending to the destination country.
      *
      * Generated from protobuf field <code>string destination_country = 10 [deprecated = true];</code>
      * @param string $var
@@ -376,9 +428,9 @@ class GetBanksRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * DEPRECATED. (Optional) Filter for banks whose 'provider' matches the providers (case-insensitive)
+     * (Optional) Filter for banks whose 'provider' matches the providers (case-insensitive)
      *
-     * Generated from protobuf field <code>repeated string providers = 11 [deprecated = true];</code>
+     * Generated from protobuf field <code>repeated string providers = 11;</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getProviders()
@@ -387,9 +439,9 @@ class GetBanksRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * DEPRECATED. (Optional) Filter for banks whose 'provider' matches the providers (case-insensitive)
+     * (Optional) Filter for banks whose 'provider' matches the providers (case-insensitive)
      *
-     * Generated from protobuf field <code>repeated string providers = 11 [deprecated = true];</code>
+     * Generated from protobuf field <code>repeated string providers = 11;</code>
      * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
@@ -397,6 +449,76 @@ class GetBanksRequest extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
         $this->providers = $arr;
+
+        return $this;
+    }
+
+    /**
+     * (Optional) Filter for banks whose bank code matches the given value (BLZ for German banks only)
+     *
+     * Generated from protobuf field <code>string bank_code = 12;</code>
+     * @return string
+     */
+    public function getBankCode()
+    {
+        return $this->bank_code;
+    }
+
+    /**
+     * (Optional) Filter for banks whose bank code matches the given value (BLZ for German banks only)
+     *
+     * Generated from protobuf field <code>string bank_code = 12;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setBankCode($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->bank_code = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated string countries = 13;</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getCountries()
+    {
+        return $this->countries;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated string countries = 13;</code>
+     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setCountries($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
+        $this->countries = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.bank.BankFeatures bank_features = 14;</code>
+     * @return \Io\Token\Proto\Common\Bank\BankFeatures
+     */
+    public function getBankFeatures()
+    {
+        return $this->bank_features;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.bank.BankFeatures bank_features = 14;</code>
+     * @param \Io\Token\Proto\Common\Bank\BankFeatures $var
+     * @return $this
+     */
+    public function setBankFeatures($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Bank\BankFeatures::class);
+        $this->bank_features = $var;
 
         return $this;
     }

@@ -61,5 +61,17 @@ class OpenBankingStandard
      * Generated from protobuf enum <code>Czech_Open_Banking_Standard = 8;</code>
      */
     const Czech_Open_Banking_Standard = 8;
+    /**
+     * https://developer.americanexpress.com/open-banking
+     *
+     * Generated from protobuf enum <code>American_Express_PSD2_API = 9;</code>
+     */
+    const American_Express_PSD2_API = 9;
+    /**
+     * https://openbanking.budapestbank.hu/docs/pdf/Budapest%20Bank%20Open%20Banking%20interface%20-%20AccountInfo_V1.pdf
+     *
+     * Generated from protobuf enum <code>Budapest_Bank_API = 10;</code>
+     */
+    const Budapest_Bank_API = 10;
 }
 

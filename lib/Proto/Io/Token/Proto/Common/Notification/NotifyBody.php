@@ -356,7 +356,7 @@ class NotifyBody extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.notification.RecoveryCompleted recovery_completed = 15;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.notification.RecoveryCompleted recovery_completed = 15 [deprecated = true];</code>
      * @return \Io\Token\Proto\Common\Notification\RecoveryCompleted
      */
     public function getRecoveryCompleted()
@@ -365,7 +365,7 @@ class NotifyBody extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.io.token.proto.common.notification.RecoveryCompleted recovery_completed = 15;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.notification.RecoveryCompleted recovery_completed = 15 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Notification\RecoveryCompleted $var
      * @return $this
      */

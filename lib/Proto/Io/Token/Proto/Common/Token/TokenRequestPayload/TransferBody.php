@@ -53,6 +53,10 @@ class TransferBody extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string set_transfer_destinations_url = 8;</code>
      */
     private $set_transfer_destinations_url = '';
+    /**
+     * Generated from protobuf field <code>string remittance_reference = 9 [(.io.token.proto.extensions.field.hash) = true];</code>
+     */
+    private $remittance_reference = '';
 
     /**
      * Constructor.
@@ -72,6 +76,7 @@ class TransferBody extends \Google\Protobuf\Internal\Message
      *           Optional. ISO 8601: YYYY-MM-DD or YYYYMMDD.
      *     @type bool $confirm_funds
      *     @type string $set_transfer_destinations_url
+     *     @type string $remittance_reference
      * }
      */
     public function __construct($data = NULL) {
@@ -267,6 +272,28 @@ class TransferBody extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->set_transfer_destinations_url = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string remittance_reference = 9 [(.io.token.proto.extensions.field.hash) = true];</code>
+     * @return string
+     */
+    public function getRemittanceReference()
+    {
+        return $this->remittance_reference;
+    }
+
+    /**
+     * Generated from protobuf field <code>string remittance_reference = 9 [(.io.token.proto.extensions.field.hash) = true];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setRemittanceReference($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->remittance_reference = $var;
 
         return $this;
     }

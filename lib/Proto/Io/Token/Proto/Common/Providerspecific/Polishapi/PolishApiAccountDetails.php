@@ -22,7 +22,7 @@ class PolishApiAccountDetails extends \Google\Protobuf\Internal\Message
      */
     private $account_holder_type = 0;
     /**
-     * Generated from protobuf field <code>string account_name_client = 3;</code>
+     * Generated from protobuf field <code>string account_name_client = 3 [(.io.token.proto.extensions.field.redact) = true];</code>
      */
     private $account_name_client = '';
     /**
@@ -38,7 +38,7 @@ class PolishApiAccountDetails extends \Google\Protobuf\Internal\Message
      */
     private $psu_relations;
     /**
-     * Generated from protobuf field <code>map<string, string> auxData = 7;</code>
+     * Generated from protobuf field <code>map<string, string> auxData = 7 [(.io.token.proto.extensions.field.redact) = true];</code>
      */
     private $auxData;
 
@@ -107,7 +107,7 @@ class PolishApiAccountDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string account_name_client = 3;</code>
+     * Generated from protobuf field <code>string account_name_client = 3 [(.io.token.proto.extensions.field.redact) = true];</code>
      * @return string
      */
     public function getAccountNameClient()
@@ -116,7 +116,7 @@ class PolishApiAccountDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string account_name_client = 3;</code>
+     * Generated from protobuf field <code>string account_name_client = 3 [(.io.token.proto.extensions.field.redact) = true];</code>
      * @param string $var
      * @return $this
      */
@@ -195,7 +195,7 @@ class PolishApiAccountDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>map<string, string> auxData = 7;</code>
+     * Generated from protobuf field <code>map<string, string> auxData = 7 [(.io.token.proto.extensions.field.redact) = true];</code>
      * @return \Google\Protobuf\Internal\MapField
      */
     public function getAuxData()
@@ -204,7 +204,7 @@ class PolishApiAccountDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>map<string, string> auxData = 7;</code>
+     * Generated from protobuf field <code>map<string, string> auxData = 7 [(.io.token.proto.extensions.field.redact) = true];</code>
      * @param array|\Google\Protobuf\Internal\MapField $var
      * @return $this
      */

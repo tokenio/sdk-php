@@ -53,6 +53,12 @@ class StandingOrder extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string frequency = 7;</code>
      */
     private $frequency = '';
+    /**
+     * If empty, frequency is specified in ProviderStandingOrderDetails
+     *
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferEndpoint creditor_endpoint = 8;</code>
+     */
+    private $creditor_endpoint = null;
 
     /**
      * Constructor.
@@ -72,6 +78,8 @@ class StandingOrder extends \Google\Protobuf\Internal\Message
      *     @type \Io\Token\Proto\Common\Providerspecific\ProviderStandingOrderDetails $provider_standing_order_details
      *     @type string $frequency
      *           ISO 20022: DAIL, WEEK, TOWK, MNTH, TOMN, QUTR, SEMI, YEAR
+     *     @type \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint $creditor_endpoint
+     *           If empty, frequency is specified in ProviderStandingOrderDetails
      * }
      */
     public function __construct($data = NULL) {
@@ -249,6 +257,32 @@ class StandingOrder extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->frequency = $var;
+
+        return $this;
+    }
+
+    /**
+     * If empty, frequency is specified in ProviderStandingOrderDetails
+     *
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferEndpoint creditor_endpoint = 8;</code>
+     * @return \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint
+     */
+    public function getCreditorEndpoint()
+    {
+        return $this->creditor_endpoint;
+    }
+
+    /**
+     * If empty, frequency is specified in ProviderStandingOrderDetails
+     *
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferEndpoint creditor_endpoint = 8;</code>
+     * @param \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint $var
+     * @return $this
+     */
+    public function setCreditorEndpoint($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint::class);
+        $this->creditor_endpoint = $var;
 
         return $this;
     }

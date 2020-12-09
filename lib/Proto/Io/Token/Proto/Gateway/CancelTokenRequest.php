@@ -22,7 +22,7 @@ class CancelTokenRequest extends \Google\Protobuf\Internal\Message
     /**
      * Signature
      *
-     * Generated from protobuf field <code>.io.token.proto.common.security.Signature signature = 2;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.security.Signature signature = 2 [deprecated = true];</code>
      */
     private $signature = null;
 
@@ -72,7 +72,7 @@ class CancelTokenRequest extends \Google\Protobuf\Internal\Message
     /**
      * Signature
      *
-     * Generated from protobuf field <code>.io.token.proto.common.security.Signature signature = 2;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.security.Signature signature = 2 [deprecated = true];</code>
      * @return \Io\Token\Proto\Common\Security\Signature
      */
     public function getSignature()
@@ -83,7 +83,7 @@ class CancelTokenRequest extends \Google\Protobuf\Internal\Message
     /**
      * Signature
      *
-     * Generated from protobuf field <code>.io.token.proto.common.security.Signature signature = 2;</code>
+     * Generated from protobuf field <code>.io.token.proto.common.security.Signature signature = 2 [deprecated = true];</code>
      * @param \Io\Token\Proto\Common\Security\Signature $var
      * @return $this
      */

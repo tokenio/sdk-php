@@ -1,8 +1,8 @@
 #
 # Fetches specified proto files from the artifact repository.
 #
-TOKEN_PROTOS_VER = "1.11.6"
-RPC_PROTOS_VER = "1.0.1"
+TOKEN_PROTOS_VER = "1.12.11"
+RPC_PROTOS_VER = "1.0.3"
 
 require 'open-uri'
 require 'fileutils'

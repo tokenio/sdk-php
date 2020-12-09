@@ -20,14 +20,6 @@ class MemberType
      */
     const PERSONAL = 1;
     /**
-     * Generated from protobuf enum <code>BUSINESS_UNVERIFIED = 2 [deprecated = true];</code>
-     */
-    const BUSINESS_UNVERIFIED = 2;
-    /**
-     * Generated from protobuf enum <code>BUSINESS_VERIFIED = 3 [deprecated = true];</code>
-     */
-    const BUSINESS_VERIFIED = 3;
-    /**
      * Generated from protobuf enum <code>TRANSIENT = 4;</code>
      */
     const TRANSIENT = 4;

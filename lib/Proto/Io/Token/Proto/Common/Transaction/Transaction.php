@@ -71,6 +71,10 @@ class Transaction extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.io.token.proto.common.providerspecific.ProviderTransactionDetails provider_transaction_details = 10;</code>
      */
     private $provider_transaction_details = null;
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferEndpoint creditor_endpoint = 11;</code>
+     */
+    private $creditor_endpoint = null;
 
     /**
      * Constructor.
@@ -97,6 +101,7 @@ class Transaction extends \Google\Protobuf\Internal\Message
      *     @type array|\Google\Protobuf\Internal\MapField $metadata
      *           Additional fields. Optional.
      *     @type \Io\Token\Proto\Common\Providerspecific\ProviderTransactionDetails $provider_transaction_details
+     *     @type \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint $creditor_endpoint
      * }
      */
     public function __construct($data = NULL) {
@@ -356,6 +361,28 @@ class Transaction extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Providerspecific\ProviderTransactionDetails::class);
         $this->provider_transaction_details = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferEndpoint creditor_endpoint = 11;</code>
+     * @return \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint
+     */
+    public function getCreditorEndpoint()
+    {
+        return $this->creditor_endpoint;
+    }
+
+    /**
+     * Generated from protobuf field <code>.io.token.proto.common.transferinstructions.TransferEndpoint creditor_endpoint = 11;</code>
+     * @param \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint $var
+     * @return $this
+     */
+    public function setCreditorEndpoint($var)
+    {
+        GPBUtil::checkMessage($var, \Io\Token\Proto\Common\Transferinstructions\TransferEndpoint::class);
+        $this->creditor_endpoint = $var;
 
         return $this;
     }

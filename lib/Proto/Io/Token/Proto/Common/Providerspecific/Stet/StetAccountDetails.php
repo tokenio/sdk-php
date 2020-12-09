@@ -14,7 +14,9 @@ use Google\Protobuf\Internal\GPBUtil;
 class StetAccountDetails extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>string bic_fi = 1;</code>
+     * use AccountDetails.bic field
+     *
+     * Generated from protobuf field <code>string bic_fi = 1 [deprecated = true, (.io.token.proto.extensions.field.redact) = true];</code>
      */
     private $bic_fi = '';
     /**
@@ -22,11 +24,11 @@ class StetAccountDetails extends \Google\Protobuf\Internal\Message
      */
     private $accountId = null;
     /**
-     * Generated from protobuf field <code>string details = 3;</code>
+     * Generated from protobuf field <code>string details = 3 [(.io.token.proto.extensions.field.redact) = true];</code>
      */
     private $details = '';
     /**
-     * Generated from protobuf field <code>string linked_account = 4;</code>
+     * Generated from protobuf field <code>string linked_account = 4 [(.io.token.proto.extensions.field.redact) = true];</code>
      */
     private $linked_account = '';
     /**
@@ -46,7 +48,7 @@ class StetAccountDetails extends \Google\Protobuf\Internal\Message
      */
     private $product = '';
     /**
-     * Generated from protobuf field <code>string psu_status = 8;</code>
+     * Generated from protobuf field <code>string psu_status = 8 [(.io.token.proto.extensions.field.redact) = true];</code>
      */
     private $psu_status = '';
 
@@ -57,6 +59,7 @@ class StetAccountDetails extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type string $bic_fi
+     *           use AccountDetails.bic field
      *     @type \Io\Token\Proto\Common\Providerspecific\Stet\AccountIdentification $accountId
      *     @type string $details
      *     @type string $linked_account
@@ -74,7 +77,9 @@ class StetAccountDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string bic_fi = 1;</code>
+     * use AccountDetails.bic field
+     *
+     * Generated from protobuf field <code>string bic_fi = 1 [deprecated = true, (.io.token.proto.extensions.field.redact) = true];</code>
      * @return string
      */
     public function getBicFi()
@@ -83,7 +88,9 @@ class StetAccountDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string bic_fi = 1;</code>
+     * use AccountDetails.bic field
+     *
+     * Generated from protobuf field <code>string bic_fi = 1 [deprecated = true, (.io.token.proto.extensions.field.redact) = true];</code>
      * @param string $var
      * @return $this
      */
@@ -118,7 +125,7 @@ class StetAccountDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string details = 3;</code>
+     * Generated from protobuf field <code>string details = 3 [(.io.token.proto.extensions.field.redact) = true];</code>
      * @return string
      */
     public function getDetails()
@@ -127,7 +134,7 @@ class StetAccountDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string details = 3;</code>
+     * Generated from protobuf field <code>string details = 3 [(.io.token.proto.extensions.field.redact) = true];</code>
      * @param string $var
      * @return $this
      */
@@ -140,7 +147,7 @@ class StetAccountDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string linked_account = 4;</code>
+     * Generated from protobuf field <code>string linked_account = 4 [(.io.token.proto.extensions.field.redact) = true];</code>
      * @return string
      */
     public function getLinkedAccount()
@@ -149,7 +156,7 @@ class StetAccountDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string linked_account = 4;</code>
+     * Generated from protobuf field <code>string linked_account = 4 [(.io.token.proto.extensions.field.redact) = true];</code>
      * @param string $var
      * @return $this
      */
@@ -236,7 +243,7 @@ class StetAccountDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string psu_status = 8;</code>
+     * Generated from protobuf field <code>string psu_status = 8 [(.io.token.proto.extensions.field.redact) = true];</code>
      * @return string
      */
     public function getPsuStatus()
@@ -245,7 +252,7 @@ class StetAccountDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string psu_status = 8;</code>
+     * Generated from protobuf field <code>string psu_status = 8 [(.io.token.proto.extensions.field.redact) = true];</code>
      * @param string $var
      * @return $this
      */

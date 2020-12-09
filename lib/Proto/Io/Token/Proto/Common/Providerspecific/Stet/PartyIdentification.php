@@ -14,7 +14,7 @@ use Google\Protobuf\Internal\GPBUtil;
 class PartyIdentification extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>string name = 1;</code>
+     * Generated from protobuf field <code>string name = 1 [(.io.token.proto.extensions.field.redact) = true];</code>
      */
     private $name = '';
     /**
@@ -48,7 +48,7 @@ class PartyIdentification extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string name = 1;</code>
+     * Generated from protobuf field <code>string name = 1 [(.io.token.proto.extensions.field.redact) = true];</code>
      * @return string
      */
     public function getName()
@@ -57,7 +57,7 @@ class PartyIdentification extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string name = 1;</code>
+     * Generated from protobuf field <code>string name = 1 [(.io.token.proto.extensions.field.redact) = true];</code>
      * @param string $var
      * @return $this
      */

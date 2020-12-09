@@ -26,11 +26,11 @@ class GetTransactionsRequest extends \Google\Protobuf\Internal\Message
     /**
      * for backwards compatibility with older JS clients TODO(RD-2738) remove
      *
-     * Generated from protobuf field <code>string offset = 3;</code>
+     * Generated from protobuf field <code>string offset = 3 [deprecated = true];</code>
      */
     private $offset = '';
     /**
-     * Generated from protobuf field <code>int32 limit = 4;</code>
+     * Generated from protobuf field <code>int32 limit = 4 [deprecated = true];</code>
      */
     private $limit = 0;
     /**
@@ -124,7 +124,7 @@ class GetTransactionsRequest extends \Google\Protobuf\Internal\Message
     /**
      * for backwards compatibility with older JS clients TODO(RD-2738) remove
      *
-     * Generated from protobuf field <code>string offset = 3;</code>
+     * Generated from protobuf field <code>string offset = 3 [deprecated = true];</code>
      * @return string
      */
     public function getOffset()
@@ -135,7 +135,7 @@ class GetTransactionsRequest extends \Google\Protobuf\Internal\Message
     /**
      * for backwards compatibility with older JS clients TODO(RD-2738) remove
      *
-     * Generated from protobuf field <code>string offset = 3;</code>
+     * Generated from protobuf field <code>string offset = 3 [deprecated = true];</code>
      * @param string $var
      * @return $this
      */
@@ -148,7 +148,7 @@ class GetTransactionsRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int32 limit = 4;</code>
+     * Generated from protobuf field <code>int32 limit = 4 [deprecated = true];</code>
      * @return int
      */
     public function getLimit()
@@ -157,7 +157,7 @@ class GetTransactionsRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int32 limit = 4;</code>
+     * Generated from protobuf field <code>int32 limit = 4 [deprecated = true];</code>
      * @param int $var
      * @return $this
      */

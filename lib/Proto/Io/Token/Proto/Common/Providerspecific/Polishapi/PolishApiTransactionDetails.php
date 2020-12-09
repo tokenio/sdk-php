@@ -22,7 +22,7 @@ class PolishApiTransactionDetails extends \Google\Protobuf\Internal\Message
      */
     private $mcc = '';
     /**
-     * Generated from protobuf field <code>map<string, string> auxData = 3;</code>
+     * Generated from protobuf field <code>map<string, string> auxData = 3 [(.io.token.proto.extensions.field.redact) = true];</code>
      */
     private $auxData;
     /**
@@ -180,7 +180,7 @@ class PolishApiTransactionDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>map<string, string> auxData = 3;</code>
+     * Generated from protobuf field <code>map<string, string> auxData = 3 [(.io.token.proto.extensions.field.redact) = true];</code>
      * @return \Google\Protobuf\Internal\MapField
      */
     public function getAuxData()
@@ -189,7 +189,7 @@ class PolishApiTransactionDetails extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>map<string, string> auxData = 3;</code>
+     * Generated from protobuf field <code>map<string, string> auxData = 3 [(.io.token.proto.extensions.field.redact) = true];</code>
      * @param array|\Google\Protobuf\Internal\MapField $var
      * @return $this
      */
