@@ -27,14 +27,15 @@ final class StoreAndRetrieveTokenRequestSample
         $destination = new TransferDestination();
         $destination->setSepa($sepaDestination);
         $tokenRequest = TokenRequest::transferTokenRequestBuilder(100, "EUR")
-                            ->setToMemberId($payee->getMemberId())
-                            ->setDescription("Book purchase")
-                            ->setRedirectUrl("https://token.io/callback")
-                            ->setFromAlias($alias)
-                            ->setBankId("iron")
-                            ->setCsrfToken(Strings::generateNonce())
-                            ->addDestination($destination)
-                            ->build();
+            ->setToMemberId($payee->getMemberId())
+            ->setRefId(Strings::generateNonce())
+            ->setDescription("Book purchase")
+            ->setRedirectUrl("https://token.io/callback")
+            ->setFromAlias($alias)
+            ->setBankId("iron")
+            ->setCsrfToken(Strings::generateNonce())
+            ->addDestination($destination)
+            ->build();
 
         return $payee->storeTokenRequest($tokenRequest);
     }
@@ -53,12 +54,13 @@ final class StoreAndRetrieveTokenRequestSample
         $resources[] = TokenRequestPayload\AccessBody\ResourceType::ACCOUNTS;
         $resources[] = TokenRequestPayload\AccessBody\ResourceType::BALANCES;
         $tokenRequest = TokenRequest::accessTokenRequestBuilder($resources)
-                        ->setToMemberId($grantee->getMemberId())
-                        ->setRedirectUrl("https://token.io/callback")
-                        ->setFromAlias($alias)
-                        ->setBankId("iron")
-                        ->setCsrfToken(Strings::generateNonce())
-                        ->build();
+            ->setToMemberId($grantee->getMemberId())
+            ->setRefId(Strings::generateNonce())
+            ->setRedirectUrl("https://token.io/callback")
+            ->setFromAlias($alias)
+            ->setBankId("iron")
+            ->setCsrfToken(Strings::generateNonce())
+            ->build();
 
         return $grantee->storeTokenRequest($tokenRequest);
     }

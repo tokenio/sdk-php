@@ -29,7 +29,7 @@ abstract class TestUtil
     {
         $email = 'asphp-' . strtolower(Strings::generateNonce()) . '+noverify@example.com';
         $alias = new Alias();
-        $alias->setType(Alias\Type::EMAIL);
+        $alias->setType(Alias\Type::DOMAIN);
         $alias->setValue($email);
         return $alias;
     }
