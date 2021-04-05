@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a75315965bcc27556c1a315e9c153fdd",
+    "content-hash": "b39cd44dbbb8032fbfce152ecb41db05",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -494,16 +494,16 @@
         },
         {
             "name": "google/protobuf",
-            "version": "v3.10.0",
+            "version": "v3.15.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/protocolbuffers/protobuf-php.git",
-                "reference": "5dffdd2c84112e6c91fd84f92e3df96649426881"
+                "reference": "96b613b0de4a96ef423404ea893b19e7e2cfe474"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/5dffdd2c84112e6c91fd84f92e3df96649426881",
-                "reference": "5dffdd2c84112e6c91fd84f92e3df96649426881",
+                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/96b613b0de4a96ef423404ea893b19e7e2cfe474",
+                "reference": "96b613b0de4a96ef423404ea893b19e7e2cfe474",
                 "shasum": ""
             },
             "require": {
@@ -531,7 +531,11 @@
             "keywords": [
                 "proto"
             ],
-            "time": "2019-10-03T20:08:37+00:00"
+            "support": {
+                "issues": "https://github.com/protocolbuffers/protobuf-php/issues",
+                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v3.15.7"
+            },
+            "time": "2021-04-02T21:19:22+00:00"
         },
         {
             "name": "grpc/grpc",
@@ -3086,5 +3090,6 @@
         "ext-json": "*",
         "ext-grpc": "*"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
 }
