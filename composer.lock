@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a75315965bcc27556c1a315e9c153fdd",
+    "content-hash": "ea85c2e1ff0939a2ef6a548a03dfb5bc",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -811,20 +811,20 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v9.99.99",
+            "version": "v9.99.100",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "84b4dfb120c6f9b4ff7b3685f9b8f1aa365a0c95"
+                "reference": "996434e5492cb4c3edcb9168db6fbb1359ef965a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/84b4dfb120c6f9b4ff7b3685f9b8f1aa365a0c95",
-                "reference": "84b4dfb120c6f9b4ff7b3685f9b8f1aa365a0c95",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/996434e5492cb4c3edcb9168db6fbb1359ef965a",
+                "reference": "996434e5492cb4c3edcb9168db6fbb1359ef965a",
                 "shasum": ""
             },
             "require": {
-                "php": "^7"
+                "php": ">= 7"
             },
             "require-dev": {
                 "phpunit/phpunit": "4.*|5.*",
@@ -852,28 +852,33 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2018-07-02T15:55:56+00:00"
+            "support": {
+                "email": "info@paragonie.com",
+                "issues": "https://github.com/paragonie/random_compat/issues",
+                "source": "https://github.com/paragonie/random_compat"
+            },
+            "time": "2020-10-15T08:29:30+00:00"
         },
         {
             "name": "paragonie/sodium_compat",
-            "version": "v1.7.0",
+            "version": "v1.15.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/sodium_compat.git",
-                "reference": "7b73005be3c224f12c47bd75a23ce24b762e47e8"
+                "reference": "8a93bfe047c7f699f819459de8ddda144cd636a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/sodium_compat/zipball/7b73005be3c224f12c47bd75a23ce24b762e47e8",
-                "reference": "7b73005be3c224f12c47bd75a23ce24b762e47e8",
+                "url": "https://api.github.com/repos/paragonie/sodium_compat/zipball/8a93bfe047c7f699f819459de8ddda144cd636a4",
+                "reference": "8a93bfe047c7f699f819459de8ddda144cd636a4",
                 "shasum": ""
             },
             "require": {
                 "paragonie/random_compat": ">=1",
-                "php": "^5.2.4|^5.3|^5.4|^5.5|^5.6|^7"
+                "php": "^5.2.4|^5.3|^5.4|^5.5|^5.6|^7|^8"
             },
             "require-dev": {
-                "phpunit/phpunit": "^3|^4|^5"
+                "phpunit/phpunit": "^3|^4|^5|^6|^7|^8|^9"
             },
             "suggest": {
                 "ext-libsodium": "PHP < 7.0: Better performance, password hashing (Argon2i), secure memory management (memzero), and better security.",
@@ -934,7 +939,11 @@
                 "secret-key cryptography",
                 "side-channel resistant"
             ],
-            "time": "2018-09-22T03:59:58+00:00"
+            "support": {
+                "issues": "https://github.com/paragonie/sodium_compat/issues",
+                "source": "https://github.com/paragonie/sodium_compat/tree/v1.15.4"
+            },
+            "time": "2021-04-17T09:00:05+00:00"
         },
         {
             "name": "phpcollection/phpcollection",
@@ -3086,5 +3095,6 @@
         "ext-json": "*",
         "ext-grpc": "*"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
 }
