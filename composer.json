@@ -20,7 +20,7 @@
     "ext-bcmath" : "*",
     "ext-json": "*",
     "ext-grpc": "*",
-    "paragonie/sodium_compat": "1.7.0",
+    "paragonie/sodium_compat": "1.16.0",
     "paragonie/random_compat": ">=2",
     "stephenhill/base58": "~1.0",
     "grpc/grpc": "^1.20.0",
