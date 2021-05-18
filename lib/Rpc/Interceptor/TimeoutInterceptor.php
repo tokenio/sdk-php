@@ -25,11 +25,11 @@ class TimeoutInterceptor extends Interceptor
     public function interceptUnaryUnary($method,
                                         $argument,
                                         $deserialize,
+	                                    $continuation,
                                         array $metadata = [],
-                                        array $options = [],
-                                        $continuation)
+                                        array $options = [])
     {
         $options['timeout'] = ($this->timeout * 1000);
-        return parent::interceptUnaryUnary($method, $argument, $deserialize, $metadata, $options, $continuation);
+        return parent::interceptUnaryUnary($method, $argument, $deserialize, $continuation, $metadata, $options);
     }
 }

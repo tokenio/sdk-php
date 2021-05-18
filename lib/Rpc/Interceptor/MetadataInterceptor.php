@@ -21,11 +21,11 @@ class MetadataInterceptor extends Interceptor
     public function interceptUnaryUnary($method,
                                         $argument,
                                         $deserialize,
+	                                    $continuation,
                                         array $metadata = [],
-                                        array $options = [],
-                                        $continuation)
+                                        array $options = [])
     {
         $metadata = array_merge($metadata, $this->metadata);
-        return parent::interceptUnaryUnary($method, $argument, $deserialize, $metadata, $options, $continuation);
+        return parent::interceptUnaryUnary($method, $argument, $deserialize, $continuation, $metadata, $options);
     }
 }

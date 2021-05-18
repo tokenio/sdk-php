@@ -37,9 +37,9 @@ class ClientAuthenticatorInterceptor extends Interceptor
     public function interceptUnaryUnary($method,
                                         $argument,
                                         $deserialize,
+	                                    $continuation,
                                         array $metadata = [],
-                                        array $options = [],
-                                        $continuation)
+                                        array $options = [])
     {
         /** @var Message $argument */
         $now = round(microtime(true) * 1000);
@@ -64,6 +64,6 @@ class ClientAuthenticatorInterceptor extends Interceptor
             AuthenticationContext::clearAccessToken();
         }
 
-        return parent::interceptUnaryUnary($method, $argument, $deserialize, $metadata, $options, $continuation);
+        return parent::interceptUnaryUnary($method, $argument, $deserialize, $continuation, $metadata, $options);
     }
 }
